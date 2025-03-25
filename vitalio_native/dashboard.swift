@@ -8,65 +8,101 @@ struct Dashboard: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isDrawerOpen = false
     @State private var selectedTab: Tab = .home
+    @State private var dragOffset: CGFloat = 0
     
     var body: some View {
-           VStack {
-               Button(action: {
-                   isDrawerOpen.toggle()
-               }) {
-                   CustomAppBar(onBack: {
-                       presentationMode.wrappedValue.dismiss()
-                   })}
-               ScrollView {
-                   VStack(alignment: .leading){
-                       Text("Vitals")
-                           .font(.system(size: 18, weight: .semibold))
-                           .foregroundColor(.black)
-                       VitalsCard()
-                       Text("Primary Actions")
-                           .font(.system(size: 18, weight: .semibold))
-                           .foregroundColor(.black)
-                       LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
-                           ActionButton(icon: "vitals_icon", title: "Vitals Details")
-                           ActionButton(icon: "fluid_icon", title: "Fluid Intake\n/Output")
-                           ActionButton(icon: "symptoms_icon", title: "Symptom Tracker")
-                           ActionButton(icon: "pills_icon", title: "Pills Reminder")
-                           ActionButton(icon: "diet", title: "Diet Checklist")
-                           ActionButton(icon: "supplement_icon", title: "Supplement Checklist")
-                       }
-                       Text("Other")
-                           .font(.system(size: 18, weight: .semibold))
-                           .foregroundColor(.black)
-
-                       HStack(spacing: 12) {
-                           ChronicleCard()
-                           VStack(spacing: 12) {
-                               OtherCard(icon: "upload_icon", title: "Upload Report")
-                               OtherCard(icon: "lifestyle_icon", title: "Lifestyle Intervention")
-                           }
-                       }
-
-                   }.padding(.horizontal,20)
-                      
-                   Text("Dashboard Screen")
-                   Button("Back") {
-                       route.back()
-                   }
-                   Button("Go to Root") {
-                       let okInstance = Ok(route: route)
-                                  okInstance.myNavigation()
-//                           route.navigatoToRoot()
-                   }
-                          }
-    
-
-               CustomTabBar(selectedTab: $selectedTab) // Moved inside VStack
-           }
-           .navigationBarHidden(true) // Hides the default AppBar
-       }
-    
+        ZStack{
+            VStack {
+                Button(action: {
+                    isDrawerOpen.toggle()
+                }) {
+                    CustomAppBar(onBack: {
+                        presentationMode.wrappedValue.dismiss()
+                    })}
+                ScrollView {
+                    VStack(alignment: .leading){
+                        Text("Vitals")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                        VitalsCard()
+                        Text("Primary Actions")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
+                            ActionButton(icon: "vitals_icon", title: "Vitals Details")
+                            ActionButton(icon: "fluid_icon", title: "Fluid Intake\n/Output")
+                            ActionButton(icon: "symptoms_icon", title: "Symptom Tracker")
+                            ActionButton(icon: "pills_icon", title: "Pills Reminder")
+                            ActionButton(icon: "diet", title: "Diet Checklist")
+                            ActionButton(icon: "supplement_icon", title: "Supplement Checklist")
+                        }
+                        Text("Other")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(.black)
+                        
+                        HStack(spacing: 12) {
+                            ChronicleCard()
+                            VStack(spacing: 12) {
+                                OtherCard(icon: "upload_icon", title: "Upload Report")
+                                OtherCard(icon: "lifestyle_icon", title: "Lifestyle Intervention")
+                            }
+                        }
+                        
+                    }.padding(.horizontal,20)
+                    
+                    Text("Dashboard Screen")
+                    Button("Back") {
+                        route.back()
+                    }
+                    Button("Go to Root") {
+                        let okInstance = Ok(route: route)
+                        okInstance.myNavigation()
+                        //                           route.navigatoToRoot()
+                    }
+                }
+                
+                
+                CustomTabBar(selectedTab: $selectedTab) // Moved inside VStack
+            }
+            .navigationBarHidden(true) // Hides the default AppBar
+            
+            
+            ZStack {
+                if isDrawerOpen {
+                    Color.black.opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            withAnimation {
+                                isDrawerOpen.toggle()
+                            }
+                        }
+                }
+                
+                SideMenuView()
+                    .offset(x: isDrawerOpen ? 0 : -500 + dragOffset)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                if value.translation.width > 0 {
+                                    dragOffset = value.translation.width
+                                }
+                            }
+                            .onEnded { value in
+                                if value.translation.width > 100 {
+                                    isDrawerOpen = true
+                                } else {
+                                    isDrawerOpen = false
+                                }
+                                dragOffset = 0
+                            }
+                    )
+            }
+            .animation(.easeInOut, value: isDrawerOpen)
+            
+        }
+        
+    }
 }
-
 
 
 
@@ -102,9 +138,9 @@ struct CustomAppBar: View {
             }
             VStack(alignment: .leading) {
             
-                Text("Good Morning")
+                CustomText("Good Morning")
                     .font(.footnote)
-                Text("Abhay Sharma")
+                CustomText("Abhay Sharma")
                     .font(.headline)
                     .fontWeight(.semibold)
             }

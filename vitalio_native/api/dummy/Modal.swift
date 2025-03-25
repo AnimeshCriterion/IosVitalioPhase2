@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct Modal: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+
+/// DUMMY DATA MODAL
+
+struct NewPost: Codable {
+    let title: String
+    let body: String
+    let userId: Int
 }
 
-#Preview {
-    Modal()
+
+struct Post: Codable, Identifiable {
+    let id: Int
+    let title: String
+    let body: String
 }
+

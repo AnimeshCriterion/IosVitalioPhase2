@@ -9,7 +9,6 @@ import SwiftUI
 import Foundation
 
 
-// MARK: - ViewModel
 class APIViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var errorMessage: String?
@@ -46,8 +45,12 @@ class APIViewModel: ObservableObject {
     func post(){
         Task {
             do {
+                
                 let newPost = NewPost(title: "SwiftUI MVVM", body: "This is a test post.", userId: 1)
+                
                 let response: Post = try await APIService.shared.postData(toURL: "https://jsonplaceholder.typicode.com/posts", body: newPost)
+                
+                
                 print("Created Post:", response)
             } catch {
                 self.showError = true
@@ -56,6 +59,3 @@ class APIViewModel: ObservableObject {
         }
     }
 }
-
-
-

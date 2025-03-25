@@ -7,12 +7,55 @@
 
 import SwiftUI
 
-struct DummyView: View {
+
+struct APIView: View {
+    @StateObject private var viewModel = APIViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                if viewModel.isLoading {
+                    ProgressView("Loading...").padding()
+                }
+                Button("post"){
+                    viewModel.post()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Button("Fetch Posts") {
+                    viewModel.fetchPosts()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                List(viewModel.posts) { post in
+                    VStack(alignment: .leading) {
+                        Text(post.title).font(.headline)
+                        Text(post.body).font(.subheadline)
+                    }
+                }
+            }
+
+
+            if viewModel.showError {
+                CustomAlertView(
+                    message: viewModel.errorMessage ?? "An unknown error occurred"
+                )
+                .transition(.opacity)
+            }
+        }
+        .animation(.easeInOut, value: viewModel.showError)
     }
 }
 
+
+
+
 #Preview {
-    DummyView()
+    APIView()
 }

@@ -12,8 +12,7 @@ struct SideMenuView: View {
     var body: some View {
         
         ZStack {
-            Color.customBackground2 // Background color covering entire view
-                         .ignoresSafeArea()
+            Color.customBackground2.ignoresSafeArea()
             ScrollView{
                 VStack {
                     VStack(
