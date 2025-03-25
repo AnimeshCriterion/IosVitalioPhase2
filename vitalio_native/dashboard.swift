@@ -6,13 +6,17 @@ struct Dashboard: View {
     
     @EnvironmentObject var route: Routing
     @Environment(\.presentationMode) var presentationMode
-    
+    @State private var isDrawerOpen = false
     @State private var selectedTab: Tab = .home
+    
     var body: some View {
            VStack {
-              CustomAppBar(onBack: {
-                              presentationMode.wrappedValue.dismiss()
-                          })
+               Button(action: {
+                   isDrawerOpen.toggle()
+               }) {
+                   CustomAppBar(onBack: {
+                       presentationMode.wrappedValue.dismiss()
+                   })}
                ScrollView {
                    VStack(alignment: .leading){
                        Text("Vitals")
@@ -60,6 +64,7 @@ struct Dashboard: View {
            }
            .navigationBarHidden(true) // Hides the default AppBar
        }
+    
 }
 
 
@@ -82,14 +87,19 @@ class Ok {
 
 struct CustomAppBar: View {
     var onBack: (() -> Void)? // Optional back action
-
+    @State private var isDrawerOpen = false
+    @State private var dragOffset: CGFloat = 0
+    
     var body: some View {
         HStack {
-            Image("dp") // Load from assets
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-          
+            Button(action: {
+                isDrawerOpen.toggle()
+            }) {
+                Image("dp") // Load from assets
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+            }
             VStack(alignment: .leading) {
             
                 Text("Good Morning")

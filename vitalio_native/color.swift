@@ -9,7 +9,9 @@ import SwiftUI
 
 extension Color {
     static let customBackground = Color(hex: "#F5F8FC")
+    static let customBackground2 = Color(hex: "#F7F9FB")
     static let primaryBlue = Color(hex: "#1564ED")
+    static let textGrey = Color(hex: "#5F6471")
 }
 
 extension Color {
