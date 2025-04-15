@@ -8,24 +8,23 @@ import SwiftUI
 }
 
 struct Dashboard: View {
-    
+
     @EnvironmentObject var route: Routing
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var themeManager: ThemeManager
-    @State private var isDrawerOpen = false
+    @EnvironmentObject var viewModel : DashboardViewModal
     @State private var selectedTab: Tab = .home
     @State private var dragOffset: CGFloat = 0
 
        var isDarkMode: Bool {
            themeManager.colorScheme == .dark
        }
-    
 
     var body: some View {
         ZStack{
             VStack {
                 Button(action: {
-                    isDrawerOpen.toggle()
+                    viewModel.isDrawerOpen.toggle()
                 }) {
                     CustomAppBar(onBack: {
                         presentationMode.wrappedValue.dismiss()
@@ -41,8 +40,12 @@ struct Dashboard: View {
                             .foregroundColor( isDarkMode ? .white :  .black)
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
                             ActionButton(icon: "vitals_icon", title: "Vitals Details",dark: isDarkMode).padding(8) // Adds padding around each button
-                            ActionButton(icon: "fluid_icon", title: "Fluid Intake\n/Output",dark: isDarkMode).padding(8) // Adds padding around each button
                             
+                            Button(action: {
+                                route.navigate(to: .fluid)
+                            }) {
+                                ActionButton(icon: "fluid_icon", title: "Fluid Intake\n/Output",dark: isDarkMode).padding(8) // Adds padding around each button
+                            }
                             Button(action: {
                                 route.navigate(to: .symptoms)
                             }) {
@@ -98,18 +101,18 @@ struct Dashboard: View {
             
             
             ZStack {
-                if isDrawerOpen {
+                if viewModel.isDrawerOpen {
                     Color.black.opacity(0.5)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
                             withAnimation {
-                                isDrawerOpen.toggle()
+                                viewModel.isDrawerOpen.toggle()
                             }
                         }
                 }
                 
                 SideMenuView()
-                    .offset(x: isDrawerOpen ? 0 : -500 + dragOffset)
+                    .offset(x: viewModel.isDrawerOpen ? 0 : -500 + dragOffset)
                     .gesture(
                         DragGesture()
                             .onChanged { value in
@@ -119,15 +122,15 @@ struct Dashboard: View {
                             }
                             .onEnded { value in
                                 if value.translation.width > 100 {
-                                    isDrawerOpen = true
+                                    viewModel.isDrawerOpen = true
                                 } else {
-                                    isDrawerOpen = false
+                                    viewModel.isDrawerOpen = false
                                 }
                                 dragOffset = 0
                             }
                     )
             }
-            .animation(.easeInOut, value: isDrawerOpen)
+            .animation(.easeInOut, value: viewModel.isDrawerOpen)
             
         }  .preferredColorScheme(themeManager.colorScheme) // Apply theme globally
         

@@ -103,4 +103,32 @@ class APIService {
             throw NetworkError.unknownError(error.localizedDescription)
         }
     }
+    
+    func postRawData<T: Encodable>(toURL: String, body: T) async throws -> [String: Any] {
+        guard let url = URL(string: toURL) else { throw NetworkError.badUrl }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 10
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jsonData = try JSONEncoder().encode(body)
+        request.httpBody = jsonData
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.badResponse
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.badStatus(httpResponse.statusCode)
+        }
+
+        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw NetworkError.failedToDecodeResponse
+        }
+
+        return json
+    }
+
 }

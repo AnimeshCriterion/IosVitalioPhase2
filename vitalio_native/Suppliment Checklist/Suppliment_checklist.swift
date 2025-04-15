@@ -20,9 +20,9 @@ struct Suppliment: View {
         VStack {
             CustomNavBarView(title: "Suppliment Checklist", isDarkMode: isDarkMode){}
             Spacer(minLength: 20)
-            DateLabelView()
+//            DateLabelView()
                 .padding(.leading,20)
-            MedicineScheduleView(isDarkMode: isDarkMode)
+//            MedicineScheduleView(isDarkMode: isDarkMode)
         }.background(isDarkMode ? Color.customBackgroundDark2 : Color.customBackground)
     }
 }

@@ -15,7 +15,10 @@ struct VitalioApp: App {
     @StateObject private var themeManager = ThemeManager()
     @ObservedObject private var route = Routing()
     @StateObject var loginViewModel = LoginViewModal()
-    @StateObject var pills = PillsViewModal()
+    @StateObject var pills = PillsViewModal()   
+    @StateObject var dashboard = DashboardViewModal()
+    @StateObject var fluidVM = FluidaViewModal()
+    
 
     init() {
         FirebaseApp.configure()
@@ -31,6 +34,8 @@ struct VitalioApp: App {
             .environmentObject(themeManager)
             .environmentObject(loginViewModel)
             .environmentObject(pills)
+            .environmentObject(dashboard)
+            .environmentObject(fluidVM)
         }
     }
 

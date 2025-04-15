@@ -23,20 +23,32 @@ class LoginViewModal : ObservableObject {
     @Published var apiState: APIState = .idle  // Track API state
     
     
-    func loadData() async {
+    func loadData( uhid: String) async {
         print("step 1")
             do {
-                let params = ["mobileNo": "", "uhid": "UHID01235"]
-                let result: PatientDetailDataModal = try await APIService.shared.fetchData(fromURL: baseURL+getPatientDetailsByMobileNo, parameters: params)
-                print("Success:", result.message)
-                print("First Patient Name:", result)
+                let params = ["mobileNo": "", "uhid": uhid]
+                let result = try await APIService.shared.fetchRawData(fromURL: baseURL+getPatientDetailsByMobileNo, parameters: params)
+                print("api data", result)
+                // result is already [String: Any]
+                guard let responseArray = result["responseValue"] as? [Any],
+                      let patientData = responseArray.first as? [String: Any] else {
+                    print("Failed to parse response")
+                    return
+                }
+
+                let id = patientData["id"] as? String ?? ""
+                let extractedUHID = patientData["uhID"] as? String ?? ""
+
+                print("Extracted id: \(id), UHID: \(extractedUHID)")
+                UserDefaultsManager.shared.saveUHID(extractedUHID)
+                UserDefaultsManager.shared.saveUserID(id)
             } catch {
                 print("Error:", error)
             }
     }
     
     
-    
+    //18021
     func login(uhid: String) async {
         DispatchQueue.main.async {
                    self.apiState = .loading  // ✅ Show loading state
@@ -55,7 +67,6 @@ class LoginViewModal : ObservableObject {
                 print("✅ Success:", response)
                 DispatchQueue.main.async {
                                  self.apiState = .success
-                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
                              }
             } catch {
                 DispatchQueue.main.async {
@@ -68,7 +79,7 @@ class LoginViewModal : ObservableObject {
     
     func verifyOTP(otp: String, uhid: String) async {
         DispatchQueue.main.async {
-                   self.apiState = .loading  // ✅ Show loading state
+                   self.apiState = .loading  //  Show loading state
                }
         do {
             let params = ["otp" : otp,
@@ -77,8 +88,10 @@ class LoginViewModal : ObservableObject {
                           "ifLoggedOutFromAllDevices" :  "0"]
             let response = try await APIService.shared.fetchRawData(fromURL: baseURL+verifyLogInOTPForSHFCApp, parameters: params)
             print("✅ Success:", response)
+            await loadData(uhid: uhid)
             DispatchQueue.main.async {
                              self.apiState = .success
+                UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
                          }
         } catch {
             DispatchQueue.main.async {

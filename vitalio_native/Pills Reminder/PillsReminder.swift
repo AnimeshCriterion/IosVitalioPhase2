@@ -3,13 +3,14 @@
 import SwiftUI
 
 struct PillsReminder: View {
+    @EnvironmentObject var route: Routing
     @EnvironmentObject var themeManager: ThemeManager
     @EnvironmentObject var pillsViewModal: PillsViewModal
-
+    @State private var selectedFormattedDate: String = "" // Will be in "yyyy-MM-dd"
     var isDarkMode : Bool {
         themeManager.colorScheme == .dark
     }
-    
+
     
     func getData(){
         Task{
@@ -19,21 +20,40 @@ struct PillsReminder: View {
     }
     
     var body: some View {
-        VStack {
-            CustomNavBarView(title: "Pills Timeline", isDarkMode: isDarkMode){}
-            Spacer(minLength: 20)
-            DateLabelView()
-                .padding(.leading,20)
-            MedicineScheduleView(isDarkMode: isDarkMode)
-        }.background(isDarkMode ? Color.customBackgroundDark2 : Color.customBackground)
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    Task{
-                        await  pillsViewModal.getMedication()
-                    }
-
+        ZStack {
+            VStack {
+//                Button("Save/Submit") {
+//                    
+//                    pillsViewModal.triggerSuccess()
+////                    withAnimation {
+////                        showSuccess = true
+////                        
+////                    }
+//                }
+                CustomNavBarView(title: "Pills Timeline", isDarkMode: isDarkMode){
+                    route.back()
+                    
                 }
-            }
+                Spacer(minLength: 20)
+                DateLabelView { formattedDate in
+                    selectedFormattedDate = formattedDate
+                }
+                .padding(.leading,20)
+                MedicineScheduleView(isDarkMode: isDarkMode,selectedDate: selectedFormattedDate)
+                
+                    .navigationBarHidden(true)
+                    .background(isDarkMode ? Color.customBackgroundDark : Color.customBackground)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            Task{
+                                await  pillsViewModal.getMedication()
+                            }
+                            
+                        }
+                    }}
+            SuccessPopupView(show: $pillsViewModal.showSuccess)
+                .zIndex(1)
+        }
     }
        
 }
@@ -46,26 +66,11 @@ struct PillsReminder: View {
 struct MedicineScheduleView: View {
     
     var  isDarkMode : Bool;
-//    @EnvironmentObject var themeManager: ThemeManager
-
-//       var isDarkMode: Bool {
-//           themeManager.colorScheme == .dark
-//       }
+    var selectedDate : String;
     
-    let columns = ["8:00 AM", "12:00 PM", "6:00 PM", "9:00 PM"]
 
     @EnvironmentObject var pillsViewModal: PillsViewModal
-    let medicines: [Medicine] = [
-        Medicine(name: "Metoprolol", dosage: "50 mg Metoprolol Succinate", schedule: ["taken", "-", "-", "-"]),
-        Medicine(name: "Aspirin", dosage: "75 mg Acetylsalicylic Acid", schedule: ["missed", "-", "-", "-"]),
-        Medicine(name: "Atorvastatin", dosage: "10 mg Atorvastatin Calcium", schedule: ["-", "taken", "-", "-"]),
-        Medicine(name: "Clopidogrel", dosage: "75 mg Clopidogrel Bisulfate", schedule: ["-", "-", "taken", "-"]),
-        Medicine(name: "Ramipril", dosage: "5 mg Ramipril", schedule: ["missed", "-", "missed", "taken"]),
-        Medicine(name: "Furosemide", dosage: "20 mg Furosemide", schedule: ["-", "taken", "-", "-"]),
-        Medicine(name: "Warfarin", dosage: "2.5 mg Warfarin Sodium", schedule: ["taken", "-", "-", "-"]),
-        Medicine(name: "Nitroglycerin", dosage: "0.4 mg Nitroglycerin (Sublingual Tablet)", schedule: ["missed", "-", "-", "-"])
-    ]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
 
@@ -80,57 +85,38 @@ struct MedicineScheduleView: View {
                     // Header Row (Time Slots)
                     HStack {
                         Text("Medicine")
+                            .padding(.horizontal)
                             .bold()
                             .frame(width: 200, alignment: .leading)
                             .foregroundColor(isDarkMode ? .white : .black)
-                        ForEach(columns, id: \.self) { time in
-                            Text(time)
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .frame(width: 80)
-                        }
+                        
+                        if pillsViewModal.uniqueTimes.isEmpty {
+                                       Text("")
+                                   } else {
+                                       ForEach(pillsViewModal.uniqueTimes, id: \.self) { time in
+                                           Text(time)
+                                               .font(.caption)
+                                               .foregroundColor(.gray)
+                                               .frame(width: 80)
+                                       }
+                                   }
+                   
                     }
                     .background(isDarkMode ? Color.customBackgroundDark2 :  Color.customBackground  )
-                    .padding(.horizontal)
+//                    .padding(.horizontal)
                     
                     Divider().background(Color.white.opacity(0.5))
                     
                     // Medicine List (Scrollable Vertically)
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 0) {
-                            ForEach(pillsViewModal.medications, id: \.prescriptionRowID) { med in
-                                HStack {
-                                    // Fixed Column (Medicine Name & Dosage)
-                                    VStack(alignment: .leading) {
-                                        Text(med.drugName)
-                                            .font(.headline)
-                                            .foregroundColor(isDarkMode ?   .white : .black)
-                                        Text(med.dosageForm)
-                                            .font(.caption)
-                                            .foregroundColor( .gray)
-                                    }
-                                    .frame(width: 200, alignment: .leading) // Freeze first column
-                                    
-                                    // Scrollable Schedule
-                                    ForEach(med.decodedJsonTime, id: \.time) { item in
-                                      
-                                    
-                                            Text(item.durationType)
-                                                .frame(width: 80)
-                                                .foregroundColor( .gray)
-                                      
-                                        
-                                      
-                                    }
-                                }
-                                .padding()
-//                                .background(isDarkMode ? Color.customBackground2 : Color.customBackground)
-                                .background(isDarkMode ?  Color.customBackgroundDark2 : Color.white )
-                                
-                                Divider().background(Color.white.opacity(0.2))
-                            }
+                            ExtractedView(selectedDate: selectedDate, pillsViewModal: _pillsViewModal,isDarkMode: isDarkMode )
+
+
                         }
+
                     }
+
                 }
             }
         }
@@ -250,6 +236,97 @@ struct MedicineScheduleView2: View {
 struct MedicineScheduleView2_Previews: PreviewProvider {
     static var previews: some View {
         MedicineScheduleView2()
-        
+    }
+}
+
+struct ExtractedView: View {
+    var selectedDate: String
+    @EnvironmentObject var pillsViewModal: PillsViewModal
+    var isDarkMode: Bool
+
+    var body: some View {
+        ForEach(Array(pillsViewModal.medications.enumerated())
+            .filter { selectedDate.isEmpty || $0.element.date == selectedDate },
+                id: \.offset) { index, med in
+            
+            MedicationRowView(
+                med: med,
+                index: index,
+                uniqueTimes: pillsViewModal.uniqueTimes,
+                isDarkMode: isDarkMode,
+                onTap: { time, duration in
+                    Task {
+                        await pillsViewModal.medcineIntake(
+                            pmID: med.pmId ?? 0,
+                            prescriptionID: med.prescriptionRowID ?? 0,
+                            convertedTime: time,
+                            durationType: duration,
+                            date: med.date ?? ""
+                        )
+                    }
+                }
+            )
+        }
+    }
+}
+
+struct MedicationRowView: View {
+    var med: Medication // Replace with your actual model type
+    var index: Int
+    var uniqueTimes: [String]
+    var isDarkMode: Bool
+    var onTap: (_ time: String, _ durationType: String) -> Void
+
+    var body: some View {
+        VStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(med.drugName)
+                        .font(.subheadline)
+                        .foregroundColor(isDarkMode ? .white : .black)
+                    Text(med.dosageForm)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                .frame(width: 200, alignment: .leading)
+
+                HStack(spacing: 0) {
+                    ForEach(uniqueTimes, id: \.self) { masterTime in
+                        if let match = med.decodedJsonTime.first(where: { $0.time == masterTime }) {
+                            if match.icon == "upcoming" {
+                                Image(systemName: "clock.fill")
+                                    .frame(width: 80, height: 50)
+                                    .foregroundColor(.blue)
+                                    .onTapGesture {
+                                        onTap(match.time, match.durationType)
+                                    }
+                            } else {
+                                Image(match.icon)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .frame(width: 80)
+                                    .foregroundColor(.gray)
+                                    .onTapGesture {
+                                        onTap(match.time, match.durationType)
+                                    }
+                            }
+                        } else {
+                            Text("_")
+                                .frame(width: 80)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+            }
+            .padding()
+            .background(
+                isDarkMode
+                ? (index.isMultiple(of: 2) ? Color.customBackgroundDark2 : Color.customBackgroundDark)
+                : (index.isMultiple(of: 2) ? Color.white : Color.customBackground2)
+            )
+
+            Divider().background(Color.white.opacity(0.2))
+        }
     }
 }

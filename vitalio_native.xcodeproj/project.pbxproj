@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0582A62DAA257F0043330A /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A52DAA257F0043330A /* Intake.swift */; };
+		8D0582A82DAA37380043330A /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A72DAA37370043330A /* BarChart.swift */; };
+		8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A92DAA3BFC0043330A /* drag.swift */; };
+		8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AB2DAA6C4B0043330A /* intakehistory.swift */; };
+		8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AD2DAA7C350043330A /* outputHistory.swift */; };
+		8D1359CA2DA65F63004A8332 /* popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1359C92DA65F63004A8332 /* popup.swift */; };
+		8D1544342DA907A9009E7433 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544332DA907A9009E7433 /* Output.swift */; };
+		8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544352DA91D72009E7433 /* DashboardViewModal.swift */; };
 		8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3148872D9FA371008DF7D7 /* PillsReminder.swift */; };
 		8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488B2D9FB648008DF7D7 /* Calander.swift */; };
 		8D31488F2D9FF8C7008DF7D7 /* Suppliment_checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488E2D9FF8C7008DF7D7 /* Suppliment_checklist.swift */; };
@@ -45,13 +53,23 @@
 		8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D966B742D9D420200B37927 /* AppDelegate.swift */; };
 		8D966B782D9D442D00B37927 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8D966B772D9D442D00B37927 /* FirebaseAnalytics */; };
 		8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BCAAB2DA0FD6800405837 /* PillsViewModal.swift */; };
-		8DCE2BCD2DA39F9E004EEED2 /* output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCC2DA39F9D004EEED2 /* output.swift */; };
+		8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */; };
 		8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */; };
 		8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */; };
 		8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */; };
+		8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */; };
+		8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F32DAE3A4500FE7302 /* addwater.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D0582A52DAA257F0043330A /* Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intake.swift; sourceTree = "<group>"; };
+		8D0582A72DAA37370043330A /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		8D0582A92DAA3BFC0043330A /* drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drag.swift; sourceTree = "<group>"; };
+		8D0582AB2DAA6C4B0043330A /* intakehistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intakehistory.swift; sourceTree = "<group>"; };
+		8D0582AD2DAA7C350043330A /* outputHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outputHistory.swift; sourceTree = "<group>"; };
+		8D1359C92DA65F63004A8332 /* popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popup.swift; sourceTree = "<group>"; };
+		8D1544332DA907A9009E7433 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		8D1544352DA91D72009E7433 /* DashboardViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModal.swift; sourceTree = "<group>"; };
 		8D3148872D9FA371008DF7D7 /* PillsReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsReminder.swift; sourceTree = "<group>"; };
 		8D31488B2D9FB648008DF7D7 /* Calander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calander.swift; sourceTree = "<group>"; };
 		8D31488E2D9FF8C7008DF7D7 /* Suppliment_checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suppliment_checklist.swift; sourceTree = "<group>"; };
@@ -69,9 +87,9 @@
 		8DC5CEAF2D97E22900BF614A /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
 		8DC5CEB32D97E2B300BF614A /* SymptomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsView.swift; sourceTree = "<group>"; };
 		8DC5CEB62D980A5700BF614A /* Confermation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confermation.swift; sourceTree = "<group>"; };
-		8DCE2BCC2DA39F9D004EEED2 /* output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = output.swift; sourceTree = "<group>"; };
+		8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fluid.swift; sourceTree = "<group>"; };
 		8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModal.swift; sourceTree = "<group>"; };
-		8DD5F83E2D8A88B600FBDF87 /* vitalio_native.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vitalio_native.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitalio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD5F8432D8A88B600FBDF87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -85,6 +103,8 @@
 		8DD5F85D2D8A8A1000FBDF87 /* otp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = otp.swift; sourceTree = "<group>"; };
 		8DD5F8632D8AB32E00FBDF87 /* CreateAccont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccont.swift; sourceTree = "<group>"; };
 		8DD5F8652D8AD7C500FBDF87 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidViewModal.swift; sourceTree = "<group>"; };
+		8DFB66F32DAE3A4500FE7302 /* addwater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addwater.swift; sourceTree = "<group>"; };
 		8DFEF6372D9BD2910026726C /* LoginViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModal.swift; sourceTree = "<group>"; };
 		8DFEF6392D9BEC5A0026726C /* url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = url.swift; sourceTree = "<group>"; };
 		8DFEF63B2D9BF2670026726C /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
@@ -122,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD5F8592D8A89F200FBDF87 /* dashboard.swift */,
+				8D1544352DA91D72009E7433 /* DashboardViewModal.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -179,8 +200,8 @@
 				8DD5F8652D8AD7C500FBDF87 /* Text.swift */,
 				8D8257742D97D39300CF96B4 /* appbar.swift */,
 				8D8257762D97D7EC00CF96B4 /* MyButton.swift */,
-				8DFEF6392D9BEC5A0026726C /* url.swift */,
 				8D31488B2D9FB648008DF7D7 /* Calander.swift */,
+				8D1359C92DA65F63004A8332 /* popup.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -238,7 +259,15 @@
 		8DCE2BCB2DA39F8E004EEED2 /* fluid */ = {
 			isa = PBXGroup;
 			children = (
-				8DCE2BCC2DA39F9D004EEED2 /* output.swift */,
+				8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */,
+				8D1544332DA907A9009E7433 /* Output.swift */,
+				8D0582A52DAA257F0043330A /* Intake.swift */,
+				8D0582A72DAA37370043330A /* BarChart.swift */,
+				8D0582A92DAA3BFC0043330A /* drag.swift */,
+				8D0582AB2DAA6C4B0043330A /* intakehistory.swift */,
+				8D0582AD2DAA7C350043330A /* outputHistory.swift */,
+				8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */,
+				8DFB66F32DAE3A4500FE7302 /* addwater.swift */,
 			);
 			path = fluid;
 			sourceTree = "<group>";
@@ -256,7 +285,7 @@
 		8DD5F83F2D8A88B600FBDF87 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD5F83E2D8A88B600FBDF87 /* vitalio_native.app */,
+				8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,12 +293,12 @@
 		8DD5F8402D8A88B600FBDF87 /* vitalio_native */ = {
 			isa = PBXGroup;
 			children = (
-				8DCE2BCB2DA39F8E004EEED2 /* fluid */,
 				8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */,
 				8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */,
 				8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */,
 				8D46DCE22D95206F00FAC567 /* AppManager */,
 				8DC5CEB12D97E28000BF614A /* symptoms */,
+				8DCE2BCB2DA39F8E004EEED2 /* fluid */,
 				8DC5CEAE2D97E21500BF614A /* FAQ */,
 				8DC5CEB52D97F53500BF614A /* feedback */,
 				8DC5CEAD2D97E1FD00BF614A /* Pills Reminder */,
@@ -304,6 +333,7 @@
 				8DFFCD2D2D927D82007A7483 /* network.swift */,
 				8DFFCD2F2D927F7A007A7483 /* alert.swift */,
 				8DFFCD312D929DC4007A7483 /* APIClass.swift */,
+				8DFEF6392D9BEC5A0026726C /* url.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -340,7 +370,7 @@
 				8D966B772D9D442D00B37927 /* FirebaseAnalytics */,
 			);
 			productName = vitalio_native;
-			productReference = 8DD5F83E2D8A88B600FBDF87 /* vitalio_native.app */;
+			productReference = 8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -405,17 +435,24 @@
 				8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */,
 				8D966B652D9CF73200B37927 /* dashboard.swift in Sources */,
 				8D966B642D9CF72E00B37927 /* drawer.swift in Sources */,
+				8D0582A82DAA37380043330A /* BarChart.swift in Sources */,
 				8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */,
+				8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */,
 				8D966B632D9CF72A00B37927 /* Darkmode.swift in Sources */,
 				8D966B622D9CF72600B37927 /* Edit Profile.swift in Sources */,
 				8D966B612D9CF72300B37927 /* Modal.swift in Sources */,
 				8D966B602D9CF71F00B37927 /* LoginViewModal.swift in Sources */,
+				8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */,
 				8D966B5F2D9CF71D00B37927 /* otp.swift in Sources */,
 				8D966B5E2D9CF71900B37927 /* login.swift in Sources */,
+				8D0582A62DAA257F0043330A /* Intake.swift in Sources */,
 				8D966B5D2D9CF71600B37927 /* FAQ.swift in Sources */,
 				8D966B5C2D9CF71300B37927 /* Confermation.swift in Sources */,
+				8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */,
 				8D966B5B2D9CF70F00B37927 /* SymptomsView.swift in Sources */,
+				8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */,
 				8D966B5A2D9CF70C00B37927 /* Feedback.swift in Sources */,
+				8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */,
 				8D966B592D9CF70900B37927 /* routing.swift in Sources */,
 				8D966B582D9CF70500B37927 /* LocalData.swift in Sources */,
 				8D966B572D9CF70200B37927 /* color.swift in Sources */,
@@ -423,14 +460,17 @@
 				8D966B552D9CF6FB00B37927 /* APIClass.swift in Sources */,
 				8D966B542D9CF6F800B37927 /* alert.swift in Sources */,
 				8D966B532D9CF6F400B37927 /* network.swift in Sources */,
+				8D1544342DA907A9009E7433 /* Output.swift in Sources */,
 				8D966B512D9CF6EE00B37927 /* viewmodal.swift in Sources */,
 				8D966B502D9CF6EA00B37927 /* DummyView.swift in Sources */,
 				8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */,
 				8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */,
 				8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */,
 				8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */,
+				8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */,
 				8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */,
-				8DCE2BCD2DA39F9E004EEED2 /* output.swift in Sources */,
+				8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */,
+				8D1359CA2DA65F63004A8332 /* popup.swift in Sources */,
 				8D31488F2D9FF8C7008DF7D7 /* Suppliment_checklist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +610,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "vitalio-native-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vitalio;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -582,7 +623,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.criteriontech.vitalio;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vitalio;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -602,6 +643,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "vitalio-native-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vitalio;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -614,7 +656,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.criteriontech.vitalio;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vitalio;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

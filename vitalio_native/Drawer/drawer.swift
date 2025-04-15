@@ -14,6 +14,8 @@ struct SideMenuView: View {
        var isDarkMode: Bool {
            themeManager.colorScheme == .dark
        }
+    @EnvironmentObject var viewModel : DashboardViewModal
+    @State private var showLogoutSheet = false
     
     var body: some View {
         ZStack {
@@ -25,11 +27,18 @@ struct SideMenuView: View {
                             Spacer()
                             
                             HStack {
-                                Image("left").frame(maxWidth:  .infinity, alignment: .leading).padding(10)
-                                Image(systemName: "ellipsis")
-                                    .font(.title3)
-                                    .padding(10)
-                                    .rotationEffect(.degrees(90))
+                                Button(action: {
+                                    viewModel.isDrawerOpen.toggle()
+                                }) {
+                                    Image("left").frame(maxWidth:  .infinity, alignment: .leading).padding(10)}
+                                Button(action: {
+                                               showLogoutSheet = true
+                                }) {
+                                    
+                                    Image(systemName: "ellipsis")
+                                        .font(.title3)
+                                        .padding(10)
+                                    .rotationEffect(.degrees(90))}
                             }
                             Spacer()
                             Image("dp").frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
@@ -91,6 +100,11 @@ struct SideMenuView: View {
                         }
                         
                     }
+                    .sheet(isPresented: $showLogoutSheet) {
+                               LogoutConfirmationSheet(isPresented: $showLogoutSheet)
+                                   .presentationDetents([.height(250)])
+                                   .presentationDragIndicator(.visible)
+                           }
                     .background( isDarkMode ?Color.customBackgroundDark2 : Color.white)
                     .cornerRadius(15)
                     .padding(10)
@@ -101,7 +115,7 @@ struct SideMenuView: View {
 }
 
 struct drawer: View {
-    
+   
     @EnvironmentObject var themeManager: ThemeManager
     @State private var isDrawerOpen = false
     @State private var dragOffset: CGFloat = 0
@@ -129,7 +143,6 @@ struct drawer: View {
                             }
                         }
                 }
-                
                 SideMenuView()
                     .offset(x: isDrawerOpen ? 0 : -500 + dragOffset)
                     .gesture(
@@ -148,8 +161,11 @@ struct drawer: View {
                                 dragOffset = 0
                             }
                     )
+             
+                
             }
-            .preferredColorScheme(themeManager.colorScheme) // Apply theme globally
+   
+            .preferredColorScheme(themeManager.colorScheme)
             .animation(.easeInOut, value: isDrawerOpen)
         }
     }
@@ -212,5 +228,55 @@ struct GroupedDrawerTile: View {
         }
         .padding(5)
         .background(dark ? Color.customBackgroundDark2 :  Color.white)
+    }
+}
+
+struct LogoutConfirmationSheet: View {
+    @Binding var isPresented: Bool
+    @EnvironmentObject var route: Routing
+    var body: some View {
+        VStack(spacing: 24) {
+            Image(systemName: "rectangle.portrait.and.arrow.right")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.primary)
+                .padding(.top)
+
+            Text("Are you sure you want to logout?")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+
+            HStack(spacing: 16) {
+                Button(action: {
+                    isPresented = false
+                }) {
+                    Text("Cancel")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.15))
+                        .cornerRadius(10)
+                }
+
+                Button(action: {
+                    isPresented = false
+                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: false)
+                    route.navigatoToRoot()
+                    
+                    print("✅ Logged Out")
+                }) {
+                    Text("Logout")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.primaryBlue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding(.horizontal)
+
+            Spacer()
+        }
+        .padding()
     }
 }

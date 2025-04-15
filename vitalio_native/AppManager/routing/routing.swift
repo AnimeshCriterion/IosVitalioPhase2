@@ -18,7 +18,10 @@ final class Routing : ObservableObject{
         case pillsReminder 
         case suppliment       
         case faqView     
-        case feedback
+        case feedback   
+        case fluid 
+        case inputHistoryView
+        case outputHistoryView
         
     }
 

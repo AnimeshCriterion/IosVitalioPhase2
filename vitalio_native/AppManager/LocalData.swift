@@ -50,5 +50,23 @@ final class UserDefaultsManager {
         return get(forKey: "loggedIn")
     }
     
+    // MARK: - User ID
+       func saveUserID(_ userID: String) {
+           set(userID, forKey: "UserID")
+       }
+
+       func getUserID() -> String? {
+           return get(forKey: "UserID")
+       }
+
+       // MARK: - UHID
+       func saveUHID(_ uhid: String) {
+           set(uhid, forKey: "UHID")
+       }
+
+       func getUHID() -> String? {
+           return get(forKey: "UHID")
+       }
+    
 }
 

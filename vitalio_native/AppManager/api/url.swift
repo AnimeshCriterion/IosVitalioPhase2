@@ -18,3 +18,4 @@ var getPatientDetailsByMobileNo = "api/PatientRegistration/GetPatientDetailsByMo
 var sentLogInOTPForSHFCApp = "api/LogInForSHFCApp/SentLogInOTPForSHFCApp"
 var verifyLogInOTPForSHFCApp = "api/LogInForSHFCApp/VerifyLogInOTPForSHFCApp"
 var getAllPatientMedication = "api/PatientMedication/GetAllPatientMedication"
+var insertPatientMedication = "api/PatientMedication/InsertPatientMedication"

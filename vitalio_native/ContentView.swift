@@ -33,7 +33,6 @@ struct ContentView: View {
                     }else{
                         route.navigate(to: .login)
                     }
-            
                 }
             }
             .padding(0)
@@ -54,15 +53,21 @@ struct ContentView: View {
                 case .symptoms:
                     SymptomTrackerView()
                 case .editProfile:
-                    EditProfile() 
+                    EditProfile()
                 case .pillsReminder:
-                    PillsReminder() 
+                    PillsReminder()
                 case .suppliment:
-                    Suppliment()  
+                    Suppliment()
                 case .faqView:
                     FAQView()
                 case .feedback:
                     Feedback()
+                case .fluid:
+                    Fluid()
+                case .inputHistoryView:
+                    InputView()       
+                case .outputHistoryView:
+                    OutputHistoryView()
                 }
             }
         }

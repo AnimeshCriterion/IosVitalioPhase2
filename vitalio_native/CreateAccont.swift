@@ -25,7 +25,7 @@ struct CreateAccont: View {
                     .frame(height: 10)
             }
             CustomText("Getting Started")
-            CustomText("Great start! You’re just beginning—let’s keep going!",color: Color.gray).padding(.top, 0.10)
+            CustomText("Great start! You’re just beginning—let’s keep going!", color: Color.gray).padding(.top, 0.10)
         }.padding(16)
             .background(Color.customBackground)
             .cornerRadius(20)
