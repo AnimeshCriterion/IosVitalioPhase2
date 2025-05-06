@@ -9,6 +9,7 @@ import SwiftUI
 
 struct popup: View {
     @State private var showSuccess = false
+    var text: String
 
        var body: some View {
            ZStack {
@@ -24,7 +25,7 @@ struct popup: View {
                       }
 
                       // Success popup with animation
-                      SuccessPopupView(show: $showSuccess)
+               SuccessPopupView(show: $showSuccess, message: text)
                           .zIndex(1)
                   }
               
@@ -32,16 +33,17 @@ struct popup: View {
 }
 
 #Preview {
-    popup()
+    popup( text: "Medicine intake Sucessful!")
 }
 
 
 
 
-import SwiftUI
+
 
 struct SuccessPopupView: View {
     @Binding var show: Bool
+    var message: String
     @State private var animateLogo = false
 
     var body: some View {
@@ -63,7 +65,7 @@ struct SuccessPopupView: View {
                         .animation(.spring(response: 0.6, dampingFraction: 0.6), value: animateLogo)
                 }
 
-                Text("Medicine intake Sucessful!")
+                Text(message)
                     .font(.headline)
                     .foregroundColor(.black.opacity(0.7))
             }

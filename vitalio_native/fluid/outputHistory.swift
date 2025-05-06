@@ -1,9 +1,13 @@
+
+
 //
 //  outputHistory.swift
 //  vitalio_native
 //
 //  Created by HID-18 on 12/04/25.
 //
+
+
 
 import SwiftUI
 
@@ -20,6 +24,7 @@ struct OutputHistoryView: View {
     @EnvironmentObject var route: Routing
     @State private var showChart = false
     @State private var selectedPeriod: Period = .daily
+    @EnvironmentObject var viewModel: FluidaViewModal
     let inputData: [InputEntry] = [
         .init(type: "Water", time: "05:50 AM", amount: 200, color: .cyan),
         .init(type: "Water", time: "06:30 AM", amount: 300, color: .cyan),
@@ -36,18 +41,23 @@ struct OutputHistoryView: View {
             
             VStack(alignment: .leading, spacing: 16) {
                 CustomNavBarView(title: "Fluid Output History", isDarkMode: false) {
-                    
+
                     route.back()
                 }
                 PeriodToggleView(selectedPeriod: $selectedPeriod)
-                
+                    .onAppear(){
+                        Task{
+                            await viewModel.outputByDate(hours: getCurrentHourString());
+                        }
+
+                    }
                 HStack {
                     Spacer()
                     DateSelectorView()
                     Spacer()
                 }
                 HStack {
-                    Text("Fluid Intake Log")
+                    Text("Fluid Output Log")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.black)
                     
@@ -77,9 +87,9 @@ struct OutputHistoryView: View {
                 }
                 
                 if showChart {
-                    OutputChartView(data: inputData)
+                    OutputChartView()
                 } else {
-                    OutputHistoryList(data: inputData)
+                    OutputHistoryList()
                 }
                 
                 Spacer()
@@ -91,25 +101,26 @@ struct OutputHistoryView: View {
         }}
 }
 
+// MARK: - OutputHistoryList
 struct OutputHistoryList: View {
-    let data: [InputEntry]
-
+//    let data: [InputEntry]
+    @EnvironmentObject var viewModel : FluidaViewModal
     var body: some View {
         VStack(spacing: 20) {
-            ForEach(data.reversed()) { item in
+            ForEach(viewModel.outputList) { item in
                 HStack {
                     Circle()
-                             .fill(Color.yellow)
-                             .frame(width: 45, height: 45)
+                        .fill(Color.yellow)
+                        .frame(width: 45, height: 45)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item.type)
+                        Text(item.colour)
                             .font(.system(size: 16, weight: .semibold))
-                        Text(item.time)
+                        Text(item.outputDate)
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
                     }
                     Spacer()
-                    Text("\(item.amount) ml")
+                    Text("\(item.quantity) \(item.unitName)")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.black)
                 }
@@ -119,31 +130,39 @@ struct OutputHistoryList: View {
 }
 
 struct OutputChartView: View {
-    let data: [InputEntry]
-
+    @EnvironmentObject var viewModel : FluidaViewModal
+    let maxY: Double = 1000.0
+    
     var body: some View {
         GeometryReader { geo in
-            let maxY = 1000.0
-            let spacing = geo.size.width / 24
-
+            let spacing = viewModel.outputList.count > 1
+            ? geo.size.width / CGFloat(viewModel.outputList.count - 1)
+            : 0
+            
             ZStack(alignment: .topLeading) {
-                // Y-axis labels
+                // Y-axis grid
                 VStack(spacing: geo.size.height / 5) {
-                    ForEach((1...5).reversed(), id: \.self) { i in
-                        Text("\(i * 200) ml")
-                            .font(.system(size: 10))
-                            .foregroundColor(.gray)
+                    ForEach((0...5).reversed(), id: \.self) { i in
+                        let value = Int(Double(i) * maxY / 5)
+                        HStack(spacing: 4) {
+                            Text("\(value) ml")
+                                .font(.system(size: 10))
+                                .foregroundColor(.gray)
+                                .frame(width: 40, alignment: .trailing)
+                            Rectangle()
+                                .fill(Color.gray)
+                                .frame(height: 1)
+                        }
                     }
                 }
-                .offset(x: -5, y: 0)
-
-                // Graph path
+                
+                // Path line
                 Path { path in
-                    for (i, item) in data.enumerated() {
-                        let x = spacing * CGFloat(hourFromTime(item.time))
-                        let y = geo.size.height - (CGFloat(item.amount) / CGFloat(maxY) * geo.size.height)
+                    for (i, item) in viewModel.outputList.enumerated() {
+                        let x = spacing * CGFloat(i)
+                        let y = geo.size.height - (CGFloat(item.quantity) / CGFloat(maxY) * geo.size.height)
                         let point = CGPoint(x: x, y: y)
-
+                        
                         if i == 0 {
                             path.move(to: point)
                         } else {
@@ -151,43 +170,74 @@ struct OutputChartView: View {
                         }
                     }
                 }
-                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-
-                // Points and Labels
-                ForEach(data) { item in
-                    let x = spacing * CGFloat(hourFromTime(item.time))
-                    let y = geo.size.height - (CGFloat(item.amount) / CGFloat(maxY) * geo.size.height)
-
-                    Circle()
-                        .fill(item.color)
-                        .frame(width: 8, height: 8)
-                        .position(x: x, y: y)
-
-                    Text("\(item.amount)ml")
-                        .font(.system(size: 10, weight: .bold))
-                        .padding(4)
-                        .background(item.color)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                        .position(x: x, y: y - 16)
+                .stroke(Color.gray, lineWidth: 1.5)
+                
+                // Data points and labels
+                ForEach(Array(viewModel.outputList.enumerated()), id: \.1.id) { index, item in
+                    let x = spacing * CGFloat(index)
+                    let y = geo.size.height - (CGFloat(item.quantity) / CGFloat(maxY) * geo.size.height)
+                    let color = colorFromString(item.colour)
+                    
+                    VStack(spacing: 4) {
+                        Text("\(item.quantity)\(item.unitName)")
+                            .font(.system(size: 10, weight: .bold))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(color)
+                            .foregroundColor(.black)
+                            .cornerRadius(4)
+                        
+                        Circle()
+                            .fill(color)
+                            .frame(width: 6, height: 6)
+                    }
+                    .position(x: x, y: y - 12)
                 }
+                
+                // Time Labels
+                HStack(spacing: spacing) {
+                    ForEach(viewModel.outputList) { item in
+                        Text(formatTime(item.outputDate))
+                            .font(.system(size: 10))
+                            .foregroundColor(.gray)
+                            .frame(width: spacing, alignment: .center)
+                    }
+                }
+                .position(x: geo.size.width / 2, y: geo.size.height + 10)
             }
         }
         .frame(height: 300)
-        .padding(.top, 10)
+        .padding()
+        .cornerRadius(16)
     }
-
-    func hourFromTime(_ time: String) -> Int {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
-        if let date = formatter.date(from: time) {
-            return Calendar.current.component(.hour, from: date)
+    
+    func colorFromString(_ color: String) -> Color {
+        switch color.lowercased() {
+        case "yellow": return .yellow
+        case "cyan": return .cyan
+        case "orange": return .orange
+        case "white": return .white
+        case "blue": return .blue
+        default: return .yellow.opacity(0.7)
         }
-        return 0
     }
+    
+    func formatTime(_ datetime: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy hh:mm a"
+        if let date = formatter.date(from: datetime) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "hh:mm a"
+            return displayFormatter.string(from: date)
+        }
+        return datetime
+    }
+    
+    
 }
 
 #Preview {
     InputView()
 }
+
 

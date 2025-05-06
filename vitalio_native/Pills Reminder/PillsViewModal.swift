@@ -17,23 +17,23 @@ class PillsViewModal : ObservableObject {
        }
     
     func getMedication() async {
-        let baseURL = "https://api.medvantage.tech:7082/api/"
-        let endpoint = "PatientMedication/GetAllPatientMedication"
+//        let baseURL = "https://api.medvantage.tech:7082/api/"
+        
+        
         
         let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
-        let fullURL = baseURL + endpoint
-
+        let fullURL = baseURL7082 + getAllPatientMedication
+        
         do {
             let result = try await APIService.shared.fetchRawData(
                 fromURL: fullURL,
                 parameters: ["UhID": uhid]
             )
-
+            
             let jsonData = try JSONSerialization.data(withJSONObject: result)
             let decodedData = try JSONDecoder().decode(MedicationResponse.self, from: jsonData)
             
             print("✅ Decoded Data:", decodedData.responseValue.medicationNameAndDate)
-        
             
             DispatchQueue.main.async {
                           self.medications = decodedData.responseValue.medicationNameAndDate
@@ -134,7 +134,7 @@ class PillsViewModal : ObservableObject {
 
         do {
             
-            let response = try await APIService.shared.postRawData(toURL: baseURL + insertPatientMedication, body: params)
+            let response = try await APIService.shared.postRawData(toURL: baseURL7082 + insertPatientMedication, body: params)
             print("Response dictionary:", response)
 
             if let message = response["message"] as? String {

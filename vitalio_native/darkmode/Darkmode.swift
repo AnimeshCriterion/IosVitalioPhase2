@@ -42,7 +42,7 @@ enum Appearance: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 struct Darkmode: View {
-    @EnvironmentObject var themeManager: ThemeManager  // Inject ThemeManager
+    @EnvironmentObject var themeManager: ThemeManager
     
     var body: some View {
         VStack {

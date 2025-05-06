@@ -40,7 +40,6 @@ struct PillsReminder: View {
                 }
                 .padding(.leading,20)
                 MedicineScheduleView(isDarkMode: isDarkMode,selectedDate: selectedFormattedDate)
-                
                     .navigationBarHidden(true)
                     .background(isDarkMode ? Color.customBackgroundDark : Color.customBackground)
                     .onAppear {
@@ -51,7 +50,9 @@ struct PillsReminder: View {
                             
                         }
                     }}
-            SuccessPopupView(show: $pillsViewModal.showSuccess)
+            
+            SuccessPopupView(show: $pillsViewModal.showSuccess,
+                             message: "Medicine intake Sucessful!")
                 .zIndex(1)
         }
     }
@@ -161,83 +162,83 @@ struct MedicineItem: Identifiable {
     let backgroundColor: Color
     let isHighlighted: Bool
 }
-
-struct MedicineScheduleView2: View {
-    let medicines: [MedicineItem] = [
-        MedicineItem(time: "08:00 AM", name: "Omega 3", dosage: "", instruction: "Take on an empty stomach", icon: "capsule.fill", color: .gray, backgroundColor: .black.opacity(0.7), isHighlighted: false),
-        MedicineItem(time: "09:00 AM", name: "Vitamin B12", dosage: "1 pill", instruction: "Take on an empty stomach", icon: "pills.fill", color: .green, backgroundColor: .teal, isHighlighted: true),
-        MedicineItem(time: "09:00 AM", name: "Probiotics", dosage: "1 spoon", instruction: "Take 30 mins before a meal", icon: "drop.fill", color: .purple, backgroundColor: .purple.opacity(0.8), isHighlighted: true),
-        MedicineItem(time: "11:00 AM", name: "Vitamin D3", dosage: "1 pill", instruction: "Take after a meal", icon: "pills.fill", color: .red, backgroundColor: .red.opacity(0.7), isHighlighted: false)
-    ]
-    
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                ForEach(medicines) { medicine in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(medicine.time)
-                            .foregroundColor(.gray)
-                            .font(.caption)
-                        
-                        HStack {
-                            if medicine.isHighlighted {
-                                Capsule()
-                                    .fill(Color.purple)
-                                    .frame(width: 60, height: 8)
-                                    .overlay(
-                                        Text(medicine.time)
-                                            .foregroundColor(.white)
-                                            .font(.caption)
-                                            .bold()
-                                    )
-                            }
-                            
-                            HStack(spacing: 12) {
-                                Image(systemName: medicine.icon)
-                                    .foregroundColor(medicine.color)
-                                
-                                VStack(alignment: .leading, spacing: 2) {
-                                    if !medicine.dosage.isEmpty {
-                                        Text(medicine.dosage)
-                                            .font(.caption)
-                                            .bold()
-                                            .padding(6)
-                                            .background(medicine.color.opacity(0.2))
-                                            .cornerRadius(8)
-                                            .foregroundColor(medicine.color)
-                                    }
-                                    
-                                    Text(medicine.name)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                    
-                                    Text(medicine.instruction)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                }
-                                Spacer()
-                                
-                                Image(systemName: "ellipsis")
-                                    .foregroundColor(.white)
-                            }
-                            .padding()
-                            .background(medicine.backgroundColor)
-                            .cornerRadius(12)
-                        }
-                    }
-                }
-            }
-            .padding()
-        }
-        .background(Color.customBackground)
-    }
-}
-
-struct MedicineScheduleView2_Previews: PreviewProvider {
-    static var previews: some View {
-        MedicineScheduleView2()
-    }
-}
+//
+//struct MedicineScheduleView2: View {
+//    let medicines: [MedicineItem] = [
+//        MedicineItem(time: "08:00 AM", name: "Omega 3", dosage: "", instruction: "Take on an empty stomach", icon: "capsule.fill", color: .gray, backgroundColor: .black.opacity(0.7), isHighlighted: false),
+//        MedicineItem(time: "09:00 AM", name: "Vitamin B12", dosage: "1 pill", instruction: "Take on an empty stomach", icon: "pills.fill", color: .green, backgroundColor: .teal, isHighlighted: true),
+//        MedicineItem(time: "09:00 AM", name: "Probiotics", dosage: "1 spoon", instruction: "Take 30 mins before a meal", icon: "drop.fill", color: .purple, backgroundColor: .purple.opacity(0.8), isHighlighted: true),
+//        MedicineItem(time: "11:00 AM", name: "Vitamin D3", dosage: "1 pill", instruction: "Take after a meal", icon: "pills.fill", color: .red, backgroundColor: .red.opacity(0.7), isHighlighted: false)
+//    ]
+//    
+//    var body: some View {
+//        ScrollView {
+//            VStack(alignment: .leading, spacing: 16) {
+//                ForEach(medicines) { medicine in
+//                    VStack(alignment: .leading, spacing: 4) {
+//                        Text(medicine.time)
+//                            .foregroundColor(.gray)
+//                            .font(.caption)
+//                        
+//                        HStack {
+//                            if medicine.isHighlighted {
+//                                Capsule()
+//                                    .fill(Color.purple)
+//                                    .frame(width: 60, height: 8)
+//                                    .overlay(
+//                                        Text(medicine.time)
+//                                            .foregroundColor(.white)
+//                                            .font(.caption)
+//                                            .bold()
+//                                    )
+//                            }
+//                            
+//                            HStack(spacing: 12) {
+//                                Image(systemName: medicine.icon)
+//                                    .foregroundColor(medicine.color)
+//                                
+//                                VStack(alignment: .leading, spacing: 2) {
+//                                    if !medicine.dosage.isEmpty {
+//                                        Text(medicine.dosage)
+//                                            .font(.caption)
+//                                            .bold()
+//                                            .padding(6)
+//                                            .background(medicine.color.opacity(0.2))
+//                                            .cornerRadius(8)
+//                                            .foregroundColor(medicine.color)
+//                                    }
+//                                    
+//                                    Text(medicine.name)
+//                                        .font(.headline)
+//                                        .foregroundColor(.white)
+//                                    
+//                                    Text(medicine.instruction)
+//                                        .font(.caption)
+//                                        .foregroundColor(.gray)
+//                                }
+//                                Spacer()
+//                                
+//                                Image(systemName: "ellipsis")
+//                                    .foregroundColor(.white)
+//                            }
+//                            .padding()
+//                            .background(medicine.backgroundColor)
+//                            .cornerRadius(12)
+//                        }
+//                    }
+//                }
+//            }
+//            .padding()
+//        }
+//        .background(Color.customBackground)
+//    }
+//}
+//
+//struct MedicineScheduleView2_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MedicineScheduleView2()
+//    }
+//}
 
 struct ExtractedView: View {
     var selectedDate: String
@@ -325,7 +326,6 @@ struct MedicationRowView: View {
                 ? (index.isMultiple(of: 2) ? Color.customBackgroundDark2 : Color.customBackgroundDark)
                 : (index.isMultiple(of: 2) ? Color.white : Color.customBackground2)
             )
-
             Divider().background(Color.white.opacity(0.2))
         }
     }

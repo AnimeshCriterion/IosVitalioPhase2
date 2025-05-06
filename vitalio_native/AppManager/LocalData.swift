@@ -67,6 +67,42 @@ final class UserDefaultsManager {
        func getUHID() -> String? {
            return get(forKey: "UHID")
        }
+    private let key = "userData"
+     
+          func saveUserData(_ patient: PatientModel) {
+              if let encoded = try? JSONEncoder().encode(patient) {
+                  UserDefaults.standard.set(encoded, forKey: key)
+              }
+          }
+     
+          func getUserData() -> PatientModel? {
+              if let data = UserDefaults.standard.data(forKey: key),
+                 let decoded = try? JSONDecoder().decode(PatientModel.self, from: data) {
+                  return decoded
+              }
+              return nil
+          }
     
 }
 
+struct PatientModel: Codable {
+    let id: String
+    let patientName: String
+    let emailID: String
+    let genderId: String
+    let bloodGroupId: String
+    let height: String
+    let weight: String
+    let dob: String
+    let zip: String
+    let ageUnitId: String
+    let age: String
+    let address: String
+    let mobileNo: String
+    let countryId: String
+    let stateId: String
+    let cityId: String
+    let userId: String
+    let uhID: String?
+    let profileUrl: String?
+}

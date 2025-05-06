@@ -1,0 +1,834 @@
+2025-04-22 05:41:17 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fc786178200; archive(resolved)="<IDEArchive: 0x60002146bea0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	Chain (15, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fc786178200; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fc77c7277d0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc774f68990; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc76c3aa590; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc76c4682b0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc781dbde40; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc76c7152a0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc76c728ae0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc76c3980f0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x600006ab83c0; teamID='7BCQCGA365', teamName='CRITERION TECH PRIVATE LIMITED', teamType='Company', username='developer@criteriontech.in', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fc7607da8a0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="(null)">
+	<IDEDistributionContext: 0x7fc7601b1750; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="(null)">
+	<IDEDistributionContext: 0x7fc776fa7170; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="(null)">
+	<IDEDistributionContext: 0x7fc7740ed820; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x6000972819e0>", team="(null)">
+	<IDEDistributionContext: 0x7fc774ccd3c0; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x7fc774cc2e00; archive = "<IDEArchive: 0x60002146bea0>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fc786178200>
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCreateDestRootStep
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCopyItemStep
+2025-04-22 05:41:17 +0000  Running /usr/bin/ditto '-V' '/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app' '/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app'
+2025-04-22 05:41:17 +0000  >>> Copying /Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app 
+2025-04-22 05:41:17 +0000  copying file ./_CodeSignature/CodeResources ... 
+2025-04-22 05:41:17 +0000  13841 bytes for ./_CodeSignature/CodeResources
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  855 bytes for ./Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy
+copying file ./Firebase_FirebaseCore.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  685 bytes for ./Firebase_FirebaseCore.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  598 bytes for ./GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy
+copying file ./GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  721 bytes for ./GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./nanopb_nanopb.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  374 bytes for ./nanopb_nanopb.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./nanopb_nanopb.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  667 bytes for ./nanopb_nanopb.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./AppIcon60x60@2x.png ... 
+2025-04-22 05:41:17 +0000  5243 bytes for ./AppIcon60x60@2x.png
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  745 bytes for ./GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  719 bytes for ./GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  1105 bytes for ./Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseInstallations.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  703 bytes for ./Firebase_FirebaseInstallations.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  855 bytes for ./Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseCoreInternal.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  701 bytes for ./Firebase_FirebaseCoreInternal.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  2102 bytes for ./Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseAuth.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  685 bytes for ./Firebase_FirebaseAuth.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  719 bytes for ./GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  731 bytes for ./GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  2357 bytes for ./Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseMessaging.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  695 bytes for ./Firebase_FirebaseMessaging.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleService-Info.plist ... 
+2025-04-22 05:41:17 +0000  503 bytes for ./GoogleService-Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  1105 bytes for ./GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleDataTransport_GoogleDataTransport.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  721 bytes for ./GoogleDataTransport_GoogleDataTransport.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  373 bytes for ./Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./Promises_FBLPromises.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  683 bytes for ./Promises_FBLPromises.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  856 bytes for ./GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  721 bytes for ./GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Assets.car ... 
+2025-04-22 05:41:17 +0000  981135 bytes for ./Assets.car
+2025-04-22 05:41:17 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2025-04-22 05:41:17 +0000  6735 bytes for ./AppIcon76x76@2x~ipad.png
+2025-04-22 05:41:17 +0000  copying file ./Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy
+copying file ./Firebase_FirebaseCoreExtension.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  703 bytes for ./Firebase_FirebaseCoreExtension.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  911 bytes for ./GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  731 bytes for ./GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./Vitalio ... 
+2025-04-22 05:41:17 +0000  3432240 bytes for ./Vitalio
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  855 bytes for ./GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  729 bytes for ./GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:17 +0000  478 bytes for ./GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:17 +0000  copying file ./GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist ... 
+2025-04-22 05:41:17 +0000  735 bytes for ./GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist
+2025-04-22 05:41:17 +0000  copying file ./embedded.mobileprovision ... 
+2025-04-22 05:41:17 +0000  22144 bytes for ./embedded.mobileprovision
+2025-04-22 05:41:17 +0000  copying file ./Info.plist ... 
+2025-04-22 05:41:17 +0000  1617 bytes for ./Info.plist
+2025-04-22 05:41:17 +0000  copying file ./PkgInfo ... 
+2025-04-22 05:41:17 +0000  8 bytes for ./PkgInfo
+2025-04-22 05:41:17 +0000  /usr/bin/ditto exited with 0
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionEmbedProfileStep
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionInfoPlistStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionSymbolsStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionAppThinningStep
+2025-04-22 05:41:17 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionArchThinningStep
+2025-04-22 05:41:17 +0000  Running /Users/ios_grey/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app/Vitalio' '-verify_arch' 'arm64e'
+2025-04-22 05:41:17 +0000  /Users/ios_grey/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2025-04-22 05:41:17 +0000  Skipping architecture thinning for item "Vitalio" because arch "arm64e" wasn't found
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionODRStep
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionStripXattrsStep
+2025-04-22 05:41:17 +0000  Skipping stripping extended attributes because the codesign step will strip them.
+2025-04-22 05:41:17 +0000  Processing step: IDEDistributionCodesignStep
+2025-04-22 05:41:17 +0000  Entitlements for <IDEDistributionItem: 0x600069418780; bundleID='com.criteriontech.vitalio', path='<DVTFilePath:0x600015b07e20:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60004d0d0be0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600010568cc0; name='Apple Development: Zaw Ali (5ABYY8TJDW)', hash='148684F7D2F0FF045EE540F4245C2579AE895806', serialNumber='3192D34C502678F0CB49746E89858EE7', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-07-10 05:36:44 +0000''>', entitlements='{
+    "application-identifier" = "7BCQCGA365.com.criteriontech.vitalio";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = 7BCQCGA365;
+    "get-task-allow" = 1;
+}', teamID='7BCQCGA365', identifier='com.criteriontech.vitalio', executablePath='<DVTFilePath:0x600069418960:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app/Vitalio'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "7BCQCGA365.com.criteriontech.vitalio";
+    "aps-environment" = production;
+    "com.apple.developer.team-identifier" = 7BCQCGA365;
+    "get-task-allow" = 0;
+}
+2025-04-22 05:41:17 +0000  Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2025-04-22 05:41:17 +0000  Entitlements for <IDEDistributionItem: 0x600069418780; bundleID='com.criteriontech.vitalio', path='<DVTFilePath:0x600015b07e20:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60004d0d0be0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x60001056b780; name='Apple Development: Zaw Ali (5ABYY8TJDW)', hash='148684F7D2F0FF045EE540F4245C2579AE895806', serialNumber='3192D34C502678F0CB49746E89858EE7', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-07-10 05:36:44 +0000''>', entitlements='{
+    "application-identifier" = "7BCQCGA365.com.criteriontech.vitalio";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = 7BCQCGA365;
+    "get-task-allow" = 1;
+}', teamID='7BCQCGA365', identifier='com.criteriontech.vitalio', executablePath='<DVTFilePath:0x600069418960:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app/Vitalio'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "7BCQCGA365.com.criteriontech.vitalio";
+    "aps-environment" = production;
+    "com.apple.developer.team-identifier" = 7BCQCGA365;
+    "get-task-allow" = 0;
+}
+2025-04-22 05:41:17 +0000  Writing entitlements for <IDEDistributionItem: 0x600069418780; bundleID='com.criteriontech.vitalio', path='<DVTFilePath:0x600015b07e20:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60004d0d0be0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600010576880; name='Apple Development: Zaw Ali (5ABYY8TJDW)', hash='148684F7D2F0FF045EE540F4245C2579AE895806', serialNumber='3192D34C502678F0CB49746E89858EE7', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2024-07-10 05:36:44 +0000''>', entitlements='{
+    "application-identifier" = "7BCQCGA365.com.criteriontech.vitalio";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = 7BCQCGA365;
+    "get-task-allow" = 1;
+}', teamID='7BCQCGA365', identifier='com.criteriontech.vitalio', executablePath='<DVTFilePath:0x600069418960:'/Users/ios_grey/Library/Developer/Xcode/Archives/2025-04-22/vitalio_native 22-04-25, 11.10 AM.xcarchive/Products/Applications/Vitalio.app/Vitalio'>', hardenedRuntime='0'>'> to: /var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/entitlements~~~UAIVmF
+2025-04-22 05:41:17 +0000  Sending request 52C2FC70-C65E-4359-9704-7EEDA2C8D06C to <https://developerservices2.apple.com/services/QH65B2/listTeams.action?clientId=XABBG36SBA> for session <DVTServicesAccountBasedSession: 0x60006942b300; account='<DVTAppleIDBasedDeveloperAccount: 0x600002915d80; username='developer@criteriontech.in'>'>.
+Method: POST
+
+Headers:
+{
+    Accept = "text/x-xml-plist";
+    "Accept-Encoding" = "gzip, deflate";
+    "Content-Length" = 368;
+    "Content-Type" = "text/x-xml-plist";
+    "User-Agent" = Xcode;
+    "X-Apple-App-Info" = "com.apple.gs.xcode.auth";
+    "X-Apple-GS-Token" = "AAAABLwIAAAAAGe26AwRDWdzLnhjb2RlLmF1dGi9APjJyZCkSrbeL32YlzEuleSj+gDT7vrZjyodRn4GsXL7CICm2TmtgddLmYlhuZHLOjNyjvQyc+Tb8Z3io7oJKcSdBEibJiCmrsPxTWYUDG+eB83npAkIAPIR9l2+rs2PSmLvsiD81iqWngj2AUvGqJ8nz0Cw";
+    "X-Apple-I-Identity-Id" = "000354-08-bfc2804b-a5d0-4e9c-b5c2-0fcdbebb4d27";
+    "X-MMe-Client-Info" = "<Macmini8,1> <macOS;14.3.1;23D60> <com.apple.AuthKit/1 (com.apple.dt.Xcode/22502)>";
+    "X-Mme-Device-Id" = "1A25E39A-53A6-539D-BBD5-C26572D4277B";
+    "X-Xcode-Version" = "15.1 (15C65)";
+}
+
+Payload:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>clientId</key>
+	<string>XABBG36SBA</string>
+	<key>protocolVersion</key>
+	<string>QH65B2</string>
+	<key>requestId</key>
+	<string>52C2FC70-C65E-4359-9704-7EEDA2C8D06C</string>
+</dict>
+</plist>
+2025-04-22 05:41:18 +0000  Received response for 52C2FC70-C65E-4359-9704-7EEDA2C8D06C @ <https://developerservices2.apple.com/services/QH65B2/listTeams.action?clientId=XABBG36SBA>. Code = 0
+2025-04-22 05:41:18 +0000  Response payload: {
+    creationTimestamp = "2025-04-22T05:41:20Z";
+    protocolVersion = QH65B2;
+    requestId = "52C2FC70-C65E-4359-9704-7EEDA2C8D06C";
+    requestUrl = "https://developerservices2.apple.com:443/services/QH65B2/listTeams.action?clientId=XABBG36SBA";
+    responseId = "18fb0141-e465-4ae8-887d-e0f36605fc34";
+    resultCode = 0;
+    teams =     (
+                {
+            currentTeamMember =             {
+                developerStatus = active;
+                email = "developer@criteriontech.in";
+                firstName = Zaw;
+                lastName = Ali;
+                personId = 17241857990;
+                privileges =                 {
+                };
+                roles =                 (
+                    "XCODE_FREE_USER"
+                );
+                teamMemberId = 9D5B3Y76H4;
+            };
+            dateCreated = "2020-06-06 10:23:53 +0000";
+            extendedTeamAttributes =             {
+            };
+            memberships =             (
+                                {
+                    dateStart = "2020-06-06 10:23:53 +0000";
+                    deleteDevicesOnExpiry = 0;
+                    inIosDeviceResetWindow = 0;
+                    inRenewalWindow = 0;
+                    membershipId = NNVNZ97LUC;
+                    membershipProductId = fp22;
+                    name = "Xcode Free Provisioning Program";
+                    platform = ios;
+                    status = activeNeverExpire;
+                }
+            );
+            name = "Zaw Ali";
+            status = active;
+            teamId = KUQ2PABXF9;
+            teamProvisioningSettings =             {
+                canDeveloperRoleAddAppIds = 1;
+                canDeveloperRoleRegisterDevices = 1;
+                canDeveloperRoleUpdateAppIds = 1;
+            };
+            type = Individual;
+            xcodeFreeOnly = 0;
+        },
+                {
+            currentTeamMember =             {
+                developerStatus = active;
+                email = "developer@criteriontech.in";
+                firstName = Zaw;
+                lastName = Ali;
+                personId = 17241857990;
+                privileges =                 {
+                };
+                roles =                 (
+                    AGENT,
+                    "TEAM_ADMIN",
+                    "MAC_PROGRAM_TEAM_ADMIN"
+                );
+                teamMemberId = 5ABYY8TJDW;
+            };
+            dateCreated = "2020-06-02 07:41:20 +0000";
+            extendedTeamAttributes =             {
+            };
+            memberships =             (
+                                {
+                    dateExpire = "2025-07-11 06:59:00 +0000";
+                    dateStart = "2024-07-11 06:59:00 +0000";
+                    deleteDevicesOnExpiry = 0;
+                    inIosDeviceResetWindow = 0;
+                    inRenewalWindow = 0;
+                    membershipId = U8SBHYKU68;
+                    membershipProductId = ad19;
+                    name = "Apple Developer Program";
+                    platform = ios;
+                    status = active;
+                },
+                                {
+                    dateExpire = "2025-07-11 06:59:00 +0000";
+                    dateStart = "2024-07-11 06:59:00 +0000";
+                    deleteDevicesOnExpiry = 0;
+                    inIosDeviceResetWindow = 0;
+                    inRenewalWindow = 0;
+                    membershipId = U8SBHYKU68;
+                    membershipProductId = ad19;
+                    name = "Apple Developer Program";
+                    platform = mac;
+                    status = active;
+                },
+                                {
+                    dateExpire = "2025-07-11 06:59:00 +0000";
+                    dateStart = "2024-07-11 06:59:00 +0000";
+                    deleteDevicesOnExpiry = 0;
+                    inIosDeviceResetWindow = 0;
+                    inRenewalWindow = 0;
+                    membershipId = U8SBHYKU68;
+                    membershipProductId = ad19;
+                    name = "Apple Developer Program";
+                    platform = safari;
+                    status = active;
+                }
+            );
+            name = "CRITERION TECH PRIVATE LIMITED";
+            status = active;
+            teamAgent =             {
+                developerStatus = active;
+                email = "developer@criteriontech.in";
+                firstName = Zaw;
+                lastName = Ali;
+                personId = 17241857990;
+                teamMemberId = 5ABYY8TJDW;
+            };
+            teamId = 7BCQCGA365;
+            teamProvisioningSettings =             {
+                canDeveloperRoleAddAppIds = 1;
+                canDeveloperRoleRegisterDevices = 1;
+                canDeveloperRoleUpdateAppIds = 1;
+            };
+            type = "Company/Organization";
+            xcodeFreeOnly = 0;
+        }
+    );
+    userLocale = "en_US";
+}
+
+2025-04-22 05:41:18 +0000  invoking codesign: <NSConcreteTask: 0x60004d09ceb0; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    "-",
+    "--signature-size",
+    16000,
+    "--entitlements",
+    "/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/entitlements~~~UAIVmF",
+    "--requirements",
+    "=designated => anchor apple generic and identifier \"com.criteriontech.vitalio\" and certificate leaf[subject.CN] = \"Apple Distribution: CRITERION TECH PRIVATE LIMITED (7BCQCGA365)\" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */",
+    "--preserve-metadata=identifier,flags,runtime",
+    "--omit-adhoc-flag",
+    "--team-identifier",
+    7BCQCGA365,
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app"
+)'>
+2025-04-22 05:41:18 +0000  codesign output: /var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app: replacing existing signature
+/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app: signed app bundle with Mach-O thin (arm64) [com.criteriontech.vitalio]
+2025-04-22 05:41:18 +0000  Remote code signing '/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app' with signature slices '[<DVTCodeSignatureSlice: 0x60003a29f6c0; architecture='arm64', cmsDigest='<DVTCodeSignatureHash: 0x60002f680200; digestAlgorithmDescription='sha256', cdHashHexEncoded='e8593ce45fe71e91b34541d865ade149f3f8695b4cbfcf82b923c58b6dd215d8'>', codeSignatureHashes='{(
+    <DVTCodeSignatureHash: 0x60002f681e00; digestAlgorithmDescription='sha256', cdHashHexEncoded='e8593ce45fe71e91b34541d865ade149f3f8695b4cbfcf82b923c58b6dd215d8'>
+)}', cmsHexEncoded=''>]' and configuration 'RemoteSigningToolConfiguration(path: <DVTFilePath:0x600011991ea0:'/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app'>, signingCertificate: <DVTSigningCertificate: 0x600010574e40; name='Apple Distribution: CRITERION TECH PRIVATE LIMITED (7BCQCGA365)', hash='C77ABAA84F2AD3AF3D53A05E81F94A17D2B0D8F3', serialNumber='43061936CBA26A82A7AD4240EB2AF934', certificateKinds='(
+    "1.2.840.113635.100.6.1.7",
+    "1.2.840.113635.100.6.1.4"
+), issueDate='2025-03-15 20:30:18 +0000''>, session: <DVTServicesAccountBasedSession: 0x60006942b300; account='<DVTAppleIDBasedDeveloperAccount: 0x600002915d80; username='developer@criteriontech.in'>'>, team: <DVTPortalTeam: 0x600012d85f00; name='CRITERION TECH PRIVATE LIMITED', teamID='7BCQCGA365', type='Company/Organization', memberships='(
+    "<DVTPortalMembership: 0x60003a2743c0; programs='{(\n    <DVTPortalProgram: 0x600001659b80; <DVTPortalProgram: 0x600001659b80; identifier='Xcode.Portal.Program.iOS'>>\n)}'>",
+    "<DVTPortalMembership: 0x60003a2769d0; programs='{(\n    <DVTPortalProgram: 0x600001659ef0; <DVTPortalProgram: 0x600001659ef0; identifier='Xcode.Portal.Program.Mac'>>\n)}'>"
+)'>, codeResourcesDictionary: [AnyHashable("files"): {
+    "AppIcon60x60@2x.png" = {length = 20, bytes = 0x767017c6685a1d996d5b5956ecf47fcf12405b03};
+    "AppIcon76x76@2x~ipad.png" = {length = 20, bytes = 0x52c82fd0b4e810e866e711693b7c638d87658e70};
+    "Assets.car" = {length = 20, bytes = 0x8aee77b3de614f5721fa65f88b3a3726824cd370};
+    "Firebase_FirebaseAuth.bundle/Info.plist" = {length = 20, bytes = 0x96ee7c424863d6479e6e357ab40617b7806e27d6};
+    "Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xf1c43fad24bb5d1f28853b92011dbb9906f5c225};
+    "Firebase_FirebaseCore.bundle/Info.plist" = {length = 20, bytes = 0xbee9c5ccb3b432c989818a5e7a4c15bfbf2d4b1b};
+    "Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xb1ad8e84596a742232cfda15edf51d0ca5b314bd};
+    "Firebase_FirebaseCoreExtension.bundle/Info.plist" = {length = 20, bytes = 0x55f345f8b186c5068ee53232cbac66418bd1b272};
+    "Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "Firebase_FirebaseCoreInternal.bundle/Info.plist" = {length = 20, bytes = 0x6ab2ac52c0acbf48f57d4700f0f61a5620b99ebc};
+    "Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x89fa1386ba9b6eaa0b1b8ca302bb8c41169fd03c};
+    "Firebase_FirebaseInstallations.bundle/Info.plist" = {length = 20, bytes = 0x30d18971166ec3a16ae0f35c0572a5766496ea3b};
+    "Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x59741426bef978c4608959cb1b27fc1abdee2d45};
+    "Firebase_FirebaseMessaging.bundle/Info.plist" = {length = 20, bytes = 0xe79cf6fd244e673bf59e56c40c44bf0a37439dfc};
+    "Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x830bf636c3bfeacee293a3f1e9e4d34ef69c58de};
+    "GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist" = {length = 20, bytes = 0xcf70af4d0f8b75cad3733de0d3d856ee9ea6d1a2};
+    "GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x1aa780324c1b70d41e1b42b8a90850876bc7847a};
+    "GoogleDataTransport_GoogleDataTransport.bundle/Info.plist" = {length = 20, bytes = 0x81bdff5690774b7578036caa2dfafabcc6a2d482};
+    "GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x59741426bef978c4608959cb1b27fc1abdee2d45};
+    "GoogleService-Info.plist" = {length = 20, bytes = 0x6bd3a496f57b98066778acb6d261834bacda784d};
+    "GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist" = {length = 20, bytes = 0xb1e2d9df50f0c428f6efa55a1809c6667ba248ca};
+    "GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist" = {length = 20, bytes = 0xe4501d8bbdba1a2ec1451c411bb5024efd807d5d};
+    "GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xe9110a6c9eb555e246c445607c282a0335967c0e};
+    "GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist" = {length = 20, bytes = 0xd2a88c4e4b2e2f0f200215a15e048cbb885b168c};
+    "GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist" = {length = 20, bytes = 0x05cedca183a1f9bd527cfa5701fa111058b25b73};
+    "GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist" = {length = 20, bytes = 0xa7c73771cb88eb1a4d16298a21b426679267fd75};
+    "GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist" = {length = 20, bytes = 0x2efc8e6a6c6b2a230fa78fa68c9f7650ee894dfd};
+    "GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x2531984134a4b89eee19f0f549f8d04eade78329};
+    "GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist" = {length = 20, bytes = 0x78a17cde776783922d02d17a57306d9bf8dd1b21};
+    "GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0xea20654845b3ac3eb3a2e1f1e0da9e0e18ca4864};
+    "GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist" = {length = 20, bytes = 0xe2bcab3dfbb4d27558cda1fa9575d97d6a332447};
+    "GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x83b32ef44e72420af8c63e65bb85e8b37b8ca6d4};
+    "Info.plist" = {length = 20, bytes = 0x4307ab581f6ca539396b592102dd0806a67fbc99};
+    PkgInfo = {length = 20, bytes = 0x9f9eea0cfe2d65f2c3d6b092e375b40782d08f31};
+    "Promises_FBLPromises.bundle/Info.plist" = {length = 20, bytes = 0x89b7985318a80669b36964d01269b45a95ae2e32};
+    "Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x65a8e7bc4b3f318452dd7e133cb0210568bc99ce};
+    "embedded.mobileprovision" = {length = 20, bytes = 0xce59bfbdb92c3270b5882fb2da63c1859e59a073};
+    "nanopb_nanopb.bundle/Info.plist" = {length = 20, bytes = 0xdb8f28ebaee082a259c32431030e71c93a0514ab};
+    "nanopb_nanopb.bundle/PrivacyInfo.xcprivacy" = {length = 20, bytes = 0x298e657f00b64efb20163e30b7b8643266a29dbb};
+}, AnyHashable("rules"): {
+    "^.*" = 1;
+    "^.*\\.lproj/" =     {
+        optional = 1;
+        weight = 1000;
+    };
+    "^.*\\.lproj/locversion.plist$" =     {
+        omit = 1;
+        weight = 1100;
+    };
+    "^Base\\.lproj/" =     {
+        weight = 1010;
+    };
+    "^version.plist$" = 1;
+}, AnyHashable("files2"): {
+    "AppIcon60x60@2x.png" =     {
+        hash2 = {length = 32, bytes = 0x86fd812e fb2423a3 ba63b94c aca7fe9c ... ff43f2c4 a1799346 };
+    };
+    "AppIcon76x76@2x~ipad.png" =     {
+        hash2 = {length = 32, bytes = 0x5cd46a7d 7791d94b 95c0467c 704cb1cc ... e52afb49 c650ace5 };
+    };
+    "Assets.car" =     {
+        hash2 = {length = 32, bytes = 0x5abfdc03 af28aee8 903006a3 0ab5f305 ... 23e32026 2cb54cbb };
+    };
+    "Firebase_FirebaseAuth.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x0911c9f3 1d09bd82 dde4dddd 6894ebe4 ... 37a6e50b aca381dd };
+    };
+    "Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x04c162ea fa49b2ce d0663231 a89cc9f5 ... 719b5da0 608aefd5 };
+    };
+    "Firebase_FirebaseCore.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x0fffc611 ed24931e 7f5a7cc2 4af844fb ... 04ba3d02 6d583927 };
+    };
+    "Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x11e31f5f 6b60e80e bd590154 9fce5043 ... 945000b4 05306c3f };
+    };
+    "Firebase_FirebaseCoreExtension.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0xb8b07389 e3c91827 8066b63e fc5f7f17 ... b01681f6 cfb7ec46 };
+    };
+    "Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "Firebase_FirebaseCoreInternal.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x7bcc0506 358c7d3f 98f49bf2 c8b0008d ... cb88ab86 d0190183 };
+    };
+    "Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x5b7fe979 423dede3 e08afc29 a42f00f6 ... 97742358 63eed3ef };
+    };
+    "Firebase_FirebaseInstallations.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x76916cda 4b45b0f3 4265543e 9c73dc7e ... 7d1cb804 593f3ced };
+    };
+    "Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0xcfbb3c4f 76a66d53 698bae91 f7110c00 ... 32592909 bc010e51 };
+    };
+    "Firebase_FirebaseMessaging.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x65c9b5f0 49430c11 1d789a97 44b96533 ... c8e40e79 203d5d98 };
+    };
+    "Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x98762096 372ac27f 5e888c73 72d512f0 ... 070f4cde 1a72a071 };
+    };
+    "GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x743ccf06 ddf2505f f01cf46e dfd11ae5 ... bcb9bf1e 0500d347 };
+    };
+    "GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x3e4a93cb e86acef7 dd7e063a 28c84999 ... 37c1e8b0 e1b54686 };
+    };
+    "GoogleDataTransport_GoogleDataTransport.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x5a9152a2 4b9f67f6 2482dd94 e79ad878 ... 2832076c 5fd54d6a };
+    };
+    "GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0xcfbb3c4f 76a66d53 698bae91 f7110c00 ... 32592909 bc010e51 };
+    };
+    "GoogleService-Info.plist" =     {
+        hash2 = {length = 32, bytes = 0xd5457a21 5cb99fcd 18f7435c 5f665aea ... cba3f144 6f3d8462 };
+    };
+    "GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x7639f2a3 bf1b50d4 862a37f0 fa247d4c ... f36f97e0 876af03f };
+    };
+    "GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x1be97493 1706aafc 031d7a6b 307c24de ... 8bb2a762 42431f29 };
+    };
+    "GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0xb08273d6 87379394 792f71c9 4c108361 ... 058980f4 44cfb3d4 };
+    };
+    "GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x9bb1a110 eae227f9 7c2cf6a1 6a7ec16c ... 5d9613ba c83a2d0e };
+    };
+    "GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0xf0c2b0d7 935cb682 3b33c4ce 12b94630 ... 05e201f1 6780ae08 };
+    };
+    "GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x6eaa27ed 995f0d4a c6a07b15 a8a4c995 ... 96eebf81 4e8a9d3b };
+    };
+    "GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0xac09bf3f 027781c8 402a8049 58727a69 ... a2ae6f25 1ee0a5a7 };
+    };
+    "GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x0ac00a0b 7eff0079 dce252e2 9ab41d71 ... a110cef5 c62970e1 };
+    };
+    "GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0xa1eef5c8 5310eed6 308ba863 3c290a35 ... 1598bea2 7e6eb8c0 };
+    };
+    "GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x1377ecce dff8f832 0f78040e 9c9d3e17 ... f0ef17be 44197c7a };
+    };
+    "GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x136c5087 d18e5862 e6e11a12 133135bd ... a584fb1b 959736c1 };
+    };
+    "GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0xfac507c5 10aba788 4e805fb5 feff1a8a ... 927a2bdf aa7130b4 };
+    };
+    "Promises_FBLPromises.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x6c347b8d e60ce266 910e5138 1f1a09d2 ... 141f686b 5f0a8e2f };
+    };
+    "Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x74b0cd72 fc23c1ef 302f22ee 2753f618 ... d0632b52 4fb8acea };
+    };
+    "embedded.mobileprovision" =     {
+        hash2 = {length = 32, bytes = 0x0779c62b 77dd16c1 741c3f57 2b70d36c ... eecc2510 cb8f9265 };
+    };
+    "nanopb_nanopb.bundle/Info.plist" =     {
+        hash2 = {length = 32, bytes = 0x42d78b33 38d918b6 6844421a fe0cfc67 ... b0c86bc5 71981c38 };
+    };
+    "nanopb_nanopb.bundle/PrivacyInfo.xcprivacy" =     {
+        hash2 = {length = 32, bytes = 0x729ba3cb d0f458c7 8cd61edf 17350eda ... 64c8cb22 ccd21b54 };
+    };
+}, AnyHashable("rules2"): {
+    ".*\\.dSYM($|/)" =     {
+        weight = 11;
+    };
+    "^(.*/)?\\.DS_Store$" =     {
+        omit = 1;
+        weight = 2000;
+    };
+    "^.*" = 1;
+    "^.*\\.lproj/" =     {
+        optional = 1;
+        weight = 1000;
+    };
+    "^.*\\.lproj/locversion.plist$" =     {
+        omit = 1;
+        weight = 1100;
+    };
+    "^Base\\.lproj/" =     {
+        weight = 1010;
+    };
+    "^Info\\.plist$" =     {
+        omit = 1;
+        weight = 20;
+    };
+    "^PkgInfo$" =     {
+        omit = 1;
+        weight = 20;
+    };
+    "^embedded\\.provisionprofile$" =     {
+        weight = 20;
+    };
+    "^version\\.plist$" =     {
+        weight = 20;
+    };
+}], enableSignatureValidation: true)'
+2025-04-22 05:41:18 +0000  Sending request C0C20796-E804-4E0B-9A78-24A42366B0F7 to <https://developerservices2.apple.com/services/v1/certificates> for session <DVTServicesAccountBasedSession: 0x60006942b300; account='<DVTAppleIDBasedDeveloperAccount: 0x600002915d80; username='developer@criteriontech.in'>'>.
+Method: POST
+
+Headers:
+{
+    Accept = "application/vnd.api+json";
+    "Accept-Encoding" = "gzip, deflate";
+    "Content-Length" = 104;
+    "Content-Type" = "application/vnd.api+json";
+    DSESSIONID = i07rdnmjgnpdk3180lntdvv7juncehf6gtpnn1thjfal1ogn2l;
+    "User-Agent" = Xcode;
+    "X-Apple-App-Info" = "com.apple.gs.xcode.auth";
+    "X-Apple-GS-Token" = "AAAABLwIAAAAAGe26AwRDWdzLnhjb2RlLmF1dGi9APjJyZCkSrbeL32YlzEuleSj+gDT7vrZjyodRn4GsXL7CICm2TmtgddLmYlhuZHLOjNyjvQyc+Tb8Z3io7oJKcSdBEibJiCmrsPxTWYUDG+eB83npAkIAPIR9l2+rs2PSmLvsiD81iqWngj2AUvGqJ8nz0Cw";
+    "X-Apple-I-Identity-Id" = "000354-08-bfc2804b-a5d0-4e9c-b5c2-0fcdbebb4d27";
+    "X-HTTP-Method-Override" = GET;
+    "X-MMe-Client-Info" = "<Macmini8,1> <macOS;14.3.1;23D60> <com.apple.AuthKit/1 (com.apple.dt.Xcode/22502)>";
+    "X-Mme-Device-Id" = "1A25E39A-53A6-539D-BBD5-C26572D4277B";
+    "X-Xcode-Version" = "15.1 (15C65)";
+}
+
+Payload:
+{"urlEncodedQueryParams":"teamId=7BCQCGA365&filter%5BcertificateType%5D=DISTRIBUTION_MANAGED&limit=200"}
+2025-04-22 05:41:18 +0000  Received response for C0C20796-E804-4E0B-9A78-24A42366B0F7 @ <https://developerservices2.apple.com/services/v1/certificates>. Code = 0
+2025-04-22 05:41:18 +0000  Response payload: {
+  "data" : [ {
+    "type" : "certificates",
+    "id" : "N7UASX55G9",
+    "attributes" : {
+      "requesterEmail" : "developer@criteriontech.in",
+      "serialNumber" : "43061936CBA26A82A7AD4240EB2AF934",
+      "certificateContent" : "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",
+      "displayName" : "CRITERION TECH PRIVATE LIMITED",
+      "requesterLastName" : "Ali",
+      "csrContent" : null,
+      "machineName" : null,
+      "platform" : null,
+      "requesterFirstName" : "Zaw",
+      "machineId" : null,
+      "name" : "Apple Distribution: CRITERION TECH PRIVATE LIMITED",
+      "responseId" : "0410caa7-e853-4100-8c09-364549e1e74d",
+      "expirationDate" : "2026-03-15T20:30:17.000+00:00",
+      "certificateType" : "DISTRIBUTION_MANAGED"
+    },
+    "links" : {
+      "self" : "https://developerservices2.apple.com:443/services/v1/certificates/N7UASX55G9"
+    }
+  } ],
+  "links" : {
+    "self" : "https://developerservices2.apple.com:443/services/v1/certificates?filter%5BcertificateType%5D=DISTRIBUTION_MANAGED&limit=200"
+  },
+  "meta" : {
+    "paging" : {
+      "total" : 1,
+      "limit" : 200
+    }
+  }
+}
+
+2025-04-22 05:41:18 +0000  Sending request 9236E7F3-E7F8-4EDE-97AC-C68694266112 to <https://developerservices3.apple.com/services/v1/batch> for session <DVTServicesAccountBasedSession: 0x60006942b300; account='<DVTAppleIDBasedDeveloperAccount: 0x600002915d80; username='developer@criteriontech.in'>'>.
+Method: POST
+
+Headers:
+{
+    Accept = "application/vnd.api+json";
+    "Accept-Encoding" = "gzip, deflate";
+    "Content-Length" = 488;
+    "Content-Type" = "application/vnd.api+json";
+    DSESSIONID = i07rdnmjgnpdk3180lntdvv7juncehf6gtpnn1thjfal1ogn2l;
+    "User-Agent" = Xcode;
+    "X-Apple-App-Info" = "com.apple.gs.xcode.auth";
+    "X-Apple-GS-Token" = "AAAABLwIAAAAAGe26AwRDWdzLnhjb2RlLmF1dGi9APjJyZCkSrbeL32YlzEuleSj+gDT7vrZjyodRn4GsXL7CICm2TmtgddLmYlhuZHLOjNyjvQyc+Tb8Z3io7oJKcSdBEibJiCmrsPxTWYUDG+eB83npAkIAPIR9l2+rs2PSmLvsiD81iqWngj2AUvGqJ8nz0Cw";
+    "X-Apple-I-Identity-Id" = "000354-08-bfc2804b-a5d0-4e9c-b5c2-0fcdbebb4d27";
+    "X-MMe-Client-Info" = "<Macmini8,1> <macOS;14.3.1;23D60> <com.apple.AuthKit/1 (com.apple.dt.Xcode/22502)>";
+    "X-Mme-Device-Id" = "1A25E39A-53A6-539D-BBD5-C26572D4277B";
+    "X-Xcode-Version" = "15.1 (15C65)";
+}
+
+Payload:
+{"data":{"type":"batch","attributes":{"resourceVersion":"1","resourceList":[{"data":{"attributes":{"digestHash":"E8593CE45FE71E91B34541D865ADE149F3F8695B4CBFCF82B923C58B6DD215D8","cdHashSha256":"E8593CE45FE71E91B34541D865ADE149F3F8695B4CBFCF82B923C58B6DD215D8","name":"0","teamId":"7BCQCGA365"},"relationships":{"bundleId":{"data":{"id":"ZQ6HU5LRAB","type":"bundleIds"}},"certificate":{"data":{"type":"certificates","id":"N7UASX55G9"}}},"type":"codeSignatures"}}],"teamId":"7BCQCGA365"}}}
+2025-04-22 05:41:20 +0000  Received response for 9236E7F3-E7F8-4EDE-97AC-C68694266112 @ <https://developerservices3.apple.com/services/v1/batch>. Code = 0
+2025-04-22 05:41:20 +0000  Response payload: {
+  "data" : {
+    "type" : "batch",
+    "id" : "5baa5346-83c1-44f0-9317-a41e42964bec",
+    "attributes" : {
+      "responseId" : "5baa5346-83c1-44f0-9317-a41e42964bec",
+      "resourceList" : [ {
+        "type" : "codeSignatures",
+        "id" : "5284c282-c72f-4d11-8347-22f494687ce9",
+        "attributes" : {
+          "digestHash" : "E8593CE45FE71E91B34541D865ADE149F3F8695B4CBFCF82B923C58B6DD215D8",
+          "cdHashSha256" : "E8593CE45FE71E91B34541D865ADE149F3F8695B4CBFCF82B923C58B6DD215D8",
+          "signature" : "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",
+          "name" : "0",
+          "responseId" : "5baa5346-83c1-44f0-9317-a41e42964bec",
+          "cmsSignature" : "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",
+          "timestamp" : false
+        },
+        "relationships" : {
+          "bundleId" : {
+            "data" : {
+              "type" : "bundleIds",
+              "id" : "ZQ6HU5LRAB"
+            },
+            "links" : {
+              "self" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/5284c282-c72f-4d11-8347-22f494687ce9/relationships/bundleId"
+              },
+              "related" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/5284c282-c72f-4d11-8347-22f494687ce9/bundleId"
+              }
+            }
+          },
+          "certificate" : {
+            "data" : {
+              "type" : "certificates",
+              "id" : "N7UASX55G9"
+            },
+            "links" : {
+              "self" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/5284c282-c72f-4d11-8347-22f494687ce9/relationships/certificate"
+              },
+              "related" : {
+                "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/5284c282-c72f-4d11-8347-22f494687ce9/certificate"
+              }
+            }
+          }
+        },
+        "links" : {
+          "self" : {
+            "href" : "https://developerservices3.apple.com:443/services/v1/codeSignatures/5284c282-c72f-4d11-8347-22f494687ce9"
+          }
+        }
+      } ],
+      "resourceVersion" : "1"
+    },
+    "links" : {
+      "self" : "https://developerservices3.apple.com:443/services/v1/batch/5baa5346-83c1-44f0-9317-a41e42964bec"
+    }
+  },
+  "links" : {
+    "self" : "https://developerservices3.apple.com:443/services/v1/batch"
+  }
+}
+
+2025-04-22 05:41:20 +0000  Remote signature for /var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app (arch: arm64) is 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
+2025-04-22 05:41:20 +0000  invoking codesign: <NSConcreteTask: 0x60004d09e3a0; launchPath='/usr/bin/codesign', arguments='(
+    "-e",
+    "--edit-cms",
+    "/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/cms~~~ao4OPV",
+    "/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app"
+)'>
+2025-04-22 05:41:20 +0000  codesign output: 
+2025-04-22 05:41:20 +0000  Processing step: IDEDistributionZipODRItemStep
+2025-04-22 05:41:20 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2025-04-22 05:41:20 +0000  Processing step: IDEDistributionCreateIPAStep
+2025-04-22 05:41:20 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root' '/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Packages/Vitalio.ipa'
+2025-04-22 05:41:20 +0000  >>> Copying /var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root 
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/_CodeSignature/CodeResources ... 
+2025-04-22 05:41:20 +0000  13841 bytes for ./Payload/Vitalio.app/_CodeSignature/CodeResources
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  855 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCore.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Firebase_FirebaseCore.bundle/Info.plist ... 
+685 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCore.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy ... 
+598 bytes for ./Payload/Vitalio.app/GTMSessionFetcher_GTMSessionFetcherCore.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  721 bytes for ./Payload/Vitalio.app/GTMSessionFetcher_GTMSessionFetcherCore.bundle/Info.plist
+copying file ./Payload/Vitalio.app/nanopb_nanopb.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  374 bytes for ./Payload/Vitalio.app/nanopb_nanopb.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/nanopb_nanopb.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  667 bytes for ./Payload/Vitalio.app/nanopb_nanopb.bundle/Info.plist
+copying file ./Payload/Vitalio.app/AppIcon60x60@2x.png ... 
+2025-04-22 05:41:20 +0000  5243 bytes for ./Payload/Vitalio.app/AppIcon60x60@2x.png
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  478 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  745 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-AppDelegateSwizzler.bundle/Info.plist
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  478 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-NSData.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  719 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-NSData.bundle/Info.plist
+copying file ./Payload/Vitalio.app/Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  1105 bytes for ./Payload/Vitalio.app/Firebase_FirebaseInstallations.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Firebase_FirebaseInstallations.bundle/Info.plist ... 
+703 bytes for ./Payload/Vitalio.app/Firebase_FirebaseInstallations.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy ... 
+855 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCoreInternal.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Firebase_FirebaseCoreInternal.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  701 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCoreInternal.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy ... 
+2102 bytes for ./Payload/Vitalio.app/Firebase_FirebaseAuth.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseAuth.bundle/Info.plist ... 
+685 bytes for ./Payload/Vitalio.app/Firebase_FirebaseAuth.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy ... 
+478 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Logger.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  719 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Logger.bundle/Info.plist
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  478 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Reachability.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist ... 
+731 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Reachability.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy ... 
+2357 bytes for ./Payload/Vitalio.app/Firebase_FirebaseMessaging.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Firebase_FirebaseMessaging.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  695 bytes for ./Payload/Vitalio.app/Firebase_FirebaseMessaging.bundle/Info.plist
+copying file ./Payload/Vitalio.app/GoogleService-Info.plist ... 
+2025-04-22 05:41:20 +0000  503 bytes for ./Payload/Vitalio.app/GoogleService-Info.plist
+copying file ./Payload/Vitalio.app/GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  1105 bytes for ./Payload/Vitalio.app/GoogleDataTransport_GoogleDataTransport.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleDataTransport_GoogleDataTransport.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  721 bytes for ./Payload/Vitalio.app/GoogleDataTransport_GoogleDataTransport.bundle/Info.plist
+copying file ./Payload/Vitalio.app/Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy ... 
+2025-04-22 05:41:20 +0000  373 bytes for ./Payload/Vitalio.app/Promises_FBLPromises.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Promises_FBLPromises.bundle/Info.plist ... 
+683 bytes for ./Payload/Vitalio.app/Promises_FBLPromises.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy ... 
+856 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Network.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist ... 
+721 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Network.bundle/Info.plist
+copying file ./Payload/Vitalio.app/Assets.car ... 
+2025-04-22 05:41:20 +0000  981135 bytes for ./Payload/Vitalio.app/Assets.car
+copying file ./Payload/Vitalio.app/AppIcon76x76@2x~ipad.png ... 
+2025-04-22 05:41:20 +0000  6735 bytes for ./Payload/Vitalio.app/AppIcon76x76@2x~ipad.png
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy ... 
+478 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCoreExtension.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/Firebase_FirebaseCoreExtension.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  703 bytes for ./Payload/Vitalio.app/Firebase_FirebaseCoreExtension.bundle/Info.plist
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy ... 
+911 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-UserDefaults.bundle/PrivacyInfo.xcprivacy
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist ... 
+731 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-UserDefaults.bundle/Info.plist
+copying file ./Payload/Vitalio.app/Vitalio ... 
+2025-04-22 05:41:20 +0000  3430256 bytes for ./Payload/Vitalio.app/Vitalio
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy ... 
+855 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Environment.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  729 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-Environment.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy ... 
+478 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/PrivacyInfo.xcprivacy
+copying file ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist ... 
+2025-04-22 05:41:20 +0000  735 bytes for ./Payload/Vitalio.app/GoogleUtilities_GoogleUtilities-MethodSwizzler.bundle/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/embedded.mobileprovision ... 
+2025-04-22 05:41:20 +0000  14620 bytes for ./Payload/Vitalio.app/embedded.mobileprovision
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/Info.plist ... 
+1617 bytes for ./Payload/Vitalio.app/Info.plist
+2025-04-22 05:41:20 +0000  copying file ./Payload/Vitalio.app/PkgInfo ... 
+8 bytes for ./Payload/Vitalio.app/PkgInfo
+2025-04-22 05:41:20 +0000  /usr/bin/ditto exited with 0
+2025-04-22 05:41:20 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2025-04-22 05:41:20 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2025-04-22 05:41:20 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2025-04-22 05:41:20 +0000  IDEDistributionItem init <DVTFilePath:0x600011991ea0:'/var/folders/y1/1twv6g611t3529sfq6wv_xhm0000gn/T/XcodeDistPipeline.~~~pF2t30/Root/Payload/Vitalio.app'>
+2025-04-22 05:41:20 +0000  Processing step: IDEDistributionCreateManifestStep

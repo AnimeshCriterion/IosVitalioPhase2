@@ -3,7 +3,7 @@ import SwiftUI
 struct DropSliderSheet: View {
     @Binding var isPresented: Bool
     @State private var selectedAmount: Double = 135.0
-
+    @EnvironmentObject var viewModel: FluidaViewModal
     var body: some View {
         VStack(spacing: 20) {
             // Header
@@ -53,7 +53,7 @@ struct DropSliderSheet: View {
 
             // Add Button
             Button(action: {
-                // Handle Add action
+                viewModel.glassSizes.append(Int(selectedAmount));
                 isPresented = false
             }) {
                 Text("Add : \(Int(selectedAmount)) ml")
@@ -61,7 +61,7 @@ struct DropSliderSheet: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
-                    .background(Color.blue)
+                    .background(Color.primaryBlue)
                     .cornerRadius(12)
             }
             .padding(.top, 8)
@@ -92,22 +92,25 @@ struct DropThumbSlider: View {
 
                 // Filled portion
                 Capsule()
-                    .fill(Color.blue)
+                    .fill(Color.primaryBlue)
                     .frame(width: offset, height: 6)
 
                 // Thumb (drop icon)
-                Image(systemName: "drop.fill")
-                    .resizable()
-                    .frame(width: 24, height: 30)
-                    .foregroundColor(.blue)
-                    .offset(x: offset - 12, y: -12)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { gesture in
-                                let newValue = gesture.location.x / width
-                                value = min(max(Double(newValue), 0.0), 1.0) * (range.upperBound - range.lowerBound) + range.lowerBound
-                            }
-                    )
+                VStack{
+                    Spacer().frame(height: 20)
+                    Image(systemName: "drop.fill")
+                        .resizable()
+                        .frame(width: 24, height: 30)
+                        .foregroundColor(.blue)
+                        .offset(x: offset - 12, y: -12)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { gesture in
+                                    let newValue = gesture.location.x / width
+                                    value = min(max(Double(newValue), 0.0), 1.0) * (range.upperBound - range.lowerBound) + range.lowerBound
+                                }
+                        )
+                }
             }
             .frame(height: 40)
         }

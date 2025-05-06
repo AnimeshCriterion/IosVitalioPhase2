@@ -20,7 +20,7 @@ class APIService {
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = 10
+        request.timeoutInterval = 60
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -56,7 +56,7 @@ class APIService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = 10
+        request.timeoutInterval = 60
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -74,7 +74,7 @@ class APIService {
             guard let url = URL(string: toURL) else { throw NetworkError.badUrl }
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            request.timeoutInterval = 10
+            request.timeoutInterval = 60
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
             let jsonData = try JSONEncoder().encode(body)
@@ -108,7 +108,7 @@ class APIService {
         guard let url = URL(string: toURL) else { throw NetworkError.badUrl }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.timeoutInterval = 10
+        request.timeoutInterval = 60
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let jsonData = try JSONEncoder().encode(body)
@@ -130,5 +130,43 @@ class APIService {
 
         return json
     }
+    
+    func postWithQueryParams(toURL: String, parameters: [String: String]) async throws -> [String: Any] {
+            // Construct query string from parameters
+            var urlComponents = URLComponents(string: toURL)
+            urlComponents?.queryItems = parameters.map { key, value in
+                URLQueryItem(name: key, value: value)
+            }
+     
+            guard let url = urlComponents?.url else {
+                throw NetworkError.badUrl
+            }
+            
+            print("🟡 Final URL: \(url.absoluteString)")
+             print("📦 Parameters: \(parameters)")
+     
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.timeoutInterval = 60
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+     
+            // Note: No HTTP body is needed, since params are in the URL
+            let (data, response) = try await URLSession.shared.data(for: request)
+     
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw NetworkError.badResponse
+            }
+     
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw NetworkError.badStatus(httpResponse.statusCode)
+            }
+     
+            guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                throw NetworkError.failedToDecodeResponse
+            }
+     
+            return json
+        }
+    
 
 }

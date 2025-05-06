@@ -18,6 +18,13 @@ struct VitalioApp: App {
     @StateObject var pills = PillsViewModal()   
     @StateObject var dashboard = DashboardViewModal()
     @StateObject var fluidVM = FluidaViewModal()
+    @StateObject var symptomsViewModal = SymptomsViewModal()
+    @StateObject var vitalvm = VitalsViewModal()
+    @StateObject var dietViewModel = DietViewModel()
+    @StateObject var uploadReportViewModel = UploadReportViewModel() 
+    @StateObject var allergiesViewModel = AllergiesViewModal()
+    @StateObject var editProfileVM = EditProfileViewModal()
+//    @StateObject var webSocketManager = WebSocketManager(userId: "1234")/
     
 
     init() {
@@ -36,6 +43,13 @@ struct VitalioApp: App {
             .environmentObject(pills)
             .environmentObject(dashboard)
             .environmentObject(fluidVM)
+            .environmentObject(symptomsViewModal)
+            .environmentObject(vitalvm)
+            .environmentObject(dietViewModel)
+            .environmentObject(uploadReportViewModel)     
+            .environmentObject(allergiesViewModel)
+            .environmentObject(editProfileVM)
+//            .environmentObject(webSocketManager)
         }
     }
 

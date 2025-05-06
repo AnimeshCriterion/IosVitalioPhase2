@@ -12,12 +12,36 @@
 		8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A92DAA3BFC0043330A /* drag.swift */; };
 		8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AB2DAA6C4B0043330A /* intakehistory.swift */; };
 		8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AD2DAA7C350043330A /* outputHistory.swift */; };
+		8D12F5EC2DC4A05F00DE1A41 /* AnimateWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12F5EB2DC4A05E00DE1A41 /* AnimateWave.swift */; };
+		8D12F5EE2DC4A13400DE1A41 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12F5ED2DC4A13400DE1A41 /* VoiceManager.swift */; };
 		8D1359CA2DA65F63004A8332 /* popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1359C92DA65F63004A8332 /* popup.swift */; };
 		8D1544342DA907A9009E7433 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544332DA907A9009E7433 /* Output.swift */; };
 		8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544352DA91D72009E7433 /* DashboardViewModal.swift */; };
+		8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */; };
 		8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3148872D9FA371008DF7D7 /* PillsReminder.swift */; };
 		8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488B2D9FB648008DF7D7 /* Calander.swift */; };
-		8D31488F2D9FF8C7008DF7D7 /* Suppliment_checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488E2D9FF8C7008DF7D7 /* Suppliment_checklist.swift */; };
+		8D31488F2D9FF8C7008DF7D7 /* DietView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488E2D9FF8C7008DF7D7 /* DietView.swift */; };
+		8D3816142DC08C5C008F2539 /* Voiceassistantview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */; };
+		8D38161B2DC0A56B008F2539 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38161A2DC0A56B008F2539 /* NIO */; };
+		8D38161D2DC0A56B008F2539 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38161C2DC0A56B008F2539 /* NIOConcurrencyHelpers */; };
+		8D38161F2DC0A56B008F2539 /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38161E2DC0A56B008F2539 /* NIOCore */; };
+		8D3816212DC0A56B008F2539 /* NIOEmbedded in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816202DC0A56B008F2539 /* NIOEmbedded */; };
+		8D3816232DC0A56B008F2539 /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816222DC0A56B008F2539 /* NIOFoundationCompat */; };
+		8D3816252DC0A56B008F2539 /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816242DC0A56B008F2539 /* NIOHTTP1 */; };
+		8D3816272DC0A56B008F2539 /* NIOPosix in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816262DC0A56B008F2539 /* NIOPosix */; };
+		8D3816292DC0A56B008F2539 /* NIOTLS in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816282DC0A56B008F2539 /* NIOTLS */; };
+		8D38162B2DC0A56B008F2539 /* NIOTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38162A2DC0A56B008F2539 /* NIOTestUtils */; };
+		8D38162D2DC0A56B008F2539 /* NIOWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38162C2DC0A56B008F2539 /* NIOWebSocket */; };
+		8D38162F2DC0A56B008F2539 /* _NIOConcurrency in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38162E2DC0A56B008F2539 /* _NIOConcurrency */; };
+		8D3816312DC0A56B008F2539 /* _NIOFileSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816302DC0A56B008F2539 /* _NIOFileSystem */; };
+		8D3816332DC0A56B008F2539 /* _NIOFileSystemFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816322DC0A56B008F2539 /* _NIOFileSystemFoundationCompat */; };
+		8D3816362DC0A666008F2539 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816352DC0A666008F2539 /* Starscream */; };
+		8D38163C2DC0D361008F2539 /* testAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D38163B2DC0D361008F2539 /* testAudio.swift */; };
+		8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */; };
+		8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */; };
+		8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */; };
+		8D78480C2DC32E2F004A255D /* Edit Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78480A2DC32E2F004A255D /* Edit Profile.swift */; };
+		8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78480D2DC38CD8004A255D /* ImagePicker.swift */; };
 		8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257742D97D39300CF96B4 /* appbar.swift */; };
 		8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF6392D9BEC5A0026726C /* url.swift */; };
 		8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257762D97D7EC00CF96B4 /* MyButton.swift */; };
@@ -38,7 +62,6 @@
 		8D966B5F2D9CF71D00B37927 /* otp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD5F85D2D8A8A1000FBDF87 /* otp.swift */; };
 		8D966B602D9CF71F00B37927 /* LoginViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF6372D9BD2910026726C /* LoginViewModal.swift */; };
 		8D966B612D9CF72300B37927 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF63B2D9BF2670026726C /* Modal.swift */; };
-		8D966B622D9CF72600B37927 /* Edit Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D46DCE42D9520E700FAC567 /* Edit Profile.swift */; };
 		8D966B632D9CF72A00B37927 /* Darkmode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D81EC682D93C21700F46773 /* Darkmode.swift */; };
 		8D966B642D9CF72E00B37927 /* drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAA9E1E2D913FFB00C0315F /* drawer.swift */; };
 		8D966B652D9CF73200B37927 /* dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD5F8592D8A89F200FBDF87 /* dashboard.swift */; };
@@ -57,8 +80,30 @@
 		8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */; };
 		8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */; };
 		8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */; };
+		8DDF8EDA2DBCE1A500F8B47D /* AllergiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED72DBCE1A400F8B47D /* AllergiesView.swift */; };
+		8DDF8EDB2DBCE1A500F8B47D /* AllergiesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED82DBCE1A400F8B47D /* AllergiesViewModal.swift */; };
+		8DDF8EDC2DBCE1A500F8B47D /* AllergiesDataModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED92DBCE1A500F8B47D /* AllergiesDataModal.swift */; };
+		8DDF8EE12DBCE1D800F8B47D /* CustomDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8EDD2DBCE1D700F8B47D /* CustomDropDown.swift */; };
+		8DDF8EE22DBCE1D800F8B47D /* CustomTextField 1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8EDE2DBCE1D700F8B47D /* CustomTextField 1.swift */; };
+		8DDF8EE32DBCE1D800F8B47D /* CustomeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8EDF2DBCE1D700F8B47D /* CustomeLoader.swift */; };
+		8DE8699C2DB6215A003BD8A8 /* Symptoms View Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE8699B2DB6215A003BD8A8 /* Symptoms View Model.swift */; };
+		8DE869A02DB6478C003BD8A8 /* SymptomsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE8699F2DB6478C003BD8A8 /* SymptomsDataModel.swift */; };
+		8DEE64452DBA0F8300C5B5E4 /* UploadReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64442DBA0F8300C5B5E4 /* UploadReportViewModel.swift */; };
+		8DEE64472DBA106C00C5B5E4 /* ReportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */; };
+		8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */; };
+		8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */; };
+		8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A62DC9D70F00A39658 /* Symptoms history.swift */; };
+		8DF275A92DCA168300A39658 /* sos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A82DCA168300A39658 /* sos.swift */; };
+		8DF6EFE32DB770EE00E2C69A /* SymptomstrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE22DB770EE00E2C69A /* SymptomstrackerView.swift */; };
+		8DF6EFEA2DB799DB00E2C69A /* vitaldatamodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE52DB799DB00E2C69A /* vitaldatamodal.swift */; };
+		8DF6EFEB2DB799DB00E2C69A /* VitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE62DB799DB00E2C69A /* VitalView.swift */; };
+		8DF6EFEC2DB799DB00E2C69A /* VitalHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE72DB799DB00E2C69A /* VitalHistoryView.swift */; };
+		8DF6EFED2DB799DB00E2C69A /* AddVitalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE82DB799DB00E2C69A /* AddVitalsView.swift */; };
+		8DF6EFEE2DB799DB00E2C69A /* VitalsViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE92DB799DB00E2C69A /* VitalsViewModal.swift */; };
+		8DF9F8A22DAF865F002BBEBB /* fluiddatamodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9F8A12DAF865F002BBEBB /* fluiddatamodal.swift */; };
 		8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */; };
 		8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F32DAE3A4500FE7302 /* addwater.swift */; };
+		8DFB66F62DAE759B00FE7302 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F52DAE759B00FE7302 /* Report.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,13 +112,22 @@
 		8D0582A92DAA3BFC0043330A /* drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drag.swift; sourceTree = "<group>"; };
 		8D0582AB2DAA6C4B0043330A /* intakehistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intakehistory.swift; sourceTree = "<group>"; };
 		8D0582AD2DAA7C350043330A /* outputHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outputHistory.swift; sourceTree = "<group>"; };
+		8D12F5EB2DC4A05E00DE1A41 /* AnimateWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateWave.swift; sourceTree = "<group>"; };
+		8D12F5ED2DC4A13400DE1A41 /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
 		8D1359C92DA65F63004A8332 /* popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popup.swift; sourceTree = "<group>"; };
 		8D1544332DA907A9009E7433 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		8D1544352DA91D72009E7433 /* DashboardViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModal.swift; sourceTree = "<group>"; };
+		8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAccountView.swift; sourceTree = "<group>"; };
 		8D3148872D9FA371008DF7D7 /* PillsReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsReminder.swift; sourceTree = "<group>"; };
 		8D31488B2D9FB648008DF7D7 /* Calander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calander.swift; sourceTree = "<group>"; };
-		8D31488E2D9FF8C7008DF7D7 /* Suppliment_checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suppliment_checklist.swift; sourceTree = "<group>"; };
-		8D46DCE42D9520E700FAC567 /* Edit Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Edit Profile.swift"; sourceTree = "<group>"; };
+		8D31488E2D9FF8C7008DF7D7 /* DietView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietView.swift; sourceTree = "<group>"; };
+		8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voiceassistantview.swift; sourceTree = "<group>"; };
+		8D38163B2DC0D361008F2539 /* testAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testAudio.swift; sourceTree = "<group>"; };
+		8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewmodal.swift; sourceTree = "<group>"; };
+		8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dietDataModel.swift; sourceTree = "<group>"; };
+		8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModal.swift; sourceTree = "<group>"; };
+		8D78480A2DC32E2F004A255D /* Edit Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Edit Profile.swift"; path = "../../../../../Downloads/Edit Profile.swift"; sourceTree = "<group>"; };
+		8D78480D2DC38CD8004A255D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		8D81EC682D93C21700F46773 /* Darkmode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkmode.swift; sourceTree = "<group>"; };
 		8D82576F2D97D05700CF96B4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8D8257742D97D39300CF96B4 /* appbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appbar.swift; sourceTree = "<group>"; };
@@ -103,8 +157,30 @@
 		8DD5F85D2D8A8A1000FBDF87 /* otp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = otp.swift; sourceTree = "<group>"; };
 		8DD5F8632D8AB32E00FBDF87 /* CreateAccont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccont.swift; sourceTree = "<group>"; };
 		8DD5F8652D8AD7C500FBDF87 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		8DDF8ED72DBCE1A400F8B47D /* AllergiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesView.swift; sourceTree = "<group>"; };
+		8DDF8ED82DBCE1A400F8B47D /* AllergiesViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesViewModal.swift; sourceTree = "<group>"; };
+		8DDF8ED92DBCE1A500F8B47D /* AllergiesDataModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesDataModal.swift; sourceTree = "<group>"; };
+		8DDF8EDD2DBCE1D700F8B47D /* CustomDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDropDown.swift; sourceTree = "<group>"; };
+		8DDF8EDE2DBCE1D700F8B47D /* CustomTextField 1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CustomTextField 1.swift"; sourceTree = "<group>"; };
+		8DDF8EDF2DBCE1D700F8B47D /* CustomeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeLoader.swift; sourceTree = "<group>"; };
+		8DE8699B2DB6215A003BD8A8 /* Symptoms View Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Symptoms View Model.swift"; sourceTree = "<group>"; };
+		8DE8699F2DB6478C003BD8A8 /* SymptomsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsDataModel.swift; sourceTree = "<group>"; };
+		8DEE64442DBA0F8300C5B5E4 /* UploadReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadReportViewModel.swift; sourceTree = "<group>"; };
+		8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataModel.swift; sourceTree = "<group>"; };
+		8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReport.swift; sourceTree = "<group>"; };
+		8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicData.swift; sourceTree = "<group>"; };
+		8DF275A62DC9D70F00A39658 /* Symptoms history.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Symptoms history.swift"; sourceTree = "<group>"; };
+		8DF275A82DCA168300A39658 /* sos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sos.swift; sourceTree = "<group>"; };
+		8DF6EFE22DB770EE00E2C69A /* SymptomstrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomstrackerView.swift; sourceTree = "<group>"; };
+		8DF6EFE52DB799DB00E2C69A /* vitaldatamodal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vitaldatamodal.swift; sourceTree = "<group>"; };
+		8DF6EFE62DB799DB00E2C69A /* VitalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalView.swift; sourceTree = "<group>"; };
+		8DF6EFE72DB799DB00E2C69A /* VitalHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalHistoryView.swift; sourceTree = "<group>"; };
+		8DF6EFE82DB799DB00E2C69A /* AddVitalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVitalsView.swift; sourceTree = "<group>"; };
+		8DF6EFE92DB799DB00E2C69A /* VitalsViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalsViewModal.swift; sourceTree = "<group>"; };
+		8DF9F8A12DAF865F002BBEBB /* fluiddatamodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fluiddatamodal.swift; sourceTree = "<group>"; };
 		8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidViewModal.swift; sourceTree = "<group>"; };
 		8DFB66F32DAE3A4500FE7302 /* addwater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addwater.swift; sourceTree = "<group>"; };
+		8DFB66F52DAE759B00FE7302 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		8DFEF6372D9BD2910026726C /* LoginViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModal.swift; sourceTree = "<group>"; };
 		8DFEF6392D9BEC5A0026726C /* url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = url.swift; sourceTree = "<group>"; };
 		8DFEF63B2D9BF2670026726C /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
@@ -121,21 +197,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D966B732D9D418900B37927 /* FirebaseMessaging in Frameworks */,
+				8D3816232DC0A56B008F2539 /* NIOFoundationCompat in Frameworks */,
+				8D3816272DC0A56B008F2539 /* NIOPosix in Frameworks */,
+				8D38161F2DC0A56B008F2539 /* NIOCore in Frameworks */,
+				8D3816252DC0A56B008F2539 /* NIOHTTP1 in Frameworks */,
 				8D966B712D9D418900B37927 /* FirebaseCore in Frameworks */,
+				8D3816212DC0A56B008F2539 /* NIOEmbedded in Frameworks */,
+				8D38162D2DC0A56B008F2539 /* NIOWebSocket in Frameworks */,
+				8D3816312DC0A56B008F2539 /* _NIOFileSystem in Frameworks */,
+				8D3816332DC0A56B008F2539 /* _NIOFileSystemFoundationCompat in Frameworks */,
 				8D966B782D9D442D00B37927 /* FirebaseAnalytics in Frameworks */,
+				8D38162B2DC0A56B008F2539 /* NIOTestUtils in Frameworks */,
+				8D38161D2DC0A56B008F2539 /* NIOConcurrencyHelpers in Frameworks */,
 				8D966B6F2D9D418900B37927 /* FirebaseAuth in Frameworks */,
+				8D38162F2DC0A56B008F2539 /* _NIOConcurrency in Frameworks */,
+				8D38161B2DC0A56B008F2539 /* NIO in Frameworks */,
+				8D3816292DC0A56B008F2539 /* NIOTLS in Frameworks */,
+				8D3816362DC0A666008F2539 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D31488D2D9FF871008DF7D7 /* Suppliment Checklist */ = {
+		8D2AEEBF2DB3AAC100FFCB62 /* Add Member */ = {
 			isa = PBXGroup;
 			children = (
-				8D31488E2D9FF8C7008DF7D7 /* Suppliment_checklist.swift */,
+				8D3816122DC08C38008F2539 /* voice assistant */,
+				8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */,
 			);
-			path = "Suppliment Checklist";
+			path = "Add Member";
+			sourceTree = "<group>";
+		};
+		8D31488D2D9FF871008DF7D7 /* Diet */ = {
+			isa = PBXGroup;
+			children = (
+				8D31488E2D9FF8C7008DF7D7 /* DietView.swift */,
+				8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */,
+				8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */,
+			);
+			path = Diet;
+			sourceTree = "<group>";
+		};
+		8D3816122DC08C38008F2539 /* voice assistant */ = {
+			isa = PBXGroup;
+			children = (
+				8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */,
+				8D38163B2DC0D361008F2539 /* testAudio.swift */,
+				8D12F5EB2DC4A05E00DE1A41 /* AnimateWave.swift */,
+				8D12F5ED2DC4A13400DE1A41 /* VoiceManager.swift */,
+			);
+			path = "voice assistant";
 			sourceTree = "<group>";
 		};
 		8D46DCDE2D951FC800FAC567 /* Dashboard */ = {
@@ -143,6 +255,7 @@
 			children = (
 				8DD5F8592D8A89F200FBDF87 /* dashboard.swift */,
 				8D1544352DA91D72009E7433 /* DashboardViewModal.swift */,
+				8DF275A82DCA168300A39658 /* sos.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -169,6 +282,7 @@
 		8D46DCE22D95206F00FAC567 /* AppManager */ = {
 			isa = PBXGroup;
 			children = (
+				8D78480D2DC38CD8004A255D /* ImagePicker.swift */,
 				8D9BCAAA2DA0F99B00405837 /* routing */,
 				8D8257732D97D38200CF96B4 /* common */,
 				8DFFCD282D926152007A7483 /* api */,
@@ -181,7 +295,8 @@
 		8D46DCE32D9520C900FAC567 /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8D46DCE42D9520E700FAC567 /* Edit Profile.swift */,
+				8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */,
+				8D78480A2DC32E2F004A255D /* Edit Profile.swift */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -197,6 +312,9 @@
 		8D8257732D97D38200CF96B4 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				8DDF8EDD2DBCE1D700F8B47D /* CustomDropDown.swift */,
+				8DDF8EDF2DBCE1D700F8B47D /* CustomeLoader.swift */,
+				8DDF8EDE2DBCE1D700F8B47D /* CustomTextField 1.swift */,
 				8DD5F8652D8AD7C500FBDF87 /* Text.swift */,
 				8D8257742D97D39300CF96B4 /* appbar.swift */,
 				8D8257762D97D7EC00CF96B4 /* MyButton.swift */,
@@ -244,6 +362,10 @@
 			children = (
 				8DC5CEB32D97E2B300BF614A /* SymptomsView.swift */,
 				8DC5CEB62D980A5700BF614A /* Confermation.swift */,
+				8DE8699B2DB6215A003BD8A8 /* Symptoms View Model.swift */,
+				8DE8699F2DB6478C003BD8A8 /* SymptomsDataModel.swift */,
+				8DF6EFE22DB770EE00E2C69A /* SymptomstrackerView.swift */,
+				8DF275A62DC9D70F00A39658 /* Symptoms history.swift */,
 			);
 			path = symptoms;
 			sourceTree = "<group>";
@@ -268,6 +390,7 @@
 				8D0582AD2DAA7C350043330A /* outputHistory.swift */,
 				8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */,
 				8DFB66F32DAE3A4500FE7302 /* addwater.swift */,
+				8DF9F8A12DAF865F002BBEBB /* fluiddatamodal.swift */,
 			);
 			path = fluid;
 			sourceTree = "<group>";
@@ -296,15 +419,19 @@
 				8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */,
 				8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */,
 				8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */,
+				8DDF8ED62DBCE17100F8B47D /* allergies */,
+				8D2AEEBF2DB3AAC100FFCB62 /* Add Member */,
+				8DF6EFE42DB7997500E2C69A /* vital */,
 				8D46DCE22D95206F00FAC567 /* AppManager */,
 				8DC5CEB12D97E28000BF614A /* symptoms */,
 				8DCE2BCB2DA39F8E004EEED2 /* fluid */,
 				8DC5CEAE2D97E21500BF614A /* FAQ */,
 				8DC5CEB52D97F53500BF614A /* feedback */,
+				8D31488D2D9FF871008DF7D7 /* Diet */,
 				8DC5CEAD2D97E1FD00BF614A /* Pills Reminder */,
-				8D31488D2D9FF871008DF7D7 /* Suppliment Checklist */,
 				8D46DCE12D95201600FAC567 /* Login */,
 				8D46DCE32D9520C900FAC567 /* Edit Profile */,
+				8DEE64432DBA0F5000C5B5E4 /* Upload report */,
 				8D81EC672D93C1FF00F46773 /* darkmode */,
 				8D46DCDF2D951FE500FAC567 /* Drawer */,
 				8D46DCDE2D951FC800FAC567 /* Dashboard */,
@@ -324,6 +451,40 @@
 				8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DDF8ED62DBCE17100F8B47D /* allergies */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF8ED92DBCE1A500F8B47D /* AllergiesDataModal.swift */,
+				8DDF8ED72DBCE1A400F8B47D /* AllergiesView.swift */,
+				8DDF8ED82DBCE1A400F8B47D /* AllergiesViewModal.swift */,
+			);
+			path = allergies;
+			sourceTree = "<group>";
+		};
+		8DEE64432DBA0F5000C5B5E4 /* Upload report */ = {
+			isa = PBXGroup;
+			children = (
+				8DFB66F52DAE759B00FE7302 /* Report.swift */,
+				8DEE64442DBA0F8300C5B5E4 /* UploadReportViewModel.swift */,
+				8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */,
+				8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */,
+				8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */,
+			);
+			path = "Upload report";
+			sourceTree = "<group>";
+		};
+		8DF6EFE42DB7997500E2C69A /* vital */ = {
+			isa = PBXGroup;
+			children = (
+				8DF6EFE82DB799DB00E2C69A /* AddVitalsView.swift */,
+				8DF6EFE52DB799DB00E2C69A /* vitaldatamodal.swift */,
+				8DF6EFE72DB799DB00E2C69A /* VitalHistoryView.swift */,
+				8DF6EFE92DB799DB00E2C69A /* VitalsViewModal.swift */,
+				8DF6EFE62DB799DB00E2C69A /* VitalView.swift */,
+			);
+			path = vital;
 			sourceTree = "<group>";
 		};
 		8DFFCD282D926152007A7483 /* api */ = {
@@ -368,6 +529,20 @@
 				8D966B702D9D418900B37927 /* FirebaseCore */,
 				8D966B722D9D418900B37927 /* FirebaseMessaging */,
 				8D966B772D9D442D00B37927 /* FirebaseAnalytics */,
+				8D38161A2DC0A56B008F2539 /* NIO */,
+				8D38161C2DC0A56B008F2539 /* NIOConcurrencyHelpers */,
+				8D38161E2DC0A56B008F2539 /* NIOCore */,
+				8D3816202DC0A56B008F2539 /* NIOEmbedded */,
+				8D3816222DC0A56B008F2539 /* NIOFoundationCompat */,
+				8D3816242DC0A56B008F2539 /* NIOHTTP1 */,
+				8D3816262DC0A56B008F2539 /* NIOPosix */,
+				8D3816282DC0A56B008F2539 /* NIOTLS */,
+				8D38162A2DC0A56B008F2539 /* NIOTestUtils */,
+				8D38162C2DC0A56B008F2539 /* NIOWebSocket */,
+				8D38162E2DC0A56B008F2539 /* _NIOConcurrency */,
+				8D3816302DC0A56B008F2539 /* _NIOFileSystem */,
+				8D3816322DC0A56B008F2539 /* _NIOFileSystemFoundationCompat */,
+				8D3816352DC0A666008F2539 /* Starscream */,
 			);
 			productName = vitalio_native;
 			productReference = 8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */;
@@ -399,6 +574,8 @@
 			mainGroup = 8DD5F8352D8A88B600FBDF87;
 			packageReferences = (
 				8D966B6D2D9D418900B37927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */,
+				8D3816342DC0A666008F2539 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 8DD5F83F2D8A88B600FBDF87 /* Products */;
 			projectDirPath = "";
@@ -427,25 +604,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DF6EFEC2DB799DB00E2C69A /* VitalHistoryView.swift in Sources */,
 				8D966B692D9CF74200B37927 /* CreateAccont.swift in Sources */,
 				8D966B682D9CF73D00B37927 /* ContentView.swift in Sources */,
+				8DDF8EE12DBCE1D800F8B47D /* CustomDropDown.swift in Sources */,
+				8D12F5EC2DC4A05F00DE1A41 /* AnimateWave.swift in Sources */,
+				8D3816142DC08C5C008F2539 /* Voiceassistantview.swift in Sources */,
+				8DF6EFEE2DB799DB00E2C69A /* VitalsViewModal.swift in Sources */,
 				8D966B672D9CF73900B37927 /* VitalioApp.swift in Sources */,
+				8DDF8EDC2DBCE1A500F8B47D /* AllergiesDataModal.swift in Sources */,
+				8DE869A02DB6478C003BD8A8 /* SymptomsDataModel.swift in Sources */,
 				8D966B662D9CF73600B37927 /* onboarding.swift in Sources */,
 				8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */,
 				8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */,
 				8D966B652D9CF73200B37927 /* dashboard.swift in Sources */,
 				8D966B642D9CF72E00B37927 /* drawer.swift in Sources */,
+				8DEE64472DBA106C00C5B5E4 /* ReportDataModel.swift in Sources */,
 				8D0582A82DAA37380043330A /* BarChart.swift in Sources */,
+				8DFB66F62DAE759B00FE7302 /* Report.swift in Sources */,
 				8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */,
+				8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */,
 				8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */,
+				8D78480C2DC32E2F004A255D /* Edit Profile.swift in Sources */,
+				8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */,
 				8D966B632D9CF72A00B37927 /* Darkmode.swift in Sources */,
-				8D966B622D9CF72600B37927 /* Edit Profile.swift in Sources */,
+				8DF6EFEB2DB799DB00E2C69A /* VitalView.swift in Sources */,
+				8DF275A92DCA168300A39658 /* sos.swift in Sources */,
+				8DDF8EDB2DBCE1A500F8B47D /* AllergiesViewModal.swift in Sources */,
+				8DE8699C2DB6215A003BD8A8 /* Symptoms View Model.swift in Sources */,
 				8D966B612D9CF72300B37927 /* Modal.swift in Sources */,
 				8D966B602D9CF71F00B37927 /* LoginViewModal.swift in Sources */,
+				8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */,
 				8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */,
+				8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */,
 				8D966B5F2D9CF71D00B37927 /* otp.swift in Sources */,
+				8DDF8EDA2DBCE1A500F8B47D /* AllergiesView.swift in Sources */,
+				8DEE64452DBA0F8300C5B5E4 /* UploadReportViewModel.swift in Sources */,
 				8D966B5E2D9CF71900B37927 /* login.swift in Sources */,
 				8D0582A62DAA257F0043330A /* Intake.swift in Sources */,
+				8DF9F8A22DAF865F002BBEBB /* fluiddatamodal.swift in Sources */,
 				8D966B5D2D9CF71600B37927 /* FAQ.swift in Sources */,
 				8D966B5C2D9CF71300B37927 /* Confermation.swift in Sources */,
 				8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */,
@@ -455,23 +652,34 @@
 				8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */,
 				8D966B592D9CF70900B37927 /* routing.swift in Sources */,
 				8D966B582D9CF70500B37927 /* LocalData.swift in Sources */,
+				8DF6EFE32DB770EE00E2C69A /* SymptomstrackerView.swift in Sources */,
 				8D966B572D9CF70200B37927 /* color.swift in Sources */,
 				8D966B562D9CF6FE00B37927 /* Text.swift in Sources */,
 				8D966B552D9CF6FB00B37927 /* APIClass.swift in Sources */,
+				8D38163C2DC0D361008F2539 /* testAudio.swift in Sources */,
 				8D966B542D9CF6F800B37927 /* alert.swift in Sources */,
 				8D966B532D9CF6F400B37927 /* network.swift in Sources */,
+				8D12F5EE2DC4A13400DE1A41 /* VoiceManager.swift in Sources */,
+				8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */,
 				8D1544342DA907A9009E7433 /* Output.swift in Sources */,
 				8D966B512D9CF6EE00B37927 /* viewmodal.swift in Sources */,
 				8D966B502D9CF6EA00B37927 /* DummyView.swift in Sources */,
+				8DF6EFEA2DB799DB00E2C69A /* vitaldatamodal.swift in Sources */,
 				8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */,
 				8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */,
+				8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */,
 				8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */,
+				8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */,
+				8DDF8EE22DBCE1D800F8B47D /* CustomTextField 1.swift in Sources */,
+				8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */,
 				8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */,
+				8DDF8EE32DBCE1D800F8B47D /* CustomeLoader.swift in Sources */,
 				8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */,
 				8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */,
+				8DF6EFED2DB799DB00E2C69A /* AddVitalsView.swift in Sources */,
 				8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */,
 				8D1359CA2DA65F63004A8332 /* popup.swift in Sources */,
-				8D31488F2D9FF8C7008DF7D7 /* Suppliment_checklist.swift in Sources */,
+				8D31488F2D9FF8C7008DF7D7 /* DietView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +819,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "vitalio-native-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Vitalio;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We need access the document so that it can be  shared.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "I need permission to transcribe it to text";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need  to access the photo library so that lab report can be shared.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -644,6 +855,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "vitalio-native-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Vitalio;
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We need access the document so that it can be  shared.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "I need permission to transcribe it to text";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need  to access the photo library so that lab report can be shared.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -687,6 +901,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.82.0;
+			};
+		};
+		8D3816342DC0A666008F2539 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.8;
+			};
+		};
 		8D966B6D2D9D418900B37927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -698,6 +928,76 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8D38161A2DC0A56B008F2539 /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		8D38161C2DC0A56B008F2539 /* NIOConcurrencyHelpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOConcurrencyHelpers;
+		};
+		8D38161E2DC0A56B008F2539 /* NIOCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOCore;
+		};
+		8D3816202DC0A56B008F2539 /* NIOEmbedded */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOEmbedded;
+		};
+		8D3816222DC0A56B008F2539 /* NIOFoundationCompat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOFoundationCompat;
+		};
+		8D3816242DC0A56B008F2539 /* NIOHTTP1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOHTTP1;
+		};
+		8D3816262DC0A56B008F2539 /* NIOPosix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOPosix;
+		};
+		8D3816282DC0A56B008F2539 /* NIOTLS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOTLS;
+		};
+		8D38162A2DC0A56B008F2539 /* NIOTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOTestUtils;
+		};
+		8D38162C2DC0A56B008F2539 /* NIOWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOWebSocket;
+		};
+		8D38162E2DC0A56B008F2539 /* _NIOConcurrency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = _NIOConcurrency;
+		};
+		8D3816302DC0A56B008F2539 /* _NIOFileSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = _NIOFileSystem;
+		};
+		8D3816322DC0A56B008F2539 /* _NIOFileSystemFoundationCompat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816192DC0A56A008F2539 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = _NIOFileSystemFoundationCompat;
+		};
+		8D3816352DC0A666008F2539 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3816342DC0A666008F2539 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
 		8D966B6E2D9D418900B37927 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8D966B6D2D9D418900B37927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

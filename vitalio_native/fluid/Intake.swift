@@ -3,51 +3,45 @@ import SwiftUI
 struct IntakeView: View {
     @EnvironmentObject var viewModel: FluidaViewModal
     @State private var showBottomSheet = false
+    @EnvironmentObject var themeManager: ThemeManager
+  
+    
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
+     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                BarChart(water: 500, juice: 300, milk: 200, tea: 300)
+                BarChart(water:  viewModel.getBarQuantity(for: 97694) ?? 0,
+                         juice: viewModel.getBarQuantity(for: 66) ?? 0,
+                         milk: viewModel.getBarQuantity(for: 76) ?? 0,
+                         tea:  viewModel.getBarQuantity(for: 114973) ?? 0,
+                         coffee: viewModel.getBarQuantity(for: 168) ?? 0,
+                         recommended: 2000)
 
-//                FluidImageSlider(
-//                    imageName: viewModel.containerImage,
-//                    imageOuter: viewModel.imageOuter,
-//                    fluidColor: .white,
-//                    topColor: .white.opacity(0.9),
-//                    value: $viewModel.fluidLevel,
-//                    totalQuantity: viewModel.selectedGlassSize,
-//                    height: 200
-//                )
+                FluidImageSlider(
+                    imageName: viewModel.containerImage,
+                    imageOuter: viewModel.imageOuter,
+                    fluidColor: .white,
+                    topColor: .white.opacity(0.9),
+                    value: $viewModel.fluidLevel,
+                    totalQuantity: viewModel.selectedGlassSize,
+                    height: 200
+                )
 
                 Text("Last intake • 1h 34m ago")
                     .font(.caption)
                     .foregroundColor(.gray)
-
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 12) {
-                    ForEach(viewModel.drinks, id: \.name) { drink in
-                        Button(action: {
-                            viewModel.selectedDrink = drink.name
-        
-                            viewModel.containerImage = drink.containerImage
-                            viewModel.imageOuter = drink.outerImage
-                        }) {
-                            VStack {
-                                Image(drink.icon)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 30)
-                                    .foregroundColor(viewModel.selectedDrink == drink.name ? .white : .gray)
-                                Text(drink.name)
-                                    .font(.caption)
-                                    .foregroundColor(viewModel.selectedDrink == drink.name ? .white : .gray)
-                            }
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(viewModel.selectedDrink == drink.name ? Color.blue : Color.white)
-                            .cornerRadius(12)
-                        }
-                    }
+                
+                
+                if viewModel.isLoading {
+                    ProgressView()
                 }
-                .padding(.horizontal)
+                else{
+                    FluidGrid()
+                }
+                  
                 HStack(spacing: 4) {
                     Image(systemName: "plus.circle")
                         .foregroundColor(.blue)
@@ -82,19 +76,45 @@ struct IntakeView: View {
                                     .foregroundColor(viewModel.selectedGlassSize == size ? .white : .textGrey)
                                     .padding(.vertical, 8)
                                     .frame(maxWidth: .infinity)
-                                    .background(viewModel.selectedGlassSize == size ? Color.blue : Color.white)
+                                    .background(viewModel.selectedGlassSize == size ? Color.blue : (isDark ? Color.customBackgroundDark2 :Color.white))
                                     .cornerRadius(10)
                             }
                         }
                     }
                 }
                 .padding(.horizontal)
+                .onAppear(){
+                    Task{
+                        await  viewModel.getFoodList(hours : "24")
+                        
+                    }
+                }
+                
             }
-            .background(Color.customBackground)
+            .background(isDark ? Color.customBackgroundDark : Color.customBackground)
             .padding(.vertical)
 
-            CustomButton(title: "Submit") {
-                print("Button Tapped")
+            if (viewModel.saveLoading  ) {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }else{
+                if  viewModel.isLoading {
+                    
+                }else{
+                    CustomButton(title: "Submit") {
+                        Task{
+                            print(String(viewModel.fluidLevel) + "is Value")
+                            await viewModel.saveIntake()
+                            print("Button Tapped")}
+                    }
+                }
+           
+            }
+          
+        }
+        .onAppear(){
+            Task{
+                await viewModel.getFoodHistoryList()
             }
         }
         .sheet(isPresented: $showBottomSheet) {
@@ -104,4 +124,46 @@ struct IntakeView: View {
            }
         .navigationTitle("Intake")
     }
+}
+
+
+struct FluidGrid : View {
+    @EnvironmentObject var themeManager: ThemeManager
+  
+    
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
+    @EnvironmentObject var viewModel: FluidaViewModal
+    var body: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 12) {
+            ForEach(viewModel.fluidList, id: \.foodID) { drink in
+                Button(action: {
+                    viewModel.selectedDrink = drink.foodName
+                            viewModel.containerImage = viewModel.getContainerImage(for: drink.foodID) ?? ""
+                            viewModel.imageOuter = viewModel.getOuter(for: drink.foodID) ?? ""
+                            viewModel.selectedFoodId = drink.foodID
+                }) {
+                    VStack {
+                        Image(viewModel.getIcon(for: drink.foodID) ?? "")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 30)
+                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? .white : .gray)
+                        Text(drink.foodName)
+                            .font(.caption)
+                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? .white : .gray)
+                    }
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
+                    .background(viewModel.selectedDrink == drink.foodName ? Color.blue : (isDark ? Color.customBackgroundDark2 : Color.white))
+                    .cornerRadius(12)
+                }
+            }
+        }.background(isDark ? Color.customBackgroundDark : Color.customBackground2)
+        
+        .padding(.horizontal)
+    }
+    
+    
 }

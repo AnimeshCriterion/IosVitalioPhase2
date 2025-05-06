@@ -8,11 +8,17 @@ struct InputEntry: Identifiable {
     let color: Color
 }
 
+func getCurrentHourString() -> String {
+    let hour = Calendar.current.component(.hour, from: Date())
+    return "\(hour)"
+}
+
 struct InputView: View {
+    @EnvironmentObject var viewModel: FluidaViewModal
     @EnvironmentObject var route: Routing
-    @State private var showChart = false
     @State private var selectedPeriod: Period = .daily
-    let inputData: [InputEntry] = [
+    @State private var showChart = false
+      let inputData: [InputEntry] = [
         .init(type: "Water", time: "05:50 AM", amount: 200, color: .cyan),
         .init(type: "Water", time: "06:30 AM", amount: 300, color: .cyan),
         .init(type: "Milk", time: "08:12 AM", amount: 350,color:.yellow),
@@ -25,16 +31,25 @@ struct InputView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             CustomNavBarView(title: "Fluid Intake History", isDarkMode: false) {
-                
                 route.back()
             }
+          
             PeriodToggleView(selectedPeriod: $selectedPeriod)
-    
-            HStack {
-                Spacer()
-                DateSelectorView()
-                Spacer()
+                .environmentObject(viewModel)
+
+            if selectedPeriod == .daily {
+                HStack {
+                    Spacer()
+                    DateSelectorView()
+                        .environmentObject(viewModel)
+                    Spacer()
+                }
+            } else {
+                RangeDateSelectorView(selectedPeriod: $selectedPeriod)
+                    .environmentObject(viewModel)
             }
+
+//            }
             HStack {
                 Text("Fluid Intake Log")
                     .font(.system(size: 18, weight: .semibold))
@@ -68,7 +83,8 @@ struct InputView: View {
             if showChart {
                 InputChartView(data: inputData)
             } else {
-                InputHistoryView(data: inputData)
+                InputHistoryView(selectedPeriod: selectedPeriod)
+
             }
 
             Spacer()
@@ -81,49 +97,87 @@ struct InputView: View {
 }
 
 struct InputHistoryView: View {
-    let data: [InputEntry]
+    @EnvironmentObject var viewModel: FluidaViewModal
+    var selectedPeriod: Period
 
     var body: some View {
         VStack(spacing: 20) {
-            ForEach(data.reversed()) { item in
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(item.type)
+            if selectedPeriod == .daily {
+                ForEach(viewModel.fluidList) { item in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(item.foodName)
+                                .font(.system(size: 16, weight: .semibold))
+                            Text(item.givenFoodDate)
+                                .font(.system(size: 12))
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                        Text("\(item.quantity) ml")
                             .font(.system(size: 16, weight: .semibold))
-                        Text(item.time)
-                            .font(.system(size: 12))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                     }
-                    Spacer()
-                    Text("\(item.amount) ml")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.black)
+                }
+            } else {
+                ForEach(viewModel.fluidSummaryList) { item in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(formatDate(item.givenFoodDate))
+                                .font(.system(size: 14, weight: .semibold))
+                            Text("Assigned Limit: \(item.assignedLimit, specifier: "%.0f") ml")
+                                .font(.system(size: 12))
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                        Text("\(item.foodQuantity) ml")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.black)
+                    }
                 }
             }
         }
     }
+
+    func formatDate(_ isoString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        if let date = formatter.date(from: isoString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        return isoString
+    }
 }
+
+
 
 struct InputChartView: View {
     let data: [InputEntry]
+    let maxY: Double = 1500.0 // Adjust according to your fluid quantity range
 
     var body: some View {
         GeometryReader { geo in
-            let maxY = 1000.0
             let spacing = geo.size.width / 24
 
             ZStack(alignment: .topLeading) {
-                // Y-axis labels
+                // Y-axis grid and labels
                 VStack(spacing: geo.size.height / 5) {
                     ForEach((1...5).reversed(), id: \.self) { i in
-                        Text("\(i * 200) ml")
-                            .font(.system(size: 10))
-                            .foregroundColor(.gray)
+                        HStack(spacing: 2) {
+                            Text("\(Int(Double(i) * maxY / 5)) ml")
+                                .font(.system(size: 10))
+                                .foregroundColor(.gray)
+                                .frame(width: 40, alignment: .trailing)
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(height: 1)
+                        }
                     }
                 }
-                .offset(x: -5, y: 0)
+                .frame(height: geo.size.height)
+                .offset(x: 0, y: 0)
 
-                // Graph path
+                // Graph line
                 Path { path in
                     for (i, item) in data.enumerated() {
                         let x = spacing * CGFloat(hourFromTime(item.time))
@@ -137,25 +191,25 @@ struct InputChartView: View {
                         }
                     }
                 }
-                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                .stroke(Color.blue, lineWidth: 2)
 
                 // Points and Labels
                 ForEach(data) { item in
                     let x = spacing * CGFloat(hourFromTime(item.time))
                     let y = geo.size.height - (CGFloat(item.amount) / CGFloat(maxY) * geo.size.height)
 
-                    Circle()
-                        .fill(item.color)
-                        .frame(width: 8, height: 8)
-                        .position(x: x, y: y)
-
-                    Text("\(item.amount)ml")
-                        .font(.system(size: 10, weight: .bold))
-                        .padding(4)
-                        .background(item.color)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                        .position(x: x, y: y - 16)
+                    VStack(spacing: 2) {
+                        Text("\(Int(item.amount))ml")
+                            .font(.system(size: 10, weight: .bold))
+                            .padding(4)
+                            .background(item.color)
+                            .foregroundColor(.white)
+                            .cornerRadius(4)
+                        Circle()
+                            .fill(item.color)
+                            .frame(width: 8, height: 8)
+                    }
+                    .position(x: x, y: y - 16)
                 }
             }
         }
@@ -173,14 +227,31 @@ struct InputChartView: View {
     }
 }
 
+
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
-        InputView()
+        InputView().environmentObject(FluidaViewModal())
+    }
+}
+import SwiftUI
+
+enum Period: Int, CaseIterable {
+    case daily = 0, weekly, monthly
+
+    var index: Int { rawValue }
+
+    var title: String {
+        switch self {
+        case .daily: return "Daily"
+        case .weekly: return "Weekly"
+        case .monthly: return "Monthly"
+        }
     }
 }
 
 struct PeriodToggleView: View {
     @Binding var selectedPeriod: Period
+    @EnvironmentObject var viewModel: FluidaViewModal
 
     var body: some View {
         ZStack {
@@ -221,33 +292,34 @@ struct PeriodToggleView: View {
     }
 }
 
-enum Period: Int, CaseIterable {
-    case daily = 0, weekly, monthly
-
-    var index: Int { rawValue }
-
-    var title: String {
-        switch self {
-        case .daily: return "Daily"
-        case .weekly: return "Weekly"
-        case .monthly: return "Monthly"
-        }
-    }
-}
-
 struct DateSelectorView: View {
     @State private var selectedDate: Date = Date()
     @Namespace private var animation
-    
+    @EnvironmentObject var viewModel: FluidaViewModal
+
+    func hoursTillNow(from selectedDate: Date) -> Int {
+        let now = Date()
+        let components = Calendar.current.dateComponents([.hour], from: selectedDate, to: now)
+        return components.hour ?? 0
+    }
+
     var body: some View {
         HStack(spacing: 16) {
             Button(action: {
                 withAnimation(.easeInOut) {
                     selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) ?? selectedDate
+                    Task {
+                        if viewModel.isIntakeSelected {
+                            await viewModel.getFoodList(hours: String(hoursTillNow(from: selectedDate)))
+                        } else {
+                            await viewModel.outputByDate(hours: String(hoursTillNow(from: selectedDate)))
+                        }
+                    }
                 }
             }) {
                 Image(systemName: "chevron.left")
-                    .foregroundColor(.gray).padding(.horizontal, 20)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal, 20)
             }
 
             ZStack {
@@ -263,15 +335,29 @@ struct DateSelectorView: View {
                         .transition(.slide)
                 }
             }
-            .frame(width: 200, alignment: .center)
+            .frame(width: 200)
 
-            Button(action: {
-                withAnimation(.easeInOut) {
-                    selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? selectedDate
-                }
-            }) {
+            if selectedDate > Calendar.current.startOfDay(for: Date()) {
                 Image(systemName: "chevron.right")
-                    .foregroundColor(.gray).padding(.horizontal, 20)
+                    .foregroundColor(.gray.opacity(0.2))
+                    .padding(.horizontal, 20)
+            } else {
+                Button(action: {
+                    withAnimation(.easeInOut) {
+                        selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? selectedDate
+                        Task {
+                            if viewModel.isIntakeSelected {
+                                await viewModel.getFoodList(hours: String(hoursTillNow(from: selectedDate)))
+                            } else {
+                                await viewModel.outputByDate(hours: String(hoursTillNow(from: selectedDate)))
+                            }
+                        }
+                    }
+                }) {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                        .padding(.horizontal, 20)
+                }
             }
         }
         .frame(height: 44)
@@ -284,9 +370,80 @@ struct DateSelectorView: View {
     }
 }
 
-struct DateSelectorView_Previews: PreviewProvider {
-    static var previews: some View {
-        DateSelectorView()
-            .previewLayout(.sizeThatFits)
+struct RangeDateSelectorView: View {
+    @EnvironmentObject var viewModel: FluidaViewModal
+    @Binding var selectedPeriod: Period
+    @State private var currentDate: Date = Date()
+
+    var body: some View {
+        let (startDate, endDate) = dateRange(for: selectedPeriod, from: currentDate)
+
+        HStack {
+            Button(action: {
+                // Move range back
+                shiftRange(by: -1)
+            }) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+            }
+            Spacer()
+            Text("\(formattedDate(startDate)) - \(formattedDate(endDate))")
+                .font(.system(size: 16, weight: .semibold))
+                .padding(.horizontal)
+
+            Spacer()
+
+
+            Button(action: {
+                // Move range forward
+                shiftRange(by: 1)
+            }) {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+            }
+        }
+        .frame(height: 44)
+        .onChange(of: selectedPeriod) { _ in
+            Task {
+                let (from, to) = dateRange(for: selectedPeriod, from: currentDate)
+                await viewModel.fluidSummaryByDateRange(fromDate: formattedDate(from), toDate: formattedDate(to))
+            }
+        }
+    }
+
+    func shiftRange(by value: Int) {
+        switch selectedPeriod {
+        case .weekly:
+            currentDate = Calendar.current.date(byAdding: .day, value: 7 * value, to: currentDate) ?? currentDate
+        case .monthly:
+            currentDate = Calendar.current.date(byAdding: .month, value: value, to: currentDate) ?? currentDate
+        default: break
+        }
+
+        Task {
+            let (from, to) = dateRange(for: selectedPeriod, from: currentDate)
+            await viewModel.fluidSummaryByDateRange(fromDate: formattedDate(from), toDate: formattedDate(to))
+        }
+    }
+
+    func dateRange(for period: Period, from date: Date) -> (Date, Date) {
+        switch period {
+        case .weekly:
+            let start = Calendar.current.date(byAdding: .day, value: -6, to: date) ?? date
+            return (start, date)
+        case .monthly:
+            let start = Calendar.current.date(byAdding: .day, value: -29, to: date) ?? date
+            return (start, date)
+        default:
+            return (date, date)
+        }
+    }
+
+    func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
 }

@@ -17,10 +17,18 @@ struct SideMenuView: View {
     @EnvironmentObject var viewModel : DashboardViewModal
     @State private var showLogoutSheet = false
     
+    @State private var selectedImage: UIImage?
+        @State private var imageFilename: String?
+        @State private var isShowingPicker = false
+        @State private var isShowingActionSheet = false
+        @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    var userData =  UserDefaultsManager.shared.getUserData()
     var body: some View {
         ZStack {
             (isDarkMode ? Color.customBackgroundDark : Color.customBackground2).ignoresSafeArea()
+
             ScrollView{
+                
                 VStack {
                     VStack(
                         alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
@@ -41,11 +49,55 @@ struct SideMenuView: View {
                                     .rotationEffect(.degrees(90))}
                             }
                             Spacer()
-                            Image("dp").frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                            //Image("dp").frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                             
-                            CustomText("Abhay Sharma", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
+                            Button(action: {
+                                                          isShowingActionSheet = true
+                                                          print("SelectedImage: \(selectedImage)")
+                                                          if let filename = imageFilename {
+                                                              print("Selected image file name: \(filename)")
+                                                          }
+                                                          print("FaheemCheck \(UserDefaultsManager.shared.getUserData()!.profileUrl)")
+                                                      }) {
+                                                          Group {
+                                                              if let image = selectedImage {
+                                                                  Image(uiImage: image)
+                                                                      .resizable()
+                                                              } else {
+                                                                  Image("dp")
+                                                                      .resizable()
+                                                              }
+                                                          }
+                                                          .scaledToFill()
+                                                          .frame(width: 100, height: 100)
+                                                          .clipShape(Circle())
+                                                      }
+                                                      .actionSheet(isPresented: $isShowingActionSheet) {
+                                                          ActionSheet(title: Text("Select Image"), buttons: [
+                                                              .default(Text("Camera")) {
+                                                                  sourceType = .camera
+                                                                  isShowingPicker = true
+                                                              },
+                                                              .default(Text("Photo Library")) {
+                                                                  sourceType = .photoLibrary
+                                                                  isShowingPicker = true
+                                                                  print(selectedImage)
+                                                              },
+                                                              .cancel()
+                                                          ])
+                                                      }
+                                                      .sheet(isPresented: $isShowingPicker) {
+                                                          ImagePicker(selectedImage: $selectedImage, imageFilename: $imageFilename, sourceType: sourceType)
+                                                      }
                             
-                            CustomText("+91 xxxxxxxx",color: Color.gray, size: 18, weight: Font.Weight.semibold)
+                            CustomText(userData?.patientName ?? "", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
+                            
+                            if let userData = UserDefaultsManager.shared.getUserData() {
+                                CustomText("+91 \(userData.mobileNo)", color: Color.gray, size: 18, weight: .semibold)
+                            } else {
+                                CustomText("", color: Color.gray, size: 18, weight: .semibold)
+                            }
+
                             Spacer()
                             Button(action: {
                                 route.navigate(to: .editProfile)
@@ -71,10 +123,14 @@ struct SideMenuView: View {
                         .cornerRadius(15)
                         .padding()
                     VStack{
-                        
-                        DrawerTile(title: "Allergies", iconName: "allergies", dark: isDarkMode )
-                        
-                        DrawerTile(title: "Switch account", iconName: "addmember", dark: isDarkMode )
+                        Button(action: {
+                            route.navigate(to: .allergies)
+                        }) {
+                        DrawerTile(title: "Allergies", iconName: "allergies", dark: isDarkMode )}
+                        Button(action: {
+                            route.navigate(to: .sharedAccountView)
+                        }) {
+                            DrawerTile(title: "Switch account", iconName: "addmember", dark: isDarkMode )}
                         DrawerTile(title: "Connect Smart Watch", iconName: "watch", dark: isDarkMode )
                         DrawerTile(title: "Add Member", iconName: "addmember", dark: isDarkMode )
                         

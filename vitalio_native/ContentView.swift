@@ -38,8 +38,9 @@ struct ContentView: View {
             .padding(0)
             .navigationDestination(for: Routing.AuthFlow.self) { destination in
                 switch destination {
-                case .onboarding:
-                    Onboarding()
+//                case .onboarding:
+                    
+//                    Onboarding()
                 case .dashboard:
                     Dashboard()
                 case .login:
@@ -57,7 +58,7 @@ struct ContentView: View {
                 case .pillsReminder:
                     PillsReminder()
                 case .suppliment:
-                    Suppliment()
+                    Diet()
                 case .faqView:
                     FAQView()
                 case .feedback:
@@ -65,14 +66,36 @@ struct ContentView: View {
                 case .fluid:
                     Fluid()
                 case .inputHistoryView:
-                    InputView()       
+                    InputView()
                 case .outputHistoryView:
                     OutputHistoryView()
-                }
+                case .reportViewUI:
+                    ReportViewUI()
+                case .sharedAccountView:
+                    SharedAccountView()
+                case .addMemberView:
+                    AddMemberView()      
+                case .stillHaveSymptomsView:
+                    StillHaveSymptomsView()
+                case .vitals:
+                    VitalView()
+                case .addVitals:
+                    AddVitalsView()
+                case .vitalHistory:
+                    VitalHistoryView()
+                case .addLabReportView:
+                    AddLabReportView()      
+                case .dynamicResponseView:
+                    DynamicResponseView()
+                case .allergies:
+                    AllergiesView()     
+                case .symptomsHistory:
+                    SymptomsHistory()
+                }}
             }
         }
     }
-}
+
 
 #Preview {
     ContentView()

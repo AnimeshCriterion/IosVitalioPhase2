@@ -7,7 +7,7 @@ final class Routing : ObservableObject{
     @Published var navpath = NavigationPath()
     enum AuthFlow: Hashable, Codable {
         
-        case onboarding
+//        case onboarding
         case dashboard
         case login
         case otp
@@ -21,7 +21,18 @@ final class Routing : ObservableObject{
         case feedback   
         case fluid 
         case inputHistoryView
-        case outputHistoryView
+        case outputHistoryView 
+        case reportViewUI
+        case sharedAccountView
+        case addMemberView
+        case stillHaveSymptomsView
+        case vitals
+        case addVitals
+        case vitalHistory
+        case addLabReportView
+        case dynamicResponseView   
+        case allergies
+        case symptomsHistory
         
     }
 
