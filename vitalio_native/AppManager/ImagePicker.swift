@@ -40,12 +40,13 @@ struct ImagePicker: UIViewControllerRepresentable {
             }
 
             if let url = info[.imageURL] as? URL {
-                parent.imageFilename = url.lastPathComponent // ✅ Capture file name
-                print("Selected image filename: \(url.lastPathComponent)")
+                parent.imageFilename = url.path  // ✅ Fix here
+                print("Selected image file path: \(url.path)")
             }
 
             parent.presentationMode.wrappedValue.dismiss()
         }
+
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             parent.presentationMode.wrappedValue.dismiss()

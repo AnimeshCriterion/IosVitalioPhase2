@@ -76,6 +76,7 @@
 		8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D966B742D9D420200B37927 /* AppDelegate.swift */; };
 		8D966B782D9D442D00B37927 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8D966B772D9D442D00B37927 /* FirebaseAnalytics */; };
 		8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BCAAB2DA0FD6800405837 /* PillsViewModal.swift */; };
+		8DC4EAF12DD3221400F806B8 /* DeviceLimitPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */; };
 		8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */; };
 		8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */; };
 		8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */; };
@@ -100,6 +101,7 @@
 		8DF6EFEC2DB799DB00E2C69A /* VitalHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE72DB799DB00E2C69A /* VitalHistoryView.swift */; };
 		8DF6EFED2DB799DB00E2C69A /* AddVitalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE82DB799DB00E2C69A /* AddVitalsView.swift */; };
 		8DF6EFEE2DB799DB00E2C69A /* VitalsViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE92DB799DB00E2C69A /* VitalsViewModal.swift */; };
+		8DF862712DD472B2002ADFE5 /* ShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF862702DD472B2002ADFE5 /* ShowImage.swift */; };
 		8DF9F8A22DAF865F002BBEBB /* fluiddatamodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9F8A12DAF865F002BBEBB /* fluiddatamodal.swift */; };
 		8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */; };
 		8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F32DAE3A4500FE7302 /* addwater.swift */; };
@@ -138,6 +140,7 @@
 		8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "vitalio-native-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8D9BCAAB2DA0FD6800405837 /* PillsViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsViewModal.swift; sourceTree = "<group>"; };
 		8DAA9E1E2D913FFB00C0315F /* drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawer.swift; sourceTree = "<group>"; };
+		8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLimitPopup.swift; sourceTree = "<group>"; };
 		8DC5CEAF2D97E22900BF614A /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
 		8DC5CEB32D97E2B300BF614A /* SymptomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsView.swift; sourceTree = "<group>"; };
 		8DC5CEB62D980A5700BF614A /* Confermation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confermation.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		8DF6EFE72DB799DB00E2C69A /* VitalHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalHistoryView.swift; sourceTree = "<group>"; };
 		8DF6EFE82DB799DB00E2C69A /* AddVitalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVitalsView.swift; sourceTree = "<group>"; };
 		8DF6EFE92DB799DB00E2C69A /* VitalsViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VitalsViewModal.swift; sourceTree = "<group>"; };
+		8DF862702DD472B2002ADFE5 /* ShowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImage.swift; sourceTree = "<group>"; };
 		8DF9F8A12DAF865F002BBEBB /* fluiddatamodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fluiddatamodal.swift; sourceTree = "<group>"; };
 		8DFB66F12DAE2D2B00FE7302 /* FluidViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidViewModal.swift; sourceTree = "<group>"; };
 		8DFB66F32DAE3A4500FE7302 /* addwater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addwater.swift; sourceTree = "<group>"; };
@@ -223,7 +227,6 @@
 		8D2AEEBF2DB3AAC100FFCB62 /* Add Member */ = {
 			isa = PBXGroup;
 			children = (
-				8D3816122DC08C38008F2539 /* voice assistant */,
 				8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */,
 			);
 			path = "Add Member";
@@ -275,6 +278,7 @@
 				8DD5F85D2D8A8A1000FBDF87 /* otp.swift */,
 				8DFEF6372D9BD2910026726C /* LoginViewModal.swift */,
 				8DFEF63B2D9BF2670026726C /* Modal.swift */,
+				8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -282,12 +286,13 @@
 		8D46DCE22D95206F00FAC567 /* AppManager */ = {
 			isa = PBXGroup;
 			children = (
-				8D78480D2DC38CD8004A255D /* ImagePicker.swift */,
 				8D9BCAAA2DA0F99B00405837 /* routing */,
 				8D8257732D97D38200CF96B4 /* common */,
 				8DFFCD282D926152007A7483 /* api */,
+				8D78480D2DC38CD8004A255D /* ImagePicker.swift */,
 				8DD5F84F2D8A890700FBDF87 /* color.swift */,
 				8DD5F8512D8A891700FBDF87 /* LocalData.swift */,
+				8DF862702DD472B2002ADFE5 /* ShowImage.swift */,
 			);
 			path = AppManager;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */,
 				8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */,
 				8DDF8ED62DBCE17100F8B47D /* allergies */,
+				8D3816122DC08C38008F2539 /* voice assistant */,
 				8D2AEEBF2DB3AAC100FFCB62 /* Add Member */,
 				8DF6EFE42DB7997500E2C69A /* vital */,
 				8D46DCE22D95206F00FAC567 /* AppManager */,
@@ -624,6 +630,7 @@
 				8DFB66F62DAE759B00FE7302 /* Report.swift in Sources */,
 				8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */,
 				8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */,
+				8DC4EAF12DD3221400F806B8 /* DeviceLimitPopup.swift in Sources */,
 				8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */,
 				8D78480C2DC32E2F004A255D /* Edit Profile.swift in Sources */,
 				8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */,
@@ -649,6 +656,7 @@
 				8D966B5B2D9CF70F00B37927 /* SymptomsView.swift in Sources */,
 				8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */,
 				8D966B5A2D9CF70C00B37927 /* Feedback.swift in Sources */,
+				8DF862712DD472B2002ADFE5 /* ShowImage.swift in Sources */,
 				8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */,
 				8D966B592D9CF70900B37927 /* routing.swift in Sources */,
 				8D966B582D9CF70500B37927 /* LocalData.swift in Sources */,
