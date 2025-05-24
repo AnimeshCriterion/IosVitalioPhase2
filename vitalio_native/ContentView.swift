@@ -90,7 +90,11 @@ struct ContentView: View {
                 case .allergies:
                     AllergiesView()     
                 case .symptomsHistory:
-                    SymptomsHistory()
+                    SymptomsHistory()              
+                case .chatBotView:
+                    ChatBotView()             
+                case .createAccountView:
+                    CreateAccountView()
                 }}
             }
         }

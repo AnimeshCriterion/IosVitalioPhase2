@@ -24,6 +24,8 @@ struct VitalioApp: App {
     @StateObject var uploadReportViewModel = UploadReportViewModel() 
     @StateObject var allergiesViewModel = AllergiesViewModal()
     @StateObject var editProfileVM = EditProfileViewModal()
+    @StateObject var chatViewModel = ChatViewModel()
+    @StateObject var signUpViewModal = SignUpViewModal()
 //    @StateObject var webSocketManager = WebSocketManager(userId: "1234")/
     
 
@@ -49,6 +51,8 @@ struct VitalioApp: App {
             .environmentObject(uploadReportViewModel)     
             .environmentObject(allergiesViewModel)
             .environmentObject(editProfileVM)
+            .environmentObject(chatViewModel)
+            .environmentObject(signUpViewModal)
 //            .environmentObject(webSocketManager)
         }
     }

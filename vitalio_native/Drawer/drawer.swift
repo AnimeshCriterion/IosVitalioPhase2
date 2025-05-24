@@ -9,20 +9,27 @@ import SwiftUI
 
 
 struct SideMenuView: View {
+    
+    @EnvironmentObject var editProfileVM: EditProfileViewModal
+    @EnvironmentObject var loginViewModel: LoginViewModal
     @EnvironmentObject var route: Routing
     @EnvironmentObject var themeManager: ThemeManager
-       var isDarkMode: Bool {
+    
+    var isDarkMode: Bool {
            themeManager.colorScheme == .dark
        }
+    
+    @State private var profileImage: UIImage?
     @EnvironmentObject var viewModel : DashboardViewModal
     @State private var showLogoutSheet = false
-    
     @State private var selectedImage: UIImage?
-        @State private var imageFilename: String?
-        @State private var isShowingPicker = false
-        @State private var isShowingActionSheet = false
-        @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var imageFilename: String?
+    @State private var isShowingPicker = false
+    @State private var isShowingActionSheet = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
     var userData =  UserDefaultsManager.shared.getUserData()
+    
     var body: some View {
         ZStack {
             (isDarkMode ? Color.customBackgroundDark : Color.customBackground2).ignoresSafeArea()
@@ -49,46 +56,82 @@ struct SideMenuView: View {
                                     .rotationEffect(.degrees(90))}
                             }
                             Spacer()
-                            //Image("dp").frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                            
+
                             Button(action: {
-                                                          isShowingActionSheet = true
-                                                          print("SelectedImage: \(selectedImage)")
-                                                          if let filename = imageFilename {
-                                                              print("Selected image file name: \(filename)")
-                                                          }
-                                                          print("FaheemCheck \(UserDefaultsManager.shared.getUserData()!.profileUrl)")
-                                                      }) {
-                                                          Group {
-                                                              if let image = selectedImage {
-                                                                  Image(uiImage: image)
-                                                                      .resizable()
-                                                              } else {
-                                                                  Image("dp")
-                                                                      .resizable()
-                                                              }
-                                                          }
-                                                          .scaledToFill()
-                                                          .frame(width: 100, height: 100)
-                                                          .clipShape(Circle())
-                                                      }
-                                                      .actionSheet(isPresented: $isShowingActionSheet) {
-                                                          ActionSheet(title: Text("Select Image"), buttons: [
-                                                              .default(Text("Camera")) {
-                                                                  sourceType = .camera
-                                                                  isShowingPicker = true
-                                                              },
-                                                              .default(Text("Photo Library")) {
-                                                                  sourceType = .photoLibrary
-                                                                  isShowingPicker = true
-                                                                  print(selectedImage)
-                                                              },
-                                                              .cancel()
-                                                          ])
-                                                      }
-                                                      .sheet(isPresented: $isShowingPicker) {
-                                                          ImagePicker(selectedImage: $selectedImage, imageFilename: $imageFilename, sourceType: sourceType)
-                                                      }
+                                                            isShowingActionSheet = true
+                                                            print("SelectedImage: \(selectedImage?.description ?? "nil")")
+                                                            if let filename = imageFilename {
+                                                                print("Selected image file name: \(filename)")
+                                                            }
+                                                            print("FaheemCheck \(UserDefaultsManager.shared.getUserData()?.profileUrl ?? "No URL")")
+                                                        }) {
+                                                            Group {
+                                                                if let urlString = UserDefaultsManager.shared.getUserData()?.profileUrl,
+                                                                   let url = URL(string: urlString) {
+                                                                     AsyncImage(url: url) { phase in
+                                                                        if let image = phase.image {
+                                                                            if editProfileVM.loadingImage {  ProgressView() } else {   image
+                                                                                .resizable()
+                                                                                .scaledToFill()
+                                                                                .clipShape(Circle())}
+                                                                        } else if phase.error != nil {
+                                                                            Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
+                                                                                .resizable()
+                                                                                .scaledToFit()
+                                                                                .foregroundColor(.gray)
+                                                                        } else {
+                                                                            ProgressView()
+                                                                        }
+                                                                    }
+                                                                    .frame(width: 100, height: 100)
+                                                                } else {
+                                                                    Image(systemName: "person.crop.circle")
+                                                                        .resizable()
+                                                                        .scaledToFit()
+                                                                        .frame(width: 100, height: 100)
+                                                                        .foregroundColor(.gray)
+                                                                }
+                                                            }
+                                                               }
+                                                        .actionSheet(isPresented: $isShowingActionSheet) {
+                                                            ActionSheet(title: Text("Select Image"), buttons: [
+                                                                .default(Text("Camera")) {
+                                                                    sourceType = .camera
+                                                                    isShowingPicker = true
+                                                                },
+                                                                .default(Text("Photo Library")) {
+                                                                    sourceType = .photoLibrary
+                                                                    isShowingPicker = true
+                                                                },
+                                                                .cancel()
+                                                            ])
+                                                        }
+                                                        .sheet(isPresented: $isShowingPicker, onDismiss: {
+                                                            Task {
+                                                                    guard let image = selectedImage,
+                                                                          let imageData = image.jpegData(compressionQuality: 0.8),
+                                                                          let imageFilename = imageFilename else {
+                                                                        print("❌ No image selected")
+                                                                        return
+                                                                    }
+                                                                    do {
+                                                                        print("selected image \(imageFilename)")
+                                                                         await editProfileVM.updateProfileDataForP(imageData: imageData, filename: imageFilename)
+                                                                        editProfileVM.loadingImage = true
+                                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                                            Task {
+                                                                                await loginViewModel.loadData(uhid: UserDefaultsManager.shared.getUserData()?.uhID ?? "")
+                                                                                editProfileVM.loadingImage = false
+                                                                            }
+                                                                        }
+                                                                       
+                                                                        
+                                                                    }
+                                                                }
+                                                        }) {
+                                                            ImagePicker(selectedImage: $selectedImage, imageFilename: $imageFilename, sourceType: sourceType)
+                                                        }
+
                             
                             CustomText(userData?.patientName ?? "", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
                             
@@ -151,8 +194,15 @@ struct SideMenuView: View {
                         }
                         Button(action: {
                             route.navigate(to: .feedback)
-                        }) {
+                        })
+                        {
                             GroupedDrawerTile(title: "Feedback", iconName: "feedback", dark: isDarkMode)
+                        }
+                               Button(action: {
+                            route.navigate(to: .createAccountView)
+                        })
+                        {
+                            GroupedDrawerTile(title: "Create Account", iconName: "feedback", dark: isDarkMode)
                         }
                         
                     }
@@ -336,3 +386,4 @@ struct LogoutConfirmationSheet: View {
         .padding()
     }
 }
+

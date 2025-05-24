@@ -12,7 +12,7 @@ struct IntakeView: View {
      
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack {
                 BarChart(water:  viewModel.getBarQuantity(for: 97694) ?? 0,
                          juice: viewModel.getBarQuantity(for: 66) ?? 0,
                          milk: viewModel.getBarQuantity(for: 76) ?? 0,
@@ -23,11 +23,11 @@ struct IntakeView: View {
                 FluidImageSlider(
                     imageName: viewModel.containerImage,
                     imageOuter: viewModel.imageOuter,
-                    fluidColor: .white,
-                    topColor: .white.opacity(0.9),
+                    fluidColor: viewModel.color,
+                    topColor: isDark ? .customBackgroundDark2 : .white.opacity(0.9),
                     value: $viewModel.fluidLevel,
                     totalQuantity: viewModel.selectedGlassSize,
-                    height: 200
+                    height: 250
                 )
 
                 Text("Last intake • 1h 34m ago")
@@ -35,21 +35,21 @@ struct IntakeView: View {
                     .foregroundColor(.gray)
                 
                 
-                if viewModel.isLoading {
+                if viewModel.fluidList.isEmpty && viewModel.isLoading {
                     ProgressView()
                 }
                 else{
                     FluidGrid()
                 }
                   
-                HStack(spacing: 4) {
-                    Image(systemName: "plus.circle")
-                        .foregroundColor(.blue)
-                    Text("Enter Fluid Manually")
-                        .font(.caption)
-                        .foregroundColor(.blue)
-                }
-                .padding(.top, 10)
+//                HStack(spacing: 4) {
+//                    Image(systemName: "plus.circle")
+//                        .foregroundColor(.blue)
+//                    Text("Enter Fluid Manually")
+//                        .font(.caption)
+//                        .foregroundColor(.blue)
+//                }
+//                .padding(.top, 10)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Select Your Glass Size")
@@ -97,8 +97,8 @@ struct IntakeView: View {
             if (viewModel.saveLoading  ) {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }else{
-                if  viewModel.isLoading {
+            } else {
+                if viewModel.fluidList.isEmpty && viewModel.isLoading {
                     
                 }else{
                     CustomButton(title: "Submit") {
@@ -142,22 +142,29 @@ struct FluidGrid : View {
                     viewModel.selectedDrink = drink.foodName
                             viewModel.containerImage = viewModel.getContainerImage(for: drink.foodID) ?? ""
                             viewModel.imageOuter = viewModel.getOuter(for: drink.foodID) ?? ""
+                    viewModel.color = viewModel.getColor(for: drink.foodID) ?? .white
                             viewModel.selectedFoodId = drink.foodID
+                    
                 }) {
                     VStack {
                         Image(viewModel.getIcon(for: drink.foodID) ?? "")
                             .resizable()
                             .scaledToFit()
                             .frame(height: 30)
-                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? .white : .gray)
+                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? .primaryBlue : .white)
                         Text(drink.foodName)
                             .font(.caption)
-                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? .white : .gray)
+                            .foregroundColor(viewModel.selectedDrink == drink.foodName ? Color.textGrey : .textGrey)
                     }
                     .padding(.vertical, 8)
                     .frame(maxWidth: .infinity)
-                    .background(viewModel.selectedDrink == drink.foodName ? Color.blue : (isDark ? Color.customBackgroundDark2 : Color.white))
+                    .background( isDark ? Color.customBackgroundDark2 : Color.white)
                     .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(viewModel.selectedDrink == drink.foodName ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+
                 }
             }
         }.background(isDark ? Color.customBackgroundDark : Color.customBackground2)

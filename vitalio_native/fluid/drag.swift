@@ -8,7 +8,14 @@ struct FluidImageSlider: View {
     @Binding var value: Int   // Current amount filled
     let totalQuantity: Int    // E.g., 150ml, 500ml
     let height: CGFloat
-
+    @EnvironmentObject var themeManager: ThemeManager
+    
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
+    
+    
+    
     var body: some View {
         let clampedValue = min(value, totalQuantity)
         let fluidHeight = height * CGFloat(clampedValue) / CGFloat(totalQuantity)
@@ -21,12 +28,7 @@ struct FluidImageSlider: View {
                 .resizable()
                
                 .aspectRatio(contentMode: .fit)
-                .mask(
-                    VStack(spacing: 0) {
-                        Color.black.frame(height: fluidHeight)
-                        Color.white
-                    }
-                )
+
                 .overlay(
                     VStack(spacing: 0) {
                         topColor.frame(height: height - fluidHeight)
@@ -44,14 +46,19 @@ struct FluidImageSlider: View {
             Image(imageOuter)
                 .renderingMode(.template)
                 .resizable()
-            
                 .aspectRatio(contentMode: .fit)
                 .opacity(0.2)
 
             // Centered percentage text
-            Text("\(percentage)%")
-                .font(.system(size: 30, weight: .bold))
-                .foregroundColor(.gray)
+            VStack {
+                Text("\(percentage)%")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundColor(imageName == "milk" ? .gray :  .white )
+                Text("\(clampedValue) ml of \(totalQuantity) ml")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(imageName == "milk" ? .gray :   .white )
+                
+            }
         }
         .frame(height: height)
         .gesture(

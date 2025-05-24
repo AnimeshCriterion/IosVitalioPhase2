@@ -13,81 +13,105 @@ struct CreateAccountView: View {
     @EnvironmentObject var viewModal: SignUpViewModal
 
     var body: some View {
-        ScrollView {
-            VStack {
-               
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("0%")
-                            .font(.system(size: 16))
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.primaryBlue)
-
-                        Rectangle()
-                            .fill(Color.primaryBlue)
-                            .frame(maxWidth: .infinity, maxHeight: 5)
-                    }
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Getting Started")
-                            .font(.system(size: 16))
-                            .fontWeight(.bold)
-                        Text("Great start! You’re just beginning—let’s keep going")
-                            .font(.system(size: 14))
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 8)
-                .padding(.horizontal)
-                .background(Color.customBackground2)
-                .cornerRadius(10)
-
-                TabView(selection: $viewModal.currentPage) {
-                    firstPage().tag(0)
-                    secondPages().tag(1)
-                    dobPage().tag(2)
-                    bloodGroupPage().tag(3)
-                    locationPage().tag(4)
-                    weightPage().tag(5)
-                    heightSelectionPage().tag(6)
-                    chronicDiseasePage().tag(7)
-                    chronicConditionPage().tag(8)
-                    healthHistoryPage().tag(9)
-                    vitalReminderPage().tag(10)
-                    fluidIntakeDetailsPage().tag(11)
-                }
-                .frame(height: 600)
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .simultaneousGesture(
-                    DragGesture().onChanged { value in
-                        if abs(value.translation.width) > abs(value.translation.height) {
+        ZStack{
+            ScrollView {
+                VStack {
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            
+                            Text("\(Int((Double(viewModal.currentPage + 1) / 11.0) * 100))%")
+                                .font(.system(size: 16))
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color.primaryBlue)
+                            
+                            
+                            ProgressView(value: Double(viewModal.currentPage + 1) / 11.0)
+                                .tint(.blue)
+                                .frame(height: 10)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Getting Started")
+                                .font(.system(size: 16))
+                                .fontWeight(.bold)
+                            Text("Great start! You’re just beginning—let’s keep going")
+                                .font(.system(size: 14))
+                                .foregroundStyle(.secondary)
                         }
                     }
-                )
-
-                Button(action: {
-                    withAnimation {
-                        viewModal.currentPage += 1
-                        print("hello \(viewModal.firstName)")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal)
+                    .background(Color.customBackground2)
+                    .cornerRadius(10)
+                    
+                    TabView(selection: $viewModal.currentPage) {
+                        firstPage().tag(0)
+                        secondPages().tag(1)
+                        dobPage().tag(2)
+                        bloodGroupPage().tag(3)
+                        locationPage().tag(4)
+                        weightPage().tag(5)
+                        heightSelectionPage().tag(6)
+                        chronicDiseasePage().tag(7)
+                        //                    chronicConditionPage().tag(8)
+                        healthHistoryPage().tag(8)
+                        vitalReminderPage().tag(9)
+                        fluidIntakeDetailsPage().tag(10)
                     }
-                }) {
-                    Text("Next")
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(viewModal.firstName.isEmpty || viewModal.lastNmae.isEmpty ? Color.gray : Color.primaryBlue)
-                        .cornerRadius(14)
+                    .frame(height: 600)
+                    .frame(maxHeight: .infinity)
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .simultaneousGesture(
+                        DragGesture().onChanged { value in
+                            if abs(value.translation.width) > abs(value.translation.height) {
+                            }
+                        }
+                    )
+                    
+                    Button(action: {
+                        withAnimation {
+                            if(viewModal.currentPage < 10){
+                                viewModal.currentPage += 1
+                                print("hello \(viewModal.firstName) current page: \(viewModal.currentPage) ")
+                            }else{
+                                
+                                Task{
+                                    viewModal.submitPatientDetails()
+                                    if(viewModal.isSavingSuccessful == true){
+                                        route.navigate(to: .dashboard)
+                                    }else{
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            
+                            
+                        }
+                    }) {
+                        Text("Next")
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(viewModal.firstName.isEmpty || viewModal.lastNmae.isEmpty ? Color.gray : Color.primaryBlue)
+                            .cornerRadius(14)
+                    }
                 }
-            }
-            
-        }.padding(.horizontal, 20)
+                
+            }.padding(.horizontal, 20)
+            SuccessPopupViewError(show: $viewModal.showError, message: viewModal.errorIs)
+                .zIndex(1)
+        }
+        
     }
 
     func firstPage() -> some View {
         VStack {
             Image("welcome")
-                .padding()
+                .resizable()
+                .scaledToFit()
                 .frame(height: 250)
 
             VStack(alignment: .leading, spacing: 8) {
@@ -143,7 +167,45 @@ struct CreateAccountView: View {
     
     
     
-    /// Create Gender Page
+
+    struct GenderOptionView: View {
+        var data: Gender
+        var isSelected: Bool
+        var onTap: () -> Void
+
+        var body: some View {
+            VStack {
+                Image(data.image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                Text(data.name)
+                    .font(.system(size: 14))
+                    .foregroundColor(isSelected ? .white : .black)
+            }
+            .frame(width: 100, height: 100)
+            .background(isSelected ? Color.primaryBlue : Color.customBackground2)
+            .cornerRadius(10)
+            .overlay(
+                isSelected ?
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 20, height: 20)
+                    .overlay(
+                        Image(systemName: "checkmark")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(Color.white)
+                    )
+                    .offset(x: 45, y: -45)
+                : nil
+            )
+            .onTapGesture {
+                onTap()
+            }
+        }
+    }
 
     func secondPages() -> some View {
         VStack {
@@ -163,36 +225,13 @@ struct CreateAccountView: View {
 
                 HStack(spacing: 16) {
                     ForEach(viewModal.genders) { data in
-                        VStack {
-                            Image(data.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-
-                            Text(data.name)
-                                .font(.system(size: 14))
-                                .foregroundColor(viewModal.selectedGender == data.value ? .white : .black)
-                        }
-                        .frame(width: 100, height: 100)
-                        .background(viewModal.selectedGender == data.value ? Color.primaryBlue : Color.customBackground2)
-                        .cornerRadius(10)
-                        .overlay(
-                            viewModal.selectedGender == data.value ?
-                            Circle()
-                                .fill(Color.green)
-                                .frame(width: 20, height: 20)
-                                .overlay(
-                                    Image(systemName: "checkmark")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 10, height: 10)
-                                        .foregroundColor(Color.white)
-                                )
-                                .offset(x: 45, y: -45)
-                            : nil
-                        )
-                        .onTapGesture {
+                        GenderOptionView(
+                            data: data,
+                            isSelected: viewModal.selectedGender == data.value
+                        ) {
                             viewModal.selectedGender = data.value
+                            viewModal.selectedGenderId = data.gederId
+                            print(data.gederId)
                         }
                     }
                 }
@@ -204,6 +243,10 @@ struct CreateAccountView: View {
         }
         .padding(.horizontal, 20)
     }
+
+    
+    
+    
     
     /// DOB view page
     
@@ -236,6 +279,13 @@ struct CreateAccountView: View {
                 .labelsHidden()
                 .frame(maxWidth: .infinity, maxHeight: 200)
                 .clipped()
+                .onChange(of: viewModal.selectedDate) { newDate in
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    print("Selected date: \(formatter.string(from: newDate))")
+                    viewModal.formattedDate = "\(formatter.string(from: newDate))"
+                }
+
             }
             .padding(.horizontal, 20)
 
@@ -270,6 +320,7 @@ struct CreateAccountView: View {
                     LazyVGrid(columns: viewModal.bloodGridColumns, spacing: 16) {
                         ForEach(viewModal.bloodGroups) { item in
                             let isSelected = viewModal.selectedBloodGroup == item.name
+                        
 
                             VStack {
                                 Text(item.name)
@@ -300,6 +351,7 @@ struct CreateAccountView: View {
                             )
                             .onTapGesture {
                                 viewModal.selectedBloodGroup = item.name
+                                viewModal.selectedBloodGroupId = item.unit
                             }
                         }
                     }
@@ -522,7 +574,6 @@ struct CreateAccountView: View {
                             )
                         }
                     }
-
                 }
                 
                 
@@ -675,6 +726,12 @@ struct CreateAccountView: View {
                             viewModal.selectedHeightText = String(format: "%.1f %@", heightInFeet, unit)
                             viewModal.showPopup.toggle()
                         print("Height: \(viewModal.selectedHeightText)")
+                        
+                        if let cm1 = viewModal.convertToCentimeters(from: viewModal.selectedHeightText) {
+                            print("7.9 ft = \(cm1) cm") // Output: ~240.792 cm
+                            viewModal.selectedHeightText = "\(cm1)"
+                        }
+
                     }
                     .frame(maxWidth: 200)
                     .padding()
@@ -718,93 +775,9 @@ struct CreateAccountView: View {
                     .padding(.bottom, 25)
 
                 VStack(alignment: .leading) {
-                    Text("Chronic Disease")
-                        .font(.system(size: 14))
-                        .foregroundColor(.black)
-
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-
-                        TextField("Search", text: $viewModal.searchText)
-                            .foregroundColor(.primary)
-                            .onChange(of: viewModal.searchText) { newValue in
-                                viewModal.showCancelButton = true
-                                Task {
-                                    await viewModal.chronicDisease(newValue)
-                                }
-                            }
-
-                        Button(action: {
-                            withAnimation {
-                                viewModal.searchText = ""
-                            }
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .opacity(viewModal.searchText.isEmpty ? 0 : 1)
-                        }
-                    }
-                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                    .foregroundColor(.secondary)
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(10.0)
-                    
-                    if !viewModal.filteredResults.isEmpty {
-                        List(viewModal.filteredResults, id: \.id) { result in
-                            Button(action: {
-                                if !viewModal.selectedItems.contains(where: { $0.id == result.id }) {
-                                    viewModal.selectedItems.append(result)
-                                }
-                                viewModal.searchText = ""
-                                for item in viewModal.selectedItems {
-                                    print("🩺 \(item.problemName)")
-                                    print("🩺 \(item.id)")
-                                }
-                                                                       
-                            }) {
-                                Text(result.problemName)
-                            }
-                        }
-                        .transition(.opacity)
-                        .frame(height: 200)
-                        .listStyle(PlainListStyle())
-                        .padding(0)
-                        .scrollContentBackground(.hidden)
-                        .background(Color.white)
-                    }
-
-                    if !viewModal.selectedItems.isEmpty {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModal.selectedItems, id: \.id) { item in
-                                    Text(item.problemName)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 8)
-                                        .background(Color.blue.opacity(0.2))
-                                        .foregroundColor(.blue)
-                                        .font(.system(size: 14))
-                                        .cornerRadius(20)
-                                        .overlay(
-                                            Circle()
-                                                .fill(Color.red.opacity(0.2))
-                                                .frame(width: 20, height: 20)
-                                                .overlay(
-                                                    Image(systemName: "xmark")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 10, height: 10)
-                                                        .foregroundColor(Color.red)
-                                                )
-                                                .offset(x: 38, y: -10)
-                                        )
-                                        .onTapGesture {
-                                            viewModal.selectedItems.removeAll { $0.id == item.id }
-                                        }
-                                }
-                            }
-                        }
-                        .transition(.slide)
-                        .padding(.all)
-                    }
+                    searchBarView()
+                    filteredListView()
+                    selectedTagsView()
                 }
                 .navigationBarHidden(viewModal.showCancelButton)
                 .resignKeyboardOnDragGesture()
@@ -812,10 +785,115 @@ struct CreateAccountView: View {
             .padding(.horizontal, 20)
 
             Spacer().frame(height: 50)
-          
         }
-        //.padding(.horizontal, 20)
     }
+
+    // Subviews
+
+    @ViewBuilder
+    func searchBarView() -> some View {
+        VStack(alignment: .leading) {
+            Text("Chronic Disease")
+                .font(.system(size: 14))
+                .foregroundColor(.black)
+
+            HStack {
+                Image(systemName: "magnifyingglass")
+
+                TextField("Search", text: $viewModal.searchText)
+                    .foregroundColor(.primary)
+                    .onChange(of: viewModal.searchText) { newValue in
+                        viewModal.showCancelButton = true
+                        Task {
+                            await viewModal.chronicDisease(newValue)
+                        }
+                    }
+
+                Button(action: {
+                    withAnimation {
+                        viewModal.searchText = ""
+                    }
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .opacity(viewModal.searchText.isEmpty ? 0 : 1)
+                }
+            }
+            .padding(.all, 8)
+            .foregroundColor(.secondary)
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(10.0)
+        }
+    }
+
+    @ViewBuilder
+    func filteredListView() -> some View {
+        if !viewModal.filteredResults.isEmpty {
+            List(viewModal.filteredResults, id: \.id) { result in
+                Button(action: {
+                    if !viewModal.selectedItems.contains(where: { $0.id == result.id }) {
+                        viewModal.selectedItems.append(result)
+                        let currentDateTime = viewModal.getCurrentDateTimeString()
+                        let detail = PatientDetail(
+                            detailID: String(describing: result.id),
+                                           detailsDate: currentDateTime,
+                            details: result.problemName,
+                                           isFromPatient: "1"
+                                       )
+                                       viewModal.addDetail(detail)
+                    }
+                    viewModal.searchText = ""
+                }) {
+                    Text(result.problemName)
+                }
+            }
+            .transition(.opacity)
+            .frame(height: 200)
+            .listStyle(PlainListStyle())
+            .padding(0)
+            .scrollContentBackground(.hidden)
+            .background(Color.white)
+        }
+    }
+
+    @ViewBuilder
+    func selectedTagsView() -> some View {
+        if !viewModal.selectedItems.isEmpty {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModal.selectedItems, id: \.id) { item in
+                        Text(item.problemName)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Color.blue.opacity(0.2))
+                            .foregroundColor(.blue)
+                            .font(.system(size: 14))
+                            .cornerRadius(20)
+                            .overlay(
+                                Circle()
+                                    .fill(Color.red.opacity(0.2))
+                                    .frame(width: 20, height: 20)
+                                    .overlay(
+                                        Image(systemName: "xmark")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 10, height: 10)
+                                            .foregroundColor(Color.red)
+                                    )
+                                    .offset(x: 38, y: -10)
+                            )
+                            .onTapGesture {
+                                viewModal.selectedItems.removeAll { $0.id == item.id }
+                                viewModal.removeDetail(byID: "\(item.id)")
+                                
+                            }
+                    }
+                }
+            }
+            .transition(.slide)
+            .padding(.all)
+        }
+    }
+
     
     
     /// chronic condition page
@@ -981,10 +1059,6 @@ struct CreateAccountView: View {
                                     }
                                 })
                                 .foregroundColor(.primary)
-                                
-                                
-                                
-                                
                                 Button(action: {
                                     withAnimation {
                                         self.viewModal.searchHealthHistoryText = ""
@@ -1002,17 +1076,13 @@ struct CreateAccountView: View {
                             if !viewModal.filteredHealthHistoryResults.isEmpty {
                                 List(viewModal.filteredHealthHistoryResults, id: \.self) { result in
                                     Button(action: {
-                                        if !viewModal.selectedHealthHistoryItems.contains(result) {
-                                            viewModal.selectedHealthHistoryItems.append(result)
-                                            
-                                            
-                                            viewModal.tempSelectedHealthHistoryItems = Set(viewModal.selectedHealthHistoryItems)
-                                            viewModal.showHealthHistoryPopup = true
-                                        }
+                                        viewModal.selectDiseases([result])
+                                        viewModal.showHealthHistoryPopup = true
                                         viewModal.searchHealthHistoryText = ""
                                     }) {
                                         Text(result)
                                     }
+
                                 }
                                 .transition(.opacity)
                                 .frame(height: 200)
@@ -1021,67 +1091,72 @@ struct CreateAccountView: View {
                                 .scrollContentBackground(.hidden)
                                 .background(Color.white)
                             }
-                            
-                            
-                            if !viewModal.selectedHealthHistoryItems.isEmpty {
-                                VStack(alignment: .leading) {
-                                    
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack{
-                                            ForEach(viewModal.selectedHealthHistoryItems, id: \.self) { item in
-                                                
-                                                VStack {
-                                                    Text("dddddd")
-                                                    Text(item)
-                                                        
-                                                }.padding(.horizontal, 16)
-                                                    .padding(.vertical, 8)
-                                                    .background(Color.blue.opacity(0.2))
-                                                    .foregroundColor(.blue)
-                                                    .font(.system(size: 13))
-                                                    .cornerRadius(20)
-                                                    .overlay(
-                                                        Circle()
-                                                            .fill(Color.red.opacity(0.2))
-                                                            .frame(width: 20, height: 20)
-                                                            .overlay(
-                                                                Image(systemName: "xmark")
-                                                                    .resizable()
-                                                                    .scaledToFit()
-                                                                    .frame(width: 10, height: 10)
-                                                                    .foregroundColor(Color.red)
-                                                            )
-                                                            .offset(x: 38, y: -10)
-                                                        
-                                                    )
-                                                    .onTapGesture {
-                                                        viewModal.selectedHealthHistoryItems.removeAll { $0 == item }
-                                                    }
-                                                
+                            VStack(alignment: .leading, spacing: 10) {
+                                ForEach(viewModal.resultMap.keys.sorted(), id: \.self) { key in
+                                    if key != "clientId" && key != "isExternal" {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(key)
+                                                .font(.headline)
+                                                .foregroundColor(.primary)
+
+                                            if let diseases = viewModal.resultMap[key] as? [String] {
+                                                ForEach(diseases, id: \.self) { disease in
+                                                    Text("- \(disease)")
+                                                        .font(.subheadline)
+                                                        .foregroundColor(.secondary)
+                                                }
                                             }
                                         }
-                                        
+                                        .padding(.vertical, 4)
                                     }
                                 }
-                                .transition(.slide)
-                                .padding(.all)
-                                
                             }
                             
-                            
-                            
-                            
-                            
-                            
-                            
+//                            if !viewModal.selectedHealthHistoryItems.isEmpty {
+//                                VStack(alignment: .leading) {
+//                                    
+//                                    ScrollView(.horizontal, showsIndicators: false) {
+//                                        HStack{
+//                                            ForEach(viewModal.selectedHealthHistoryItems, id: \.self) { item in
+//                                                
+//                                                VStack {
+//                                                    Text("dddddd")
+//                                                    Text(item)
+//                                                        
+//                                                }.padding(.horizontal, 16)
+//                                                    .padding(.vertical, 8)
+//                                                    .background(Color.blue.opacity(0.2))
+//                                                    .foregroundColor(.blue)
+//                                                    .font(.system(size: 13))
+//                                                    .cornerRadius(20)
+//                                                    .overlay(
+//                                                        Circle()
+//                                                            .fill(Color.red.opacity(0.2))
+//                                                            .frame(width: 20, height: 20)
+//                                                            .overlay(
+//                                                                Image(systemName: "xmark")
+//                                                                    .resizable()
+//                                                                    .scaledToFit()
+//                                                                    .frame(width: 10, height: 10)
+//                                                                    .foregroundColor(Color.red)
+//                                                            )
+//                                                            .offset(x: 38, y: -10)
+//                                                        
+//                                                    )
+//                                                    .onTapGesture {
+//                                                        viewModal.selectedHealthHistoryItems.removeAll { $0 == item }
+//                                                    }
+//                                            }
+//                                        }
+//                                        
+//                                    }
+//                                }
+//                                .transition(.slide)
+//                                .padding(.all)
+//                            }
                         }
                         .navigationBarHidden(viewModal.showHealthHistoryPopup)
                         .resignKeyboardOnDragGesture()
-                        
-                        
-                        
-                        
-                        
                     }.padding(.horizontal,20)
                    
                     
@@ -1090,6 +1165,9 @@ struct CreateAccountView: View {
                 }
                 //.padding(.horizontal,20)
             }
+            
+
+
             if viewModal.showHealthHistoryPopup {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
@@ -1119,6 +1197,9 @@ struct CreateAccountView: View {
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
+                                viewModal.assignRelation(item)
+                                viewModal.printResultMap()
+
                                 if viewModal.tempSelectedHealthHistoryItems.contains(item) {
                                     viewModal.tempSelectedHealthHistoryItems.remove(item)
                                 } else {
@@ -1129,9 +1210,6 @@ struct CreateAccountView: View {
                         .listStyle(PlainListStyle())
                         
                         Spacer()
-                        
-                        
-                        
                     }
                     
                     Button("Done") {
@@ -1164,7 +1242,7 @@ struct CreateAccountView: View {
     }
     
     
-    /// VitalReminder Page
+    /// Vital Reminder Page
     
     func vitalReminderPage() -> some View {
         ZStack {
@@ -1294,6 +1372,8 @@ struct CreateAccountView: View {
     }
     
     
+    
+    
     /// fluide intake details Page
     
     
@@ -1394,5 +1474,18 @@ struct CreateAccountView: View {
 
 
 
+
+import SwiftUI
+
+extension View {
+    func resignKeyboardOnDragGesture() -> some View {
+        self.gesture(
+            DragGesture().onChanged { _ in
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                to: nil, from: nil, for: nil)
+            }
+        )
+    }
+}
 
 

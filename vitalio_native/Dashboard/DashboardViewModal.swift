@@ -78,7 +78,7 @@ import Foundation
 
           let encodedSymptoms = SymptomsViewModal().getEncodedSymptomParam(savingList)
           let baseURL = baseURL7082 + "api/PatientIPDPrescription/InsertSymtoms"
-          let fullURLString = "\(baseURL)?uhID=UHID01235&userID=0&doctorId=0&jsonSymtoms=\(encodedSymptoms)&clientID=\(clientID)"
+          let fullURLString = "\(baseURL)?uhID=\(UserDefaultsManager.shared.getUserData()?.uhID ?? "" )&userID=0&doctorId=0&jsonSymtoms=\(encodedSymptoms)&clientID=\(clientID)"
 
           guard let url = URL(string: fullURLString) else {
               print("Invalid URL")

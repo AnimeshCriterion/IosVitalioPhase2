@@ -9,42 +9,66 @@ import SwiftUI
 
 struct SosBottomSheet: View {
     @Binding var showSheet: Bool
+    @State private var storeNumber: Bool = false
+ 
+    let phoneNumber = "8577850281"
+    @EnvironmentObject var dark : ThemeManager
+//    @State private var isSheetPresented = false
+    
+    var isDark: Bool {
+        dark.colorScheme == .dark
+    }
+ 
  
     var body: some View {
         VStack(spacing: 20) {
-            Text("Emergency SOS")
-                .font(.title2)
-                .fontWeight(.bold)
- 
-            
-            Link(destination: URL(string: "tel://8577850281")!) {
-                HStack{
-                    
-                    Image(systemName: "checkmark.circle.fill").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                    Text("Helpline No. 8577850281")
-                }
-                .font(.body)
-                .foregroundColor(.black)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                        )
-                )
-                .padding(.horizontal)
+            Image(systemName: "phone.fill")
+                .foregroundColor(.green)
+                .font(.largeTitle)
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(storeNumber ? .blue : .gray)
+                Text("Helpline No. \(phoneNumber)")
             }
+            .font(.body)
+            .foregroundColor(isDark ? .white : .black)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(isDark ? Color.customBackgroundDark2 : Color.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+            )
+            .padding(.horizontal)
+            .onTapGesture {
+                storeNumber = true
+                print("FaheemCheck")
+            }
+ 
+            Button(action: {
+                guard storeNumber else { return }
+                if let url = URL(string: "tel://\(phoneNumber)") {
+                    UIApplication.shared.open(url)
+                }
+                showSheet = false
+            }) {
+                Text("Call now")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(storeNumber ? Color.blue :( isDark ? Color.customBackgroundDark2 : Color.gray))
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .padding(.horizontal)
+            .disabled(!storeNumber)
         }
+        .padding()
         .frame(maxWidth: .infinity)
         .frame(height: 300)
-        .padding()
-        .background(Color.white)
+        .background(isDark ? Color.customBackgroundDark : Color.white)
         .cornerRadius(20)
     }
 }
- 
-//#Preview {
-//    SosBottomSheet(showSheet: <#Binding<Bool>#>)
-//}

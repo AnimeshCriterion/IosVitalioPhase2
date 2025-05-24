@@ -22,7 +22,7 @@ class DietViewModel : ObservableObject {
       do {
           let result = try await APIService.shared.fetchRawData(
               fromURL: baseURL7096 + "api/FoodIntake/GetFoodIntake",
-              parameters: ["UhID": "uhid01235", "entryType":"D", "fromDate" : time]
+              parameters: ["UhID": "\(UserDefaultsManager.shared.getUserData()?.uhID ?? "" )", "entryType":"D", "fromDate" : time]
           )
 
           let jsonData = try JSONSerialization.data(withJSONObject: result)
@@ -45,7 +45,7 @@ class DietViewModel : ObservableObject {
     func saveFoodInntake(dietId : Int)async{
 
             let currentTime = getCurrentFormattedTime()
-            let uhid = "uhid01235"
+            let uhid = "\(UserDefaultsManager.shared.getUserData()?.uhID ?? "")"
             let userId = "8"
 
             guard let givenAtEncoded = currentTime.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {

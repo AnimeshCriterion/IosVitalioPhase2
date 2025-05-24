@@ -18,6 +18,10 @@
 		8D1544342DA907A9009E7433 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544332DA907A9009E7433 /* Output.swift */; };
 		8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1544352DA91D72009E7433 /* DashboardViewModal.swift */; };
 		8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */; };
+		8D2E8FCA2DDAF4CC0008EB66 /* country_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC72DDAF4CC0008EB66 /* country_json.json */; };
+		8D2E8FCB2DDAF4CC0008EB66 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */; };
+		8D2E8FCC2DDAF4CC0008EB66 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */; };
+		8D2F1CC42DDD916F0058E939 /* signupdatamodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F1CC32DDD916F0058E939 /* signupdatamodel.swift */; };
 		8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3148872D9FA371008DF7D7 /* PillsReminder.swift */; };
 		8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488B2D9FB648008DF7D7 /* Calander.swift */; };
 		8D31488F2D9FF8C7008DF7D7 /* DietView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488E2D9FF8C7008DF7D7 /* DietView.swift */; };
@@ -93,6 +97,7 @@
 		8DEE64472DBA106C00C5B5E4 /* ReportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */; };
 		8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */; };
 		8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */; };
+		8DF253A12DD5CA7C00BECD6F /* ObserverDashboaard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */; };
 		8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A62DC9D70F00A39658 /* Symptoms history.swift */; };
 		8DF275A92DCA168300A39658 /* sos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A82DCA168300A39658 /* sos.swift */; };
 		8DF6EFE32DB770EE00E2C69A /* SymptomstrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF6EFE22DB770EE00E2C69A /* SymptomstrackerView.swift */; };
@@ -120,6 +125,10 @@
 		8D1544332DA907A9009E7433 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		8D1544352DA91D72009E7433 /* DashboardViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModal.swift; sourceTree = "<group>"; };
 		8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAccountView.swift; sourceTree = "<group>"; };
+		8D2E8FC72DDAF4CC0008EB66 /* country_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_json.json; sourceTree = "<group>"; };
+		8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		8D2F1CC32DDD916F0058E939 /* signupdatamodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupdatamodel.swift; sourceTree = "<group>"; };
 		8D3148872D9FA371008DF7D7 /* PillsReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsReminder.swift; sourceTree = "<group>"; };
 		8D31488B2D9FB648008DF7D7 /* Calander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calander.swift; sourceTree = "<group>"; };
 		8D31488E2D9FF8C7008DF7D7 /* DietView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietView.swift; sourceTree = "<group>"; };
@@ -172,6 +181,7 @@
 		8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataModel.swift; sourceTree = "<group>"; };
 		8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReport.swift; sourceTree = "<group>"; };
 		8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicData.swift; sourceTree = "<group>"; };
+		8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverDashboaard.swift; sourceTree = "<group>"; };
 		8DF275A62DC9D70F00A39658 /* Symptoms history.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Symptoms history.swift"; sourceTree = "<group>"; };
 		8DF275A82DCA168300A39658 /* sos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sos.swift; sourceTree = "<group>"; };
 		8DF6EFE22DB770EE00E2C69A /* SymptomstrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomstrackerView.swift; sourceTree = "<group>"; };
@@ -230,6 +240,17 @@
 				8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */,
 			);
 			path = "Add Member";
+			sourceTree = "<group>";
+		};
+		8D2E8FC62DDAF4BA0008EB66 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				8D2E8FC72DDAF4CC0008EB66 /* country_json.json */,
+				8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */,
+				8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */,
+				8D2F1CC32DDD916F0058E939 /* signupdatamodel.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		8D31488D2D9FF871008DF7D7 /* Diet */ = {
@@ -301,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */,
+				8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */,
 				8D78480A2DC32E2F004A255D /* Edit Profile.swift */,
 			);
 			path = "Edit Profile";
@@ -403,6 +425,7 @@
 		8DD5F8352D8A88B600FBDF87 = {
 			isa = PBXGroup;
 			children = (
+				8D2E8FC62DDAF4BA0008EB66 /* SignUp */,
 				8D966B742D9D420200B37927 /* AppDelegate.swift */,
 				8DD5F8402D8A88B600FBDF87 /* vitalio_native */,
 				8DD5F83F2D8A88B600FBDF87 /* Products */,
@@ -599,6 +622,7 @@
 			files = (
 				8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */,
 				8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */,
+				8D2E8FCA2DDAF4CC0008EB66 /* country_json.json in Resources */,
 				8D966B6B2D9D2C5600B37927 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,6 +648,7 @@
 				8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */,
 				8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */,
 				8D966B652D9CF73200B37927 /* dashboard.swift in Sources */,
+				8D2E8FCB2DDAF4CC0008EB66 /* CreateAccountView.swift in Sources */,
 				8D966B642D9CF72E00B37927 /* drawer.swift in Sources */,
 				8DEE64472DBA106C00C5B5E4 /* ReportDataModel.swift in Sources */,
 				8D0582A82DAA37380043330A /* BarChart.swift in Sources */,
@@ -648,7 +673,9 @@
 				8DDF8EDA2DBCE1A500F8B47D /* AllergiesView.swift in Sources */,
 				8DEE64452DBA0F8300C5B5E4 /* UploadReportViewModel.swift in Sources */,
 				8D966B5E2D9CF71900B37927 /* login.swift in Sources */,
+				8D2F1CC42DDD916F0058E939 /* signupdatamodel.swift in Sources */,
 				8D0582A62DAA257F0043330A /* Intake.swift in Sources */,
+				8D2E8FCC2DDAF4CC0008EB66 /* SignUpViewModel.swift in Sources */,
 				8DF9F8A22DAF865F002BBEBB /* fluiddatamodal.swift in Sources */,
 				8D966B5D2D9CF71600B37927 /* FAQ.swift in Sources */,
 				8D966B5C2D9CF71300B37927 /* Confermation.swift in Sources */,
@@ -679,6 +706,7 @@
 				8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */,
 				8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */,
 				8DDF8EE22DBCE1D800F8B47D /* CustomTextField 1.swift in Sources */,
+				8DF253A12DD5CA7C00BECD6F /* ObserverDashboaard.swift in Sources */,
 				8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */,
 				8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */,
 				8DDF8EE32DBCE1D800F8B47D /* CustomeLoader.swift in Sources */,

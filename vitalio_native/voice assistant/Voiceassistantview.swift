@@ -190,7 +190,7 @@ struct Voiceassistantview: View {
             "uhid": "\(uhid)",
             "date": "2024-09-18",
             "time": "11:55:12",
-            "clientID": \(clientID),
+            "clientID": 1,
             "medication": [
               {
                 "drugName": [],

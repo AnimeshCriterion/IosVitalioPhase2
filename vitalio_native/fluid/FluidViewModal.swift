@@ -7,6 +7,7 @@ class FluidaViewModal  : ObservableObject {
     @Published var selectedGlassSize: Int = 150
     @Published var selectedDrink: String = "Water"
     @Published var selectedFoodId: Int = 0
+    @Published var color: Color = .white
     @Published var containerImage: String = "beverage"
     @Published var imageOuter: String = "beverageoutline"
     @Published var imageOutLastLayer: String = ""
@@ -40,7 +41,7 @@ class FluidaViewModal  : ObservableObject {
     
     
 
-    let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
+//    let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
 
     func getIcon(for foodID: Int) -> String? {
         return staticDrinks.first(where: { $0.foodID == foodID })?.icon
@@ -51,20 +52,24 @@ class FluidaViewModal  : ObservableObject {
         func getContainerImage(for foodID: Int) -> String? {
             return staticDrinks.first(where: { $0.foodID == foodID })?.containerImage
     }
+    func getColor(for foodID: Int) -> Color? {
+        return staticDrinks.first(where: { $0.foodID == foodID })?.color
+    }
+
     
     func getBarQuantity(for foodID: Int) -> Double? {
         return Double(fluidList.first(where: { $0.foodID == foodID })?.quantity ?? "0")
         }
     
     
-    let staticDrinks: [(foodID: Int, icon: String, containerImage: String, outerImage: String)] = [
-        (97694, "WaterBtn", "water", "wateroutline"),
-        (66, "JuiceBtn", "Juice", "juiceoutline"),
-        (76, "MilkBtn", "milk", "milkoutline"),
-        (114973, "TeaBtn", "tea", "teaoutline"),
-        (168, "CoffeeBtn", "coffee", "coffeeoutlin2"),
+    let staticDrinks: [(foodID: Int, icon: String, containerImage: String, outerImage: String, color: Color)] = [
+        (97694, "WaterBtn", "water", "wateroutline", .waterBlue),
+        (66, "JuiceBtn", "Juice", "juiceoutline", .orange),
+        (76, "MilkBtn", "milk", "milkoutline", .white),
+        (114973, "TeaBtn", "tea", "teaoutline", .chaiColor),
+        (168, "CoffeeBtn", "coffee", "coffeeoutlin2", .brown)
     ]
-    
+
     
     @Published var  glassSizes = [150, 250, 300, 400]
     
@@ -81,7 +86,7 @@ class FluidaViewModal  : ObservableObject {
         
         let body = FoodIntakeRequest(
             givenQuanitityInGram: 0,
-            uhid: uhid,
+            uhid: UserDefaultsManager.shared.getUHID() ?? "",
             foodId: selectedFoodId,
             pmId: 0,
             givenFoodQuantity: Double(fluidLevel),
@@ -111,6 +116,7 @@ class FluidaViewModal  : ObservableObject {
         DispatchQueue.main.async{
             self.saveLoading = false
             self.intakeSuccess()
+            
         }
         
     }
@@ -118,7 +124,7 @@ class FluidaViewModal  : ObservableObject {
     func getOutputList() async {
  
         do{
-            let params = ["UHID": uhid]
+            let params = ["UHID": UserDefaultsManager.shared.getUHID() ?? ""]
             let response = try await APIService.shared.fetchRawData(fromURL: baseURL7082 + getpatientOutputList, parameters: params)
             print(response)
         } catch {
@@ -138,7 +144,7 @@ class FluidaViewModal  : ObservableObject {
 
 
         let body =
-        ["clientId": clientID, "id": "0", "uhid": uhid, "outputDate": formattedDate, "outputTypeID": "51", "pmID": "0", "quantity": fluidLevel, "unitID": "1", "userID": "0"]
+        ["clientId": clientID, "id": "0", "uhid": UserDefaultsManager.shared.getUHID() ?? "", "outputDate": formattedDate, "outputTypeID": "51", "pmID": "0", "quantity": fluidLevel, "unitID": "1", "userID": "0"]
         print(body)
 
         do {
@@ -164,7 +170,7 @@ class FluidaViewModal  : ObservableObject {
     func getFoodHistoryList() async{
         
         do{
-            let params = ["Uhid": uhid,"intervalTimeInHour": "24"]
+            let params = ["Uhid": UserDefaultsManager.shared.getUHID() ?? "","intervalTimeInHour": "24"]
             let response = try await APIService.shared.fetchRawData(fromURL: baseURL7096 + getFoodAssignList , parameters: params)
             print(response)
         } catch {
@@ -175,7 +181,7 @@ class FluidaViewModal  : ObservableObject {
     func outputByDate(hours: String) async {
         print ("working")
         do{
-            let params = ["Uhid": uhid,
+            let params = ["Uhid": UserDefaultsManager.shared.getUHID() ?? "",
                           "intervalTimeInHour": hours
 //                          "fromDate": "2025-04-12", "toDate": "2025-04-13"
             ]
@@ -201,7 +207,7 @@ class FluidaViewModal  : ObservableObject {
         }
         
         do {
-            let params = ["Uhid": uhid, "intervalTimeInHour": hours ?? "24"]
+            let params = ["Uhid": UserDefaultsManager.shared.getUHID() ?? "", "intervalTimeInHour": hours ?? "24"]
             
             let data = try await APIService.shared.fetchRawData(
                 fromURL: baseURL7096 + foodaAssignList,
@@ -228,7 +234,7 @@ class FluidaViewModal  : ObservableObject {
 
     func fluidSummaryByDateRange(fromDate: String, toDate : String) async {
         do {
-            let params = ["Uhid": uhid, "fromDate": fromDate , "toDate" : toDate]
+            let params = ["Uhid": UserDefaultsManager.shared.getUHID() ?? "", "fromDate": fromDate , "toDate" : toDate]
             let data = try await APIService.shared.fetchRawData(
                 fromURL: baseURL7096 + FluidSummaryByDateRange,
                 parameters: params

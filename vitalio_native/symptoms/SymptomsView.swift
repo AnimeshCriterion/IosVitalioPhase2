@@ -14,8 +14,6 @@ struct SymptomTrackerView: View {
     
     var body: some View {
         ZStack{
-            
-        
             ScrollView{
                 VStack(spacing: 16) {
                     HStack{
@@ -26,12 +24,10 @@ struct SymptomTrackerView: View {
                             route.navigate(to: .symptomsHistory)
                               }) {
                                   Text("History")
-                                      .foregroundColor(.white)
-                                      .padding()
-                                      .background(Color.blue).opacity(0.2)
+                                      .foregroundColor(.primaryBlue)
+                                      .padding(8)
+                                      .background(isDark ? Color.customBackgroundDark2 : Color.white)
                                       .cornerRadius(20)
-                                      .shadow(radius: 4)
-                                  
                               }
                     }
    

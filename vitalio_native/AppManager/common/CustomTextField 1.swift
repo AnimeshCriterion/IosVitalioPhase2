@@ -24,6 +24,11 @@ struct CustomTextField1: View {
     var showBorder: Bool = false
        var borderColor: Color = .gray
        var borderWidth: CGFloat = 1
+    
+    @EnvironmentObject var themeManager: ThemeManager
+       var isDarkMode: Bool {
+           themeManager.colorScheme == .dark
+       }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -36,7 +41,7 @@ struct CustomTextField1: View {
                 .foregroundColor(placeholderColor)
                 .padding(.horizontal, 20)
                 .frame(height: 50)
-                .background(backgroundColor)
+                .background(isDarkMode ? Color.customBackgroundDark2 :  backgroundColor)
                 .cornerRadius(cornerRadius)
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)

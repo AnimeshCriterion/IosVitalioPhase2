@@ -33,6 +33,8 @@ final class Routing : ObservableObject{
         case dynamicResponseView   
         case allergies
         case symptomsHistory
+        case chatBotView
+        case createAccountView
         
     }
 

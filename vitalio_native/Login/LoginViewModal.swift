@@ -55,7 +55,9 @@ class LoginViewModal : ObservableObject {
 //                print("Error:", error)
 //            }
 //    }
+    
     func loadData(uhid: String) async {
+        
           print("step 1")
           do {
               let params = ["mobileNo": "", "uhid": uhid,"clientId" : clientID]
@@ -76,6 +78,7 @@ class LoginViewModal : ObservableObject {
               
               // ✅ Decode into PatientModel
               let patientModel = try JSONDecoder().decode(PatientModel.self, from: jsonData)
+             print("\( patientModel.profileUrl) from api")
               
               // ✅ Save to UserDefaults
               UserDefaultsManager.shared.saveUserData(patientModel)
@@ -91,6 +94,7 @@ class LoginViewModal : ObservableObject {
               UserDefaultsManager.shared.saveUHID(extractedUHID)
               UserDefaultsManager.shared.saveUserID(id)
               print((UserDefaultsManager.shared.getUHID() ?? "") + "uhid is being saved")
+              print((UserDefaultsManager.shared.getUserData()?.profileUrl ?? "") + "getting updated url from local storage")
           } catch {
               print("Error:", error)
           }
@@ -114,15 +118,18 @@ class LoginViewModal : ObservableObject {
         let predicate = NSPredicate(format: "SELF MATCHES %@", mobileRegex)
         return predicate.evaluate(with: input)
     }
-
+    @Published var isRegistered: Bool = true
+    
+    
     
     //18021
-    func login(uhid: String) async {
+    func login(uhid: String, isLoggedIn : String) async {
         
         print("🔄 Attempting login with UHID: \(uhid)") // Debugging to verify correctness
         
         DispatchQueue.main.async {
                    self.apiState = .loading
+       
                }
         
          await loadData(uhid: uhid)
@@ -130,11 +137,13 @@ class LoginViewModal : ObservableObject {
         var params = ["" : ""]
         if    (checkIdentifierType(uhid) == "UHID" ){
             
-            params = ["ifLoggedOutFromAllDevices": "1", "UHID": uhid]
+            params = ["ifLoggedOutFromAllDevices": isLoggedIn, "UHID": uhid]
             
         }  else if (checkIdentifierType(uhid) == "Mobile" ){
             
-            params = ["ifLoggedOutFromAllDevices": "1", "mobileNo": uhid, "UHID": ""]
+            params = ["ifLoggedOutFromAllDevices": isLoggedIn, "UHID": uhid]
+            
+            /*   params = ["ifLoggedOutFromAllDevices": isLoggedIn, "mobileNo": uhid, "UHID": ""]*/
             
         }
     
@@ -152,12 +161,26 @@ class LoginViewModal : ObservableObject {
                 let response = try await APIService.shared.fetchRawData(fromURL: baseURL7082 + sentLogInOTPForSHFCApp, parameters: params)
                 
                 print("✅ Success:", response)
+                if let isRegistered = response["isRegisterd"] as? Int, isRegistered == 0 {
+                    print("🔒 User is not registered.")
+                    DispatchQueue.main.async{
+                        self.isRegistered = false
+                    }
+                } else {
+                    print("✅ User is registered.")
+                    DispatchQueue.main.async{
+                        self.isRegistered = true
+                    }
+                }
+
                 DispatchQueue.main.async {
                                  self.apiState = .success
                              }
             } catch {
                 DispatchQueue.main.async {
-                                   self.apiState = .failure("Invalid OTP")  // ❌ API Error
+                                 
+                self.apiState = .failure("error")
+                self.isLoggedIn = true
                                }
                 print("❌ Error:", error)
             }

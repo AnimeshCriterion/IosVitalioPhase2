@@ -42,10 +42,16 @@ struct VitalHistoryView: View {
     
     
     @EnvironmentObject var route: Routing
+    @EnvironmentObject var themeManager: ThemeManager
+
+    var isDark: Bool {
+        themeManager.colorScheme == .dark
+    }
+
     
     var body: some View {
         VStack(alignment: .leading){
-            CustomNavBarView(title: "Add Vitals", isDarkMode: false) {
+            CustomNavBarView(title: "Vitals history", isDarkMode: isDark) {
                 route.back()
             }
             ScrollView{
@@ -139,7 +145,7 @@ struct VitalHistoryView: View {
                                 .renderingMode(.template)
                                 .foregroundColor(isSelecttedGraph ? .gray : Color.primaryBlue)
                                 .frame(width: 36, height: 36)
-                                .background(Color.customBackground2)
+                                .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
                                 .cornerRadius(30)
                         }
                         Spacer()
@@ -152,7 +158,7 @@ struct VitalHistoryView: View {
                                 .renderingMode(.template)
                                 .foregroundColor(isSelecttedGraph ? Color.primaryBlue : .gray)
                                 .frame(width: 36, height: 36)
-                                .background(Color.customBackground2)
+                                .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
                                 .cornerRadius(30)
                         }
                     }
@@ -239,13 +245,13 @@ struct VitalHistoryView: View {
             }
             .padding()
             .frame(width: .infinity,height: 272)
-            .background(Color.white)
+            .background(isDark ? Color.customBackgroundDark2 : Color.customBackground2)
             .cornerRadius(10)
             .padding()
             Spacer()
         }}
         .navigationBarHidden(true)
-        .background(Color.customBackground2)
+        .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
     }
 }
 

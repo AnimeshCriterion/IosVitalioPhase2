@@ -18,80 +18,93 @@ struct InputView: View {
     @EnvironmentObject var route: Routing
     @State private var selectedPeriod: Period = .daily
     @State private var showChart = false
-      let inputData: [InputEntry] = [
-        .init(type: "Water", time: "05:50 AM", amount: 200, color: .cyan),
-        .init(type: "Water", time: "06:30 AM", amount: 300, color: .cyan),
-        .init(type: "Milk", time: "08:12 AM", amount: 350,color:.yellow),
-        .init(type: "Water", time: "11:55 AM", amount: 400, color: .cyan),
-        .init(type: "Juice", time: "02:00 PM", amount: 200,color:.orange),
-        .init(type: "Water", time: "05:15 PM", amount: 200, color: .cyan),
-        .init(type: "Tea", time: "05:22 PM", amount: 50, color: .orange)
-    ]
+    @EnvironmentObject var themeManager: ThemeManager
+    var isFromChat: Bool = false  // Optional-like, with default
+
+
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
+    
+//      let inputData: [InputEntry] = [
+//        .init(type: "Water", time: "05:50 AM", amount: 200, color: .cyan),
+//        .init(type: "Water", time: "06:30 AM", amount: 300, color: .cyan),
+//        .init(type: "Milk", time: "08:12 AM", amount: 350,color:.yellow),
+//        .init(type: "Water", time: "11:55 AM", amount: 400, color: .cyan),
+//        .init(type: "Juice", time: "02:00 PM", amount: 200,color:.orange),
+//        .init(type: "Water", time: "05:15 PM", amount: 200, color: .cyan),
+//        .init(type: "Tea", time: "05:22 PM", amount: 50, color: .orange)
+//    ]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            CustomNavBarView(title: "Fluid Intake History", isDarkMode: false) {
-                route.back()
+            
+            if isFromChat != true {
+                CustomNavBarView(title: "Fluid Intake History", isDarkMode: isDark) {
+                    route.back()
+                }
             }
           
-            PeriodToggleView(selectedPeriod: $selectedPeriod)
-                .environmentObject(viewModel)
-
-            if selectedPeriod == .daily {
-                HStack {
-                    Spacer()
-                    DateSelectorView()
-                        .environmentObject(viewModel)
-                    Spacer()
-                }
-            } else {
-                RangeDateSelectorView(selectedPeriod: $selectedPeriod)
+            ScrollView{
+                PeriodToggleView(selectedPeriod: $selectedPeriod)
                     .environmentObject(viewModel)
-            }
-
-//            }
-            HStack {
-                Text("Fluid Intake Log")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-
-                Spacer()
-
-                HStack(spacing: 8) {
-                    Button(action: {
-                        showChart = false
-                    }) {
-                        Image(systemName: "list.bullet")
-                            .foregroundColor(showChart ? .gray : .blue)
-                            .padding(8)
-                            .background(Color(.systemGray6))
-                            .clipShape(Circle())
+                
+                if selectedPeriod == .daily {
+                    HStack {
+                        Spacer()
+                        DateSelectorView(isFromChat: isFromChat)
+                            .environmentObject(viewModel)
+                        Spacer()
                     }
-
-                    Button(action: {
-                        showChart = true
-                    }) {
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                            .foregroundColor(showChart ? .blue : .gray)
-                            .padding(8)
-                            .background(Color(.systemGray6))
-                            .clipShape(Circle())
+                } else {
+                    RangeDateSelectorView(selectedPeriod: $selectedPeriod)
+                        .environmentObject(viewModel)
+                }
+                
+                //            }
+                HStack {
+                    Text("Fluid Intake Log")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(isDark ? .white : .black)
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 8) {
+                        Button(action: {
+                            showChart = false
+                        }) {
+                            Image(systemName: "list.bullet")
+                                .foregroundColor(showChart ? .gray : .blue)
+                                .padding(8)
+                                .background(Color(.systemGray6))
+                                .clipShape(Circle())
+                        }
+                        
+                        Button(action: {
+                            showChart = true
+                        }) {
+                            Image(systemName: "chart.line.uptrend.xyaxis")
+                                .foregroundColor(showChart ? .blue : .gray)
+                                .padding(8)
+                                .background(Color(.systemGray6))
+                                .clipShape(Circle())
+                        }
                     }
                 }
-            }
-
-            if showChart {
-                InputChartView(data: inputData)
-            } else {
-                InputHistoryView(selectedPeriod: selectedPeriod)
-
-            }
-
-            Spacer()
-        }
+                
+                if showChart {
+//                    InputChartView(data: inputData)
+                    InputHistoryView2(selectedPeriod: selectedPeriod)
+                } else {
+                    InputHistoryView(selectedPeriod: selectedPeriod)
+                    
+                }
+                
+                Spacer()
+            }}
         .navigationBarHidden(true) // Hides the default AppBar
         .padding()
-        .background(Color.white)
+        .background(isDark ? Color.customBackgroundDark2 :Color.white)
         .cornerRadius(20)
     }
 }
@@ -99,7 +112,11 @@ struct InputView: View {
 struct InputHistoryView: View {
     @EnvironmentObject var viewModel: FluidaViewModal
     var selectedPeriod: Period
-
+    @EnvironmentObject var themeManager: ThemeManager
+    
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
     var body: some View {
         VStack(spacing: 20) {
             if selectedPeriod == .daily {
@@ -115,7 +132,7 @@ struct InputHistoryView: View {
                         Spacer()
                         Text("\(item.quantity) ml")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundColor(isDark ? .white : .black)
                     }
                 }
             } else {
@@ -131,7 +148,7 @@ struct InputHistoryView: View {
                         Spacer()
                         Text("\(item.foodQuantity) ml")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundColor(isDark ? .white : .black)
                     }
                 }
             }
@@ -144,6 +161,113 @@ struct InputHistoryView: View {
             let displayFormatter = DateFormatter()
             displayFormatter.dateFormat = "dd MMM yyyy"
             return displayFormatter.string(from: date)
+        }
+        return isoString
+    }
+}
+
+import SwiftUI
+import Charts
+
+struct InputHistoryView2: View {
+    @EnvironmentObject var viewModel: FluidaViewModal
+    var selectedPeriod: Period
+    @EnvironmentObject var themeManager: ThemeManager
+
+    var isDark: Bool {
+        themeManager.colorScheme == .dark
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                // Chart Section
+                if selectedPeriod == .daily {
+                    Chart {
+                        ForEach(viewModel.fluidList.filter { Double($0.quantity) != nil }) { item in
+                            BarMark(
+                                x: .value("Drink", item.foodName),
+                                y: .value("Quantity", (Double(item.quantity) ?? 0) / 100)
+                            )
+                            .foregroundStyle(isDark ? .white : .blue)
+                        }
+                    }
+                    .frame(height: 250)
+                    .padding(.horizontal)
+                }else {
+                    Chart {
+                        ForEach(viewModel.fluidSummaryList.filter { Double($0.foodQuantity) != nil }) { item in
+                            BarMark(
+                                x: .value("Date", formatDate(item.givenFoodDate)),
+                                y: .value("Quantity", (Double(item.foodQuantity) ?? 0) / 100) // divide if needed
+                            )
+                            .foregroundStyle(isDark ? .white : .blue)
+                        }
+                    }
+                    .frame(height: 200)
+                    .padding(.horizontal)
+                }
+
+//
+//                // List Section
+//                if selectedPeriod == .daily {
+//                    ForEach(viewModel.fluidList) { item in
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 2) {
+//                                Text(item.foodName)
+//                                    .font(.system(size: 16, weight: .semibold))
+//                                Text(item.givenFoodDate)
+//                                    .font(.system(size: 12))
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//                            Text("\(item.quantity) ml")
+//                                .font(.system(size: 16, weight: .semibold))
+//                                .foregroundColor(isDark ? .white : .black)
+//                        }
+//                        .padding(.horizontal)
+//                    }
+//                } else {
+//                    ForEach(viewModel.fluidSummaryList) { item in
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 2) {
+//                                Text(formatDate(item.givenFoodDate))
+//                                    .font(.system(size: 14, weight: .semibold))
+//                                Text("Assigned Limit: \(item.assignedLimit, specifier: "%.0f") ml")
+//                                    .font(.system(size: 12))
+//                                    .foregroundColor(.gray)
+//                            }
+//                            Spacer()
+//                            Text("\(item.foodQuantity) ml")
+//                                .font(.system(size: 16, weight: .semibold))
+//                                .foregroundColor(isDark ? .white : .black)
+//                        }
+//                        .padding(.horizontal)
+//                    }
+//                }
+            }
+            .padding(.top)
+        }
+    }
+
+    // Helper: Convert ISO8601 string to display date
+    func formatDate(_ isoString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        if let date = formatter.date(from: isoString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        return isoString
+    }
+
+    // Helper: Format time from ISO string
+    func formattedTime(_ isoString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        if let date = formatter.date(from: isoString) {
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            return timeFormatter.string(from: date)
         }
         return isoString
     }
@@ -296,6 +420,7 @@ struct DateSelectorView: View {
     @State private var selectedDate: Date = Date()
     @Namespace private var animation
     @EnvironmentObject var viewModel: FluidaViewModal
+    var isFromChat: Bool = false  // Optional-like, with default
 
     func hoursTillNow(from selectedDate: Date) -> Int {
         let now = Date()
@@ -335,7 +460,7 @@ struct DateSelectorView: View {
                         .transition(.slide)
                 }
             }
-            .frame(width: 200)
+            .frame(width: isFromChat ? 100 : 200)
 
             if selectedDate > Calendar.current.startOfDay(for: Date()) {
                 Image(systemName: "chevron.right")
@@ -447,3 +572,7 @@ struct RangeDateSelectorView: View {
         return formatter.string(from: date)
     }
 }
+
+
+
+

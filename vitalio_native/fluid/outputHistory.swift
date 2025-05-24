@@ -25,6 +25,13 @@ struct OutputHistoryView: View {
     @State private var showChart = false
     @State private var selectedPeriod: Period = .daily
     @EnvironmentObject var viewModel: FluidaViewModal
+    @EnvironmentObject var themeManager: ThemeManager
+    var isFromChat: Bool = false  // Optional-like, with default
+
+
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
     let inputData: [InputEntry] = [
         .init(type: "Water", time: "05:50 AM", amount: 200, color: .cyan),
         .init(type: "Water", time: "06:30 AM", amount: 300, color: .cyan),
@@ -40,26 +47,31 @@ struct OutputHistoryView: View {
             
             
             VStack(alignment: .leading, spacing: 16) {
-                CustomNavBarView(title: "Fluid Output History", isDarkMode: false) {
-
-                    route.back()
+                if isFromChat != true {
+                    CustomNavBarView(title: "Fluid Output History", isDarkMode: isDark) {
+                        
+                        route.back()
+                    }
+                    
+                    PeriodToggleView(selectedPeriod: $selectedPeriod)
+                    
                 }
-                PeriodToggleView(selectedPeriod: $selectedPeriod)
-                    .onAppear(){
+             
+                
+                HStack {
+                    Spacer()
+                    DateSelectorView(isFromChat: isFromChat)  
+                        .onAppear(){
                         Task{
                             await viewModel.outputByDate(hours: getCurrentHourString());
                         }
-
                     }
-                HStack {
-                    Spacer()
-                    DateSelectorView()
                     Spacer()
                 }
                 HStack {
                     Text("Fluid Output Log")
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.black)
+                        .foregroundColor(isDark ? .white : .black)
                     
                     Spacer()
                     
@@ -96,13 +108,19 @@ struct OutputHistoryView: View {
             }
             .navigationBarHidden(true)
             .padding()
-            .background(Color.white)
+            .background(isDark ?Color.customBackgroundDark2 : Color.white)
             .cornerRadius(20)
         }}
 }
 
 // MARK: - OutputHistoryList
 struct OutputHistoryList: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    
+       var isDark: Bool {
+           themeManager.colorScheme == .dark
+       }
+
 //    let data: [InputEntry]
     @EnvironmentObject var viewModel : FluidaViewModal
     var body: some View {
@@ -110,10 +128,11 @@ struct OutputHistoryList: View {
             ForEach(viewModel.outputList) { item in
                 HStack {
                     Circle()
-                        .fill(Color.yellow)
+                        .fill(Color(hex: item.colour.isEmpty ? "#FFF176" : item.colour))
                         .frame(width: 45, height: 45)
+                    
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item.colour)
+                        Text(item.outputType)
                             .font(.system(size: 16, weight: .semibold))
                         Text(item.outputDate)
                             .font(.system(size: 12))
@@ -122,10 +141,10 @@ struct OutputHistoryList: View {
                     Spacer()
                     Text("\(item.quantity) \(item.unitName)")
                         .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.black)
+                        .foregroundColor(isDark ? .white : .black)
                 }
             }
-        }
+        }  .background(isDark ? Color.customBackgroundDark2 :Color.white)
     }
 }
 

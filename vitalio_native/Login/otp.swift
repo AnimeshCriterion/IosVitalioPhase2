@@ -13,13 +13,9 @@ struct OTPVerificationView: View {
     @FocusState private var focusedIndex: Int?
 
     var body: some View {
-   
-                OTPContent(otp: $otp, focusedIndex: $focusedIndex, isDarkMode: isDarkMode)
-//            .edgesIgnoringSafeArea(.all)
+        OTPContent(otp: $otp, focusedIndex: $focusedIndex, isDarkMode: isDarkMode)
             .background(Color.primaryBlue)
             .navigationBarHidden(true)
-        
-
     }
 }
 
@@ -33,12 +29,10 @@ struct OTPContent: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-//                Spacer()
                 Image("loginDr")
                     .resizable()
                     .scaledToFit()
-           
-
+               
                 VStack(spacing: 20) {
                     headerSection
                     otpFields
@@ -50,15 +44,13 @@ struct OTPContent: View {
                 .cornerRadius(20, corners: [.topLeft, .topRight])
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
             }
-            .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height, alignment: .topLeading) // ✅ This ensures full screen
+            .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height, alignment: .topLeading)
             .background(Color.primaryBlue)
             .preferredColorScheme(ThemeManager().colorScheme)
             .onAppear {
                 focusedIndex = 0
             }
         }
-
-
     }
 
     var headerSection: some View {
@@ -113,7 +105,12 @@ struct OTPContent: View {
 
                 await viewModel.verifyOTP(otp: otp.joined(), uhid: viewModel.uhidNumber)
                 if case .success = viewModel.apiState {
-                    route.navigateOnly(to: .dashboard)
+                    if(viewModel.isRegistered == false){
+                        route.navigateOnly(to: .createAccountView)
+                    }else{
+                        route.navigateOnly(to: .dashboard)
+                    }
+                   
                 }
             }
         }) {
@@ -131,13 +128,12 @@ struct OTPContent: View {
             Text("Didn’t receive the Code?")
                 .foregroundColor(.gray)
             Button(action: {
-                Task{
-                    await viewModel.login(uhid: viewModel.uhidNumber)
+                Task {
+                    await viewModel.login(uhid: viewModel.uhidNumber, isLoggedIn: "1")
                     if case .success = viewModel.apiState {
-                   
+                        // Handle the successful resend logic here
                     }
                 }
-       
             }) {
                 if case .loading = viewModel.apiState {
                     ProgressView()
@@ -145,7 +141,8 @@ struct OTPContent: View {
                 } else {
                     Text("Resend OTP")
                         .foregroundColor(.blue)
-                    .fontWeight(.semibold)}
+                        .fontWeight(.semibold)
+                }
             }
         }
         .font(.system(size: 14))

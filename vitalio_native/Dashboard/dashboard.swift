@@ -279,11 +279,11 @@ struct GreetingView: View {
         let hour = Calendar.current.component(.hour, from: Date())
 
         switch hour {
-        case 5..<12:
+        case 5..<10:
             return "Good Morning"
-        case 12..<17:
+        case 10..<15:
             return "Good Afternoon"
-        case 17..<21:
+        case 15..<19:
             return "Good Evening"
         default:
             return "Good Night"
@@ -297,23 +297,30 @@ struct CustomAppBar: View {
     var onBack: (() -> Void)?
     var onMenuTap: (() -> Void)?
     let dark: Bool
- 
+    @EnvironmentObject var viewModel : DashboardViewModal
+    @EnvironmentObject var editProfileVM : EditProfileViewModal
     @State private var showSosSheet = false
- 
+
+    
     var body: some View {
         HStack {
             Button(action: {
                 onMenuTap?()
+                viewModel.isDrawerOpen.toggle()
             }) {
-                Image("dp")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
+       
+                    if editProfileVM.loadingImage {  ProgressView() } else {    RemoteImage(url: UserDefaultsManager.shared.getUserData()?.profileUrl)
+                            .clipShape(Circle())
+                        .frame(width: 50, height: 50)}
+             
+
+                  
             }
  
             VStack(alignment: .leading) {
-                CustomText("Good Morning", color: dark ? .white : .black)
-                    .font(.footnote)
+                GreetingView(dark: dark )
+//                CustomText("Good Morning", color: dark ? .white : .black)
+//                    .font(.footnote)
                 CustomText(userData!.patientName, color: dark ? .white : .black)
                     .font(.headline)
                     .fontWeight(.semibold)
@@ -401,6 +408,9 @@ struct TabBarItem: View {
             
             if(selectedTab == .reminders){
               route.navigate(to: .pillsReminder)
+            }        
+            if(selectedTab == .chat){
+              route.navigate(to: .chatBotView)
             }
         }
     }

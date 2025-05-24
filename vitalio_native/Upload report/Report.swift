@@ -145,40 +145,66 @@ struct ReportViewUI_Previews: PreviewProvider {
 }
 
 
+import SwiftUI
+import SafariServices
+
 struct ReportRowDynamic: View {
     var report: AllReport
     @EnvironmentObject var dark: ThemeManager
-    
-    
+
+    @State private var showImageViewer = false
+    @State private var showPDFViewer = false
+
     var isDarkMode: Bool {
         dark.colorScheme == .dark
     }
+
+    var isPDF: Bool {
+        (report.url ?? "").lowercased().hasSuffix(".pdf")
+    }
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 6) {
-                Text(report.category )
+                Text(report.category)
                     .font(.headline)
                     .foregroundColor(isDarkMode ? .white : .black)
 
-                Text("Time: \(report.dateTime )")
+                Text("Time: \(report.dateTime)")
                     .font(.subheadline)
                     .foregroundColor(isDarkMode ? .white : .black)
 
-                Text("Type: \(report.fileType )")
+                Text("Type: \(report.fileType)")
                     .font(.footnote)
                     .foregroundColor(isDarkMode ? .white : .black)
 
-                Text(report.subCategory ?? "" )
+                Text(report.subCategory ?? "")
                     .font(.caption)
                     .foregroundColor(isDarkMode ? .white : .black)
             }
 
             Spacer()
 
-            AsyncImage(url: URL(string: report.filePath ?? "")) { phase in
+            if let fileURL = URL(string: report.url ?? "") {
+                if isPDF {
+                    // Show PDF thumbnail icon and open SafariView on tap
+                    Image(systemName: "doc.richtext")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60, height: 70)
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            showPDFViewer = true
+                        }
+                        .sheet(isPresented: $showPDFViewer) {
+                            SafariView(url: fileURL)
+                        }
+                } else {
+                    // Async image display
+                    AsyncImage(url: fileURL) { phase in
                         switch phase {
                         case .empty:
-                            ProgressView() // or placeholder image
+                            ProgressView()
                                 .frame(width: 100, height: 70)
                         case .success(let image):
                             image
@@ -187,6 +213,9 @@ struct ReportRowDynamic: View {
                                 .frame(width: 100, height: 70)
                                 .clipped()
                                 .cornerRadius(10)
+                                .onTapGesture {
+                                    showImageViewer = true
+                                }
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
@@ -197,10 +226,46 @@ struct ReportRowDynamic: View {
                             EmptyView()
                         }
                     }
+                    .sheet(isPresented: $showImageViewer) {
+                        ZStack {
+                            Color.black.ignoresSafeArea()
+                            AsyncImage(url: fileURL) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                case .failure:
+                                    Image(systemName: "xmark.octagon")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(.white)
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         .padding()
-        .background(isDarkMode ? Color.customBackgroundDark2  : Color.white)
+        .background(isDarkMode ? Color.customBackgroundDark2 : Color.white)
         .cornerRadius(14)
         .shadow(color: Color.black.opacity(0.05), radius: 6, x: 0, y: 2)
     }
+}
+
+import SafariServices
+
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }

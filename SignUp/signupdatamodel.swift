@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+
+struct PatientDetail: Identifiable, Codable, Equatable {
+    var id: String { detailID }
+    let detailID: String
+    let detailsDate: String
+    let details: String
+    let isFromPatient: String
+}
+

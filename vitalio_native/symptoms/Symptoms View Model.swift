@@ -160,7 +160,7 @@ class SymptomsViewModal : ObservableObject {
     func sendSymptoms(savingList: [SavingList]) {
         let encodedSymptoms = getEncodedSymptomParam(savingList)
         let baseURL = baseURL7082 +  "api/PatientIPDPrescription/InsertSymtoms"
-        let fullURLString = "\(baseURL)?uhID=UHID01235&userID=0&doctorId=0&jsonSymtoms=\(encodedSymptoms)&clientID=\(clientID)"
+        let fullURLString = "\(baseURL)?uhID=\(UserDefaultsManager.shared.getUserData()?.uhID ?? "" )&userID=0&doctorId=0&jsonSymtoms=\(encodedSymptoms)&clientID=\(clientID)"
         print(fullURLString)
         guard let url = URL(string: fullURLString) else {
             print("Invalid URL")
@@ -193,7 +193,7 @@ class SymptomsViewModal : ObservableObject {
     
 
     func getStillHaveSymptoms() {
-        guard let url = URL(string: baseURL7082 +  "api/PatientIPDPrescription/GetSymtoms?uhID=UHID01235&clientID=\(clientID)") else { return }
+        guard let url = URL(string: baseURL7082 +  "api/PatientIPDPrescription/GetSymtoms?uhID=\(UserDefaultsManager.shared.getUserData()?.uhID ?? "" )&clientID=\(clientID)") else { return }
 
         var request = URLRequest(url: url, timeoutInterval: Double.infinity)
         request.httpMethod = "POST"
@@ -253,7 +253,7 @@ class SymptomsViewModal : ObservableObject {
 
             // Make API call
             let result = try await APIService.shared.postRawData(
-                toURL: baseURL7082 + "api/PatientIPDPrescription/GetSymtoms?uhID=uhid01235&clientID=194",
+                toURL: baseURL7082 + "api/PatientIPDPrescription/GetSymtoms?uhID=\(UserDefaultsManager.shared.getUserData()?.uhID ?? "")&clientID=194",
                 body: bodyData
             )
             // Print response as string
@@ -272,6 +272,15 @@ class SymptomsViewModal : ObservableObject {
         }
     }
     
+
+    @Published var selectedFilter: TimeFilter = .weekly
+
+
+//    // Call this method to load data
+//    func SymptomsHistory(for date: Date) async {
+//        // API call logic here
+//        // Then group your response by day/week/month based on `selectedFilter`
+//    }
 
 
 
