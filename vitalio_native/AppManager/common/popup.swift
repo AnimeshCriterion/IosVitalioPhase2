@@ -65,7 +65,7 @@ struct SuccessPopupView: View {
                         .animation(.spring(response: 0.6, dampingFraction: 0.6), value: animateLogo)
                 }
 
-                Text(message)
+                LocalizedText(key:message)
                     .font(.headline)
                     .foregroundColor(.black.opacity(0.7))
             }
@@ -113,7 +113,7 @@ struct SuccessPopupViewError: View {
                         .animation(.spring(response: 0.6, dampingFraction: 0.6), value: animateLogo)
                 }
 
-                Text(message)
+                LocalizedText(key:message)
                     .font(.headline)
                     .foregroundColor(.black.opacity(0.7))
             }

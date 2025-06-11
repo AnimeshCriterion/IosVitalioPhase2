@@ -31,6 +31,8 @@ class EditProfileViewModal : ObservableObject {
      func loadUserData() {
         guard let userData = UserDefaultsManager.shared.getUserData() else {
                 print("No user data found")
+            print("No user data found\(userData?.dob ?? "")")
+            
                 return
             }
 
@@ -45,10 +47,22 @@ class EditProfileViewModal : ObservableObject {
         weight = userData.weight
         height = userData.height
         selectedBloodGroupID = userData.bloodGroupId
-        
-        if let parsedDate = parseDate(userData.dob) {
-                    dob = parsedDate
-                }
+         print("\(userData.dob) getting dob") // prints "01-03-1998 00:00:00 getting dob"
+
+         if let parsedDate = parseDate(userData.dob) {
+             dob = parsedDate // Assign parsed Date to dob
+             print("\(dob) Now dob") // Prints real Date object, e.g. 1998-03-01 00:00:00 +0000
+         } else {
+             print("Failed to parse date")
+         }
+
+         let outputFormatter = DateFormatter()
+         outputFormatter.dateFormat = "yyyy-MM-dd"
+
+         print(outputFormatter.string(from: dob))  // Now prints "1998-03-01"
+
+
+         
         
 
     }
@@ -59,11 +73,32 @@ class EditProfileViewModal : ObservableObject {
            return formatter.string(from: date)
        }
 
-       private func parseDate(_ string: String) -> Date? {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "yyyy-MM-dd"
-           return formatter.date(from: string)
-       }
+//    @Published var dob: Date = Date()
+    private func parseDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter.date(from: string)
+    }
+
+
+    func updateDOB(from originalString: String) {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        if let date = inputFormatter.date(from: originalString) {
+            dob = date  // Assign the Date object to dob
+            print("Date saved:", dob)  // This prints the Date object
+        } else {
+            print("Invalid date string")
+        }
+    }
+
+
+
 
        private func calculateAge(from dob: Date) -> String {
            let calendar = Calendar.current
@@ -95,7 +130,7 @@ class EditProfileViewModal : ObservableObject {
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
 
         let parameters: [String: Any] = [
-            "Pid": 8,
+            "Pid": UserDefaultsManager.shared.getUserData()?.pid ?? 8,
             "PatientName": firstName,
             "EmailID":  UserDefaultsManager.shared.getUserData()?.emailID ?? "",
             "GenderId":  UserDefaultsManager.shared.getUserData()?.genderId ?? "",
@@ -124,6 +159,7 @@ class EditProfileViewModal : ObservableObject {
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             print("❌ Server returned status code: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+            showGlobalError(message: "Error: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
             throw NetworkError.badResponse
         }
 
@@ -147,52 +183,47 @@ class EditProfileViewModal : ObservableObject {
         print("✅ Profile updated and saved to local storage:", updatedPatient)
     }
     
-    
-
-    func updateProfileDataForP(imageData: Data, filename: String) async  {
-        
-       
-        
-        
-        
-        
+    func updateProfileDataForP(imageData: Data, filename: String) async {
         print("sending to api \(filename)")
-        print("sending to api \(imageData)  imageData")
+        print("sending to api \(imageData.count) bytes imageData")
         
+        // Force unwrap userData — be sure it exists or this will crash
+        let userData = UserDefaultsManager.shared.getUserData()!
         
         let parameters = [
-            ["key": "Pid", "value": "8", "type": "text"],
-            ["key": "PatientName", "value": "\( UserDefaultsManager.shared.getUserData()?.patientName ?? "" )", "type": "text"],
-            ["key": "EmailID", "value":  UserDefaultsManager.shared.getUserData()?.emailID  ?? "" , "type": "text"],
-            ["key": "GenderId", "value": "\( UserDefaultsManager.shared.getUserData()?.genderId ?? "" )", "type": "text"],
-            ["key": "BloodGroupId", "value":  UserDefaultsManager.shared.getUserData()?.bloodGroupId ?? "" , "type": "text"],
-            ["key": "Height", "value": "\( UserDefaultsManager.shared.getUserData()?.height ?? "" )", "type": "text"],
-            ["key": "Weight", "value": "\( UserDefaultsManager.shared.getUserData()?.weight ?? "" )", "type": "text"],
-            ["key": "Dob", "value": "\(UserDefaultsManager.shared.getUserData()?.dob ?? "" )", "type": "text"],
-            ["key": "Zip", "value":  UserDefaultsManager.shared.getUserData()?.zip ?? "" , "type": "text"],
-            ["key": "AgeUnitId", "value":  UserDefaultsManager.shared.getUserData()?.ageUnitId ?? "" , "type": "text"],
-            ["key": "Age", "value":  UserDefaultsManager.shared.getUserData()?.age ?? "" , "type": "text"],
-            ["key": "Address", "value":  UserDefaultsManager.shared.getUserData()?.address ?? "" , "type": "text"],
-            ["key": "MobileNo", "value": "\( UserDefaultsManager.shared.getUserData()?.mobileNo ?? "" )", "type": "text"],
-            ["key": "CountryId", "value":  UserDefaultsManager.shared.getUserData()?.countryId ?? "" , "type": "text"],
-            ["key": "StateId", "value":  UserDefaultsManager.shared.getUserData()?.stateId ?? "" , "type": "text"],
-            ["key": "CityId", "value":  UserDefaultsManager.shared.getUserData()?.cityId ?? "" , "type": "text"],
-            ["key": "UserId", "value":  UserDefaultsManager.shared.getUserData()?.userId ?? "" , "type": "text"],
+            ["key": "Pid", "value": userData.pid , "type": "text"],
+            ["key": "PatientName", "value": "\(userData.patientName )", "type": "text"],
+            ["key": "EmailID", "value": userData.emailID , "type": "text"],
+            ["key": "GenderId", "value": "\(userData.genderId )", "type": "text"],
+            ["key": "BloodGroupId", "value": userData.bloodGroupId , "type": "text"],
+            ["key": "Height", "value": "\(userData.height )", "type": "text"],
+            ["key": "Weight", "value": "\(userData.weight )", "type": "text"],
+            ["key": "Dob", "value": "\(userData.dob.toDateFormat("yyyy-MM-dd"))", "type": "text"],
+            ["key": "Zip", "value": userData.zip , "type": "text"],
+            ["key": "AgeUnitId", "value": userData.ageUnitId , "type": "text"],
+            ["key": "Age", "value": userData.age , "type": "text"],
+            ["key": "Address", "value": userData.address , "type": "text"],
+            ["key": "MobileNo", "value": "\(userData.mobileNo )", "type": "text"],
+            ["key": "CountryId", "value": userData.countryId , "type": "text"],
+            ["key": "StateId", "value": userData.stateId , "type": "text"],
+            ["key": "CityId", "value": userData.cityId , "type": "text"],
+            ["key": "UserId", "value": userData.userId , "type": "text"],
             ["key": "FamilyDiseaseJson", "value": "\"\"", "type": "text"],
             ["key": "ChoronicDiseasesJson", "value": "\"\"", "type": "text"],
             ["key": "FormFile", "src": "\(filename)", "type": "file"]
         ] as [[String: Any]]
-
+        
         let boundary = "Boundary-\(UUID().uuidString)"
         var body = Data()
-        var error: Error? = nil
-
+        
+        print(parameters)
+        
         for param in parameters {
             guard let paramName = param["key"] as? String else { continue }
             body += Data("--\(boundary)\r\n".utf8)
-
+            
             guard let paramType = param["type"] as? String else { continue }
-
+            
             if paramType == "text" {
                 guard let paramValue = param["value"] as? String else { continue }
                 body += Data("Content-Disposition: form-data; name=\"\(paramName)\"\r\n\r\n".utf8)
@@ -201,35 +232,163 @@ class EditProfileViewModal : ObservableObject {
                 guard let paramSrc = param["src"] as? String else { continue }
                 let fileURL = URL(fileURLWithPath: paramSrc)
                 let fileData = try? Data(contentsOf: fileURL)
-
+                
                 if let fileData = fileData {
                     body += Data("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileURL.lastPathComponent)\"\r\n".utf8)
                     body += Data("Content-Type: application/octet-stream\r\n\r\n".utf8)
                     body += fileData
                     body += Data("\r\n".utf8)
+                } else {
+                    print("Error reading file data for \(paramSrc)")
                 }
             }
         }
-
-
+        
         body += Data("--\(boundary)--\r\n".utf8)
-        let postData = body
-
-        var request = URLRequest(url: URL(string: "http://172.16.61.31:5082/api/PatientRegistration/UpdatePatientProfile")!, timeoutInterval: Double.infinity)
+        
+        var request = URLRequest(url: URL(string: baseURL7082 + "api/PatientRegistration/UpdatePatientProfile")!, timeoutInterval: Double.infinity)
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "PUT"
-        request.httpBody = postData
-
+        request.httpBody = body
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print(String(describing: error))
+                showGlobalError(message: String(describing: error))
                 return
             }
-            print(String(data: data, encoding: .utf8)!)
+            print("Response: " + (String(data: data, encoding: .utf8) ?? "No response string"))
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                
+                if let status = json?["status"] as? Int, status == 1 {
+                    print("✅ Success")
+                } else {
+                    let message = json?["message"] as? String ?? "Unknown error"
+                    let responseValue = json?["responseValue"] as? String ?? "No details"
+                    let errorCode = json?["errorCode"] as? String ?? "No error code"
+                    
+                    print("❌ Failed - Message: \(message)")
+                    print("Response Value: \(responseValue)")
+                    print("Error Code: \(errorCode)")
+                    showGlobalError(message: "Error: \(errorCode), \(responseValue)")
+                }
+            } catch {
+                showGlobalError(message: "❌ JSON parsing error: \(error.localizedDescription)")
+                print("❌ JSON parsing error: \(error.localizedDescription)")
+            }
         }
-
+        
         task.resume()
     }
+
+
+
+//    func updateProfileDataForP(imageData: Data, filename: String) async  {
+//        
+//       
+//        
+//        
+//        
+//        
+//        print("sending to api \(filename)")
+//        print("sending to api \(imageData)  imageData")
+//        
+//        
+//        let parameters = [
+//            ["key": "Pid", "value":  UserDefaultsManager.shared.getUserData()?.pid ?? 8, "type": "text"],
+//            ["key": "PatientName", "value": "\( UserDefaultsManager.shared.getUserData()?.patientName ?? "" )", "type": "text"],
+//            ["key": "EmailID", "value":  UserDefaultsManager.shared.getUserData()?.emailID  ?? "" , "type": "text"],
+//            ["key": "GenderId", "value": "\( UserDefaultsManager.shared.getUserData()?.genderId ?? "" )", "type": "text"],
+//            ["key": "BloodGroupId", "value":  UserDefaultsManager.shared.getUserData()?.bloodGroupId ?? "" , "type": "text"],
+//            ["key": "Height", "value": "\( UserDefaultsManager.shared.getUserData()?.height ?? "" )", "type": "text"],
+//            ["key": "Weight", "value": "\( UserDefaultsManager.shared.getUserData()?.weight ?? "" )", "type": "text"],
+//            ["key": "Dob", "value": "\(UserDefaultsManager.shared.getUserData()?.dob ?? "" )", "type": "text"],
+//            ["key": "Zip", "value":  UserDefaultsManager.shared.getUserData()?.zip ?? "" , "type": "text"],
+//            ["key": "AgeUnitId", "value":  UserDefaultsManager.shared.getUserData()?.ageUnitId ?? "" , "type": "text"],
+//            ["key": "Age", "value":  UserDefaultsManager.shared.getUserData()?.age ?? "" , "type": "text"],
+//            ["key": "Address", "value":  UserDefaultsManager.shared.getUserData()?.address ?? "" , "type": "text"],
+//            ["key": "MobileNo", "value": "\( UserDefaultsManager.shared.getUserData()?.mobileNo ?? "" )", "type": "text"],
+//            ["key": "CountryId", "value":  UserDefaultsManager.shared.getUserData()?.countryId ?? "" , "type": "text"],
+//            ["key": "StateId", "value":  UserDefaultsManager.shared.getUserData()?.stateId ?? "" , "type": "text"],
+//            ["key": "CityId", "value":  UserDefaultsManager.shared.getUserData()?.cityId ?? "" , "type": "text"],
+//            ["key": "UserId", "value":  UserDefaultsManager.shared.getUserData()?.userId ?? "" , "type": "text"],
+////            ["key": "FamilyDiseaseJson", "value": "\"\"", "type": "text"],
+////            ["key": "ChoronicDiseasesJson", "value": "\"\"", "type": "text"],
+//            ["key": "FormFile", "src": "\(filename)", "type": "file"]
+//        ] as [[String: Any]]
+//
+//        let boundary = "Boundary-\(UUID().uuidString)"
+//        var body = Data()
+//        var error: Error? = nil
+//        
+//        print(parameters)
+//
+//        for param in parameters {
+//            guard let paramName = param["key"] as? String else { continue }
+//            body += Data("--\(boundary)\r\n".utf8)
+//
+//            guard let paramType = param["type"] as? String else { continue }
+//
+//            if paramType == "text" {
+//                guard let paramValue = param["value"] as? String else { continue }
+//                body += Data("Content-Disposition: form-data; name=\"\(paramName)\"\r\n\r\n".utf8)
+//                body += Data("\(paramValue)\r\n".utf8)
+//            } else if paramType == "file" {
+//                guard let paramSrc = param["src"] as? String else { continue }
+//                let fileURL = URL(fileURLWithPath: paramSrc)
+//                let fileData = try? Data(contentsOf: fileURL)
+//
+//                if let fileData = fileData {
+//                    body += Data("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileURL.lastPathComponent)\"\r\n".utf8)
+//                    body += Data("Content-Type: application/octet-stream\r\n\r\n".utf8)
+//                    body += fileData
+//                    body += Data("\r\n".utf8)
+//                }
+//            }
+//        }
+//
+//
+//        body += Data("--\(boundary)--\r\n".utf8)
+//        let postData = body
+//
+//        var request = URLRequest(url: URL(string: baseURL7082 + "api/PatientRegistration/UpdatePatientProfile")!, timeoutInterval: Double.infinity)
+//        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "PUT"
+//        request.httpBody = postData
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data else {
+//                print(String(describing: error))
+//                showGlobalError(message: String(describing: error))
+//                return
+//            }
+//            print("Response" + String(data: data, encoding: .utf8)!)
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//
+//                if let status = json?["status"] as? Int, status == 1 {
+//                    print("✅ Success")
+//
+//                } else {
+//                    let message = json?["message"] as? String ?? "Unknown error"
+//                    let responseValue = json?["responseValue"] as? String ?? "No details"
+//                    let errorCode = json?["errorCode"] as? String ?? "No error code"
+//
+//                    print("❌ Failed - Message: \(message)")
+//                    print("Response Value: \(responseValue)")
+//                    print("Error Code: \(errorCode)")
+//                    showGlobalError(message: "Error: \(errorCode), \(responseValue)")
+//                }
+//            } catch {
+//                showGlobalError(message: "❌ JSON parsing error: \(error.localizedDescription)")
+//                print("❌ JSON parsing error: \(error.localizedDescription)")
+//            }
+//
+//        }
+//
+//        task.resume()
+//    }
 
  
 
@@ -291,4 +450,17 @@ class EditProfileViewModal : ObservableObject {
 //        return formatter.string(from: date)
 //    }
 
+}
+
+extension String {
+    func toDateFormat(_ format: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = self.contains(":") ? "dd-MM-yyyy HH:mm:ss" : "dd-MM-yyyy"
+        if let date = inputFormatter.date(from: self) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = format
+            return outputFormatter.string(from: date)
+        }
+        return self // fallback to original string if parsing fails
+    }
 }

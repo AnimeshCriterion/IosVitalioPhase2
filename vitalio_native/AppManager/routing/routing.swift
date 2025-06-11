@@ -35,6 +35,7 @@ final class Routing : ObservableObject{
         case symptomsHistory
         case chatBotView
         case createAccountView
+        case language
         
     }
 

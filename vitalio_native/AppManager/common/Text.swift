@@ -21,7 +21,7 @@ struct CustomText: View {
     }
     
     var body: some View {
-        Text(text)
+        LocalizedText(key:text)
             .font(.system(size: size, weight: weight))
             .foregroundColor(color)
     }

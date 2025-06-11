@@ -25,6 +25,15 @@ struct Output : View{
         "Brown",
         "Red"
     ]
+    
+    let colorHexCodes: [String] = [
+        "#FFF9CC", // Light Yellow
+        "#FFFF00", // Yellow
+        "#FFA500", // Dark Yellow (Orange)
+        "#FFB347", // Amber
+        "#A52A2A", // Brown
+        "#FF0000"  // Red
+    ]
 
 
     @State private var selectedIndex: Int? = nil
@@ -131,6 +140,9 @@ struct Output : View{
                     .foregroundColor(.gray)
             }
             .frame(maxWidth: .infinity)
+        
+        
+        
 //            .gesture(
 //                DragGesture(minimumDistance: 0)
 //                    .onChanged { value in
@@ -145,30 +157,33 @@ struct Output : View{
 
 
         VStack(spacing: 8) {
-            HStack( alignment: .top ,spacing: 0) {
-                ForEach(0..<6) { index in
+            HStack(alignment: .top, spacing: 0) {
+                ForEach(0..<colors.count, id: \.self) { index in
                     VStack {
                         Rectangle()
                             .fill(colors[index])
                             .frame(height: 10)
-                            
                         Text(labels[index])
                             .font(.caption2)
                             .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
                     }
                     .overlay(
                         Rectangle()
                             .stroke(selectedIndex == index ? Color.black : Color.clear, lineWidth: 1)
-                )
+                    )
                     .onTapGesture {
                         withAnimation {
                             selectedIndex = index
+                            viewModel.colour    = colorHexCodes[index]
                         }
                     }
                 }
             }
-        }.padding(.horizontal,20)
+        }
+        .padding(.horizontal, 20)
+    
+        
         Spacer()
         Button(action: {
             Task{

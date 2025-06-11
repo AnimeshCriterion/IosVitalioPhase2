@@ -44,7 +44,7 @@ class UploadReportViewModel : ObservableObject {
         let uhid =   UserDefaultsManager.shared.getUHID() ?? ""
         do{
             let result = try await APIService.shared.fetchRawData(
-                fromURL: "http://172.16.61.31:5082/api/PatientMediaData/GetPatientMediaData?",
+                fromURL: baseURL7082 + "api/PatientMediaData/GetPatientMediaData?",
                 parameters: ["uhId" : uhid,"category" : name]
             )
             
@@ -180,7 +180,7 @@ class UploadReportViewModel : ObservableObject {
         
         let uhid =   UserDefaultsManager.shared.getUHID() ?? ""
        let id =    UserDefaultsManager.shared.getUserID() ?? ""
-        let baseURL = "http://172.16.61.31:5082/api/PatientMediaData/InsertPatientMediaData"
+        let baseURL = baseURL7082 + "api/PatientMediaData/InsertPatientMediaData"
         let queryParams = [
             "uhId": uhid,
             "subCategory": subCategory,

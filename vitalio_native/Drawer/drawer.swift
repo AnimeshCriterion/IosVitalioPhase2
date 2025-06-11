@@ -33,7 +33,7 @@ struct SideMenuView: View {
     var body: some View {
         ZStack {
             (isDarkMode ? Color.customBackgroundDark : Color.customBackground2).ignoresSafeArea()
-
+            
             ScrollView{
                 
                 VStack {
@@ -49,7 +49,6 @@ struct SideMenuView: View {
                                 Button(action: {
                                                showLogoutSheet = true
                                 }) {
-                                    
                                     Image(systemName: "ellipsis")
                                         .font(.title3)
                                         .padding(10)
@@ -94,12 +93,12 @@ struct SideMenuView: View {
                                                             }
                                                                }
                                                         .actionSheet(isPresented: $isShowingActionSheet) {
-                                                            ActionSheet(title: Text("Select Image"), buttons: [
-                                                                .default(Text("Camera")) {
+                                                            ActionSheet(title: Text("select_image"), buttons: [
+                                                                .default(Text("camera")) {
                                                                     sourceType = .camera
                                                                     isShowingPicker = true
                                                                 },
-                                                                .default(Text("Photo Library")) {
+                                                                .default(Text("photo_library")) {
                                                                     sourceType = .photoLibrary
                                                                     isShowingPicker = true
                                                                 },
@@ -146,7 +145,7 @@ struct SideMenuView: View {
                                 route.navigate(to: .editProfile)
                             }) {
                                 HStack {
-                                    Text("Edit Profile")
+                                    LocalizedText(key:"edit_profile")
                                         .font(.system(size: 14, weight: .bold))
                                         .foregroundColor(.white)
                                     Image(systemName: "chevron.right")
@@ -169,40 +168,45 @@ struct SideMenuView: View {
                         Button(action: {
                             route.navigate(to: .allergies)
                         }) {
-                        DrawerTile(title: "Allergies", iconName: "allergies", dark: isDarkMode )}
+                        DrawerTile(title: "allergies", iconName: "allergies", dark: isDarkMode )}
                         Button(action: {
                             route.navigate(to: .sharedAccountView)
                         }) {
-                            DrawerTile(title: "Switch account", iconName: "addmember", dark: isDarkMode )}
-                        DrawerTile(title: "Connect Smart Watch", iconName: "watch", dark: isDarkMode )
-                        DrawerTile(title: "Add Member", iconName: "addmember", dark: isDarkMode )
+                        DrawerTile(title: "switch_account", iconName: "addmember", dark: isDarkMode )}
+                        DrawerTile(title: "connect_smart_watch", iconName: "watch", dark: isDarkMode )
+                        DrawerTile(title: "add_member", iconName: "addmember", dark: isDarkMode )
                         
                     }
                     .padding(10)
                     
                     VStack{
                         
-                        GroupedDrawerTile(title: "Language", iconName: "language", dark: isDarkMode)
+                        Button(action: {
+                            route.navigate(to: .language)
+                        }) {
+                            GroupedDrawerTile(title: "language", iconName: "language", dark: isDarkMode)
+                        }
+                        
                         Button(action: {
                             route.navigate(to: .darkmode)
                         }) {
-                            GroupedDrawerTile(title: "Dark Mode", iconName: "darkmode", dark: isDarkMode)}
+                            GroupedDrawerTile(title: "dark_mode", iconName: "darkmode", dark: isDarkMode)}
                         Button(action: {
                             route.navigate(to: .faqView)
                         }) {
-                            GroupedDrawerTile(title: "FAQs", iconName: "faq", dark: isDarkMode)
+                            GroupedDrawerTile(title: "faqs", iconName: "faq", dark: isDarkMode)
                         }
                         Button(action: {
                             route.navigate(to: .feedback)
                         })
                         {
-                            GroupedDrawerTile(title: "Feedback", iconName: "feedback", dark: isDarkMode)
+                            GroupedDrawerTile(title: "feedback", iconName: "feedback", dark: isDarkMode)
                         }
                                Button(action: {
                             route.navigate(to: .createAccountView)
                         })
                         {
-                            GroupedDrawerTile(title: "Create Account", iconName: "feedback", dark: isDarkMode)
+                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
                         }
                         
                     }
@@ -231,7 +235,7 @@ struct drawer: View {
             Button(action: {
                 isDrawerOpen.toggle()
             }) {
-                Text("Main Content")
+                LocalizedText(key:"Main Content")
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding()
@@ -339,6 +343,7 @@ struct GroupedDrawerTile: View {
 
 struct LogoutConfirmationSheet: View {
     @Binding var isPresented: Bool
+    @EnvironmentObject var viewModel : DashboardViewModal
     @EnvironmentObject var route: Routing
     var body: some View {
         VStack(spacing: 24) {
@@ -349,7 +354,7 @@ struct LogoutConfirmationSheet: View {
                 .foregroundColor(.primary)
                 .padding(.top)
 
-            Text("Are you sure you want to logout?")
+            LocalizedText(key:"logout_prompt")
                 .font(.headline)
                 .multilineTextAlignment(.center)
 
@@ -357,7 +362,7 @@ struct LogoutConfirmationSheet: View {
                 Button(action: {
                     isPresented = false
                 }) {
-                    Text("Cancel")
+                    LocalizedText(key:"cancel")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.gray.opacity(0.15))
@@ -367,11 +372,12 @@ struct LogoutConfirmationSheet: View {
                 Button(action: {
                     isPresented = false
                     UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: false)
-                    route.navigatoToRoot()
-                    
+//                    route.navigatoToRoot()
+                    route.navigateOnly(to: .login)
+                    viewModel.isDrawerOpen = false
                     print("✅ Logged Out")
                 }) {
-                    Text("Logout")
+                    LocalizedText(key:"logout")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.primaryBlue)

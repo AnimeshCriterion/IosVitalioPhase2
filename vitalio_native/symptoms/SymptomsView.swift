@@ -67,14 +67,33 @@ struct SymptomTrackerView: View {
                     
                     SavingListChipView()
                     CustomButton(title: "Save and Update Symptoms") {
+                        
+                        
+                        let existingIDs = Set(symptomsVM.savingList.map { $0.detailID })
+
+                        let newItems: [SavingList] = symptomsVM.symptomResponse.compactMap { item -> SavingList? in
+                            let idString = String(item.detailID)
+                            guard !existingIDs.contains(idString) else { return nil }
+
+                            return SavingList(
+                                detailID: idString,
+                                detailsDate: item.detailsDate ?? "",
+                                details: item.details,
+                                isFromPatient: "0"
+                            )
+                        }
+
+                        symptomsVM.savingList.append(contentsOf: newItems)
+
+                        
+                        
+                        
                         if(symptomsVM.savingList.isEmpty){
                             symptomsVM.getStillHaveSymptoms()
                             isSheetPresented.toggle()
                         }else{
                             symptomsVM.sendSymptoms(savingList: symptomsVM.savingList)
-                            
                         }
-                        
                         //
                         print("Symptoms Updated")
                     }
@@ -83,15 +102,14 @@ struct SymptomTrackerView: View {
                 }
                 .onAppear(){
                     Task{
+                        await symptomsVM.SymptomsHistory()
                         symptomsVM.icons()
                         symptomsVM.getStillHaveSymptoms()
                         symptomsVM.getSuggessions()
                         //                await symptomsVM.allSuggesstions()
                     }
                 }
-                
                 .navigationBarHidden(true) // Hides the default AppBar
-                
                 .padding(.top)
                 .sheet(isPresented: $isSheetPresented) {
                     AddVitalsBottomSheet(isPresented: $isSheetPresented)

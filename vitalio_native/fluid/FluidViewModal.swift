@@ -3,6 +3,7 @@ import Foundation
 import SwiftUI
 
 class FluidaViewModal  : ObservableObject {
+    
     @Published  var isIntakeSelected = true
     @Published var selectedGlassSize: Int = 150
     @Published var selectedDrink: String = "Water"
@@ -19,20 +20,19 @@ class FluidaViewModal  : ObservableObject {
     @Published var showOutput: Bool = false
     @Published var showIntake: Bool = false
     @Published var isLoading: Bool = false
-    
+    @Published var colour: String = ""
     
     
     func intakeSuccess() {
         showIntake = true
-
            // Auto-dismiss after 2 seconds
            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                self.showIntake = false
            }
        }
+    
         func outputSuccess() {
             showOutput = true
-
            // Auto-dismiss after 2 seconds
            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                self.showOutput = false
@@ -144,7 +144,7 @@ class FluidaViewModal  : ObservableObject {
 
 
         let body =
-        ["clientId": clientID, "id": "0", "uhid": UserDefaultsManager.shared.getUHID() ?? "", "outputDate": formattedDate, "outputTypeID": "51", "pmID": "0", "quantity": fluidLevel, "unitID": "1", "userID": "0"]
+        ["clientId": clientID, "id": "0", "uhid": UserDefaultsManager.shared.getUHID() ?? "", "outputDate": formattedDate, "outputTypeID": "51", "pmID": "0", "quantity": fluidLevel, "unitID": "1", "userID": "0", "colour" : colour ]
         print(body)
 
         do {

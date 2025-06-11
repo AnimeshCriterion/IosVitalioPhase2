@@ -87,6 +87,7 @@ final class UserDefaultsManager {
 
 struct PatientModel: Codable {
     let id: String
+    let pid: String
     let patientName: String
     let emailID: String
     let genderId: String

@@ -10,13 +10,17 @@ import Foundation
 
  class DashboardViewModal : ObservableObject {
     @Published var isDrawerOpen = false
-
      
+
+     func showError(message: String){
+         Task {
+             @MainActor in  showGlobalError(message: message)
+         }
+     }
      
      @Published  var showVoiceAssistant = false
      @Published  var lastTextRecieved = false
-     
-     
+
      
     func  hidePage(){
   
@@ -82,6 +86,7 @@ import Foundation
 
           guard let url = URL(string: fullURLString) else {
               print("Invalid URL")
+              showError(message: "Invalid URL")
               return
           }
 

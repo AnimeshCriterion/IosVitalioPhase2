@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  vitalio_native
+
+  Created by HID-18 on 28/05/25.
+  
+*/
+
+
+
+
+
+"test 1" = "welcome" ;
+"vitals" = "Vitals";
+"primary_actions" = "Primary Actions";
+"vitals_details" = "Vitals Details";
+"fluid_intake_output" = "Fluid Intake\n/Output";
+"symptom_tracker" = "Symptom Tracker";
+"pills_reminder" = "Pills Reminder";
+"diet_checklist" = "Diet Checklist";
+
+"other" = "Other";
+"upload_report" = "Upload Report";
+"please_confirm_symptoms" = "Please confirm Symptoms";
+"cancel" = "Cancel";
+"yes_save" = "Yes, Save";
+
+"symptoms_added_success" = "Symptoms Added Successfully!";
+"vitals_added_success" = "Vitals Added Successfully!";
+"fluid_added_success" = "Fluid Added Successfully!";
+
+"good_morning" = "Good Morning";
+"good_afternoon" = "Good Afternoon";
+"good_evening" = "Good Evening";
+"good_night" = "Good Night";
+
+"notification" = "Notification";
+"home" = "Home";
+"reminders" = "Reminders";
+"chat" = "Chat";
+"update" = "Update";
+"activities" = "Activities";
+"chronicle" = "Chronicle";
+"cyclist_icon" = "cyclist_icon";
+"share_today_activity" = "Share today's activities with us to understand your health pattern.";
+"add_now" = "Add Now";
+
+"select_image" = "Select Image";
+"camera" = "Camera";
+"photo_library" = "Photo Library";
+"edit_profile" = "Edit Profile";
+"allergies" = "Allergies";
+"switch_account" = "Switch account";
+"connect_smart_watch" = "Connect Smart Watch";
+"add_member" = "Add Member";
+"language" = "Language";
+"dark_mode" = "Dark Mode";
+"faqs" = "FAQs";
+"feedback" = "Feedback";
+"create_account" = "Create Account";
+"logout_prompt" = "Are you sure you want to logout?";
+"cancel" = "Cancel";
+"logout" = "Logout";

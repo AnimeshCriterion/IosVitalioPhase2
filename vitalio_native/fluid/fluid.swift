@@ -24,7 +24,7 @@ struct Fluid: View {
                     }) {
                         Image(systemName: "chevron.left").foregroundColor(isDark ? .white : .black)}
                     Spacer().frame(width: 20)
-                    Text("Fluid Data Input")
+                    LocalizedText(key:"fluid_data_input")
                         .font(.headline)
                     Spacer()
                     Button(action: {
@@ -38,7 +38,7 @@ struct Fluid: View {
                     }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
-                            Text("History")
+                            Text("history")
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -71,7 +71,7 @@ struct Fluid: View {
                                 fluidVM.isIntakeSelected = true
                             }
                         }) {
-                            Text("Fluid Intake")
+                            LocalizedText(key:"fluid_intake")
                                 .foregroundColor(fluidVM.isIntakeSelected ? .white : .gray)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
@@ -81,7 +81,7 @@ struct Fluid: View {
                                 fluidVM.isIntakeSelected = false
                             }
                         }) {
-                            Text("Fluid Output")
+                            LocalizedText(key:"fluid_output")
                                 .foregroundColor(!fluidVM.isIntakeSelected ? .white : .gray)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
@@ -100,16 +100,15 @@ struct Fluid: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarHidden(true)
-        .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
-            
-            SuccessPopupView(show: $fluidVM.showIntake, message: "Intake Added Successfully")
+            .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
+            SuccessPopupView(show: $fluidVM.showIntake, message: "intake_added_successfully")
                 .zIndex(1)
-            SuccessPopupView(show: $fluidVM.showOutput, message: "Output Added Successfully")
+            SuccessPopupView(show: $fluidVM.showOutput, message: "output_added_successfully")
                 .zIndex(1)
         }
-        
     }
 }
+
 struct FluidOutputView_Previews: PreviewProvider {
     static var previews: some View {
         Fluid()      

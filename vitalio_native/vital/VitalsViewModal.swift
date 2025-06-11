@@ -11,33 +11,27 @@ import SwiftUI
 
 
 class VitalsViewModal: ObservableObject {
+    
     @Published var isLoading: Bool = false
     @Published var vitals: [Vital] = []
-    
     @Published var data: String = ""
     @Published var unitData: String = ""
-    
     @Published var patientGraph: [PatientGraph] = []
     @Published var patientVital: [PatientVital] = []
     @Published var vitalsDate: [VitalsDate] = []
-    
     @Published var selectedVital: Vital?
-    
     @Published var matchSelectedValue = ""
-    
-    
-    @Published var vmValueBPSys = ""
-    @Published var vmValueBPDias = ""
-    @Published var vmValueSPO2 = ""
-    @Published var vmValueRespiratoryRate = ""
-    @Published var vmValueHeartRate = ""
-    @Published var vmValuePulse = ""
-    @Published var vmValueRbs = ""
-    @Published var vmValueTemperature = ""
-    
+    @Published var vmValueBPSys = "0"
+    @Published var vmValueBPDias = "0"
+    @Published var vmValueSPO2 = "0"
+    @Published var vmValueRespiratoryRate = "0"
+    @Published var vmValueHeartRate = "0"
+    @Published var vmValuePulse = "0"
+    @Published var vmValueRbs = "0"
+    @Published var vmValueTemperature = "0"
     
     // Use a unique identifier, e.g., rowId
-    
+
      @Published var showVoiceAssistant = false
     
      // Called when the drag/press begins
@@ -56,11 +50,72 @@ class VitalsViewModal: ObservableObject {
          // … any cleanup logic here …
      }
     
+//    func getVitals() async {
+//        let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
+//        DispatchQueue.main.async {
+//            self.isLoading = true
+//           }
+//        do {
+//            let result = try await APIService.shared.fetchRawData(
+//                fromURL: baseURL7082 + "api/PatientVital/GetPatientLastVital",
+//                parameters: ["uhID": uhid]
+//            )
+//
+//            let jsonData = try JSONSerialization.data(withJSONObject: result)
+//            
+//            let decoded = try JSONDecoder().decode(VitalResponse.self, from: jsonData)
+//            DispatchQueue.main.async {
+//                self.vitals = decoded.responseValue.lastVital
+//                self.isLoading = false
+//            }
+//            DispatchQueue.main.async {
+//                self.vitals = decoded.responseValue.lastVital
+//                
+//                // Now map vitalName to your variables
+//                for vital in decoded.responseValue.lastVital {
+//                    switch vital.vitalName {
+//                    case "BP_Sys":
+//                        self.vmValueBPSys = "\(vital.vitalValue)"
+//                    case "BP_Dias":
+//                        self.vmValueBPDias = "\(vital.vitalValue)"
+//                    case "Spo2":
+//                        self.vmValueSPO2 = "\(vital.vitalValue)"
+//                    case "RespRate":
+//                        self.vmValueRespiratoryRate = "\(vital.vitalValue)"
+//                    case "HeartRate":
+//                        self.vmValueHeartRate = "\(vital.vitalValue)"
+//                    case "Pulse":
+//                        self.vmValuePulse = "\(vital.vitalValue)"
+//                    case "RBS":
+//                        self.vmValueRbs = "\(vital.vitalValue)"
+//                    case "Temperature":
+//                        self.vmValueTemperature = "\(vital.vitalValue)"
+//                    default:
+//                        break
+//                    }}}
+//            // 🖨️ Print all final values
+//              print("✅ Updated Vitals:")
+//              print("vmValueBPSys: \(self.vmValueBPSys)")
+//              print("vmValueBPDias: \(self.vmValueBPDias)")
+//              print("vmValueSPO2: \(self.vmValueSPO2)")
+//              print("vmValueRespiratoryRate: \(self.vmValueRespiratoryRate)")
+//              print("vmValueHeartRate: \(self.vmValueHeartRate)")
+//              print("vmValuePulse: \(self.vmValuePulse)")
+//              print("vmValueRbs: \(self.vmValueRbs)")
+//              print("vmValueTemperature: \(self.vmValueTemperature)")
+//        } catch {
+//            print("❌ Error Fetching Vitals:", error)
+//        }
+//    }
+    
+    
     func getVitals() async {
-        let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
+        let uhid = UserDefaultsManager.shared.getUHID() ?? ""
+
         DispatchQueue.main.async {
             self.isLoading = true
-           }
+        }
+
         do {
             let result = try await APIService.shared.fetchRawData(
                 fromURL: baseURL7082 + "api/PatientVital/GetPatientLastVital",
@@ -69,15 +124,38 @@ class VitalsViewModal: ObservableObject {
 
             let jsonData = try JSONSerialization.data(withJSONObject: result)
             let decoded = try JSONDecoder().decode(VitalResponse.self, from: jsonData)
+
+            var fetchedVitals = decoded.responseValue.lastVital
+
+            // MARK: - Add missing default vitals
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let nowString = formatter.string(from: Date())
+
+            let defaultVitals: [Vital] = [
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Sys", vitalValue: 0, unit: "mmHg", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Dias", vitalValue: 0, unit: "mmHg", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "HeartRate", vitalValue: 0, unit: "bpm", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Spo2", vitalValue: 0, unit: "%", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Temperature", vitalValue: 0, unit: "°F", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Pulse", vitalValue: 0, unit: "bpm", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "RespRate", vitalValue: 0, unit: "rpm", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "RBS", vitalValue: 0, unit: "mg/dL", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Weight", vitalValue: 0, unit: "kg", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Height", vitalValue: 0, unit: "cm", vitalDateTime: nowString, userId: 0, rowId: 0),
+            ]
+
+            let existingVitalNames = Set(fetchedVitals.map { $0.vitalName })
+            let missingDefaults = defaultVitals.filter { !existingVitalNames.contains($0.vitalName) }
+
+            fetchedVitals.append(contentsOf: missingDefaults)
+
             DispatchQueue.main.async {
-                self.vitals = decoded.responseValue.lastVital
+                self.vitals = fetchedVitals
                 self.isLoading = false
-            }
-            DispatchQueue.main.async {
-                self.vitals = decoded.responseValue.lastVital
-                
-                // Now map vitalName to your variables
-                for vital in decoded.responseValue.lastVital {
+
+                // 🧠 Map to view model variables
+                for vital in fetchedVitals {
                     switch vital.vitalName {
                     case "BP_Sys":
                         self.vmValueBPSys = "\(vital.vitalValue)"
@@ -95,25 +173,36 @@ class VitalsViewModal: ObservableObject {
                         self.vmValueRbs = "\(vital.vitalValue)"
                     case "Temperature":
                         self.vmValueTemperature = "\(vital.vitalValue)"
+//                    case "Weight":
+//                        self.vmValueWeight = "\(vital.vitalValue)"
+//                    case "Height":
+//                        self.vmValueHeight = "\(vital.vitalValue)"
                     default:
                         break
-                    }}}
-            // 🖨️ Print all final values
-              print("✅ Updated Vitals:")
-              print("vmValueBPSys: \(self.vmValueBPSys)")
-              print("vmValueBPDias: \(self.vmValueBPDias)")
-              print("vmValueSPO2: \(self.vmValueSPO2)")
-              print("vmValueRespiratoryRate: \(self.vmValueRespiratoryRate)")
-              print("vmValueHeartRate: \(self.vmValueHeartRate)")
-              print("vmValuePulse: \(self.vmValuePulse)")
-              print("vmValueRbs: \(self.vmValueRbs)")
-              print("vmValueTemperature: \(self.vmValueTemperature)")
-                      
+                    }
+                }
 
+                // ✅ Debug print
+                print("✅ Updated Vitals:")
+                print("vmValueBPSys: \(self.vmValueBPSys)")
+                print("vmValueBPDias: \(self.vmValueBPDias)")
+                print("vmValueSPO2: \(self.vmValueSPO2)")
+                print("vmValueRespiratoryRate: \(self.vmValueRespiratoryRate)")
+                print("vmValueHeartRate: \(self.vmValueHeartRate)")
+                print("vmValuePulse: \(self.vmValuePulse)")
+                print("vmValueRbs: \(self.vmValueRbs)")
+                print("vmValueTemperature: \(self.vmValueTemperature)")
+//                print("vmValueWeight: \(self.vmValueWeight)")
+//                print("vmValueHeight: \(self.vmValueHeight)")
+            }
         } catch {
             print("❌ Error Fetching Vitals:", error)
         }
     }
+
+
+    
+    
     func myCurrentDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -182,11 +271,13 @@ class VitalsViewModal: ObservableObject {
             "vmValuePulse": vmValuePulse,
             "vmValueRbs": vmValueRbs,
             "vmValueTemperature": vmValueTemperature,
-              "uhid": uhid,
-              "userId": "664",
-              "vitalDate": myCurrentDate(Date()),
-              "vitalTime": myCurrentTime(Date()),
-              "clientId": clientID
+            "uhid": uhid,
+            "userId":(UserDefaultsManager.shared.getUserData()?.userId ?? "0"),
+            "vitalDate": myCurrentDate(Date()),
+            "vitalTime": myCurrentTime(Date()),
+            "clientId": clientID,
+            "isFromPatient":"true",
+            "positionId":"129"
         ]
         for (key, value) in values {
              body[key] = value
@@ -194,12 +285,17 @@ class VitalsViewModal: ObservableObject {
         print(body)
         do {
             let result = try await APIService.shared.postRawData(toURL: baseURL7082 + "api/PatientVital/InsertPatientVital", body: body)
-            print(result)
+            if let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted),
+                    let jsonString = String(data: jsonData, encoding: .utf8) {
+                     print("✅ API Response:\n\(jsonString)")
+                 } else {
+                     print("📦 Raw Response:\n\(result)")
+                 }
             Task{
             await getVitals()
             }
         } catch {
-          print("❌ Error Fetching Vitals:", error)
+          print("❌ Error occured", error)
         }
     }
     
@@ -267,6 +363,7 @@ class VitalsViewModal: ObservableObject {
     func vitalsHistory() async {
         
         let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
+        let userId =  UserDefaultsManager.shared.getUserID() ?? ""
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -284,7 +381,7 @@ class VitalsViewModal: ObservableObject {
         
         
         let parameters: [String: String] = [
-            "userId": "0",
+            "userId": userId,
             "UHID": uhid,
             "vitalIdSearchNew": String(selectedVital!.vitalID),
             "vitalDate": formatter.string(from: startDate),
@@ -575,3 +672,4 @@ class VitalsViewModal: ObservableObject {
     
     
 }
+

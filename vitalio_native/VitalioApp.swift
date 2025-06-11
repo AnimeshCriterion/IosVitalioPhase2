@@ -26,10 +26,13 @@ struct VitalioApp: App {
     @StateObject var editProfileVM = EditProfileViewModal()
     @StateObject var chatViewModel = ChatViewModel()
     @StateObject var signUpViewModal = SignUpViewModal()
+    @StateObject var popupManager = PopupManager()
 //    @StateObject var webSocketManager = WebSocketManager(userId: "1234")/
-    
+    @StateObject var localizer = LocalizationManager.shared
+
 
     init() {
+        _ = NetworkMonitor.shared  // starts monitoring
         FirebaseApp.configure()
         requestPushNotificationPermission()
     }
@@ -53,6 +56,9 @@ struct VitalioApp: App {
             .environmentObject(editProfileVM)
             .environmentObject(chatViewModel)
             .environmentObject(signUpViewModal)
+            .environmentObject(localizer)
+            .environmentObject(popupManager)
+            
 //            .environmentObject(webSocketManager)
         }
     }

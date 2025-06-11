@@ -48,57 +48,49 @@ struct SymptomsHistory: View {
             Divider()
 
             // MARK: - Scrollable List
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    ForEach(viewmodel.groupedSymptoms.keys.sorted(by: >), id: \.self) { date in
-                        Text(viewmodel.customdate(from: date))
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.leading, 16)
-                            .padding(.top, 12)
 
-                        ForEach(viewmodel.groupedSymptoms[date] ?? [], id: \.id) { symptom in
-                            HStack(alignment: .top, spacing: 8) {
-                                VStack {
-                                    Circle()
-                                        .fill(Color.gray)
-                                        .frame(width: 10, height: 10)
-                                    Rectangle()
-                                        .fill(Color.gray.opacity(0.5))
-                                        .frame(width: 2, height: 60)
-                                }
+            List {
+                ForEach(viewmodel.groupedSymptomsByDate.keys.sorted(), id: \.self) { dateKey in
+                    Section(header: Text(dateKey)
+                                .font(.headline)
+                                .foregroundColor(isDarkMode ? .white : .black)
                                 .padding(.leading, 16)
+                                .padding(.top, 12)) {
+                        ForEach(viewmodel.groupedSymptomsByDate[dateKey] ?? [], id: \.id) { symptom in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(symptom.details)
+                                    .font(.headline)
+                                    .foregroundColor(isDarkMode ? .white : .black)
 
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(symptom.details)
-                                        .font(.headline)
-                                        .foregroundColor(isDarkMode ? .white : .black)
-
-                                    if let dateStr = symptom.detailsDate {
-                                        Text(dateStr)
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(isDarkMode ? Color.customBackgroundDark2 : Color.white)
-                                .cornerRadius(12)
+                                // If you want to hide the time because date is already a header, skip this
+                                // Text(viewmodel.formattedOnly(from: symptom.detailsDate ?? ""))
+                                //     .font(.caption)
+                                //     .foregroundColor(isDarkMode ? .white : .black)
                             }
-                            .padding(8)
+                            .padding()
+                            .background(isDarkMode ? Color.customBackgroundDark2 : Color.white)
+                            .cornerRadius(12)
                         }
                     }
                 }
-                .padding(.bottom, 16)
             }
+            .listStyle(PlainListStyle())
+
+
+                .padding(.bottom, 16)
+            
             .background(Color(.systemGroupedBackground))
         }
         .onAppear {
             Task {
-                let currentDate = Date()
+//                let currentDate = Date()
                 await viewmodel.SymptomsHistory()
                 
             }
         }
     }
+    
+
 }
+
+

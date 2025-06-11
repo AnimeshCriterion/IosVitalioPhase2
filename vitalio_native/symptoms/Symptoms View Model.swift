@@ -282,6 +282,36 @@ class SymptomsViewModal : ObservableObject {
 //        // Then group your response by day/week/month based on `selectedFilter`
 //    }
 
+    func formattedOnly(from isoDateString: String) -> String {
+  
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            
+            guard let date = formatter.date(from: isoDateString) else {
+                return "Invalid date"
+            }
+            
+            formatter.dateFormat = "EEEE, dd MMMM yyyy"  // Sunday, 01 September 2024
+            return formatter.string(from: date)
+        }
+
+    // Group symptoms by just the date (without time part)
+    var groupedSymptomsByDate: [String: [SymptomsHistoryItem]] {
+        Dictionary(grouping: symptomResponse) { symptom in
+            formattedOnly(from: symptom.detailsDate ?? "")
+        }
+    }
+
+
+    func formattedTimeOnly(from isoDate: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        guard let date = formatter.date(from: isoDate) else { return "" }
+
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "h:mm a"   // 3:48 PM
+        return timeFormatter.string(from: date)
+    }
 
 
 }

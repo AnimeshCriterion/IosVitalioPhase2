@@ -120,6 +120,6 @@ struct StillHaveSymptomsView: View {
         }
     }
 
-
+    
   
 }

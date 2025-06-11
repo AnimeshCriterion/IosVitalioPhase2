@@ -46,9 +46,9 @@ import Foundation
 
 
 //var baseURL7082 = "https://api.medvantage.tech:7082/"
-var baseURL7082 = "http://172.16.61.31:5082/"
+var baseURL7082 = "http://182.156.200.177:5082/"
 //var baseURL7096 = "https://api.medvantage.tech:7096/"
-var baseURL7096 = "http://172.16.61.31:5096/"
+var baseURL7096 = "http://182.156.200.177:5096/"
 var baseURL205 = "http://52.172.134.222:205/"
 var baseURL5119 = "http://172.16.61.31:5119/"
 

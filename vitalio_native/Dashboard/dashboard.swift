@@ -18,8 +18,9 @@ struct Dashboard: View {
     @EnvironmentObject var vitalsVM: VitalsViewModal
     @State private var selectedTab: Tab = .home
     @State private var dragOffset: CGFloat = 0
-
+    @ObservedObject private var localizer = LocalizationManager.shared
     @GestureState private var isPressing = false
+    @EnvironmentObject var popupManager: PopupManager
 
        var isDarkMode: Bool {
            themeManager.colorScheme == .dark
@@ -41,7 +42,7 @@ struct Dashboard: View {
                     }, dark: isDarkMode)}
                 ScrollView {
                     VStack(alignment: .leading){
-                        Text("Vitals")
+                        LocalizedText(key:"vitals")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor( isDarkMode ? .white :  .black)
                    
@@ -51,40 +52,47 @@ struct Dashboard: View {
                             VitalsCard(dark: isDarkMode)
                         
                         }
-         
+//                        Button("Show Global Popup") {
+//                            
+//                            viewModel.showError(message: "Error check")
+////                            popupManager.show(
+////                               
+////                                message: "This is test popup")
+//                        }
 
-                        Text("Primary Actions")
+
+                        LocalizedText(key: "primary_actions")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor( isDarkMode ? .white :  .black)
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12) {
                             Button(action: {
                                 route.navigate(to: .vitals)
                             }) {
-                                ActionButton(icon: "vitals_icon", title: "Vitals Details",dark: isDarkMode).padding(8)
+                                ActionButton(icon: "vitals_icon", title: "vitals_details",dark: isDarkMode).padding(8)
                             }
                             
                             Button(action: {
                                 route.navigate(to: .fluid)
                             }) {
-                                ActionButton(icon: "fluid_icon", title: "Fluid Intake\n/Output",dark: isDarkMode).padding(8)
+                                ActionButton(icon: "fluid_icon", title: "fluid_intake_output",dark: isDarkMode).padding(8)
                             }
                             Button(action: {
                                 route.navigate(to: .symptoms)
                             }) {
-                                ActionButton(icon: "symptoms_icon", title: "Symptom Tracker", dark: isDarkMode)
+                                ActionButton(icon: "symptoms_icon", title: "symptom_tracker", dark: isDarkMode)
                                     .padding(8)
                             }
                             
                             Button(action: {
                                 route.navigate(to: .pillsReminder)  
                             }) {
-                            ActionButton(icon: "pills_icon", title: "Pills Reminder",dark: isDarkMode).padding(8)
+                            ActionButton(icon: "pills_icon", title: "pills_reminder",dark: isDarkMode).padding(8)
                             
                         }
                             Button(action: {
                                 route.navigate(to: .suppliment)
                             }) {
-                                ActionButton(icon: "diet", title: "Diet Checklist",dark: isDarkMode).padding(8)
+                                ActionButton(icon: "diet", title: "diet_checklist",dark: isDarkMode).padding(8)
                                 
                             }
                             
@@ -92,7 +100,7 @@ struct Dashboard: View {
 //                                ActionButton(icon: "supplement_icon", title: "Supplement Checklist",dark: isDarkMode).padding(8)
 
                         }
-                        Text("Other")
+                        LocalizedText(key: "other")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor( isDarkMode ? .white :  .black)
                         
@@ -102,7 +110,7 @@ struct Dashboard: View {
                                 Button(action: {
                                     route.navigate(to: .reportViewUI)
                                 }) {
-                                    OtherCard(icon: "upload_icon", title: "Upload Report",dark: isDarkMode)}
+                                    OtherCard(icon: "upload_icon", title: "upload_report",dark: isDarkMode)}
 //                                OtherCard(icon: "lifestyle_icon", title: "Lifestyle Intervention",dark: isDarkMode)
                             }
                         }
@@ -128,7 +136,7 @@ struct Dashboard: View {
                     }
                     .sheet(isPresented: $viewModel.showConfirmationSheet) {
                         VStack(spacing: 16) {
-                            Text("Please confirm Symptoms")
+                            Text("please_confirm_symptoms")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .padding(.top, 20)
@@ -144,7 +152,7 @@ struct Dashboard: View {
                             }.scrollIndicators(.visible)
 
                             HStack {
-                                Button("Cancel") {
+                                Button("cancel") {
                                     viewModel.showConfirmationSheet = false
                                 }
                                 .frame(height: 44)
@@ -156,7 +164,7 @@ struct Dashboard: View {
 
                                 Spacer()
 
-                                Button("Yes, Save") {
+                                Button("yes_save") {
                                     viewModel.confirmSymptoms()
                                 }
                                 .frame(height: 44)
@@ -226,11 +234,11 @@ struct Dashboard: View {
                             }
                         }
                 }
-                SuccessPopupView(show: $viewModel.showSuccess, message: "Symptoms Added Successfully!")
+                SuccessPopupView(show: $viewModel.showSuccess, message: "symptoms_added_success")
                     .zIndex(1)
-                SuccessPopupView(show: $viewModel.showVitalSuccess, message: "Vitals Added Successfully!")
+                SuccessPopupView(show: $viewModel.showVitalSuccess, message: "vitals_added_success")
                     .zIndex(1)
-                SuccessPopupView(show: $viewModel.showFluidSuccess, message: "Fluid Added Successfully!")
+                SuccessPopupView(show: $viewModel.showFluidSuccess, message: "fluid_added_success")
                     .zIndex(1)
                 
                 SideMenuView()
@@ -280,13 +288,13 @@ struct GreetingView: View {
 
         switch hour {
         case 5..<10:
-            return "Good Morning"
+            return "good_morning"
         case 10..<15:
-            return "Good Afternoon"
+            return "good_afternoon"
         case 15..<19:
-            return "Good Evening"
+            return "good_evening"
         default:
-            return "Good Night"
+            return "good_night"
         }
     }
 }
@@ -304,6 +312,7 @@ struct CustomAppBar: View {
     
     var body: some View {
         HStack {
+            
             Button(action: {
                 onMenuTap?()
                 viewModel.isDrawerOpen.toggle()
@@ -321,7 +330,8 @@ struct CustomAppBar: View {
                 GreetingView(dark: dark )
 //                CustomText("Good Morning", color: dark ? .white : .black)
 //                    .font(.footnote)
-                CustomText(userData!.patientName, color: dark ? .white : .black)
+                CustomText(userData?.patientName ?? "" , color: dark ? .white : .black)
+        
                     .font(.headline)
                     .fontWeight(.semibold)
             }
@@ -359,14 +369,14 @@ struct CustomTabBar: View {
 
     var body: some View {
         HStack {
-            TabBarItem(icon: "home", title: "Home", tab: .home, selectedTab: $selectedTab)
+            TabBarItem(icon: "home", title: "home", tab: .home, selectedTab: $selectedTab)
 //                       TabBarItem(icon: "activity", title: "Activity", tab: .activity, selectedTab: $selectedTab)
      
-                TabBarItem(icon: "reminder", title: "Reminders", tab: .reminders, selectedTab: $selectedTab)
+                TabBarItem(icon: "reminder", title: "reminders", tab: .reminders, selectedTab: $selectedTab)
                     .padding()
             
              
-                       TabBarItem(icon: "Chat", title: "Chat", tab: .chat, selectedTab: $selectedTab)
+                       TabBarItem(icon: "Chat", title: "chat", tab: .chat, selectedTab: $selectedTab)
         }
         .frame(height: 70)
         .background(
@@ -395,7 +405,7 @@ struct TabBarItem: View {
                 .scaledToFit()
                 .frame(width: 24, height: 24)
                 .foregroundColor(icon == "home" ? .blue : .gray)
-            Text(title)
+            LocalizedText(key:title)
                 .font(.caption)
                 .foregroundColor(icon == "home" ? .blue : .gray)
         }
@@ -456,7 +466,7 @@ struct VitalsCard: View {
                                 .transition(.opacity.combined(with: .scale))
                                 .id(currentVital?.vitalID) // trigger animation on change
                             
-                            Button("Update") {
+                            Button("update") {
                                 
                                 Task{
                                   
@@ -539,7 +549,8 @@ struct ActionButton: View {
     let icon: String
     let title: String
     let dark: Bool
-
+    @ObservedObject private var localizer = LocalizationManager.shared
+    
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             Image(icon)
@@ -547,7 +558,7 @@ struct ActionButton: View {
                 .scaledToFit()
                 .frame(width: 40, height: 40)
 
-            Text(title)
+            Text(localizer.localizedString(for: title)) // ✅ Localized string here
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(dark ? .white : .black)
                 .multilineTextAlignment(.center)
@@ -573,11 +584,11 @@ struct ChronicleCard: View {
           
             .overlay(
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Activities")
+                    Text("activities")
                         .font(.system(size: 14))
                         .foregroundColor( dark ? .white : .gray)
                     
-                    Text("Chronicle")
+                    Text("chronicle")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor( dark ? .white : .black)
                     
@@ -586,12 +597,12 @@ struct ChronicleCard: View {
                         .scaledToFit()
                         .frame(height: 80)
                     
-                    Text("Share today's activities with us to understand your health pattern.")
+                    Text("share_today_activity")
                         .font(.system(size: 14))
                         .foregroundColor( dark ? .white : .black)
                     
                     Button(action: {}) {
-                        Text("Add Now")
+                        Text("add_now")
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.white)
                             .padding()
@@ -612,7 +623,7 @@ struct OtherCard: View {
     let icon: String
     let title: String
     let dark: Bool
-    
+    @ObservedObject private var localizer = LocalizationManager.shared
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
             .fill(dark ? Color.customBackgroundDark : Color.customBackground)
@@ -623,7 +634,7 @@ struct OtherCard: View {
                         .scaledToFit()
                         .frame(width: 40, height: 40)
                     
-                    Text(title)
+                    Text(localizer.localizedString(for: title)) // ✅ Localized string here
                         .font(.system(size: 16, weight: .light))
                         .foregroundColor( dark ? .white : .black)
                 }

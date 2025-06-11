@@ -120,7 +120,49 @@ class APIService {
             throw NetworkError.badResponse
         }
 
-        guard (200...299).contains(httpResponse.statusCode) else {
+        // 🚨 If status is not 2xx, print and throw the actual error body
+        if !(200...299).contains(httpResponse.statusCode) {
+            if let errorBody = String(data: data, encoding: .utf8) {
+                print("❌ Server returned HTTP \(httpResponse.statusCode):\n\(errorBody)")
+            } else {
+                print("❌ Server returned HTTP \(httpResponse.statusCode), but no readable body.")
+            }
+            throw NetworkError.badStatus(httpResponse.statusCode)
+        }
+
+
+        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            throw NetworkError.failedToDecodeResponse
+        }
+
+        return json
+    }
+    
+    
+    
+    
+    func postRawDataWithAnyDict(toURL: String, body: [String: Any]) async throws -> [String: Any] {
+        guard let url = URL(string: toURL) else { throw NetworkError.badUrl }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 60
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.badResponse
+        }
+
+        if !(200...299).contains(httpResponse.statusCode) {
+            if let errorBody = String(data: data, encoding: .utf8) {
+                print("❌ Server returned HTTP \(httpResponse.statusCode):\n\(errorBody)")
+            } else {
+                print("❌ Server returned HTTP \(httpResponse.statusCode), but no readable body.")
+            }
             throw NetworkError.badStatus(httpResponse.statusCode)
         }
 
@@ -130,6 +172,11 @@ class APIService {
 
         return json
     }
+
+
+    
+    
+    
     
     func postWithQueryParams(toURL: String, parameters: [String: String]) async throws -> [String: Any] {
             // Construct query string from parameters

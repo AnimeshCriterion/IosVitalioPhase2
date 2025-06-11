@@ -64,7 +64,11 @@ struct VitalView: View {
                                           case "RBS":
                                             vitalsVM.matchSelectedValue = "vmValueRbs"
                                           case "Temperature":
-                                            vitalsVM.matchSelectedValue = "vmValueTemperature"
+                                            vitalsVM.matchSelectedValue = "vmValueTemperature"      
+                                          case "Weight":
+                                            vitalsVM.matchSelectedValue = "weight"
+                                          case "Height":
+                                            vitalsVM.matchSelectedValue = "height"
                                           default:
                                             vitalsVM.matchSelectedValue = "" // or show an error
                                           }

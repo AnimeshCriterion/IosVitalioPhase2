@@ -28,21 +28,10 @@ struct OTPContent: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Image("loginDr")
-                    .resizable()
-                    .scaledToFit()
-               
-                VStack(spacing: 20) {
-                    headerSection
-                    otpFields
-                    verifyButton
-                    resendSection
-                }
-                .padding()
-                .background(isDarkMode ? Color.customBackgroundDark : Color.white)
-                .cornerRadius(20, corners: [.topLeft, .topRight])
-                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
+            VStack {
+                headerText
+                doctorImage
+                formContainer
             }
             .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height, alignment: .topLeading)
             .background(Color.primaryBlue)
@@ -52,66 +41,125 @@ struct OTPContent: View {
             }
         }
     }
+    
+    var headerText: some View {
+        VStack {
+            Text("Empower Your Health with")
+                .font(.system(size: 26, weight: .light))
+                .foregroundColor(.white)
+            Text("Our Smart App!")
+                .font(.system(size: 26, weight: .semibold))
+                .foregroundColor(.white)
+        }
+    }
+    
+    var doctorImage: some View {
+        Image("loginDr")
+            .resizable()
+            .scaledToFit()
+    }
+    
+    var formContainer: some View {
+        VStack(spacing: 20) {
+            headerSection
+            otpFields
+            verifyButton
+            resendSection
+        }
+        .padding()
+        .background(isDarkMode ? Color.customBackgroundDark : Color.white)
+        .cornerRadius(20, corners: [.topLeft, .topRight])
+        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
+    }
 
     var headerSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Verify your UHID!")
+            Text("Login Verification!")
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(.blue)
-            Text("Enter 6 digit verification code sent to your number \(viewModel.extractedMobileNumber)")
-                .font(.system(size: 16))
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.leading)
+            
+            Button(action: {
+                route.navigateOnly(to: .login)
+                print("Verification text tapped")
+            }) {
+                verificationText
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    var verificationText: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Verification code sent to your mobile")
+                .foregroundColor(.gray)
+                .font(.system(size: 14))
+            
+            Text("+91 \(viewModel.uhidNumber)")
+                .foregroundColor(.primaryBlue)
+                .font(.system(size: 14))
+        }
+        .multilineTextAlignment(.leading)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var otpFields: some View {
         HStack(spacing: 8) {
             ForEach(0..<6, id: \.self) { index in
-                TextField("", text: $otp[index])
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 40, height: 50)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                    )
-                    .focused($focusedIndex, equals: index)
-                    .onChange(of: otp[index]) { oldValue, newValue in
-                        if newValue.count > 1 {
-                            otp[index] = String(newValue.prefix(1))
-                        }
-                        if !newValue.isEmpty && index < 5 {
-                            focusedIndex = index + 1
-                        } else if newValue.isEmpty && index > 0 {
-                            focusedIndex = index - 1
-                        }
-                    }
+                otpTextField(for: index)
             }
         }
+    }
+    
+    func otpTextField(for index: Int) -> some View {
+        TextField("", text: $otp[index])
+            .keyboardType(.numberPad)
+            .multilineTextAlignment(.center)
+            .frame(width: 40, height: 50)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+            )
+            .focused($focusedIndex, equals: index)
+            .onChange(of: otp[index]) { oldValue, newValue in
+                handleOTPChange(index: index, oldValue: oldValue, newValue: newValue)
+            }
+            .onKeyPress(.delete) {
+                handleBackspace(index: index)
+            }
+    }
+    
+    func handleOTPChange(index: Int, oldValue: String, newValue: String) {
+        // Handle input: limit to single character
+        if newValue.count > 1 {
+            otp[index] = String(newValue.prefix(1))
+            return
+        }
+        
+        // Handle forward navigation (when user enters a digit)
+        if !newValue.isEmpty && index < 5 {
+            focusedIndex = index + 1
+        }
+        // Handle backward navigation (when user deletes/backspaces)
+        else if newValue.isEmpty && !oldValue.isEmpty && index > 0 {
+            focusedIndex = index - 1
+        }
+    }
+    
+    func handleBackspace(index: Int) -> KeyPress.Result {
+        // Handle backspace when field is already empty
+        if otp[index].isEmpty && index > 0 {
+            focusedIndex = index - 1
+            return .handled
+        }
+        return .ignored
     }
 
     var verifyButton: some View {
         Button(action: {
             Task {
-                print("📝 Entered UHID: \(viewModel.uhidNumber)")
-                guard !viewModel.uhidNumber.isEmpty else {
-                    print("⚠️ Cannot proceed! UHID is empty.")
-                    return
-                }
-
-                await viewModel.verifyOTP(otp: otp.joined(), uhid: viewModel.uhidNumber)
-                if case .success = viewModel.apiState {
-                    if(viewModel.isRegistered == false){
-                        route.navigateOnly(to: .createAccountView)
-                    }else{
-                        route.navigateOnly(to: .dashboard)
-                    }
-                   
-                }
+                await handleVerification()
             }
         }) {
             Text("Verify")
@@ -122,30 +170,58 @@ struct OTPContent: View {
                 .cornerRadius(10)
         }
     }
+    
+    func handleVerification() async {
+        print("📝 Entered UHID: \(viewModel.uhidNumber)")
+        guard !viewModel.uhidNumber.isEmpty else {
+            print("⚠️ Cannot proceed! UHID is empty.")
+            return
+        }
+
+        await viewModel.verifyOTP(otp: otp.joined(), uhid: viewModel.uhidNumber)
+        if case .success = viewModel.apiState {
+            if viewModel.isRegistered == false {
+                route.navigateOnly(to: .createAccountView)
+            } else {
+                route.navigateOnly(to: .dashboard)
+            }
+        }
+    }
 
     var resendSection: some View {
-        HStack {
-            Text("Didn’t receive the Code?")
+        VStack {
+            Text("Didn't receive the Code?")
                 .foregroundColor(.gray)
+            
             Button(action: {
                 Task {
-                    await viewModel.login(uhid: viewModel.uhidNumber, isLoggedIn: "1")
-                    if case .success = viewModel.apiState {
-                        // Handle the successful resend logic here
-                    }
+                    await handleResendOTP()
                 }
             }) {
-                if case .loading = viewModel.apiState {
-                    ProgressView()
-                        .foregroundColor(.white)
-                } else {
-                    Text("Resend OTP")
-                        .foregroundColor(.blue)
-                        .fontWeight(.semibold)
-                }
+                resendButtonContent
             }
         }
         .font(.system(size: 14))
+    }
+    
+    var resendButtonContent: some View {
+        Group {
+            if case .loading = viewModel.apiState {
+                ProgressView()
+                    .foregroundColor(.white)
+            } else {
+                Text("Resend OTP")
+                    .foregroundColor(.blue)
+                    .fontWeight(.semibold)
+            }
+        }
+    }
+    
+    func handleResendOTP() async {
+        await viewModel.login(uhid: viewModel.uhidNumber, isLoggedIn: "1")
+        if case .success = viewModel.apiState {
+            // Handle the successful resend logic here
+        }
     }
 }
 

@@ -1,0 +1,70 @@
+/* 
+  Localizable.strings
+  vitalio_native
+
+  Created by HID-18 on 28/05/25.
+  
+*/
+
+
+
+
+
+"test 1" = "स्वागत है" ;
+
+
+"vitals" = "महत्वपूर्ण संकेत";
+"primary_actions" = "प्राथमिक क्रियाएं";
+"vitals_details" = "विटल्स विवरण";
+"fluid_intake_output" = "तरल सेवन\n/निष्कासन";
+"symptom_tracker" = "लक्षण ट्रैकर";
+"pills_reminder" = "गोली अनुस्मारक";
+"diet_checklist" = "आहार जांच सूची";
+
+"other" = "अन्य";
+"upload_report" = "रिपोर्ट अपलोड करें";
+"please_confirm_symptoms" = "कृपया लक्षणों की पुष्टि करें";
+"cancel" = "रद्द करें";
+"yes_save" = "हाँ, सहेजें";
+
+"symptoms_added_success" = "लक्षण सफलतापूर्वक जोड़े गए!";
+"vitals_added_success" = "वाइटल्स सफलतापूर्वक जोड़े गए!";
+"fluid_added_success" = "तरल सफलतापूर्वक जोड़ा गया!";
+
+"good_morning" = "सुप्रभात";
+"good_afternoon" = "नमस्कार";
+"good_evening" = "शुभ संध्या";
+"good_night" = "शुभ रात्रि";
+
+"notification" = "सूचना";
+"home" = "होम";
+"reminders" = "अनुस्मारक";
+"chat" = "चैट";
+"update" = "अपडेट";
+"activities" = "गतिविधियाँ";
+"chronicle" = "वृत्तांत";
+"cyclist_icon" = "साइकिल आइकन";
+"share_today_activity" = "आज की गतिविधियाँ साझा करें ताकि हम आपकी स्वास्थ्य प्रवृत्ति समझ सकें।";
+"add_now" = "अभी जोड़ें";
+
+
+
+
+
+"select_image" = "छवि चुनें";
+"camera" = "कैमरा";
+"photo_library" = "फोटो लाइब्रेरी";
+"edit_profile" = "प्रोफ़ाइल संपादित करें";
+"allergies" = "एलर्जी";
+"switch_account" = "खाता बदलें";
+"connect_smart_watch" = "स्मार्ट वॉच कनेक्ट करें";
+"add_member" = "सदस्य जोड़ें";
+"language" = "भाषा";
+"dark_mode" = "डार्क मोड";
+"faqs" = "अक्सर पूछे जाने वाले प्रश्न";
+"feedback" = "प्रतिपुष्टि";
+"create_account" = "खाता बनाएं";
+"logout_prompt" = "क्या आप वाकई लॉगआउट करना चाहते हैं?";
+"cancel" = "रद्द करें";
+"logout" = "लॉगआउट";
+
