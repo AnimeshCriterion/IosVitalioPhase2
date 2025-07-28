@@ -42,13 +42,11 @@ struct Dashboard: View {
                     }, dark: isDarkMode)}
                 ScrollView {
                     VStack(alignment: .leading){
+                        if !vitalsVM.vitals.isEmpty {
                         LocalizedText(key:"vitals")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor( isDarkMode ? .white :  .black)
                    
-                        if(vitalsVM.vitals.isEmpty) {
-                            ProgressView()
-                        }else{
                             VitalsCard(dark: isDarkMode)
                         
                         }
@@ -312,37 +310,39 @@ struct CustomAppBar: View {
     
     var body: some View {
         HStack {
-            
             Button(action: {
                 onMenuTap?()
                 viewModel.isDrawerOpen.toggle()
             }) {
-       
-                    if editProfileVM.loadingImage {  ProgressView() } else {    RemoteImage(url: UserDefaultsManager.shared.getUserData()?.profileUrl)
+                HStack(spacing: 10) {
+                    if editProfileVM.loadingImage {
+                        ProgressView()
+                            .frame(width: 50, height: 50)
+                    } else {
+                        RemoteImage(url: UserDefaultsManager.shared.getUserData()?.profileUrl)
                             .clipShape(Circle())
-                        .frame(width: 50, height: 50)}
-             
+                            .frame(width: 50, height: 50)
+                    }
 
-                  
+                    VStack(alignment: .leading, spacing: 2) {
+                        GreetingView(dark: dark)
+                        CustomText(userData?.patientName ?? "", color: dark ? .white : .black)
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                    }
+                }
             }
- 
-            VStack(alignment: .leading) {
-                GreetingView(dark: dark )
-//                CustomText("Good Morning", color: dark ? .white : .black)
-//                    .font(.footnote)
-                CustomText(userData?.patientName ?? "" , color: dark ? .white : .black)
-        
-                    .font(.headline)
-                    .fontWeight(.semibold)
-            }
- 
+            .buttonStyle(PlainButtonStyle()) // Avoid default blue tint on tap
+
             Spacer()
- 
-            Image("Notification")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 24, height: 24)
- 
+            Button(action:{}){
+                Image("Notification")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            }
+            
+
             Button(action: {
                 showSosSheet = true
             }) {
@@ -360,6 +360,7 @@ struct CustomAppBar: View {
                 .presentationDragIndicator(.visible)
         }
     }
+
 }
  
 

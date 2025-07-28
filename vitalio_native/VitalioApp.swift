@@ -35,6 +35,21 @@ struct VitalioApp: App {
         _ = NetworkMonitor.shared  // starts monitoring
         FirebaseApp.configure()
         requestPushNotificationPermission()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            Messaging.messaging().token { token, error in
+                if let error = error {
+                    print("❌ Error fetching FCM token: \(error.localizedDescription)")
+                } else if let token = token {
+                    print("🔥 FCM token: \(token)")
+                    UserDefaultsManager.shared.set(token, forKey: "fcmToken")
+                    let fcmToken = UserDefaultsManager.shared.get(forKey: "fcmToken") ?? "notoken"
+                    
+                } else {
+                    print("⚠️ No FCM token available yet.")
+                }
+            }
+        }
+ 
     }
 
     var body: some Scene {
@@ -94,6 +109,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         print("📲 APNs Device Token: \(tokenString)")
+        // ✅ IMPORTANT: tell Firebase Messaging about your APNs token
+         Messaging.messaging().apnsToken = deviceToken
     }
 
     // ❌ Failed to Register

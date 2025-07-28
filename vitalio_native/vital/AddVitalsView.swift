@@ -5,6 +5,7 @@ import SwiftUI
 struct AddVitalsView: View {
     @State private var showPopup = false
     @State private var value: String = ""
+    @State private var valueSecond: String = ""
     @EnvironmentObject var vitalsVM: VitalsViewModal
     @EnvironmentObject var route: Routing
     @EnvironmentObject var theme: ThemeManager
@@ -64,7 +65,7 @@ struct AddVitalsView: View {
         .padding(.horizontal, 20)
         .background(isDark ? Color.customBackgroundDark : Color.customBackground2)
         .sheet(isPresented: $showPopup) {
-            VitalPopupView(showPopup: $showPopup, value: $value)
+            VitalPopupView(showPopup: $showPopup, value: $value,valueSecond: $valueSecond)
                 .presentationDetents([.height(300)])
                 .presentationDragIndicator(.visible)
                 .environmentObject(vitalsVM)
@@ -85,6 +86,7 @@ struct VitalPopupView: View {
     @EnvironmentObject var route: Routing
     @Binding var showPopup: Bool
     @Binding var value: String
+    @Binding var valueSecond: String
     @EnvironmentObject var vitalsVM: VitalsViewModal
 
     var body: some View {
@@ -120,12 +122,30 @@ struct VitalPopupView: View {
 
                         Spacer()
 
-                        TextField("00", text: $value)
-                            .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 12)
-                            .frame(width: 60)
-                            .multilineTextAlignment(.trailing)
+                        if vitalsVM.data == "Blood Pressure" {
+                                                VStack {
+                                                    TextField("Sys", text: $value)
+                                                        .font(.body)
+                                                        .foregroundColor(.black)
+                                                        .padding(.vertical, 8)
+                                                        .frame(width: 60)
+                                                        .multilineTextAlignment(.trailing)
+
+                                                    TextField("Dias", text: $valueSecond)
+                                                        .font(.body)
+                                                        .foregroundColor(.black)
+                                                        .padding(.vertical, 8)
+                                                        .frame(width: 60)
+                                                        .multilineTextAlignment(.trailing)
+                                                }
+                                            } else {
+                                                TextField("00", text: $value)
+                                                    .font(.largeTitle)
+                                                    .foregroundColor(.black)
+                                                    .padding(.vertical, 12)
+                                                    .frame(width: 60)
+                                                    .multilineTextAlignment(.trailing)
+                                            }
                     }
                     .padding(.horizontal)
                 }
@@ -134,11 +154,28 @@ struct VitalPopupView: View {
             }
 
             Button("Done") {
-                Task{
-                    await vitalsVM.addVitals([vitalsVM.matchSelectedValue: value])
-                                value = ""
+                Task {
+                    if vitalsVM.data == "Blood Pressure" {
+                        if !value.isEmpty && !valueSecond.isEmpty {
+                            await vitalsVM.addVitals([
+                                vitalsVM.matchSelectedValue[0]: value,
+                                vitalsVM.matchSelectedValue[1]: valueSecond
+                            ])
+                            // Clear values only after adding
+                            value = ""
+                            valueSecond = ""
+                            showPopup = false
+                        }
+                    } else {
+                        if !value.isEmpty {
+                            await vitalsVM.addVitals([
+                                vitalsVM.matchSelectedValue[0]: value
+                            ])
+                            value = ""
+                            showPopup = false
+                        }
+                    }
                 }
-                showPopup = false
             }
             .frame(maxWidth: .infinity)
             .frame(height: 40)

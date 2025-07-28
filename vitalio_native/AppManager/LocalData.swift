@@ -45,6 +45,14 @@ final class UserDefaultsManager {
     func saveIsLoggedIn(loggedIn: Bool){
         set(loggedIn, forKey: "loggedIn")
     }
+    func deleteIsLoggedIn() {
+        UserDefaults.standard.removeObject(forKey: "loggedIn")
+    }
+    func logout() {
+        clearAll()
+    }
+
+
     
     func getIsLoggedIn() -> Bool? {
         return get(forKey: "loggedIn")

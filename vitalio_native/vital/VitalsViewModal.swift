@@ -20,9 +20,9 @@ class VitalsViewModal: ObservableObject {
     @Published var patientVital: [PatientVital] = []
     @Published var vitalsDate: [VitalsDate] = []
     @Published var selectedVital: Vital?
-    @Published var matchSelectedValue = ""
-    @Published var vmValueBPSys = "0"
-    @Published var vmValueBPDias = "0"
+    @Published var matchSelectedValue: [String] = []
+    @Published var vmValueBPSys = ""
+    @Published var vmValueBPDias = ""
     @Published var vmValueSPO2 = "0"
     @Published var vmValueRespiratoryRate = "0"
     @Published var vmValueHeartRate = "0"
@@ -107,7 +107,84 @@ class VitalsViewModal: ObservableObject {
 //            print("❌ Error Fetching Vitals:", error)
 //        }
 //    }
-    
+    var groupedVitals: [Vital] {
+        // All vital names you expect
+        let allVitalNames = [
+            "Blood Pressure", "HeartRate", "Spo2", "Temperature", "Pulse",
+            "RespRate", "RBS", "Weight", "Height"
+        ]
+        
+        var result: [Vital] = []
+        var addedBP = false
+
+        // Step 1: Handle existing vitals
+        for vital in vitals {
+            if vital.vitalName == "BP_Sys" || vital.vitalName == "BP_Dias" {
+                if addedBP { continue }
+                if let sys = vitals.first(where: { $0.vitalName == "BP_Sys" }),
+                   let dias = vitals.first(where: { $0.vitalName == "BP_Dias" }) {
+                    let bpVital = Vital(
+                        uhid: sys.uhid,
+                        pmId: sys.pmId,
+                        vitalID: sys.vitalID,
+                        vitalName: "Blood Pressure",
+                        vitalValue: 0,
+                        unit: "mmHg",
+                        vitalDateTime: sys.vitalDateTime,
+                        userId: sys.userId,
+                        rowId: sys.rowId
+                    )
+                    result.append(bpVital)
+                    addedBP = true
+                }
+            } else {
+                result.append(vital)
+            }
+        }
+
+        // Step 2: Add missing vitals with placeholder
+        let existingNames = Set(result.map { $0.vitalName })
+        for name in allVitalNames where !existingNames.contains(name) {
+            let placeholderVital = Vital(
+                uhid: "", pmId: 0, vitalID: 0,
+                vitalName: name,
+                vitalValue: 0,
+                unit: unitForVital(name), // Optional: provide default unit
+                vitalDateTime: "", userId: 0, rowId: 0
+            )
+            result.append(placeholderVital)
+        }
+
+        return result
+    }
+    func unitForVital(_ name: String) -> String {
+        switch name {
+        case "Blood Pressure": return "mmHg"
+        case "HeartRate", "Pulse": return "/min"
+        case "Spo2": return "%"
+        case "Temperature": return "°F"
+        case "RespRate": return "/min"
+        case "RBS": return "mg/dL"
+        case "Weight": return "kg"
+        case "Height": return "cm"
+        default: return ""
+        }
+    }
+
+
+    let vitalPriorityOrder: [String] = [
+        "BP_Sys",       // 1. Blood Pressure (systolic)
+        "BP_Dias",      // 1. Blood Pressure (diastolic)
+        "HeartRate",    // 2. Heart Rate
+        "Spo2",         // 3. SpO2
+        "Temperature",  // 4. Temperature
+        "RespRate",     // 5. Respiratory Rate
+        "RBS",          // 6. RBS
+        "Pulse",
+        "Weight",        // 7. Weight
+        "Height"
+    ]
+
     
     func getVitals() async {
         let uhid = UserDefaultsManager.shared.getUHID() ?? ""
@@ -126,6 +203,14 @@ class VitalsViewModal: ObservableObject {
             let decoded = try JSONDecoder().decode(VitalResponse.self, from: jsonData)
 
             var fetchedVitals = decoded.responseValue.lastVital
+            print("fetchedVitals \(fetchedVitals)")
+            let orderedVitals = fetchedVitals.sorted {
+                let firstIndex = vitalPriorityOrder.firstIndex(of: $0.vitalName) ?? Int.max
+                let secondIndex = vitalPriorityOrder.firstIndex(of: $1.vitalName) ?? Int.max
+                return firstIndex < secondIndex
+            }
+
+            print("orderedVitals \(orderedVitals)")
 
             // MARK: - Add missing default vitals
             let formatter = DateFormatter()
@@ -151,7 +236,7 @@ class VitalsViewModal: ObservableObject {
             fetchedVitals.append(contentsOf: missingDefaults)
 
             DispatchQueue.main.async {
-                self.vitals = fetchedVitals
+                self.vitals = orderedVitals
                 self.isLoading = false
 
                 // 🧠 Map to view model variables
@@ -196,6 +281,10 @@ class VitalsViewModal: ObservableObject {
 //                print("vmValueHeight: \(self.vmValueHeight)")
             }
         } catch {
+            DispatchQueue.main.async {
+                self.vitals = []
+                self.isLoading = false
+            }
             print("❌ Error Fetching Vitals:", error)
         }
     }
@@ -259,18 +348,19 @@ class VitalsViewModal: ObservableObject {
     }
     
     
-    
+    @MainActor
     func addVitals(_ values: [String: String]) async {
+        print("matchSelectedValue \(matchSelectedValue)")
         let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
         var body = [
-            "vmValueBPSys": vmValueBPSys,
-            "vmValueBPDias": vmValueBPDias,
-            "vmValueSPO2": vmValueSPO2,
-            "vmValueRespiratoryRate": vmValueRespiratoryRate,
-            "vmValueHeartRate": vmValueHeartRate,
-            "vmValuePulse": vmValuePulse,
-            "vmValueRbs": vmValueRbs,
-            "vmValueTemperature": vmValueTemperature,
+//            "vmValueBPSys": vmValueBPSys,
+//            "vmValueBPDias": vmValueBPDias,
+//            "vmValueSPO2": vmValueSPO2,
+//            "vmValueRespiratoryRate": vmValueRespiratoryRate,
+//            "vmValueHeartRate": vmValueHeartRate,
+//            "vmValuePulse": vmValuePulse,
+//            "vmValueRbs": vmValueRbs,
+//            "vmValueTemperature": vmValueTemperature,
             "uhid": uhid,
             "userId":(UserDefaultsManager.shared.getUserData()?.userId ?? "0"),
             "vitalDate": myCurrentDate(Date()),
@@ -291,6 +381,7 @@ class VitalsViewModal: ObservableObject {
                  } else {
                      print("📦 Raw Response:\n\(result)")
                  }
+            matchSelectedValue.removeAll()
             Task{
             await getVitals()
             }
@@ -446,43 +537,43 @@ class VitalsViewModal: ObservableObject {
     
     
      
-    enum VitalStatus {
-
-        case normal
-
-        case borderline
-
-        case critical
-     
-        var color: Color {
-
-            switch self {
-
-            case .normal: return .green
-
-            case .borderline: return .orange
-
-            case .critical: return .red
-
-            }
-
-        }
-     
-        var label: String {
-
-            switch self {
-
-            case .normal: return "Normal"
-
-            case .borderline: return "Borderline"
-
-            case .critical: return "Critical"
-
-            }
-
-        }
-
-    }
+//    enum VitalStatus {
+//
+//        case normal
+//
+//        case borderline
+//
+//        case critical
+//     
+//        var color: Color {
+//
+//            switch self {
+//
+//            case .normal: return .green
+//
+//            case .borderline: return .orange
+//
+//            case .critical: return .red
+//
+//            }
+//
+//        }
+//     
+//        var label: String {
+//
+//            switch self {
+//
+//            case .normal: return "Normal"
+//
+//            case .borderline: return "Borderline"
+//
+//            case .critical: return "Critical"
+//
+//            }
+//
+//        }
+//
+//    }
 
     func getVitalStatus(for vital: String, value: String) -> VitalStatus {
         let cleanedValue = value.filter("0123456789.".contains)
@@ -673,3 +764,19 @@ class VitalsViewModal: ObservableObject {
     
 }
 
+enum VitalStatus {
+    case normal
+    case borderline
+    case critical
+
+    var color: Color {
+        switch self {
+        case .normal:
+            return .green
+        case .borderline:
+            return .orange
+        case .critical:
+            return .red
+        }
+    }
+}

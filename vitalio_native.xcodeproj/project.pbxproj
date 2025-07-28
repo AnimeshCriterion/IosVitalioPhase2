@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521000D52E0139BD00AE9936 /* preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521000D42E0139AF00AE9936 /* preview.swift */; };
+		525F3C582DF970C200D69430 /* Edit Profile 4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F3C572DF970C200D69430 /* Edit Profile 4.swift */; };
+		528CD8842E1697E70002B795 /* other_disease.gif in Resources */ = {isa = PBXBuildFile; fileRef = 528CD8832E1697E70002B795 /* other_disease.gif */; };
+		5293CF122E129C770071D66B /* confetti.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5293CF112E129C770071D66B /* confetti.gif */; };
+		52DA85C92E323E5E00E19B0F /* otp_fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA85C82E323E5500E19B0F /* otp_fields.swift */; };
 		8D029BA42DE82DF0000FE708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D029BA62DE82DF0000FE708 /* InfoPlist.strings */; };
 		8D0582A62DAA257F0043330A /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A52DAA257F0043330A /* Intake.swift */; };
 		8D0582A82DAA37380043330A /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A72DAA37370043330A /* BarChart.swift */; };
@@ -61,7 +66,6 @@
 		8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */; };
 		8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */; };
 		8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */; };
-		8D78480C2DC32E2F004A255D /* Edit Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78480A2DC32E2F004A255D /* Edit Profile.swift */; };
 		8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78480D2DC38CD8004A255D /* ImagePicker.swift */; };
 		8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257742D97D39300CF96B4 /* appbar.swift */; };
 		8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF6392D9BEC5A0026726C /* url.swift */; };
@@ -133,6 +137,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		521000D42E0139AF00AE9936 /* preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = preview.swift; sourceTree = "<group>"; };
+		525F3C572DF970C200D69430 /* Edit Profile 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Edit Profile 4.swift"; sourceTree = "<group>"; };
+		528CD8832E1697E70002B795 /* other_disease.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = other_disease.gif; sourceTree = "<group>"; };
+		5293CF112E129C770071D66B /* confetti.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = confetti.gif; sourceTree = "<group>"; };
+		52DA85C82E323E5500E19B0F /* otp_fields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otp_fields.swift; sourceTree = "<group>"; };
 		8D029BA52DE82DF0000FE708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D029BA72DE82DF3000FE708 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D0582A52DAA257F0043330A /* Intake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intake.swift; sourceTree = "<group>"; };
@@ -174,7 +183,6 @@
 		8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewmodal.swift; sourceTree = "<group>"; };
 		8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dietDataModel.swift; sourceTree = "<group>"; };
 		8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModal.swift; sourceTree = "<group>"; };
-		8D78480A2DC32E2F004A255D /* Edit Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Edit Profile.swift"; path = "../../../../../Downloads/Edit Profile.swift"; sourceTree = "<group>"; };
 		8D78480D2DC38CD8004A255D /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		8D81EC682D93C21700F46773 /* Darkmode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkmode.swift; sourceTree = "<group>"; };
 		8D82576F2D97D05700CF96B4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
@@ -293,6 +301,7 @@
 		8D2E8FC62DDAF4BA0008EB66 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				521000D42E0139AF00AE9936 /* preview.swift */,
 				8D2E8FC72DDAF4CC0008EB66 /* country_json.json */,
 				8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */,
 				8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */,
@@ -355,6 +364,7 @@
 		8D46DCE22D95206F00FAC567 /* AppManager */ = {
 			isa = PBXGroup;
 			children = (
+				52DA85C82E323E5500E19B0F /* otp_fields.swift */,
 				8D9BCAAA2DA0F99B00405837 /* routing */,
 				8D8257732D97D38200CF96B4 /* common */,
 				8DFFCD282D926152007A7483 /* api */,
@@ -371,9 +381,9 @@
 		8D46DCE32D9520C900FAC567 /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
+				525F3C572DF970C200D69430 /* Edit Profile 4.swift */,
 				8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */,
 				8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */,
-				8D78480A2DC32E2F004A255D /* Edit Profile.swift */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -480,6 +490,8 @@
 				8D188B7F2DF94B39007267B9 /* familygif.gif */,
 				8D188B7D2DF94AE3007267B9 /* diseasegif.gif */,
 				8D188B7B2DF94AAB007267B9 /* heightgif.gif */,
+				5293CF112E129C770071D66B /* confetti.gif */,
+				528CD8832E1697E70002B795 /* other_disease.gif */,
 				8D188B792DF94A40007267B9 /* weightgif.gif */,
 				8D188B772DF94A28007267B9 /* addressgif.gif */,
 				8D188B752DF949FE007267B9 /* bloodgif.gif */,
@@ -693,12 +705,14 @@
 				8D0BBDC02DE6D7FD00ACFBBC /* Localizable.strings in Resources */,
 				8D188B722DF948E7007267B9 /* namegif.gif in Resources */,
 				8D188B7E2DF94AE3007267B9 /* diseasegif.gif in Resources */,
+				528CD8842E1697E70002B795 /* other_disease.gif in Resources */,
 				8D188B822DF94B86007267B9 /* setreminder.gif in Resources */,
 				8D188B782DF94A28007267B9 /* addressgif.gif in Resources */,
 				8D029BA42DE82DF0000FE708 /* InfoPlist.strings in Resources */,
 				8D188B7C2DF94AAB007267B9 /* heightgif.gif in Resources */,
 				8D188B7A2DF94A40007267B9 /* weightgif.gif in Resources */,
 				8D188B6E2DF9406B007267B9 /* calandergif.gif in Resources */,
+				5293CF122E129C770071D66B /* confetti.gif in Resources */,
 				8D188B762DF949FE007267B9 /* bloodgif.gif in Resources */,
 				8D188B742DF9497D007267B9 /* gendergif.gif in Resources */,
 				8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */,
@@ -741,17 +755,19 @@
 				8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */,
 				8DC4EAF12DD3221400F806B8 /* DeviceLimitPopup.swift in Sources */,
 				8D1544362DA91D72009E7433 /* DashboardViewModal.swift in Sources */,
-				8D78480C2DC32E2F004A255D /* Edit Profile.swift in Sources */,
 				8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */,
 				8D966B632D9CF72A00B37927 /* Darkmode.swift in Sources */,
 				8DF6EFEB2DB799DB00E2C69A /* VitalView.swift in Sources */,
 				8DF275A92DCA168300A39658 /* sos.swift in Sources */,
+				52DA85C92E323E5E00E19B0F /* otp_fields.swift in Sources */,
 				8DDF8EDB2DBCE1A500F8B47D /* AllergiesViewModal.swift in Sources */,
 				8DE8699C2DB6215A003BD8A8 /* Symptoms View Model.swift in Sources */,
 				8D966B612D9CF72300B37927 /* Modal.swift in Sources */,
 				8D188B692DF93C00007267B9 /* gif.swift in Sources */,
 				8D966B602D9CF71F00B37927 /* LoginViewModal.swift in Sources */,
+				521000D52E0139BD00AE9936 /* preview.swift in Sources */,
 				8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */,
+				525F3C582DF970C200D69430 /* Edit Profile 4.swift in Sources */,
 				8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */,
 				8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */,
 				8D966B5F2D9CF71D00B37927 /* otp.swift in Sources */,

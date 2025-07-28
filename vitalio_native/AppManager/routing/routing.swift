@@ -60,5 +60,15 @@ final class Routing : ObservableObject{
             navpath.removeLast(navpath.count)
         }
     }
+    func replaceAllWith(_ destination: AuthFlow) {
+        navpath = NavigationPath()
+        navpath.append(destination)
+    }
 
+}
+
+
+@MainActor
+class AppState: ObservableObject {
+    @Published var routing = Routing()
 }

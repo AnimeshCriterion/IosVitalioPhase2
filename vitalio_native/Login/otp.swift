@@ -27,18 +27,25 @@ struct OTPContent: View {
     @EnvironmentObject var viewModel: LoginViewModal
 
     var body: some View {
-        ScrollView {
-            VStack {
-                headerText
-                doctorImage
-                formContainer
+        ZStack{
+            ScrollView {
+                VStack {
+                    headerText
+                    doctorImage
+                    formContainer
+                }
+                .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height, alignment: .topLeading)
+                .background(Color.primaryBlue)
+                .preferredColorScheme(ThemeManager().colorScheme)
+                .onAppear {
+                    focusedIndex = 0
+                }
             }
-            .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height, alignment: .topLeading)
-            .background(Color.primaryBlue)
-            .preferredColorScheme(ThemeManager().colorScheme)
-            .onAppear {
-                focusedIndex = 0
-            }
+//            if viewModel.showToast {
+//                       ToastView(message: "OTP does not matched or expired")
+//                           .padding(.bottom, 40)
+//                           .transition(.opacity)
+//                   }
         }
     }
     
@@ -103,12 +110,22 @@ struct OTPContent: View {
     }
 
     var otpFields: some View {
-        HStack(spacing: 8) {
-            ForEach(0..<6, id: \.self) { index in
-                otpTextField(for: index)
+        VStack(alignment: .leading ,spacing: 4) {
+            HStack(spacing: 8) {
+                ForEach(0..<6, id: \.self) { index in
+                    otpTextField(for: index)
+                }
+            }
+
+            if viewModel.isOTPInvalid {
+                Text("OTP didn’t match!")
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                    .padding(.top, 4)
             }
         }
     }
+
     
     func otpTextField(for index: Int) -> some View {
         TextField("", text: $otp[index])
@@ -119,8 +136,9 @@ struct OTPContent: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    .stroke(viewModel.isOTPInvalid ? Color.red : Color.gray.opacity(0.3), lineWidth: 1)
             )
+            .background(viewModel.isOTPInvalid ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
             .focused($focusedIndex, equals: index)
             .onChange(of: otp[index]) { oldValue, newValue in
                 handleOTPChange(index: index, oldValue: oldValue, newValue: newValue)
@@ -165,19 +183,20 @@ struct OTPContent: View {
             Text("Verify")
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.blue)
+                .background(otp.joined().count < 6 ? Color.gray :Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-        }
+        }.disabled(otp.joined().count < 6)
     }
     
     func handleVerification() async {
+        viewModel.isOTPInvalid = false // reset initially
         print("📝 Entered UHID: \(viewModel.uhidNumber)")
         guard !viewModel.uhidNumber.isEmpty else {
             print("⚠️ Cannot proceed! UHID is empty.")
             return
         }
-
+        
         await viewModel.verifyOTP(otp: otp.joined(), uhid: viewModel.uhidNumber)
         if case .success = viewModel.apiState {
             if viewModel.isRegistered == false {
@@ -186,6 +205,9 @@ struct OTPContent: View {
                 route.navigateOnly(to: .dashboard)
             }
         }
+        else {
+                viewModel.isOTPInvalid = true // trigger red error styling
+            }
     }
 
     var resendSection: some View {

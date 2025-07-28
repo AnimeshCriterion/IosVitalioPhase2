@@ -136,3 +136,19 @@ struct SuccessPopupViewError: View {
         }
     }
 }
+
+
+struct ToastView: View {
+    var message: String
+
+    var body: some View {
+        Text(message)
+            .font(.subheadline)
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 16)
+            .background(Color.black.opacity(0.8))
+            .cornerRadius(8)
+            .transition(.opacity)
+    }
+}

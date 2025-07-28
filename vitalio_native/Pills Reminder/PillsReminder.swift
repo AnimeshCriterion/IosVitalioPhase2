@@ -76,6 +76,7 @@ struct MedicineScheduleView: View {
         VStack(alignment: .leading, spacing: 10) {
 
             // Scrollable Table
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Your pills for the day")
@@ -84,6 +85,7 @@ struct MedicineScheduleView: View {
                                               .padding(.leading,20)
                     Spacer(minLength: 30)
                     // Header Row (Time Slots)
+                    
                     HStack {
                         Text("Medicine")
                             .padding(.horizontal)

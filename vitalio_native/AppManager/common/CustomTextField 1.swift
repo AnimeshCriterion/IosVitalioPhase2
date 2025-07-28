@@ -8,27 +8,30 @@ import SwiftUI
 
 struct CustomTextField1: View {
     @Binding var text: String
-    let title: String                // Label on top
-    let placeholder: String          // Placeholder inside the text field
-    let onChange: (String) -> Void   // Change callback
+    let title: String
+    let placeholder: String
+    let onChange: (String) -> Void
 
     // Optional Customization
-    var titleFont: Font = .caption
+    var titleFont: Font = .body
     var titleColor: Color = .gray
     var textFieldFont: Font = .body
     var textColor: Color = .black
     var backgroundColor: Color = .white
-    var cornerRadius: CGFloat = 20
+    var cornerRadius: CGFloat = 10
     var placeholderFont: Font = .system(size: 14)
     var placeholderColor: Color = .gray
     var showBorder: Bool = false
-       var borderColor: Color = .gray
-       var borderWidth: CGFloat = 1
-    
+    var borderColor: Color = .gray
+    var borderWidth: CGFloat = 1
+
+    /// ✅ NEW PROPERTY
+    var isDisabled: Bool = false
+
     @EnvironmentObject var themeManager: ThemeManager
-       var isDarkMode: Bool {
-           themeManager.colorScheme == .dark
-       }
+    var isDarkMode: Bool {
+        themeManager.colorScheme == .dark
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -38,20 +41,22 @@ struct CustomTextField1: View {
 
             TextField(placeholder, text: $text)
                 .font(placeholderFont)
-                .foregroundColor(placeholderColor)
+                .foregroundColor(isDisabled ? .gray : textColor)
                 .padding(.horizontal, 20)
                 .frame(height: 50)
-                .background(isDarkMode ? Color.customBackgroundDark2 :  backgroundColor)
+                .background(isDarkMode ? Color.customBackgroundDark2 : backgroundColor)
                 .cornerRadius(cornerRadius)
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(borderColor, lineWidth: showBorder ? borderWidth : 0)
                 )
+                .disabled(isDisabled) // ✅ disables editing
                 .multilineTextAlignment(.leading)
                 .onChange(of: text, perform: onChange)
         }
     }
 }
+
 
 
 

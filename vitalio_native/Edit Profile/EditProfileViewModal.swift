@@ -18,16 +18,62 @@ class EditProfileViewModal : ObservableObject {
     @Published var selectedBloodGroup: String = ""
     @Published var height: String = ""
     @Published var emergencyContact: String = ""
+    @Published var email: String = ""
     @Published var age: String = ""
     @Published var loadingImage: Bool = false
+    @Published var shouldDismissView = false
     
+    var isFormValid: Bool {
+        let emailRegex = #"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"#
+        let emailIsValid = NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+
+        return !firstName.isEmpty &&
+               !emergencyContact.isEmpty &&
+               emergencyContact.count >= 10 &&
+               (email.isEmpty || emailIsValid)
+    }
+
     
+    var emergencyContactError: String? {
+        if emergencyContact.isEmpty {
+            return "Mobile number is required."
+        }
+        if emergencyContact.count < 10 {
+            return "Mobile number must be at least 10 digits."
+        }
+        return nil
+    }
+    var firstNameError: String? {
+        if firstName.isEmpty {
+            return "First name is required."
+        }
+        return nil
+    }
+    var isEmailValid: Bool {
+        let email = self.email
+        let emailRegEx = #"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"#
+        let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return predicate.evaluate(with: email)
+    }
+
+
 //    init() {
 ////        loadUserData()
 ////        print(userData?.patientName as? String ?? "")
 //    }
 //    
-
+func reset() {
+        firstName = ""
+        lastName = ""
+        dob = Date()
+        gender = ""
+        weight = ""
+        selectedBloodGroup = ""
+        height = ""
+        emergencyContact = ""
+        email = ""
+    self.shouldDismissView = false
+    }
      func loadUserData() {
         guard let userData = UserDefaultsManager.shared.getUserData() else {
                 print("No user data found")
@@ -36,13 +82,27 @@ class EditProfileViewModal : ObservableObject {
                 return
             }
 
-        firstName = userData.patientName
+//        firstName = userData.patientName
+         let nameComponents = userData.patientName.components(separatedBy: " ")
+
+          firstName = nameComponents.first ?? ""
+          lastName = nameComponents.dropFirst().joined(separator: " ")
+         print("First Name: \(firstName)")
+         print("Last Name: \(lastName)")
         age = userData.age
         emergencyContact = userData.mobileNo
+         if(userData.emailID != "0"){
+             email = userData.emailID
+         }
+         print("\(userData) getting gender")
         if userData.genderId == "1" {
             gender = "Male"
-        }else{
-            gender = "Female"
+        }
+         else if userData.genderId == "2"{
+             gender = "Female"
+         }
+         else{
+            gender = "Other"
         }
         weight = userData.weight
         height = userData.height
@@ -117,7 +177,22 @@ class EditProfileViewModal : ObservableObject {
            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                self.updateProfile = false
            }
+        self.shouldDismissView = true
+        
        }
+    var genderID: String {
+        switch gender {
+        case "Male":
+            return "1"
+        case "Female":
+            return "2"
+        case "Other":
+            return "3"
+        default:
+            return "0" // or handle unexpected case
+        }
+    }
+
     
     func updateProfileData() async throws {
         print("Dateofbirth: \(formatDate(dob))")
@@ -128,12 +203,13 @@ class EditProfileViewModal : ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
+        let fullName = "\(firstName) \(lastName)"
+        print("fullName: \(fullName)")
         let parameters: [String: Any] = [
             "Pid": UserDefaultsManager.shared.getUserData()?.pid ?? 8,
-            "PatientName": firstName,
-            "EmailID":  UserDefaultsManager.shared.getUserData()?.emailID ?? "",
-            "GenderId":  UserDefaultsManager.shared.getUserData()?.genderId ?? "",
+            "PatientName": fullName,
+            "EmailID":  email,
+            "GenderId":  genderID,
             "BloodGroupId": String(selectedBloodGroupID!),
             "Height": height,
             "Weight": weight,
@@ -169,6 +245,7 @@ class EditProfileViewModal : ObservableObject {
             
         }
         updateSuccess()
+//        self.shouldDismissView = true
         // Decode and save to UserDefaults
         guard let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let responseArray = result["responseValue"] as? [[String: Any]],

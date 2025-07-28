@@ -15,15 +15,20 @@ class LoginViewModal : ObservableObject {
     
     
 
-    
+    var route: Routing?
+
+        func navigateToDashboard() {
+            route?.navigate(to: .dashboard)
+        }
     
     @Published var uhidNumber: String = "" // Moved UHID to ViewModel
     @Published var extractedMobileNumber: String = "" // Moved UHID to ViewModel
     @Published var isOTPSuccess: Bool = false  // ✅ Track OTP status
     @Published var isLoggedIn: Bool = false  // ✅ user Logged In
     @Published var apiState: APIState = .idle  // Track API state
-    
-//    
+    @Published var isOTPInvalid: Bool = false
+    @Published var tempPatientModel: PatientModel?
+//
 //    func loadData( uhid: String) async {
 //            do {
 //                
@@ -56,49 +61,53 @@ class LoginViewModal : ObservableObject {
 //            }
 //    }
     
-    func loadData(uhid: String) async {
-        
-          print("step 1")
-          do {
-              let params = ["mobileNo": "", "uhid": uhid,"clientId" : clientID]
-              let result = try await APIService.shared.fetchRawData(
-                  fromURL: baseURL7082 + getPatientDetailsByMobileNo,
-                  parameters: params
-              )
-              print("api data", result)
-   
-              guard let responseArray = result["responseValue"] as? [Any],
-                    let patientData = responseArray.first as? [String: Any] else {
-                  print("Failed to parse response")
-                  return
-              }
-   
-              // ✅ Convert to JSON data
-              let jsonData = try JSONSerialization.data(withJSONObject: patientData)
-              
-              // ✅ Decode into PatientModel
-              let patientModel = try JSONDecoder().decode(PatientModel.self, from: jsonData)
-             print("\( patientModel.profileUrl) from api")
-              
-              // ✅ Save to UserDefaults
-              UserDefaultsManager.shared.saveUserData(patientModel)
-   
-              let id = String(patientModel.userId)
-              let extractedUHID = patientModel.uhID ?? ""
-              
-              
-              print("Extracted id: \(id), UHID: \(extractedUHID)")
-              
-              var  data = UserDefaultsManager.shared.getUserData()
-              print(data)
-              UserDefaultsManager.shared.saveUHID(extractedUHID)
-              UserDefaultsManager.shared.saveUserID(id)
-              print((UserDefaultsManager.shared.getUHID() ?? "") + "uhid is being saved")
-              print((UserDefaultsManager.shared.getUserData()?.profileUrl ?? "") + "getting updated url from local storage")
-          } catch {
-              print("Error:", error)
-          }
-      }
+    func loadData(uhid: String) async -> PatientModel? {
+        print("step 1")
+        let isNumericOnly = uhid.allSatisfy { $0.isNumber }
+
+        do {
+            let params = isNumericOnly ? [
+                "mobileNo": uhid,
+                "uhid": "",
+                "clientId": clientID
+            ] : [
+                "mobileNo": "",
+                "uhid": uhid,
+                "clientId": clientID
+            ]
+
+            print("params \(params)")
+
+            let result = try await APIService.shared.fetchRawData(
+                fromURL: baseURL7082 + getPatientDetailsByMobileNo,
+                parameters: params
+            )
+
+            print("api data", result)
+
+            guard
+                let responseArray = result["responseValue"] as? [Any],
+                let patientData = responseArray.first as? [String: Any]
+            else {
+                print("Failed to parse responseValue")
+                return nil
+            }
+
+            let jsonData = try JSONSerialization.data(withJSONObject: patientData)
+            let patientModel = try JSONDecoder().decode(PatientModel.self, from: jsonData)
+
+            print("\(patientModel.profileUrl) from api")
+
+            // Don't save to UserDefaults here anymore
+            return patientModel
+
+        } catch {
+            print("Error:", error)
+            return nil
+        }
+    }
+
+
    
     
     func checkIdentifierType(_ input: String) -> String {
@@ -120,7 +129,23 @@ class LoginViewModal : ObservableObject {
     }
     @Published var isRegistered: Bool = true
     
-    
+    var isButtonDisabled: Bool {
+        let uhid = uhidNumber.trimmingCharacters(in: .whitespaces)
+        
+        // ✅ Enable if it starts with "uhid" (case-insensitive)
+        if uhid.lowercased().hasPrefix("uhid") {
+            return false
+        }
+
+        // ✅ Enable if numeric-only and length >= 10
+        let isNumericOnly = uhid.allSatisfy { $0.isNumber }
+        if isNumericOnly && uhid.count >= 10 {
+            return false
+        }
+
+        // ❌ All other cases: disabled
+        return true
+    }
     
     //18021
     func login(uhid: String, isLoggedIn : String) async {
@@ -132,7 +157,15 @@ class LoginViewModal : ObservableObject {
        
                }
         
-         await loadData(uhid: uhid)
+        let result = await loadData(uhid: uhid)
+        if let model = result {
+            print("✅ API Call Success")
+            tempPatientModel = model  // Save it temporarily
+            // Proceed to show OTP screen
+        } else {
+            print("❌ API Call Failed")
+        }
+        print("modelling \(tempPatientModel)")
 
         var params = ["" : ""]
         if    (checkIdentifierType(uhid) == "UHID" ){
@@ -170,6 +203,7 @@ class LoginViewModal : ObservableObject {
                     print("✅ User is registered.")
                     DispatchQueue.main.async{
                         self.isRegistered = true
+                        
                     }
                 }
 
@@ -185,24 +219,44 @@ class LoginViewModal : ObservableObject {
                 print("❌ Error:", error)
             }
         }
-    
+    @Published var showToast: Bool = false
     
     func verifyOTP(otp: String, uhid: String) async {
+        let fcmToken =  UserDefaultsManager.shared.get(forKey: "fcmToken") ?? "notoken"
+
         DispatchQueue.main.async {
                    self.apiState = .loading  //  Show loading state
+            self.showToast = false;
                }
         do {
             let params = ["otp" : otp,
                           "UHID" : uhidNumber,
-                          "deviceToken" : "eafdasgfsdgfsdgsdfgfd",
+                          "deviceToken" : fcmToken,
                           "ifLoggedOutFromAllDevices" :  "0"]
             let response = try await APIService.shared.fetchRawData(fromURL: baseURL7082+verifyLogInOTPForSHFCApp, parameters: params)
-            print("✅ Success:", response)
+            print("✅  Success:", response)
+            
+                if let model = tempPatientModel {
+                    print("modalwa \(model)")
+                    UserDefaultsManager.shared.saveUserData(model)
+                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
+                    
+                    let id = String(model.userId)
+                    let extractedUHID = model.uhID ?? ""
+                    
+                    UserDefaultsManager.shared.saveUHID(extractedUHID)
+                    UserDefaultsManager.shared.saveUserID(id)
+                
+
+                // Navigate to dashboard
+//                navigateToDashboard()
+            }
+
 //            await loadData(uhid: uhid)
              
             DispatchQueue.main.async {
                             self.apiState = .success
-                                            UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
+//                                            UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
                             
                             if let responseArray = response["responseValue"] as? [[String: Any]] {
                                 do {
@@ -224,18 +278,25 @@ class LoginViewModal : ObservableObject {
              
         } catch {
             DispatchQueue.main.async {
-                               self.apiState = .failure("Invalid OTP")  // ❌ API Error
-                           }
-            print("❌ Error:", error)
+                    self.apiState = .failure("Invalid OTP")
+                    self.showToast = true
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.showToast = false
+                }
+                print("❌ Error:", error)
         }
     }
     
     func logOut(uhid: String) async {
+        let fcmToken = UserDefaultsManager.shared.get(forKey: "fcmToken") ?? "notoken"
+
         
         do{
             let params = [
                           "UHID" : uhid,
-                          "deviceToken" : "eafdasgfsdgfsdgsdfgfd",
+                          "deviceToken" : fcmToken,
                        ]
             let response = try await APIService.shared.fetchRawData(fromURL: baseURL7082+"api/LogInForVitalioApp/LogOutOTPForVitalioApp", parameters: params)
         } catch {

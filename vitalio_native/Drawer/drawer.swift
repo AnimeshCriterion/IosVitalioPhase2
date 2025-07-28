@@ -174,8 +174,11 @@ struct SideMenuView: View {
                         }) {
                         DrawerTile(title: "switch_account", iconName: "addmember", dark: isDarkMode )}
                         DrawerTile(title: "connect_smart_watch", iconName: "watch", dark: isDarkMode )
-                        DrawerTile(title: "add_member", iconName: "addmember", dark: isDarkMode )
-                        
+                        Button(action:{
+                            route.navigate(to: .addMemberView)
+                        }){
+                            DrawerTile(title: "add_member", iconName: "addmember", dark: isDarkMode )
+                        }
                     }
                     .padding(10)
                     
@@ -202,12 +205,12 @@ struct SideMenuView: View {
                         {
                             GroupedDrawerTile(title: "feedback", iconName: "feedback", dark: isDarkMode)
                         }
-                               Button(action: {
-                            route.navigate(to: .createAccountView)
-                        })
-                        {
-                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
-                        }
+//                               Button(action: {
+//                            route.navigate(to: .createAccountView)
+//                        })
+//                        {
+//                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
+//                        }
                         
                     }
                     .sheet(isPresented: $showLogoutSheet) {
@@ -371,8 +374,10 @@ struct LogoutConfirmationSheet: View {
 
                 Button(action: {
                     isPresented = false
-                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: false)
+//                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: false)
 //                    route.navigatoToRoot()
+                    UserDefaultsManager.shared.logout()
+
                     route.navigateOnly(to: .login)
                     viewModel.isDrawerOpen = false
                     print("✅ Logged Out")

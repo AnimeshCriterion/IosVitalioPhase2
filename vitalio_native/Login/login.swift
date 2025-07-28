@@ -21,6 +21,9 @@ struct Login: View {
     @EnvironmentObject var route: Routing
     
     
+
+    
+    
     var body: some View {
         ZStack {
             ScrollView{
@@ -99,11 +102,11 @@ struct Login: View {
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .foregroundColor(.white)
-                                    .background(viewModel.uhidNumber.count  <= 6  ?   Color.gray.opacity(0.4) : Color.primaryBlue)
+                                    .background(viewModel.isButtonDisabled  ?   Color.gray.opacity(0.4) : Color.primaryBlue)
                                     .cornerRadius(10)
                             }
                         }
-                        .disabled(viewModel.uhidNumber.isEmpty)
+                        .disabled(viewModel.isButtonDisabled || viewModel.uhidNumber.isEmpty)
                         Spacer()
                             .frame(height: 32)
 //                        Button(action: {

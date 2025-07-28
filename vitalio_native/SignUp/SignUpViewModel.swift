@@ -16,14 +16,28 @@ struct Gender: Identifiable, Hashable{
     let image: String
     let gederId: Int
 }
+enum EditableField: String, Identifiable, CaseIterable {
+    case name = "Name"
+    case gender = "Gender"
+    case dateOfBirth = "Date of Birth"
+    case bloodGroup = "Blood Group"
+    case address = "Address"
+    case weight = "Weight"
+    case height = "Height"
 
+    var id: String { rawValue }
+}
+
+@MainActor
 class SignUpViewModal: ObservableObject {
     
     init() {
         updateFormattedDate(with: selectedDate)
         loadCountries()
     }
-
+    deinit {
+           print("SignupViewModel deinitialized")
+       }
     func updateFormattedDate(with date: Date) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -31,9 +45,34 @@ class SignUpViewModal: ObservableObject {
     }
     
     @Published var currentPage = 0
+    @Published var lastPage = -1
     @Published  var firstName: String = ""
     @Published  var lastNmae: String = ""
     @Published  var familyDisease: String = ""
+    @Published var showFirstNameError: Bool = false
+
+//    @Published  var selectedField: EditableField? = nil
+    @Published var selectedProfileField: EditableField? = nil
+    func reset() {
+        currentPage = 0
+        lastPage = -1
+        firstName = ""
+        lastNmae = ""
+        familyDisease = ""
+        showFirstNameError = false
+            tempPatientModel = nil
+        selectedGender = nil
+        selectedGenderId = nil
+        formattedDate = ""
+        streetAddress = ""
+        fullAddress = ""
+        zipCode = ""
+        states = []
+        selectedStateID = nil
+        selectedState = nil
+       isLoading = false
+            // Reset additional variables if you add more
+        }
 
     func getCurrentDateTimeString() -> String {
         let formatter = DateFormatter()
@@ -43,9 +82,9 @@ class SignUpViewModal: ObservableObject {
     }
 
     @Published var genders: [Gender] = [
-        Gender(name: "Male", value: "male", image: "male", gederId: 1),
-        Gender(name: "Female", value: "female", image: "female", gederId: 2),
-        Gender(name: "Other", value: "other", image: "other", gederId: 3)
+        Gender(name: "Male", value: "Male", image: "male", gederId: 1),
+        Gender(name: "Female", value: "Female", image: "female", gederId: 2),
+        Gender(name: "Other", value: "Other", image: "other", gederId: 3)
     ]
     
     
@@ -101,6 +140,7 @@ class SignUpViewModal: ObservableObject {
     
     
     @Published var streetAddress: String = ""
+    @Published var fullAddress: String = ""
     @Published var zipCode: String = ""
 //    @Published var selectedCity: String = ""
     
@@ -153,24 +193,30 @@ class SignUpViewModal: ObservableObject {
     @Published var states: [State] = []
     @Published var selectedStateID: Int? = nil
     @Published var selectedState: State? = nil
+    @Published var isLoading: Bool = false
     
     func StateData(_ countryID: Int) async {
         do {
+            print("stateId: \(countryID)")
+                self.isLoading = true
             let result = try await APIService.shared.fetchRawData(
-                fromURL: "https://api.medvantage.tech:7083/api/StateMaster/GetStateMasterByCountryId",
-                parameters: ["id": String(countryID)]
+                fromURL: "http://172.16.61.31:5119/api/StateMaster/GetStateMasterByCountryId",
+                parameters: ["id": String(countryID),
+                             "clientId": "176"]
             )
 
             let jsonData = try JSONSerialization.data(withJSONObject: result)
             let decodedResponse = try JSONDecoder().decode(StateResponse.self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.states = decodedResponse.responseValue
-                    }
+                   
+            self.states = decodedResponse.responseValue
+            self.isLoading = false
+                    
 
             
             print("Fetching Data:",jsonData);
 
         } catch {
+            self.isLoading = false
             print("❌ Error Fetching Vitals:", error)
         }
     }
@@ -205,22 +251,23 @@ class SignUpViewModal: ObservableObject {
     @Published var selectedCity: City? = nil
    
     func CityData(_ stateId: Int) async {
+        print("cityData \(stateId)")
         do {
+            self.isLoading = true
             let result = try await APIService.shared.fetchRawData(
-                fromURL: "https://api.medvantage.tech:7083/api/CityMaster/GetCityMasterByStateId",
-                parameters: ["id": String(stateId)]
+                fromURL: "http://172.16.61.31:5119/api/CityMaster/GetCityMasterByStateId",
+                parameters: ["id": String(stateId),
+                            "clientId": "176"]
             )
 
             let jsonData = try JSONSerialization.data(withJSONObject: result)
             let decodedResponse = try JSONDecoder().decode(CityResponse.self, from: jsonData)
-            await MainActor.run {
                 self.citys = decodedResponse.responseValue
-            }
-
-            
+            self.isLoading = false
             print("Fetching Data:",jsonData);
 
         } catch {
+            self.isLoading = false
             print("❌ Error Fetching Vitals:", error)
         }
     }
@@ -243,8 +290,101 @@ class SignUpViewModal: ObservableObject {
             name
         }
     }
-    /// city dropdown end
+    @Published var selectedVitalIndex: Int? = nil
+
+    var vitalsList: [[String: Any]] = [
+        [
+            "parameterId": "1",
+            "parameterTypeId": "4",
+            "name": "Blood Pressure",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ],
+        [
+            "parameterId": "1",
+            "parameterTypeId": "74",
+            "name": "Heart Rate",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ],
+        [
+            "parameterId": "1",
+            "parameterTypeId": "56",
+            "name": "Blood Oxygen (spo2)",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ],
+        [
+            "parameterId": "1",
+            "parameterTypeId": "7",
+            "name": "Respiratory Rate",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ],
+        [
+            "parameterId": "1",
+            "parameterTypeId": "3",
+            "name": "Pulse Rate",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ],
+        [
+            "parameterId": "1",
+            "parameterTypeId": "10",
+            "name": "RBS",
+            "quantity": "0",
+            "frequencyType": "ONCE A DAY (24 HOURLY)",
+            "isCheck": false,
+            "uhid": "123456"
+        ]
+    ]
+
+    var fluidIntakeDetails: [String: Any] = [
+        "parameterId": "2",
+        "parameterTypeId": "1",
+        "name": "Fluid Limit",
+        "quantity": "",
+        "frequencyType": "Daily",
+        "isCheck": false,
+        "uhid": "0"
+    ]
+
     
+    var frequencyList: [[String: Any]] = []
+    /// frequency api
+    func hitFrequencyApi() async {
+        print("hitFrequencyApi")
+        do {
+            self.isLoading = true
+            let result = try await APIService.shared.fetchRawData(
+                fromURL:baseURL7082 + "api/KnowMedApis/GetFrequencyList",
+                parameters: ["alphabet": ""]
+            )
+            let jsonData = try JSONSerialization.data(withJSONObject: result)
+            if let jsonObject = try? JSONSerialization.jsonObject(with: jsonData),
+               let jsonDict = jsonObject as? [String: Any],
+               let response = jsonDict["responseValue"] as? [[String: Any]] {
+                frequencyList = response
+                print("decodedResponse",response)
+            }
+            self.isLoading = false
+            print("decodedResponse",frequencyList)
+        }
+        catch {
+            self.isLoading = false
+            print("❌ Error Fetching Vitals:", error)
+        }
+    }
     
     
     
@@ -257,7 +397,7 @@ class SignUpViewModal: ObservableObject {
     @Published var selectedFeet: Int = 5
     @Published var selectedInches: Int = 7
     @Published var selectedHeightUnit: String = "ft" // Only the unit
-    @Published var selectedHeightText: String = "0" // Full display text
+    @Published var selectedHeightText: String = "" // Full display text
     @Published var showPopup = false
 
     let feetRange = Array(3...7)
@@ -289,10 +429,67 @@ class SignUpViewModal: ObservableObject {
     
     
     /// chronic disease
-    
+    @Published var familyProblems: [Problem] = []
+    @Published var problemsByFamily: [FamilyMember: [Problem]] = [:]
+    func assignSelectedProblemsToRelations() {
+            for rawRelation in tempSelectedHealthHistoryItems {
+                guard let member = FamilyMember(rawValue: rawRelation) else { continue }
+                var existingProblems = problemsByFamily[member] ?? []
+                
+                for problem in familyProblems {
+                    if !existingProblems.contains(where: { $0.id == problem.id }) {
+                        existingProblems.append(problem)
+                    }
+                }
+                problemsByFamily[member] = existingProblems
+            }
+            tempSelectedHealthHistoryItems.removeAll()
+        familyProblems.removeAll()
+        }
+    func printResultMapFamilyProblem() {
+            for (member, problems) in problemsByFamily {
+                print("\(member.rawValue): \(problems.map { $0.problemName })")
+            }
+        }
+    func getFamilyProblemJson() -> String? {
+        var result: [String: [String]] = [:]
+        
+        for (member, problems) in problemsByFamily {
+            result[member.rawValue] = problems.map { $0.problemName }
+        }
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: result, options: []),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            return jsonString
+        }
+        
+        return nil
+    }
+
        @Published var searchText = ""
        @Published var showCancelButton: Bool = false
        @Published var selectedItems: [Problem] = []
+       @Published var OtherselectedDiseaseItems: [Problem] = []
+       @Published var chronicPreview: String = ""
+    @Published var familyProblemPreview: String = ""
+
+    // Wherever you want to generate the text, e.g. in a function
+    func generateAllProblemsText() {
+        var result = ""
+
+        for member in FamilyMember.allCases {
+            if let problems = problemsByFamily[member], !problems.isEmpty {
+                result += "\(member.rawValue):\n"
+                for problem in problems {
+                    result += "• \(problem.problemName)\n"
+                }
+                result += "\n"
+            }
+        }
+
+        familyProblemPreview = result.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
        
        var filteredResults: [Problem] {
            if searchText.isEmpty {
@@ -387,14 +584,13 @@ class SignUpViewModal: ObservableObject {
 //            let name: String
 //            let subName: String
 //        }
-    @Published var vitalsData: [VitalsReminder] = [
-        VitalsReminder(name: "Blood Presure", subName: "3 times a day"),
-        VitalsReminder(name: "Heart Rate", subName: "3 times a day"),
-        VitalsReminder(name: "Blood Oxygen (spo2)", subName: "3 times a day"),
-        VitalsReminder(name: "Resparetry Rate", subName: "Every 4 hours"),
-        VitalsReminder(name: "RBS", subName: "Daily"),
-        VitalsReminder(name: "Body Weight", subName: "Monthly")
-        ]
+//    @Published var vitalsData: [VitalsReminder] = [
+//        VitalsReminder(name: "Blood Presure", subName: "3 times a day"),
+//        VitalsReminder(name: "Heart Rate", subName: "3 times a day"),
+//        VitalsReminder(name: "Blood Oxygen (spo2)", subName: "3 times a day"),
+//        VitalsReminder(name: "Resparetry Rate", subName: "Every 4 hours"),
+//        VitalsReminder(name: "RBS", subName: "Daily"),
+//        ]
     @Published var showPopupReminder = false
     @Published var selectedSubName: String = "Select Frequency"
     @Published var selectedReminder: VitalsReminder?
@@ -402,7 +598,7 @@ class SignUpViewModal: ObservableObject {
     
     
     
-    @Published var name : String = ""
+    @Published var fluidQuantity : String = ""
     @Published var selectedfluidIntakeUnit = "Litre"
     let fludeIntakeUnitOptions = ["Litre", "gram", "mg"]
     
@@ -421,20 +617,51 @@ class SignUpViewModal: ObservableObject {
 
     
     
+    @Published var route: Routing?
     
-    @Published var isSavingSuccessful : Bool = false
-    func submitPatientDetails(number: String) {
-        
-        let chronic = escapedJSONString(patientDetailsList)
 
-    
-        // 1. Your API URL
-        guard let url = URL(string: baseURL7082 + "api/PatientRegistration/PatientSignUp") else {
-            print("❌ Invalid URL")
-            return
+    func navigateToDashboard() {
+//        route?.navigate(to: .dashboard)
+        route?.replaceAllWith(.dashboard)
+    }
+//    func onSignupSuccess() {
+//        // Clears all navigation stack and goes to dashboard
+//        routing.replaceAllWith(.dashboard)
+//    }
+
+
+    @Published var isSavingSuccessful : Bool = false
+    @Published var showLoader: Bool = false
+    @Published var tempPatientModel: PatientModel?
+    func submitPatientDetails(number: String) async -> Bool {
+        self.showLoader = true
+        self.showError = false
+
+        let chronic = escapedJSONString(patientDetailsList)
+        let otherChronic = escapedJSONString(otherDetailsList)
+        guard let jsonString = getFamilyProblemJson() else {
+            print("❌ Failed to generate familyDiseaseJson")
+            self.showLoader = false
+            return false
         }
 
-        // 2. Request Payload (Dictionary)
+        guard let url = URL(string: baseURL7082 + "api/PatientRegistration/PatientSignUp") else {
+            print("❌ Invalid URL")
+            self.showLoader = false
+            return false
+        }
+
+        vitalsList.append(fluidIntakeDetails)
+
+        var reminderJsonString = ""
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: vitalsList)
+            reminderJsonString = String(data: jsonData, encoding: .utf8) ?? ""
+            print(reminderJsonString)
+        } catch {
+            print("JSON encoding error: \(error)")
+        }
+
         let jsonPayload: [String: Any] = [
             "patientName": firstName + " " + lastNmae,
             "genderId": selectedGenderId ?? "1",
@@ -444,107 +671,137 @@ class SignUpViewModal: ObservableObject {
             "weight": String(describing: weight),
             "zip": String(describing: zipCode),
             "address": streetAddress,
+            "streetAddress": streetAddress,
             "countryCallingCode": "+91",
             "mobileNo": "\(number)",
             "countryId": selectedCountryID ?? 0,
             "stateId": selectedStateID ?? 0,
             "cityId": selectedCityID ?? 0,
             "choronicDiseasesJson": chronic ?? "",
-            "familyDiseaseJson": familyDisease == "[]" ? "" : familyDisease ,
-//            "reminderJson": "",
+            "otherChoronicDiseasesJson": otherChronic ?? "",
+            "familyDiseaseJson": jsonString,
             "clientId": "194",
-            "isExternal": "1"
+            "isExternal": "1",
+            "reminderJson": reminderJsonString
         ]
-        print(jsonPayload)
 
-        // 3. Convert to JSON
+        print("jsonPayload : \(jsonPayload)")
+
         guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonPayload) else {
             print("❌ Failed to serialize JSON")
-            return
+            self.showLoader = false
+            return false
         }
 
-        // 4. Prepare URLRequest
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
 
-        // 5. Perform Request
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async{
-                    self.showError = true
-                    self.errorIs = "❌ Error: \(error.localizedDescription)"
-                }
-              
-                print("❌ Error: \(error.localizedDescription)")
-                return
-            }
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                DispatchQueue.main.async{
-                    self.showError = true
-                    self.errorIs = "❌ Invalid response"
-                }
                 print("❌ Invalid response")
-                return
+                self.showError = true
+                self.errorIs = "❌ Invalid response"
+                self.showLoader = false
+                return false
             }
 
             print("✅ Status Code: \(httpResponse.statusCode)")
-            if("\(httpResponse.statusCode)" == "200"){
+
+            if httpResponse.statusCode == 200 {
                 self.isSavingSuccessful = true
-            }else{
-                DispatchQueue.main.async{
-                    self.showError = true
-                    self.errorIs = "❌ some Error Occured"
-                }
-                self.isSavingSuccessful = false
-            }
+                self.showLoader = false
 
-            if let data = data {
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("📦 Response: \(responseString)")
-//                    LoginViewModal().loadData(uhid: "")
-                }
-            }
-            
-            if let data2 = data {
-                do {
-                    // Decode JSON
-                    if let json = try JSONSerialization.jsonObject(with: data2, options: []) as? [String: Any],
-                       let responseArray = json["responseValue"] as? [[String: Any]],
-                       let firstItem = responseArray.first,
-                       let uhid = firstItem["uhid"] as? String {
-                        print("📦 UHID: \(uhid)")
-                        Task{
-                            let viewModel = LoginViewModal()
-                            await viewModel.loadData(uhid: uhid)
-                        }
+                // Parse UHID if present
+                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let responseArray = json["responseValue"] as? [[String: Any]],
+                   let firstItem = responseArray.first,
+                   let uhid = firstItem["uhid"] as? String {
+                    print("📦 UHID: \(uhid)")
+                    let viewModel = LoginViewModal()
+//                    await viewModel.loadData(uhid: uhid)
+//                    if let patient = await viewModel.loadData(uhid: uhid) {
+//                        print("✅ API Call Success")
+//                        
+//                        navigateToDashboard()
+//                    } else {
+//                        print("❌ API Call Failed")
+//                    }
+                    let result = await viewModel.loadData(uhid: uhid)
+                    if let model = result {
+                        print("✅ API Call Success")
+                        tempPatientModel = model  // Save it temporarily
+                        // Proceed to show OTP screen
+                    } else {
+                        print("❌ API Call Failed")
                     }
-                } catch {
-                    print("❌ JSON parsing error: \(error.localizedDescription)")
+                    if let model = tempPatientModel {
+                        print("registermodalwa \(model)")
+                        UserDefaultsManager.shared.saveUserData(model)
+                        UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
+                        
+                        let id = String(model.userId)
+                        let extractedUHID = model.uhID ?? ""
+                        
+                        UserDefaultsManager.shared.saveUHID(extractedUHID)
+                        UserDefaultsManager.shared.saveUserID(id)
+                    
+
+                    // Navigate to dashboard
+                    navigateToDashboard()
+                        
                 }
+                    
+
+//                    let success = await viewModel.loadData(uhid: uhid)
+//
+//                    if success {
+//                        print("✅ API Call Success")
+//                        navigateToDashboard()
+//                    } else {
+//                        print("❌ API Call Failed")
+//                    }
+
+                }
+
+                return true
+            } else {
+                self.isSavingSuccessful = false
+                self.showError = true
+                self.errorIs = "❌ Some error occurred"
+                self.showLoader = false
+                return false
             }
 
+        } catch {
+            print("❌ Network error: \(error.localizedDescription)")
+            self.showError = true
+            self.isSavingSuccessful = false
+            self.errorIs = "❌ Error: \(error.localizedDescription)"
+            self.showLoader = false
+            return false
         }
-
-        task.resume()
     }
+
     
     @Published var showError: Bool = false
     @Published var errorIs: String = ""
     
-    func intakeError() {
-        showError = true
-
-           // Auto-dismiss after 2 seconds
-           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-               self.showError = false
-           }
-       }
+//    func intakeError() {
+//        showError = true
+//
+//           // Auto-dismiss after 2 seconds
+//           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//               self.showError = false
+//           }
+//       }
     
     
     @Published var patientDetailsList: [PatientDetail] = []
+    @Published var otherDetailsList: [PatientDetail] = []
        
     func addDetail(_ newDetail: PatientDetail) {
           guard !patientDetailsList.contains(where: { $0.detailID == newDetail.detailID }) else {
@@ -555,6 +812,16 @@ class SignUpViewModal: ObservableObject {
         print(escapedBodyString ?? "")
 
       }
+    
+    func addOtherDiseaseDetail(_ newDetail: PatientDetail) {
+          guard !otherDetailsList.contains(where: { $0.detailID == newDetail.detailID }) else {
+              return // Already exists, don't add
+          }
+        otherDetailsList.append(newDetail)
+        let escapedBodyString = escapedJSONString(otherDetailsList)
+        print(escapedBodyString ?? "")
+
+      }
       
     
 
@@ -562,6 +829,13 @@ class SignUpViewModal: ObservableObject {
         patientDetailsList.removeAll { $0.detailID == id }
         print(patientDetailsList)
          let escapedBodyString = escapedJSONString(patientDetailsList)
+        print(escapedBodyString ?? "")
+    }
+    
+    func removeOtherDiseaseDetail(byID id: String) {
+        otherDetailsList.removeAll { $0.detailID == id }
+        print(otherDetailsList)
+         let escapedBodyString = escapedJSONString(otherDetailsList)
         print(escapedBodyString ?? "")
     }
     
@@ -648,7 +922,12 @@ class SignUpViewModal: ObservableObject {
         "You’re making great progress—just a little more to go!",
         "You've come so far—just a final push!",
         "So close! Only a few steps remain!",
-        "You’re just one step away from completing the process."
+//        "You've come so far—just a final push!",
+        "You’re just one step away from completing the process.",
+        "Your submission is now complete and we're excited to have you on board.",
+        "You’re nearly done—just one final step!",
+        "Almost done--just complete this final step.",
+        "You’re just one step away from completing the process.",
     ]
 
 
@@ -663,7 +942,13 @@ class SignUpViewModal: ObservableObject {
         "Final Stretch in Sight",
         "Just a Little Further to Go",
         "Final Push Ahead",
-        "All Done!"
+//        "Final Push Ahead",
+//        "Just a Little Further to Go",
+        "All Done!",
+        "Thank you for registering with Vitalio!",
+        "One Step Away",
+        "All Done!",
+        "All Done!",
     ]
     
     

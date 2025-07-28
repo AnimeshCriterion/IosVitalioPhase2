@@ -16,3 +16,12 @@ struct PatientDetail: Identifiable, Codable, Equatable {
     let isFromPatient: String
 }
 
+enum FamilyMember: String, CaseIterable, Identifiable, Hashable {
+    case mother = "Mother"
+    case father = "Father"
+    case brother = "Brother"
+    case sister = "Sister"
+    case grandParent = "Grand Parent"
+
+    var id: String { rawValue }
+}
