@@ -27,9 +27,7 @@ struct ContentView: View {
                                     logoOpacity = 1.0
                                 }
                             }
-                        
                     }
-                    
                 }
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -101,7 +99,17 @@ struct ContentView: View {
                     case .createAccountView:
                         CreateAccountView()
                     case .language:
-                        Language()
+                        Language()       
+                    case .leaderboardView:
+                        LeaderboardView()  
+                    case .challengesView:
+                        ChallengesView()        
+                    case .forgotPassword:
+                        FogotPassword()   
+                    case .resetPassword:
+                        ResetPassword()       
+                    case .challengeDetailsView:
+                        ChallengeDetailsView()
                     }}
             }
             // Popup layer

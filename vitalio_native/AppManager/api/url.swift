@@ -76,23 +76,9 @@ var getFoodIntake = "api/FoodIntake/GetFoodIntake"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var socketURL = "ws://182.156.200.177:8002/"
 var clientID = "194"
+
+
+
+

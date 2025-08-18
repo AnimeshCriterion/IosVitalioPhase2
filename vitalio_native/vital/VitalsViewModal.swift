@@ -187,7 +187,7 @@ class VitalsViewModal: ObservableObject {
 
     
     func getVitals() async {
-        let uhid = UserDefaultsManager.shared.getUHID() ?? ""
+        let uhid = UserDefaultsManager.shared.getEmployee()?.empId ?? ""
 
         DispatchQueue.main.async {
             self.isLoading = true

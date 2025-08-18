@@ -14,7 +14,7 @@ struct EditProfile: View {
        var isDarkMode: Bool {
            themeManager.colorScheme == .dark
        }
-   var userData =  UserDefaultsManager.shared.getUserData()
+   var userData =  UserDefaultsManager.shared.getEmployee()
     @Environment(\.presentationMode) var presentationMode
     
     

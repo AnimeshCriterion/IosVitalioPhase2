@@ -36,6 +36,11 @@ final class Routing : ObservableObject{
         case chatBotView
         case createAccountView
         case language
+        case leaderboardView
+        case challengesView    
+        case forgotPassword
+        case resetPassword
+        case challengeDetailsView
         
     }
 

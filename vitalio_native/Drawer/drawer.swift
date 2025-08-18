@@ -28,7 +28,7 @@ struct SideMenuView: View {
     @State private var isShowingActionSheet = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
-    var userData =  UserDefaultsManager.shared.getUserData()
+    var userData =  UserDefaultsManager.shared.getEmployee()
     
     var body: some View {
         ZStack {
@@ -40,7 +40,6 @@ struct SideMenuView: View {
                     VStack(
                         alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
                             Spacer()
-                            
                             HStack {
                                 Button(action: {
                                     viewModel.isDrawerOpen.toggle()
@@ -74,21 +73,31 @@ struct SideMenuView: View {
                                                                                 .scaledToFill()
                                                                                 .clipShape(Circle())}
                                                                         } else if phase.error != nil {
-                                                                            Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
+                                                                            Image("dpImage")
                                                                                 .resizable()
                                                                                 .scaledToFit()
                                                                                 .foregroundColor(.gray)
+                                                                              
                                                                         } else {
                                                                             ProgressView()
                                                                         }
                                                                     }
                                                                     .frame(width: 100, height: 100)
+                                                                    .background(
+                                                                        Circle()
+                                                                            .fill(Color.blue)
+                                                                    )
                                                                 } else {
-                                                                    Image(systemName: "person.crop.circle")
+                                                                    Image("dpImage")
                                                                         .resizable()
                                                                         .scaledToFit()
+                                                                        .background(
+                                                                            Circle()
+                                                                                .fill(Color.blue)
+                                                                        )
                                                                         .frame(width: 100, height: 100)
                                                                         .foregroundColor(.gray)
+                                                                     
                                                                 }
                                                             }
                                                                }
@@ -123,8 +132,6 @@ struct SideMenuView: View {
                                                                                 editProfileVM.loadingImage = false
                                                                             }
                                                                         }
-                                                                       
-                                                                        
                                                                     }
                                                                 }
                                                         }) {
@@ -132,7 +139,7 @@ struct SideMenuView: View {
                                                         }
 
                             
-                            CustomText(userData?.patientName ?? "", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
+                            CustomText(userData?.empName ?? "", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
                             
                             if let userData = UserDefaultsManager.shared.getUserData() {
                                 CustomText("+91 \(userData.mobileNo)", color: Color.gray, size: 18, weight: .semibold)
@@ -183,7 +190,6 @@ struct SideMenuView: View {
                     .padding(10)
                     
                     VStack{
-                        
                         Button(action: {
                             route.navigate(to: .language)
                         }) {
@@ -204,6 +210,12 @@ struct SideMenuView: View {
                         })
                         {
                             GroupedDrawerTile(title: "feedback", iconName: "feedback", dark: isDarkMode)
+                        }               
+                        Button(action: {
+                            route.navigate(to: .resetPassword)
+                        })
+                        {
+                            GroupedDrawerTile(title: "Reset Password", iconName: "feedback", dark: isDarkMode)
                         }
 //                               Button(action: {
 //                            route.navigate(to: .createAccountView)

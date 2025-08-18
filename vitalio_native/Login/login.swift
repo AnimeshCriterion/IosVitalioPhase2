@@ -29,105 +29,146 @@ struct Login: View {
             ScrollView{
 //                Text("Empower Your Health with")
 //                    .font(.system(size: 26, weight: .light))
-//                    .foregroundColor(.white)        
+//                    .foregroundColor(.white)
                 Text("Our Smart App!")
                     .font(.system(size: 26, weight: .semibold))
                     .foregroundColor(.white)
                 VStack{
-                    
 //                    Spacer().frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                   
                     Image("loginDr")
                     VStack(alignment: .leading){
                         Spacer()
                             .frame(height:20)
-                        Text("Login/Signup")
-                            .font(.system(size: 24, weight: .semibold))
-                            .foregroundColor(.blue)
+                        HStack {
+                            Spacer()
+                            Text("Login/Signup")
+                                .font(.system(size: 24, weight: .semibold))
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
                         
                         Spacer()
                             .frame(height: 13)
-                        Text("Access your health records and services.")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                        HStack {
+                            Spacer()
+                            Text("Access your health records and services.")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
                         
                         Spacer()
                             .frame(height: 32)
                         VStack(alignment: .leading) {
-                            Text("Enter UHID/Mobile No.")
+                            Text("Employee ID ")
                                 .font(.system(size: 13))
                                 .foregroundColor(.gray)
                             Spacer()
                                 .frame(height: 10)
                             HStack {
-                                Image(systemName: "creditcard")
-                                    .foregroundColor(.gray)
-                                
-                                TextField("Enter UHID/Mobile No.", text: $viewModel.uhidNumber)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(isDarkMode ? .white : .black)
-                                    .padding(.vertical, 12)
-                                    .keyboardType(.default)
-                                    .onChange(of: viewModel.uhidNumber) { newValue in
-                                        // Allow only A-Z, a-z, 0-9 and limit to 10 characters
-                                        let filtered = newValue.filter { $0.isLetter || $0.isNumber }
-                                        viewModel.uhidNumber = String(filtered.prefix(10))
+                                //                                Image(systemName: "creditcard")
+                                //                                    .foregroundColor(.gray)
+                                //
+                                VStack{
+                                    TextField("Employee ID ", text: $viewModel.uhidNumber)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(isDarkMode ? .white : .black)
+                                        .padding(.vertical, 12)
+                                        .keyboardType(.default)
+                                        .padding(.horizontal)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                        .onChange(of: viewModel.uhidNumber) { newValue in
+                                            // All'onChange(of:perform:)' was deprecated in iOS 17.0: Use `onChange` with a two or zero parameter action closure instead.ow only A-Z, a-z, 0-9 and limit to 10 characters
+                                            let filtered = newValue.filter { $0.isLetter || $0.isNumber }
+                                            //                                            viewModel.uhidNumber = String(filtered.prefix(10))
+                                        }
+                                    HStack {
+                                        Text("Enter Password")
+                                            .font(.system(size: 13))
+                                            .foregroundColor(.gray)
+                                        Spacer()
                                     }
-
+                                    Spacer()
+                                        .frame(height: 10)
+                                    TextField("Password", text: $viewModel.password)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(isDarkMode ? .white : .black)
+                                        .padding(.vertical, 12)
+                                        .keyboardType(.default)
+                                        .onChange(of: viewModel.password) { newValue in
+                                            // All'onChange(of:perform:)' was deprecated in iOS 17.0: Use `onChange` with a two or zero parameter action closure instead.ow only A-Z, a-z, 0-9 and limit to 10 characters
+                                        }
+                                        .padding(.horizontal)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                }
+                                
                             }
-                            .padding(.horizontal)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(10)
+                            
                         }
                         
                         Spacer()
                             .frame(height: 20)
                         Button(action: {
                             Task{
-                                await viewModel.login(uhid: viewModel.uhidNumber, isLoggedIn: "0")
+                                await viewModel.CorporateEmployeeLogin()
                                 if case .success = viewModel.apiState {
-                                    route.navigate(to: .otp)
+                                    route.navigateOnly(to: .dashboard)
                                 }
                             }
-                            
                         }) {
                             if case .loading = viewModel.apiState {
                                 ProgressView()
-                                
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .foregroundColor(.white)
                             } else {
-                                Text("Send OTP")
+                                Text("Login")
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .foregroundColor(.white)
-                                    .background(viewModel.isButtonDisabled  ?   Color.gray.opacity(0.4) : Color.primaryBlue)
+                                    .background(
+                                        LinearGradient(
+                                            colors: viewModel.isButtonDisabled
+                                            ? [Color.gray.opacity(0.4), Color.gray.opacity(0.4)] // Same color for disabled
+                                            : [Color.primaryBlue, Color.cyan], // Gradient colors
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                    )
                                     .cornerRadius(10)
+                                
                             }
                         }
                         .disabled(viewModel.isButtonDisabled || viewModel.uhidNumber.isEmpty)
                         Spacer()
                             .frame(height: 32)
-//                        Button(action: {
-//                            Task{
-//                    
-//                                route.navigate(to: .createAccountView)
-//                                
-//                            }
-//                            
-//                        }) {
-//                            Text("Dont have an account? **Sign Up.**")
-//                                .font(.system(size: 12))
-//                                .foregroundColor(.primaryBlue)
-//                                .multilineTextAlignment(.center)
-//                            .padding(.top, 8)
-//                        }
-                        Text("By signing in you agree to our **Terms & Conditions** and **Privacy Policy**")
+                        //                        Button(action: {
+                        //                            Task{
+                        //
+                        //                                route.navigate(to: .createAccountView)
+                        //
+                        //                            }
+                        //
+                        //                        }) {
+                        //                            Text("Dont have an account? **Sign Up.**")
+                        //                                .font(.system(size: 12))
+                        //                                .foregroundColor(.primaryBlue)
+                        //                                .multilineTextAlignment(.center)
+                        //                            .padding(.top, 8)
+                        //                        }
+                        Button(action: {
+                            Task{
+                                route.navigateOnly(to: .forgotPassword)
+                            }
+                        }) {
+                        Text("Forgot password?")
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
-                            .padding(.top, 8)
+                        .padding(.top, 8)}
                     }.padding(20)
                         .background(isDarkMode ? Color.customBackgroundDark : Color.white)
                         .cornerRadius(20)

@@ -27,6 +27,7 @@ struct VitalioApp: App {
     @StateObject var chatViewModel = ChatViewModel()
     @StateObject var signUpViewModal = SignUpViewModal()
     @StateObject var popupManager = PopupManager()
+    @StateObject var challengesviewModel = ChallengesviewModel()
 //    @StateObject var webSocketManager = WebSocketManager(userId: "1234")/
     @StateObject var localizer = LocalizationManager.shared
 
@@ -55,6 +56,9 @@ struct VitalioApp: App {
     var body: some Scene {
         WindowGroup {
 //            NavigationStack(path: $route.navpath){
+            
+//            LeaderboardView()
+//            ChallengesView()
                 ContentView()
 //            }
             .environmentObject(route)
@@ -73,6 +77,7 @@ struct VitalioApp: App {
             .environmentObject(signUpViewModal)
             .environmentObject(localizer)
             .environmentObject(popupManager)
+            .environmentObject(challengesviewModel)
             
 //            .environmentObject(webSocketManager)
         }

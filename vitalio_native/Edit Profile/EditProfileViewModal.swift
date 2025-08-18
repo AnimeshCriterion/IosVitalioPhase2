@@ -75,7 +75,7 @@ func reset() {
     self.shouldDismissView = false
     }
      func loadUserData() {
-        guard let userData = UserDefaultsManager.shared.getUserData() else {
+        guard let userData = UserDefaultsManager.shared.getEmployee() else {
                 print("No user data found")
             print("No user data found\(userData?.dob ?? "")")
             
@@ -83,7 +83,7 @@ func reset() {
             }
 
 //        firstName = userData.patientName
-         let nameComponents = userData.patientName.components(separatedBy: " ")
+         let nameComponents = userData.empName.components(separatedBy: " ")
 
           firstName = nameComponents.first ?? ""
           lastName = nameComponents.dropFirst().joined(separator: " ")
@@ -95,18 +95,18 @@ func reset() {
              email = userData.emailID
          }
          print("\(userData) getting gender")
-        if userData.genderId == "1" {
+        if userData.genderId == 1 {
             gender = "Male"
         }
-         else if userData.genderId == "2"{
+         else if userData.genderId == 2{
              gender = "Female"
          }
          else{
             gender = "Other"
         }
-        weight = userData.weight
-        height = userData.height
-        selectedBloodGroupID = userData.bloodGroupId
+        weight = "\(userData.weight)"
+        height = "\(userData.height)"
+        selectedBloodGroupID = "\(userData.bloodGroupId)"
          print("\(userData.dob) getting dob") // prints "01-03-1998 00:00:00 getting dob"
 
          if let parsedDate = parseDate(userData.dob) {

@@ -7,13 +7,33 @@ import SwiftUI
         .environmentObject(ThemeManager())
 }
 
+
+func gradientText(_ text: String,
+                  font: Font = .system(size: 28, weight: .bold),
+                  colors: [Color] = [ .waterBlue, .blue]) -> some View {
+    
+    Text(text)
+        .font(font)
+        .overlay(
+            LinearGradient(
+                colors: colors,
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        )
+        .mask(
+            Text(text)
+                .font(font)
+        )
+}
+
+
 struct Dashboard: View {
 
     @EnvironmentObject var route: Routing
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var themeManager: ThemeManager
     @EnvironmentObject var viewModel : DashboardViewModal
-
     @EnvironmentObject var loginVM : LoginViewModal
     @EnvironmentObject var vitalsVM: VitalsViewModal
     @State private var selectedTab: Tab = .home
@@ -21,15 +41,14 @@ struct Dashboard: View {
     @ObservedObject private var localizer = LocalizationManager.shared
     @GestureState private var isPressing = false
     @EnvironmentObject var popupManager: PopupManager
-
+    @EnvironmentObject var vm : ChallengesviewModel
        var isDarkMode: Bool {
            themeManager.colorScheme == .dark
        }
-
+    
+    var userData =  UserDefaultsManager.shared.getEmployee()
     var body: some View {
         ZStack{
-            
-            
             VStack {
                 Button(action: {
                     viewModel.isDrawerOpen.toggle()
@@ -40,24 +59,45 @@ struct Dashboard: View {
                     CustomAppBar(onBack: {
                         presentationMode.wrappedValue.dismiss()
                     }, dark: isDarkMode)}
+       
+              
                 ScrollView {
+                    HStack {
+                        gradientText("Hi \(userData?.empName ?? "")!").padding(.leading)
+
+                        Image("hey")
+                            .resizable()
+                            .frame(width:30, height:30)
+                        Spacer()
+                    }
+                    HStack {
+                        Text("A great day to make your health better!").foregroundColor(.textGrey)
+                            .padding(.horizontal)
+                        Spacer()
+                    }
+                    MoodSelectorCard().padding()
+//                    VitalsForDashboard().frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
                     VStack(alignment: .leading){
                         if !vitalsVM.vitals.isEmpty {
-                        LocalizedText(key:"vitals")
-                            .font(.system(size: 18, weight: .semibold))
+                            HStack {
+                                LocalizedText(key:"Vital stats")
+                                .font(.system(size: 18, weight: .semibold))
                             .foregroundColor( isDarkMode ? .white :  .black)
+                                Spacer()
+                                Image("calander")
+                                    .resizable()
+                                    .frame( width: 20, height: 20)
+                                Text("Weekly")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            }
                    
-                            VitalsCard(dark: isDarkMode)
+//                            VitalsCard(dark: isDarkMode)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                VitalsForDashboard()
+                            }
                         
                         }
-//                        Button("Show Global Popup") {
-//                            
-//                            viewModel.showError(message: "Error check")
-////                            popupManager.show(
-////                               
-////                                message: "This is test popup")
-//                        }
-
 
                         LocalizedText(key: "primary_actions")
                             .font(.system(size: 18, weight: .semibold))
@@ -82,7 +122,7 @@ struct Dashboard: View {
                             }
                             
                             Button(action: {
-                                route.navigate(to: .pillsReminder)  
+                                route.navigate(to: .pillsReminder)
                             }) {
                             ActionButton(icon: "pills_icon", title: "pills_reminder",dark: isDarkMode).padding(8)
                             
@@ -114,7 +154,21 @@ struct Dashboard: View {
                         }
                         
                     }.padding(.horizontal,20)
-                    
+                    SleepTrackerCardView()
+                    HStack{
+                        Text( "Latest Challenges").font(.headline).fontWeight(.bold)
+                            .padding(.horizontal)
+                        Spacer()
+                        Button(action: {
+                            route.navigate(to: .challengesView)
+                        }) {
+                            Text("View All Challenges  ")
+                                .fontWeight(.semibold)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)}
+                    }
+                
+                    DashboardChallengeView()
+  
 //                    Text("Dashboard Screen")
 //                    Button("Back") {
 //                        route.back()
@@ -125,11 +179,14 @@ struct Dashboard: View {
 //                        //                           route.navigatoToRoot()
 //                    }
                 }
+            
+              
                 CustomTabBar(dark: isDarkMode, selectedTab: $selectedTab) // Moved inside VStack
-                
+               
                     .onAppear(){
                         Task{
                                 await vitalsVM.getVitals()
+                            await vm.getChallenges()
                         }
                     }
                     .sheet(isPresented: $viewModel.showConfirmationSheet) {
@@ -202,24 +259,24 @@ struct Dashboard: View {
                 
                         
                     
-                    Image(systemName: "mic.fill")
-                        .foregroundColor(.white)
-                        .padding(20)
-                        .background(Circle().fill(Color.blue))
-                        .padding(.trailing, 20)
-                        .padding(.bottom, 80)
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { _ in
-                                    if !viewModel.showVoiceAssistant {
-                                        viewModel.showVoiceAssistant = true
-                                        print("started")
-                                    }
-                                }
-                                .onEnded { _ in
-                                    viewModel.hidePage()
-                                }
-                        )
+//                    Image(systemName: "mic.fill")
+//                        .foregroundColor(.white)
+//                        .padding(20)
+//                        .background(Circle().fill(Color.blue))
+//                        .padding(.trailing, 20)
+//                        .padding(.bottom, 80)
+//                        .gesture(
+//                            DragGesture(minimumDistance: 0)
+//                                .onChanged { _ in
+//                                    if !viewModel.showVoiceAssistant {
+//                                        viewModel.showVoiceAssistant = true
+//                                        print("started")
+//                                    }
+//                                }
+//                                .onEnded { _ in
+//                                    viewModel.hidePage()
+//                                }
+//                        )
                 }
             }
             ZStack {
@@ -258,7 +315,6 @@ struct Dashboard: View {
                             }
                     )
             }
-          
             .animation(.easeInOut, value: viewModel.isDrawerOpen)
             
             
@@ -305,6 +361,7 @@ struct CustomAppBar: View {
     let dark: Bool
     @EnvironmentObject var viewModel : DashboardViewModal
     @EnvironmentObject var editProfileVM : EditProfileViewModal
+    @EnvironmentObject var route: Routing
     @State private var showSosSheet = false
 
     
@@ -322,18 +379,22 @@ struct CustomAppBar: View {
                         RemoteImage(url: UserDefaultsManager.shared.getUserData()?.profileUrl)
                             .clipShape(Circle())
                             .frame(width: 50, height: 50)
+                            .background(
+                                Circle()
+                                    .fill(Color.yellow) // Change to any color you want
+                            )
+
                     }
 
                     VStack(alignment: .leading, spacing: 2) {
-                        GreetingView(dark: dark)
-                        CustomText(userData?.patientName ?? "", color: dark ? .white : .black)
-                            .font(.headline)
-                            .fontWeight(.semibold)
+//                        GreetingView(dark: dark)
+//                        CustomText(userData?.patientName ?? "", color: dark ? .white : .black)
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
                     }
-                }
-            }
+                }   }
             .buttonStyle(PlainButtonStyle()) // Avoid default blue tint on tap
-
+         
             Spacer()
             Button(action:{}){
                 Image("Notification")
@@ -341,16 +402,19 @@ struct CustomAppBar: View {
                     .scaledToFit()
                     .frame(width: 24, height: 24)
             }
-            
-
-            Button(action: {
-                showSosSheet = true
-            }) {
-                Image(dark ? "sosDark" : "sos")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 56, height: 56)
-            }
+            Button(action:{
+                route.navigate(to: .leaderboardView)
+            }){
+                HStack {
+                    Image("gem")
+                        .resizable()
+                        .frame( width:25 ,  height:20)
+                    
+                    Text("230 points").foregroundColor(.black)
+                }.padding(4)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.customBackground2))}
         }
         .padding()
         .background(dark ? Color.black : Color.white)
@@ -370,15 +434,19 @@ struct CustomTabBar: View {
 
     var body: some View {
         HStack {
-            TabBarItem(icon: "home", title: "home", tab: .home, selectedTab: $selectedTab)
+            TabBarItem(icon: "homeC", title: "home", tab: .home, selectedTab: $selectedTab)
+                .padding()
 //                       TabBarItem(icon: "activity", title: "Activity", tab: .activity, selectedTab: $selectedTab)
      
-                TabBarItem(icon: "reminder", title: "reminders", tab: .reminders, selectedTab: $selectedTab)
+            TabBarItem(icon: "challenge", title: "reminders", tab: .challenge, selectedTab: $selectedTab)
                     .padding()
+            TabBarItem(icon: "mindfulness", title: "chat", tab: .mindfulness, selectedTab: $selectedTab)
             
-             
-                       TabBarItem(icon: "Chat", title: "chat", tab: .chat, selectedTab: $selectedTab)
+            TabBarItem(icon: "Group", title: "chat", tab: .run, selectedTab: $selectedTab)
+            
+            TabBarItem(icon: "activity", title: "chat", tab: .activity, selectedTab: $selectedTab)
         }
+        .padding(.horizontal)
         .frame(height: 70)
         .background(
             (dark ? Color.customBackgroundDark :  Color.white)
@@ -406,9 +474,9 @@ struct TabBarItem: View {
                 .scaledToFit()
                 .frame(width: 24, height: 24)
                 .foregroundColor(icon == "home" ? .blue : .gray)
-            LocalizedText(key:title)
-                .font(.caption)
-                .foregroundColor(icon == "home" ? .blue : .gray)
+//            LocalizedText(key:title)
+//                .font(.caption)
+//                .foregroundColor(icon == "home" ? .blue : .gray)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 10)
@@ -417,11 +485,20 @@ struct TabBarItem: View {
             selectedTab = tab
             print("Reminders tab tapped")
             
-            if(selectedTab == .reminders){
-              route.navigate(to: .pillsReminder)
-            }        
-            if(selectedTab == .chat){
-              route.navigate(to: .chatBotView)
+            if(selectedTab == .home){
+//              route.navigate(to: .pillsReminder)
+            }
+            if(selectedTab == .challenge){
+                route.navigate(to: .challengesView)
+            }
+            if(selectedTab == .mindfulness){
+//              route.navigate(to: .pillsReminder)
+            }
+            if(selectedTab == .run){
+//              route.navigate(to: .pillsReminder)
+            }
+            if(selectedTab == .activity){
+//              route.navigate(to: .chatBotView)
             }
         }
     }
@@ -429,7 +506,7 @@ struct TabBarItem: View {
 
 
 enum Tab {
-    case home, activity, reminders, chat
+    case home, challenge, mindfulness, run , activity
 }
 
 
@@ -456,7 +533,6 @@ struct VitalsCard: View {
                             Text(timeAgo(from: currentVital?.vitalDateTime ?? ""))
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
-
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
@@ -470,7 +546,6 @@ struct VitalsCard: View {
                             Button("update") {
                                 
                                 Task{
-                                  
                                         Task{
                                             await vitalsVM.getVitals()
                                         }

@@ -18,6 +18,7 @@
 		8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A92DAA3BFC0043330A /* drag.swift */; };
 		8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AB2DAA6C4B0043330A /* intakehistory.swift */; };
 		8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582AD2DAA7C350043330A /* outputHistory.swift */; };
+		8D08F2252E49DA0E00FE1B04 /* forgetpassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D08F2242E49DA0E00FE1B04 /* forgetpassword.swift */; };
 		8D0BBDC02DE6D7FD00ACFBBC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D0BBDC22DE6D7FD00ACFBBC /* Localizable.strings */; };
 		8D0BBDC62DE6E4E200ACFBBC /* language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0BBDC52DE6E4E200ACFBBC /* language.swift */; };
 		8D12F5EC2DC4A05F00DE1A41 /* AnimateWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D12F5EB2DC4A05E00DE1A41 /* AnimateWave.swift */; };
@@ -40,6 +41,7 @@
 		8D188B822DF94B86007267B9 /* setreminder.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D188B812DF94B86007267B9 /* setreminder.gif */; };
 		8D188B842DF94BCA007267B9 /* intakegif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D188B832DF94BCA007267B9 /* intakegif.gif */; };
 		8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */; };
+		8D2C37892E41D002003170DD /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C37882E41D002003170DD /* ForgotPassword.swift */; };
 		8D2E8FCA2DDAF4CC0008EB66 /* country_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC72DDAF4CC0008EB66 /* country_json.json */; };
 		8D2E8FCB2DDAF4CC0008EB66 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */; };
 		8D2E8FCC2DDAF4CC0008EB66 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */; };
@@ -47,6 +49,12 @@
 		8D3148882D9FA371008DF7D7 /* PillsReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3148872D9FA371008DF7D7 /* PillsReminder.swift */; };
 		8D31488C2D9FB648008DF7D7 /* Calander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488B2D9FB648008DF7D7 /* Calander.swift */; };
 		8D31488F2D9FF8C7008DF7D7 /* DietView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D31488E2D9FF8C7008DF7D7 /* DietView.swift */; };
+		8D3247402E4712CF003DC81B /* NewChallengeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D32473F2E4712CF003DC81B /* NewChallengeDataModel.swift */; };
+		8D3247422E471431003DC81B /* DashboardChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3247412E471431003DC81B /* DashboardChallenge.swift */; };
+		8D3247442E47165D003DC81B /* NewChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3247432E47165D003DC81B /* NewChallengeView.swift */; };
+		8D3247462E471F79003DC81B /* JoinChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3247452E471F79003DC81B /* JoinChallengeView.swift */; };
+		8D3247482E4720E2003DC81B /* Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3247472E4720E2003DC81B /* Toggle.swift */; };
+		8D32474A2E472826003DC81B /* FullchallengeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3247492E472826003DC81B /* FullchallengeDescription.swift */; };
 		8D3816142DC08C5C008F2539 /* Voiceassistantview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */; };
 		8D38161B2DC0A56B008F2539 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38161A2DC0A56B008F2539 /* NIO */; };
 		8D38161D2DC0A56B008F2539 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 8D38161C2DC0A56B008F2539 /* NIOConcurrencyHelpers */; };
@@ -67,6 +75,11 @@
 		8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */; };
 		8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */; };
 		8D78480E2DC38CD8004A255D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D78480D2DC38CD8004A255D /* ImagePicker.swift */; };
+		8D829EFD2E3CD7E200FA4298 /* challenges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829EF92E3CD7E200FA4298 /* challenges.swift */; };
+		8D829EFE2E3CD7E200FA4298 /* ChallengesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829EFA2E3CD7E200FA4298 /* ChallengesViewModel.swift */; };
+		8D829EFF2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829EFB2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift */; };
+		8D829F022E3CD7FB00FA4298 /* leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829F002E3CD7FB00FA4298 /* leaderboard.swift */; };
+		8D8DB88D2E4DC741000A43A1 /* button_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D8DB88C2E4DC740000A43A1 /* button_loader.gif */; };
 		8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257742D97D39300CF96B4 /* appbar.swift */; };
 		8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF6392D9BEC5A0026726C /* url.swift */; };
 		8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257762D97D7EC00CF96B4 /* MyButton.swift */; };
@@ -101,13 +114,25 @@
 		8D966B752D9D420200B37927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D966B742D9D420200B37927 /* AppDelegate.swift */; };
 		8D966B782D9D442D00B37927 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8D966B772D9D442D00B37927 /* FirebaseAnalytics */; };
 		8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9BCAAB2DA0FD6800405837 /* PillsViewModal.swift */; };
+		8DA8BD9E2E45E4EC00307949 /* JoinNowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8BD9D2E45E4EC00307949 /* JoinNowButton.swift */; };
+		8DBA7DD12E4B0A1F002F9B58 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA7DD02E4B0A1F002F9B58 /* ResetPassword.swift */; };
 		8DBD5F382DE9862900B2367C /* globalerror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD5F372DE9862900B2367C /* globalerror.swift */; };
 		8DBD5F3A2DE9C13700B2367C /* Internet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD5F392DE9C13700B2367C /* Internet.swift */; };
 		8DC4EAF12DD3221400F806B8 /* DeviceLimitPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */; };
 		8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */; };
 		8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */; };
+		8DD1EF612E3DEA4E00EBDC07 /* mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1EF602E3DEA4E00EBDC07 /* mood.swift */; };
 		8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */; };
 		8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */; };
+		8DDDD4522E44841A001AE3B4 /* sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4512E44841A001AE3B4 /* sleep.swift */; };
+		8DDDD4542E448569001AE3B4 /* sleepmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4532E448569001AE3B4 /* sleepmodel.swift */; };
+		8DDDD4562E4485BC001AE3B4 /* SleepTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4552E4485BC001AE3B4 /* SleepTrackerViewModel.swift */; };
+		8DDDD45D2E44B3F4001AE3B4 /* glad.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD4572E44B3F2001AE3B4 /* glad.gif */; };
+		8DDDD45E2E44B3F4001AE3B4 /* worried.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD4582E44B3F2001AE3B4 /* worried.gif */; };
+		8DDDD45F2E44B3F4001AE3B4 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD4592E44B3F3001AE3B4 /* angry.gif */; };
+		8DDDD4602E44B3F4001AE3B4 /* Spectacular.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD45A2E44B3F3001AE3B4 /* Spectacular.gif */; };
+		8DDDD4612E44B3F4001AE3B4 /* Upset.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD45B2E44B3F4001AE3B4 /* Upset.gif */; };
+		8DDDD4622E44B3F4001AE3B4 /* happy.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DDDD45C2E44B3F4001AE3B4 /* happy.gif */; };
 		8DDF8EDA2DBCE1A500F8B47D /* AllergiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED72DBCE1A400F8B47D /* AllergiesView.swift */; };
 		8DDF8EDB2DBCE1A500F8B47D /* AllergiesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED82DBCE1A400F8B47D /* AllergiesViewModal.swift */; };
 		8DDF8EDC2DBCE1A500F8B47D /* AllergiesDataModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF8ED92DBCE1A500F8B47D /* AllergiesDataModal.swift */; };
@@ -120,6 +145,8 @@
 		8DEE64472DBA106C00C5B5E4 /* ReportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */; };
 		8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */; };
 		8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */; };
+		8DF1938A2E409EC500995340 /* sleeptracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF193892E409EC400995340 /* sleeptracker.swift */; };
+		8DF1938E2E40A69900995340 /* VitalsForDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF1938D2E40A69900995340 /* VitalsForDashboard.swift */; };
 		8DF253A12DD5CA7C00BECD6F /* ObserverDashboaard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */; };
 		8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A62DC9D70F00A39658 /* Symptoms history.swift */; };
 		8DF275A92DCA168300A39658 /* sos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF275A82DCA168300A39658 /* sos.swift */; };
@@ -149,6 +176,7 @@
 		8D0582A92DAA3BFC0043330A /* drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drag.swift; sourceTree = "<group>"; };
 		8D0582AB2DAA6C4B0043330A /* intakehistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intakehistory.swift; sourceTree = "<group>"; };
 		8D0582AD2DAA7C350043330A /* outputHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = outputHistory.swift; sourceTree = "<group>"; };
+		8D08F2242E49DA0E00FE1B04 /* forgetpassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forgetpassword.swift; sourceTree = "<group>"; };
 		8D0BBDC12DE6D7FD00ACFBBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D0BBDC32DE6D7FF00ACFBBC /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D0BBDC52DE6E4E200ACFBBC /* language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = language.swift; sourceTree = "<group>"; };
@@ -171,6 +199,7 @@
 		8D188B812DF94B86007267B9 /* setreminder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = setreminder.gif; sourceTree = "<group>"; };
 		8D188B832DF94BCA007267B9 /* intakegif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = intakegif.gif; sourceTree = "<group>"; };
 		8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAccountView.swift; sourceTree = "<group>"; };
+		8D2C37882E41D002003170DD /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		8D2E8FC72DDAF4CC0008EB66 /* country_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_json.json; sourceTree = "<group>"; };
 		8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -178,6 +207,12 @@
 		8D3148872D9FA371008DF7D7 /* PillsReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsReminder.swift; sourceTree = "<group>"; };
 		8D31488B2D9FB648008DF7D7 /* Calander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calander.swift; sourceTree = "<group>"; };
 		8D31488E2D9FF8C7008DF7D7 /* DietView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietView.swift; sourceTree = "<group>"; };
+		8D32473F2E4712CF003DC81B /* NewChallengeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeDataModel.swift; sourceTree = "<group>"; };
+		8D3247412E471431003DC81B /* DashboardChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardChallenge.swift; sourceTree = "<group>"; };
+		8D3247432E47165D003DC81B /* NewChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeView.swift; sourceTree = "<group>"; };
+		8D3247452E471F79003DC81B /* JoinChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeView.swift; sourceTree = "<group>"; };
+		8D3247472E4720E2003DC81B /* Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toggle.swift; sourceTree = "<group>"; };
+		8D3247492E472826003DC81B /* FullchallengeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullchallengeDescription.swift; sourceTree = "<group>"; };
 		8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voiceassistantview.swift; sourceTree = "<group>"; };
 		8D38163B2DC0D361008F2539 /* testAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testAudio.swift; sourceTree = "<group>"; };
 		8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewmodal.swift; sourceTree = "<group>"; };
@@ -188,12 +223,19 @@
 		8D82576F2D97D05700CF96B4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8D8257742D97D39300CF96B4 /* appbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appbar.swift; sourceTree = "<group>"; };
 		8D8257762D97D7EC00CF96B4 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
+		8D829EF92E3CD7E200FA4298 /* challenges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = challenges.swift; sourceTree = "<group>"; };
+		8D829EFA2E3CD7E200FA4298 /* ChallengesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesViewModel.swift; sourceTree = "<group>"; };
+		8D829EFB2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinedChallengeDataModel.swift; sourceTree = "<group>"; };
+		8D829F002E3CD7FB00FA4298 /* leaderboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leaderboard.swift; sourceTree = "<group>"; };
+		8D8DB88C2E4DC740000A43A1 /* button_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = button_loader.gif; sourceTree = "<group>"; };
 		8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = vitalio_native.entitlements; sourceTree = "<group>"; };
 		8D966B742D9D420200B37927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "vitalio-native-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8D9BCAAB2DA0FD6800405837 /* PillsViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillsViewModal.swift; sourceTree = "<group>"; };
+		8DA8BD9D2E45E4EC00307949 /* JoinNowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinNowButton.swift; sourceTree = "<group>"; };
 		8DAA9E1E2D913FFB00C0315F /* drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawer.swift; sourceTree = "<group>"; };
+		8DBA7DD02E4B0A1F002F9B58 /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		8DBD5F372DE9862900B2367C /* globalerror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = globalerror.swift; sourceTree = "<group>"; };
 		8DBD5F392DE9C13700B2367C /* Internet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Internet.swift; sourceTree = "<group>"; };
 		8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLimitPopup.swift; sourceTree = "<group>"; };
@@ -202,6 +244,7 @@
 		8DC5CEB62D980A5700BF614A /* Confermation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confermation.swift; sourceTree = "<group>"; };
 		8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fluid.swift; sourceTree = "<group>"; };
 		8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModal.swift; sourceTree = "<group>"; };
+		8DD1EF602E3DEA4E00EBDC07 /* mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mood.swift; sourceTree = "<group>"; };
 		8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitalio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD5F8432D8A88B600FBDF87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -216,6 +259,15 @@
 		8DD5F85D2D8A8A1000FBDF87 /* otp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = otp.swift; sourceTree = "<group>"; };
 		8DD5F8632D8AB32E00FBDF87 /* CreateAccont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccont.swift; sourceTree = "<group>"; };
 		8DD5F8652D8AD7C500FBDF87 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		8DDDD4512E44841A001AE3B4 /* sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleep.swift; sourceTree = "<group>"; };
+		8DDDD4532E448569001AE3B4 /* sleepmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleepmodel.swift; sourceTree = "<group>"; };
+		8DDDD4552E4485BC001AE3B4 /* SleepTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTrackerViewModel.swift; sourceTree = "<group>"; };
+		8DDDD4572E44B3F2001AE3B4 /* glad.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = glad.gif; sourceTree = "<group>"; };
+		8DDDD4582E44B3F2001AE3B4 /* worried.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = worried.gif; sourceTree = "<group>"; };
+		8DDDD4592E44B3F3001AE3B4 /* angry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = angry.gif; sourceTree = "<group>"; };
+		8DDDD45A2E44B3F3001AE3B4 /* Spectacular.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Spectacular.gif; sourceTree = "<group>"; };
+		8DDDD45B2E44B3F4001AE3B4 /* Upset.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Upset.gif; sourceTree = "<group>"; };
+		8DDDD45C2E44B3F4001AE3B4 /* happy.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = happy.gif; sourceTree = "<group>"; };
 		8DDF8ED72DBCE1A400F8B47D /* AllergiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesView.swift; sourceTree = "<group>"; };
 		8DDF8ED82DBCE1A400F8B47D /* AllergiesViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesViewModal.swift; sourceTree = "<group>"; };
 		8DDF8ED92DBCE1A500F8B47D /* AllergiesDataModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesDataModal.swift; sourceTree = "<group>"; };
@@ -228,6 +280,8 @@
 		8DEE64462DBA106C00C5B5E4 /* ReportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDataModel.swift; sourceTree = "<group>"; };
 		8DEE64482DBA3D9000C5B5E4 /* AddReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReport.swift; sourceTree = "<group>"; };
 		8DEE644A2DBA50DB00C5B5E4 /* DynamicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicData.swift; sourceTree = "<group>"; };
+		8DF193892E409EC400995340 /* sleeptracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleeptracker.swift; sourceTree = "<group>"; };
+		8DF1938D2E40A69900995340 /* VitalsForDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsForDashboard.swift; sourceTree = "<group>"; };
 		8DF253A02DD5CA7C00BECD6F /* ObserverDashboaard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverDashboaard.swift; sourceTree = "<group>"; };
 		8DF275A62DC9D70F00A39658 /* Symptoms history.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Symptoms history.swift"; sourceTree = "<group>"; };
 		8DF275A82DCA168300A39658 /* sos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sos.swift; sourceTree = "<group>"; };
@@ -298,6 +352,14 @@
 			path = "Add Member";
 			sourceTree = "<group>";
 		};
+		8D2C37872E41CFDD003170DD /* forgot password */ = {
+			isa = PBXGroup;
+			children = (
+				8D2C37882E41D002003170DD /* ForgotPassword.swift */,
+			);
+			path = "forgot password";
+			sourceTree = "<group>";
+		};
 		8D2E8FC62DDAF4BA0008EB66 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +382,23 @@
 			path = Diet;
 			sourceTree = "<group>";
 		};
+		8D32473D2E471284003DC81B /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D829EFB2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift */,
+				8D32473F2E4712CF003DC81B /* NewChallengeDataModel.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		8D32474B2E47310B003DC81B /* Challange ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8D829EFA2E3CD7E200FA4298 /* ChallengesViewModel.swift */,
+			);
+			path = "Challange ViewModel";
+			sourceTree = "<group>";
+		};
 		8D3816122DC08C38008F2539 /* voice assistant */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,9 +413,12 @@
 		8D46DCDE2D951FC800FAC567 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				8DDDD4502E448380001AE3B4 /* sleepwidget */,
 				8DD5F8592D8A89F200FBDF87 /* dashboard.swift */,
 				8D1544352DA91D72009E7433 /* DashboardViewModal.swift */,
 				8DF275A82DCA168300A39658 /* sos.swift */,
+				8DD1EF602E3DEA4E00EBDC07 /* mood.swift */,
+				8DF1938D2E40A69900995340 /* VitalsForDashboard.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -357,6 +439,8 @@
 				8DFEF6372D9BD2910026726C /* LoginViewModal.swift */,
 				8DFEF63B2D9BF2670026726C /* Modal.swift */,
 				8DC4EAF02DD3221400F806B8 /* DeviceLimitPopup.swift */,
+				8D08F2242E49DA0E00FE1B04 /* forgetpassword.swift */,
+				8DBA7DD02E4B0A1F002F9B58 /* ResetPassword.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -411,6 +495,24 @@
 			path = common;
 			sourceTree = "<group>";
 		};
+		8D829EFC2E3CD7E200FA4298 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				8DA8BD9C2E45E4D200307949 /* ChallangeView */,
+				8D32474B2E47310B003DC81B /* Challange ViewModel */,
+				8D32473D2E471284003DC81B /* Data Model */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		8D829F012E3CD7FB00FA4298 /* leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				8D829F002E3CD7FB00FA4298 /* leaderboard.swift */,
+			);
+			path = leaderboard;
+			sourceTree = "<group>";
+		};
 		8D966B762D9D432D00B37927 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +526,20 @@
 				8DD5F8532D8A892000FBDF87 /* routing.swift */,
 			);
 			path = routing;
+			sourceTree = "<group>";
+		};
+		8DA8BD9C2E45E4D200307949 /* ChallangeView */ = {
+			isa = PBXGroup;
+			children = (
+				8D829EF92E3CD7E200FA4298 /* challenges.swift */,
+				8D3247432E47165D003DC81B /* NewChallengeView.swift */,
+				8DA8BD9D2E45E4EC00307949 /* JoinNowButton.swift */,
+				8D3247412E471431003DC81B /* DashboardChallenge.swift */,
+				8D3247452E471F79003DC81B /* JoinChallengeView.swift */,
+				8D3247472E4720E2003DC81B /* Toggle.swift */,
+				8D3247492E472826003DC81B /* FullchallengeDescription.swift */,
+			);
+			path = ChallangeView;
 			sourceTree = "<group>";
 		};
 		8DC5CEAD2D97E1FD00BF614A /* Pills Reminder */ = {
@@ -485,6 +601,13 @@
 		8DD5F8352D8A88B600FBDF87 = {
 			isa = PBXGroup;
 			children = (
+				8D8DB88C2E4DC740000A43A1 /* button_loader.gif */,
+				8DDDD4592E44B3F3001AE3B4 /* angry.gif */,
+				8DDDD4572E44B3F2001AE3B4 /* glad.gif */,
+				8DDDD45C2E44B3F4001AE3B4 /* happy.gif */,
+				8DDDD45A2E44B3F3001AE3B4 /* Spectacular.gif */,
+				8DDDD45B2E44B3F4001AE3B4 /* Upset.gif */,
+				8DDDD4582E44B3F2001AE3B4 /* worried.gif */,
 				8D188B832DF94BCA007267B9 /* intakegif.gif */,
 				8D188B812DF94B86007267B9 /* setreminder.gif */,
 				8D188B7F2DF94B39007267B9 /* familygif.gif */,
@@ -519,12 +642,15 @@
 		8DD5F8402D8A88B600FBDF87 /* vitalio_native */ = {
 			isa = PBXGroup;
 			children = (
+				8D2C37872E41CFDD003170DD /* forgot password */,
 				8D0BBDC42DE6E4A900ACFBBC /* Language */,
 				8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */,
 				8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */,
 				8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */,
 				8D46DCE22D95206F00FAC567 /* AppManager */,
 				8D46DCDE2D951FC800FAC567 /* Dashboard */,
+				8D829F012E3CD7FB00FA4298 /* leaderboard */,
+				8D829EFC2E3CD7E200FA4298 /* Challenges */,
 				8D46DCDF2D951FE500FAC567 /* Drawer */,
 				8D2E8FC62DDAF4BA0008EB66 /* SignUp */,
 				8DDF8ED62DBCE17100F8B47D /* allergies */,
@@ -548,6 +674,7 @@
 				8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */,
 				8DD5F8472D8A88B900FBDF87 /* Preview Content */,
 				8D0BBDC22DE6D7FD00ACFBBC /* Localizable.strings */,
+				8DF193892E409EC400995340 /* sleeptracker.swift */,
 			);
 			path = vitalio_native;
 			sourceTree = "<group>";
@@ -558,6 +685,16 @@
 				8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DDDD4502E448380001AE3B4 /* sleepwidget */ = {
+			isa = PBXGroup;
+			children = (
+				8DDDD4512E44841A001AE3B4 /* sleep.swift */,
+				8DDDD4532E448569001AE3B4 /* sleepmodel.swift */,
+				8DDDD4552E4485BC001AE3B4 /* SleepTrackerViewModel.swift */,
+			);
+			path = sleepwidget;
 			sourceTree = "<group>";
 		};
 		8DDF8ED62DBCE17100F8B47D /* allergies */ = {
@@ -704,18 +841,25 @@
 				8D188B802DF94B39007267B9 /* familygif.gif in Resources */,
 				8D0BBDC02DE6D7FD00ACFBBC /* Localizable.strings in Resources */,
 				8D188B722DF948E7007267B9 /* namegif.gif in Resources */,
+				8DDDD4622E44B3F4001AE3B4 /* happy.gif in Resources */,
 				8D188B7E2DF94AE3007267B9 /* diseasegif.gif in Resources */,
 				528CD8842E1697E70002B795 /* other_disease.gif in Resources */,
 				8D188B822DF94B86007267B9 /* setreminder.gif in Resources */,
 				8D188B782DF94A28007267B9 /* addressgif.gif in Resources */,
 				8D029BA42DE82DF0000FE708 /* InfoPlist.strings in Resources */,
+				8DDDD45F2E44B3F4001AE3B4 /* angry.gif in Resources */,
 				8D188B7C2DF94AAB007267B9 /* heightgif.gif in Resources */,
 				8D188B7A2DF94A40007267B9 /* weightgif.gif in Resources */,
 				8D188B6E2DF9406B007267B9 /* calandergif.gif in Resources */,
+				8DDDD4612E44B3F4001AE3B4 /* Upset.gif in Resources */,
 				5293CF122E129C770071D66B /* confetti.gif in Resources */,
 				8D188B762DF949FE007267B9 /* bloodgif.gif in Resources */,
+				8D8DB88D2E4DC741000A43A1 /* button_loader.gif in Resources */,
+				8DDDD45E2E44B3F4001AE3B4 /* worried.gif in Resources */,
+				8DDDD45D2E44B3F4001AE3B4 /* glad.gif in Resources */,
 				8D188B742DF9497D007267B9 /* gendergif.gif in Resources */,
 				8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */,
+				8DDDD4602E44B3F4001AE3B4 /* Spectacular.gif in Resources */,
 				8D188B842DF94BCA007267B9 /* intakegif.gif in Resources */,
 				8D188B702DF947B1007267B9 /* gif2.gif in Resources */,
 				8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */,
@@ -766,23 +910,33 @@
 				8D188B692DF93C00007267B9 /* gif.swift in Sources */,
 				8D966B602D9CF71F00B37927 /* LoginViewModal.swift in Sources */,
 				521000D52E0139BD00AE9936 /* preview.swift in Sources */,
+				8D829EFD2E3CD7E200FA4298 /* challenges.swift in Sources */,
 				8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */,
+				8DDDD4562E4485BC001AE3B4 /* SleepTrackerViewModel.swift in Sources */,
+				8DD1EF612E3DEA4E00EBDC07 /* mood.swift in Sources */,
 				525F3C582DF970C200D69430 /* Edit Profile 4.swift in Sources */,
 				8DFB66F22DAE2D2B00FE7302 /* FluidViewModal.swift in Sources */,
 				8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */,
+				8D3247482E4720E2003DC81B /* Toggle.swift in Sources */,
 				8D966B5F2D9CF71D00B37927 /* otp.swift in Sources */,
 				8DDF8EDA2DBCE1A500F8B47D /* AllergiesView.swift in Sources */,
 				8DEE64452DBA0F8300C5B5E4 /* UploadReportViewModel.swift in Sources */,
+				8DDDD4522E44841A001AE3B4 /* sleep.swift in Sources */,
 				8D966B5E2D9CF71900B37927 /* login.swift in Sources */,
+				8D3247442E47165D003DC81B /* NewChallengeView.swift in Sources */,
+				8D3247462E471F79003DC81B /* JoinChallengeView.swift in Sources */,
 				8D2F1CC42DDD916F0058E939 /* signupdatamodel.swift in Sources */,
 				8D0582A62DAA257F0043330A /* Intake.swift in Sources */,
 				8D2E8FCC2DDAF4CC0008EB66 /* SignUpViewModel.swift in Sources */,
 				8DF9F8A22DAF865F002BBEBB /* fluiddatamodal.swift in Sources */,
 				8D966B5D2D9CF71600B37927 /* FAQ.swift in Sources */,
+				8D3247402E4712CF003DC81B /* NewChallengeDataModel.swift in Sources */,
 				8D966B5C2D9CF71300B37927 /* Confermation.swift in Sources */,
+				8D3247422E471431003DC81B /* DashboardChallenge.swift in Sources */,
 				8DFB66F42DAE3A4500FE7302 /* addwater.swift in Sources */,
 				8D966B5B2D9CF70F00B37927 /* SymptomsView.swift in Sources */,
 				8D0582AE2DAA7C350043330A /* outputHistory.swift in Sources */,
+				8D32474A2E472826003DC81B /* FullchallengeDescription.swift in Sources */,
 				8D966B5A2D9CF70C00B37927 /* Feedback.swift in Sources */,
 				8DF862712DD472B2002ADFE5 /* ShowImage.swift in Sources */,
 				8D0582AC2DAA6C4B0043330A /* intakehistory.swift in Sources */,
@@ -796,12 +950,17 @@
 				8D966B542D9CF6F800B37927 /* alert.swift in Sources */,
 				8D966B532D9CF6F400B37927 /* network.swift in Sources */,
 				8D12F5EE2DC4A13400DE1A41 /* VoiceManager.swift in Sources */,
+				8D829EFE2E3CD7E200FA4298 /* ChallengesViewModel.swift in Sources */,
+				8DA8BD9E2E45E4EC00307949 /* JoinNowButton.swift in Sources */,
 				8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */,
 				8D1544342DA907A9009E7433 /* Output.swift in Sources */,
 				8DBD5F3A2DE9C13700B2367C /* Internet.swift in Sources */,
 				8D966B512D9CF6EE00B37927 /* viewmodal.swift in Sources */,
+				8D08F2252E49DA0E00FE1B04 /* forgetpassword.swift in Sources */,
 				8D966B502D9CF6EA00B37927 /* DummyView.swift in Sources */,
 				8DF6EFEA2DB799DB00E2C69A /* vitaldatamodal.swift in Sources */,
+				8DBA7DD12E4B0A1F002F9B58 /* ResetPassword.swift in Sources */,
+				8DF1938A2E409EC500995340 /* sleeptracker.swift in Sources */,
 				8D9BCAAC2DA0FD6800405837 /* PillsViewModal.swift in Sources */,
 				8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */,
 				8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */,
@@ -809,10 +968,15 @@
 				8DF275A72DC9D70F00A39658 /* Symptoms history.swift in Sources */,
 				8DDF8EE22DBCE1D800F8B47D /* CustomTextField 1.swift in Sources */,
 				8DF253A12DD5CA7C00BECD6F /* ObserverDashboaard.swift in Sources */,
+				8DF1938E2E40A69900995340 /* VitalsForDashboard.swift in Sources */,
+				8D2C37892E41D002003170DD /* ForgotPassword.swift in Sources */,
 				8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */,
+				8D829F022E3CD7FB00FA4298 /* leaderboard.swift in Sources */,
 				8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */,
 				8DDF8EE32DBCE1D800F8B47D /* CustomeLoader.swift in Sources */,
+				8DDDD4542E448569001AE3B4 /* sleepmodel.swift in Sources */,
 				8D0582AA2DAA3BFC0043330A /* drag.swift in Sources */,
+				8D829EFF2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift in Sources */,
 				8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */,
 				8DF6EFED2DB799DB00E2C69A /* AddVitalsView.swift in Sources */,
 				8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */,

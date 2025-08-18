@@ -13,7 +13,8 @@ struct RemoteImage: View {
     var placeholder: Image
     var failure: Image
 
-    init(url: String?, placeholder: Image = Image(systemName: "person.crop.circle"), failure: Image = Image(systemName: "person.crop.circle.badge.exclamationmark")) {
+    init(url: String?, placeholder: Image = Image("dpImage"), failure: Image = Image("dpImage")) {
+//    init(url: String?, placeholder: Image = Image(systemName: "person.crop.circle"), failure: Image = Image(systemName: "person.crop.circle.badge.exclamationmark")) {
         _loader = StateObject(wrappedValue: ImageLoader(url: url))
         self.placeholder = placeholder
         self.failure = failure

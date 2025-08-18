@@ -21,13 +21,23 @@ class LoginViewModal : ObservableObject {
             route?.navigate(to: .dashboard)
         }
     
-    @Published var uhidNumber: String = "" // Moved UHID to ViewModel
-    @Published var extractedMobileNumber: String = "" // Moved UHID to ViewModel
+    @Published var uhidNumber: String = ""  // Moved UHID to ViewModel
+    @Published var emailForLink: String = ""  // Email for link
+
+    @Published var password: String = ""  // Moved UHID to ViewModel
+    @Published var extractedMobileNumber: String = ""  // Moved UHID to ViewModel
     @Published var isOTPSuccess: Bool = false  // ✅ Track OTP status
-    @Published var isLoggedIn: Bool = false  // ✅ user Logged In
+    @Published var isLoggedIn: Bool = false    // ✅ user Logged   In
     @Published var apiState: APIState = .idle  // Track API state
     @Published var isOTPInvalid: Bool = false
     @Published var tempPatientModel: PatientModel?
+    
+    
+    @Published var resetPasswordOld: String = "" // Email for link
+    @Published var resetPasswordNew: String = "" // Email for link
+    @Published var resetPasswordNewReEnter: String = "" // Email for link
+    
+    
 //
 //    func loadData( uhid: String) async {
 //            do {
@@ -108,7 +118,6 @@ class LoginViewModal : ObservableObject {
     }
 
 
-   
     
     func checkIdentifierType(_ input: String) -> String {
         let trimmedInput = input.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -133,7 +142,7 @@ class LoginViewModal : ObservableObject {
         let uhid = uhidNumber.trimmingCharacters(in: .whitespaces)
         
         // ✅ Enable if it starts with "uhid" (case-insensitive)
-        if uhid.lowercased().hasPrefix("uhid") {
+        if uhid.isEmpty == false{
             return false
         }
 
@@ -193,7 +202,7 @@ class LoginViewModal : ObservableObject {
 
                 let response = try await APIService.shared.fetchRawData(fromURL: baseURL7082 + sentLogInOTPForSHFCApp, parameters: params)
                 
-                print("✅ Success:", response)
+                print("✅ new result:", response)
                 if let isRegistered = response["isRegisterd"] as? Int, isRegistered == 0 {
                     print("🔒 User is not registered.")
                     DispatchQueue.main.async{
@@ -203,7 +212,6 @@ class LoginViewModal : ObservableObject {
                     print("✅ User is registered.")
                     DispatchQueue.main.async{
                         self.isRegistered = true
-                        
                     }
                 }
 
@@ -219,6 +227,7 @@ class LoginViewModal : ObservableObject {
                 print("❌ Error:", error)
             }
         }
+    
     @Published var showToast: Bool = false
     
     func verifyOTP(otp: String, uhid: String) async {
@@ -264,7 +273,6 @@ class LoginViewModal : ObservableObject {
                                     let patient = try JSONDecoder().decode(PatientModel.self, from: firstItem)
                                     print("FaheemCheck ✅ Decoded patient: \(patient)")
                                     UserDefaultsManager.shared.saveUserData(patient)
-                                    
                                     if let savedPatient = UserDefaultsManager.shared.getUserData() {
                                         print("FaheemCheck2 ✅ Retrieved from UserDefaults: \(savedPatient)")
                                     } else {
@@ -289,6 +297,8 @@ class LoginViewModal : ObservableObject {
         }
     }
     
+
+    
     func logOut(uhid: String) async {
         let fcmToken = UserDefaultsManager.shared.get(forKey: "fcmToken") ?? "notoken"
 
@@ -303,6 +313,172 @@ class LoginViewModal : ObservableObject {
             print("error")
         }
     }
+    
+    
+    
+    
+    
+    
+//    
+//    func CorporateEmployeeLogin() async{
+//        
+//        var  result : [String: Any] = [:]
+//        let params = [
+////            "username": uhidNumber,
+////            "password": password  
+//            
+//            "username": "Saddam@hotmail.com",
+//            "password": "Saddam@123#"
+//        ]
+//        
+//        print(params)
+//        do {
+//             result = try await APIService.shared.postRawData(toURL: "http://182.156.200.177:5082/api/CorporateEmployee/CorporateEmployeeLogin", body: params )
+//
+//            print("new result \(result)")
+//            
+//            if let userArray = result["responseValue"] as? [[String: Any]],
+//               let firstUserDict = userArray.first,
+//               let jsonData = try? JSONSerialization.data(withJSONObject: firstUserDict),
+//               let employee = try? JSONDecoder().decode(CorporateEmployee.self, from: jsonData) {
+//
+//                if let encoded = try? JSONEncoder().encode(employee) {
+//                    UserDefaults.standard.set(encoded, forKey: "corporate_employee_data")
+//                    print("💾 Employee saved.")
+//                }
+//
+//                if let savedData = UserDefaults.standard.data(forKey: "corporate_employee_data"),
+//                   let savedEmployee = try? JSONDecoder().decode(CorporateEmployee.self, from: savedData) {
+//                    print("👤 Retrieved: \(savedEmployee.empName)")
+//                } else {
+//                    print("⚠️ Failed to retrieve saved employee.")
+//                }
+//
+//            } else {
+//                print("❌ Failed to decode employee data.")
+//            }
+//
+//
+//        } catch  {
+//            showGlobalError(message: "\(error.localizedDescription)")
+//        }
+//    }
+    
+    
+    func CorporateEmployeeLogin() async {
+        DispatchQueue.main.async {
+                   self.apiState = .loading
+               }
+        
+        let params = [
+            "username": uhidNumber,
+            "password": password
+        ]
+
+        print(params)
+        do {
+            let result = try await APIService.shared.postRawData(
+                toURL: "http://182.156.200.177:5082/api/CorporateEmployee/CorporateEmployeeLogin",
+                body: params
+            )
+
+            let data = try JSONSerialization.data(withJSONObject: result, options: [])
+            let decodedResponse = try JSONDecoder().decode(CorporateEmployeeLoginResponse.self, from: data)
+
+            if decodedResponse.status == 1 {
+                if let employee = decodedResponse.responseValue.first {
+                    print("✅ Login successful for: \(employee)")
+                    UserDefaultsManager.shared.saveEmployee(employee)
+                    UserDefaultsManager.shared.saveIsLoggedIn(loggedIn: true)
+                    DispatchQueue.main.async {
+                        self.apiState = .success
+                    }
+                }
+            } else {
+                print("❌ Login failed: \(decodedResponse.message)")
+                showGlobalError(message:"❌ Login failed: \(decodedResponse.message)")
+                DispatchQueue.main.async {
+                    self.apiState = .failure("\(decodedResponse.message)")
+                       }
+            }
+        } catch {
+            print("message:❌ Error: \(error.localizedDescription)")
+            showGlobalError(message:"❌ Error: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                self.apiState = .failure("\(error.localizedDescription)")
+                   }
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    func resetPasswordwithLink()async{
+        
+        let params = [
+            "emailId" : emailForLink
+        ]
+        
+        print(params)
+        do {
+            let result = try await APIService.shared.postWithQueryParams(toURL: "http://182.156.200.177:5082/api/CorporateEmployee/EmployeeResetPassowrdLink", parameters: params)
+            print(result)
+        }catch{
+                
+            }
+    }
+    
+
+    func resetPasswordwithNew() async {
+        let userData =  UserDefaultsManager.shared.getEmployee()
+        if(resetPasswordNewReEnter != resetPasswordNew){
+            showGlobalError(message: "New password and confirmation do not match.")
+            return
+        }
+        
+        let params = [
+            "username": String(userData?.empId ?? ""),
+            "newPassword": resetPasswordNew,
+            "confirmNewPassword": resetPasswordNewReEnter
+        ]
+        
+        
+        do {
+            let result = try await APIService.shared.postRawData(toURL:  "http://182.156.200.177:5082/api/CorporateEmployee/CorporateEmployeeForgotPassword", body: params)
+            print(result)
+        }catch{
+            showGlobalError(message:"❌ Error: \(error.localizedDescription)")
+            print("error")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -313,7 +489,3 @@ enum APIState {
     case success
     case failure(String)
 }
-
-
-//http://172.16.61.31:5082/api/LogInForVitalioApp/LogOutOTPForVitalioApp?UHID=UHID01235&deviceToken=dulLpKNCK8h5jWigtthtH5:APA91bGN-IfgKuZM6IiNJw1eSqT2EQWNkh80ZEetd4gc3krv30rhpt44ZktMcOyAZ6jIsGWKg3Kuv4kOCU8Wwa7OrHGPYE2c-ECNoo4pj2nnhcHBD_e9I1M
-

@@ -154,29 +154,38 @@ struct VitalPopupView: View {
             }
 
             Button("Done") {
+                // Capture the needed values first
+                let dataType = vitalsVM.data
+                let unitKeys = vitalsVM.matchSelectedValue
+
                 Task {
-                    if vitalsVM.data == "Blood Pressure" {
+                    if dataType == "Blood Pressure" {
                         if !value.isEmpty && !valueSecond.isEmpty {
                             await vitalsVM.addVitals([
-                                vitalsVM.matchSelectedValue[0]: value,
-                                vitalsVM.matchSelectedValue[1]: valueSecond
+                                unitKeys[0]: value,
+                                unitKeys[1]: valueSecond
                             ])
-                            // Clear values only after adding
-                            value = ""
-                            valueSecond = ""
-                            showPopup = false
+                            await MainActor.run {
+                                value = ""
+                                valueSecond = ""
+                                showPopup = false
+                            }
                         }
                     } else {
                         if !value.isEmpty {
                             await vitalsVM.addVitals([
-                                vitalsVM.matchSelectedValue[0]: value
+                                unitKeys[0]: value
                             ])
-                            value = ""
-                            showPopup = false
+                            await MainActor.run {
+                                value = ""
+                                showPopup = false
+                            }
                         }
                     }
                 }
             }
+
+
             .frame(maxWidth: .infinity)
             .frame(height: 40)
             .background(Color.blue)

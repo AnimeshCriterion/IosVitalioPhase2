@@ -91,6 +91,24 @@ final class UserDefaultsManager {
               return nil
           }
     
+    let LoggedInEmployee = "LoggedInEmployee"
+    
+
+    func saveEmployee(_ employee: CorporateEmployee) {
+        if let encoded = try? JSONEncoder().encode(employee) {
+            UserDefaults.standard.set(encoded, forKey: LoggedInEmployee)
+        }
+    }
+
+    func getEmployee() -> CorporateEmployee? {
+        if let data = UserDefaults.standard.data(forKey: LoggedInEmployee),
+           let decoded = try? JSONDecoder().decode(CorporateEmployee.self, from: data) {
+            return decoded
+        }
+        return nil
+    }
+
+    
 }
 
 struct PatientModel: Codable {
@@ -114,4 +132,35 @@ struct PatientModel: Codable {
     let userId: String
     let uhID: String?
     let profileUrl: String?
+}
+
+struct CorporateEmployeeLoginResponse: Codable {
+    let status: Int
+    let message: String
+    let responseValue: [CorporateEmployee]
+}
+
+struct CorporateEmployee: Codable {
+    let id: Int
+    let empName: String
+    let empId: String
+    let mobileNo: String
+    let genderId: Int
+    let age: String
+    let ageType: String
+    let address: String
+    let dob: String
+    let joiningDate: String
+    let height: Double
+    let weight: Double
+    let countryCallingCode: String
+    let countryId: Int
+    let stateId: Int
+    let zip: String
+    let cityId: Int
+    let emailID: String
+    let bloodGroupId: Int
+    let imageURL: String
+    let clientId: Int
+    let isFirstLoginCompleted: Int
 }
