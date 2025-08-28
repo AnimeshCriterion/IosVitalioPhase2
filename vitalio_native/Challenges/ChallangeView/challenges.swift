@@ -9,10 +9,24 @@ import SwiftUI
 
 struct ChallengesView : View {
     @EnvironmentObject var vm : ChallengesviewModel
+    @EnvironmentObject var themeManager: ThemeManager
+    
+    
+       var isDarkMode: Bool {
+           themeManager.colorScheme == .dark
+       }
+    
+    
+    @EnvironmentObject var route: Routing
+    
 
     var body: some View {
         VStack {
+//            CustomNavBarView(title: "" , isDarkMode: isDarkMode) {
+//                route.back()
+//            }
             HStack{
+            
                 Image("challengemind")
                     .resizable()
                     .frame(width: 46, height : 46)
@@ -39,11 +53,11 @@ struct ChallengesView : View {
                     Spacer()
                 }
             }
+            .navigationBarHidden(true)
             .onAppear {
                 Task {
                     await vm.getChallenges()
                     await vm.getJoinedChallenges()
-                 
                 }
             }
         }

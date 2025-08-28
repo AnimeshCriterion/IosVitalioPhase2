@@ -32,7 +32,7 @@ class VitalsViewModal: ObservableObject {
     
     // Use a unique identifier, e.g., rowId
 
-     @Published var showVoiceAssistant = false
+    @Published var showVoiceAssistant = false
     
      // Called when the drag/press begins
      func startVoiceAssistant() {
@@ -351,7 +351,8 @@ class VitalsViewModal: ObservableObject {
     @MainActor
     func addVitals(_ values: [String: String]) async {
         print("matchSelectedValue \(matchSelectedValue)")
-        let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
+        let uhid =  UserDefaultsManager.shared.getEmployee()?.empId ?? ""
+//        let uhid =  UserDefaultsManager.shared.getUHID() ?? ""
         var body = [
 //            "vmValueBPSys": vmValueBPSys,
 //            "vmValueBPDias": vmValueBPDias,

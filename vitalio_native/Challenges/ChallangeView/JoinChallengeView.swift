@@ -18,7 +18,7 @@ struct JoinedChallenge: View {
                     }
                 }
                 .padding(.top)
-            .navigationTitle("Joined Challenges")
+          
             .task {
                 await vm.getJoinedChallenges()
             }

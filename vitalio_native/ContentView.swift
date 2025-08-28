@@ -45,7 +45,7 @@ struct ContentView: View {
                         
                         //                    Onboarding()
                     case .dashboard:
-                        Dashboard()
+                        DashboardAllPages()
                     case .login:
                         Login()
                     case .otp:

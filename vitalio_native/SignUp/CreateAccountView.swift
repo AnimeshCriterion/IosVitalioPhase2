@@ -10,7 +10,7 @@ struct CreateAccountView: View {
 
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var route: Routing
-//    @EnvironmentObject var viewModal: SignUpViewModal
+// @EnvironmentObject var viewModal: SignUpViewModal
     @StateObject private var viewModal = SignUpViewModal()
     @EnvironmentObject var loginVM: LoginViewModal
     @State private var selectedField: EditableField? = nil
@@ -32,88 +32,95 @@ struct CreateAccountView: View {
                     }
                     if ![10, 11, 14].contains(viewModal.currentPage){
                         Button(action: {
-                            if viewModal.currentPage >= 3{
-                                if(viewModal.currentPage == 4){
-                                    viewModal.fullAddress = ""
-                                }
+//                            if viewModal.currentPage >= 3{
+//                                if(viewModal.currentPage == 4){
+//                                    viewModal.fullAddress = ""
+//                                }
                                 viewModal.currentPage += 1
-                                
-                            }
-
+//                            }
                         }) {
                             Text("Skip")
                                 .font(.system(size: 18))
                                 .foregroundColor(.primaryBlue)
-                                .opacity(viewModal.currentPage < 3 ? 0.2 : 0.8 )
+                                .opacity( 0.8 )
                                 .fontWeight(.semibold)
                         }.padding(.horizontal, 10)
                     }
                 }
                 
                 ScrollView {
-                    if viewModal.currentPage == 11 {
-                        Spacer().frame(height:20)
-                        GIFView(gifName: "confetti")
-                            .scaledToFit()
-                            .frame(height: 250)
-                    }
-                    if (viewModal.currentPage != 14){
-                        VStack(alignment:viewModal.currentPage == 11 ? .center : .leading, spacing: 8) {
-                            
-                            HStack {
-                                Text("\(Int((Double(viewModal.currentPage) / 14.0) * 100))%")
-                                    .font(.system(size: 16))
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(Color.primaryBlue)
-                                
-                                
-                                ProgressView(value: Double(viewModal.currentPage) / 13.0)
-                                    .tint(.blue)
-                                    .frame(height: 10)
-                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
-                                
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(viewModal.progressStages[viewModal.currentPage])
-                                    .font(.system(size: 16))
-                                    .fontWeight(.bold)
-                                    .transition(.opacity)
-                                    .id(viewModal.currentPage) // triggers animation
-                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
-                                
-                                Text(viewModal.progressMessages[viewModal.currentPage])
-                                    .font(.system(size: 14))
-                                    .foregroundStyle(.secondary)
-                                    .transition(.opacity)
-                                    .id("msg\(viewModal.currentPage)") // unique ID to trigger transition
-                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal)
-                        .background(Color.customBackground2)
-                        .cornerRadius(10)
-                    }
+//                    if viewModal.currentPage == 11 {
+//                        Spacer().frame(height:20)
+//                        GIFView(gifName: "confetti")
+//                            .scaledToFit()
+//                            .frame(height: 250)
+//                    }
+//                    if (viewModal.currentPage != 14){
+//                        VStack(alignment:viewModal.currentPage == 11 ? .center : .leading, spacing: 8) {
+//                            
+//                            HStack {
+//                                Text("\(Int((Double(viewModal.currentPage) / 14.0) * 100))%")
+//                                    .font(.system(size: 16))
+//                                    .fontWeight(.bold)
+//                                    .foregroundStyle(Color.primaryBlue)
+//                                
+//                                
+//                                ProgressView(value: Double(viewModal.currentPage) / 13.0)
+//                                    .tint(.blue)
+//                                    .frame(height: 10)
+//                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
+//                                
+//                            }
+//                            
+//                            VStack(alignment: .leading, spacing: 4) {
+//                                Text(viewModal.progressStages[viewModal.currentPage])
+//                                    .font(.system(size: 16))
+//                                    .fontWeight(.bold)
+//                                    .transition(.opacity)
+//                                    .id(viewModal.currentPage) // triggers animation
+//                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
+//                                
+//                                Text(viewModal.progressMessages[viewModal.currentPage])
+//                                    .font(.system(size: 14))
+//                                    .foregroundStyle(.secondary)
+//                                    .transition(.opacity)
+//                                    .id("msg\(viewModal.currentPage)") // unique ID to trigger transition
+//                                    .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
+//                            }
+//                        }
+//                        .frame(maxWidth: .infinity)
+//                        .padding(.vertical, 8)
+//                        .padding(.horizontal)
+//                        .background(Color.customBackground2)
+//                        .cornerRadius(10)
+//                    }
                     Group {
                         switch viewModal.currentPage {
-                        case 0: firstPage()
-                        case 1: secondPages()
-                        case 2: dobPage()
-                        case 3: bloodGroupPage()
-                        case 4: locationPage()
-                        case 5: weightPage()
-                        case 6: heightSelectionPage()
-                        case 7: chronicDiseasePage()
-                        case 8: otherDiseasePage()
-                        case 9: healthHistoryPage()
-                        case 10: ProfileSummaryPage()
-                        case 11: thankYouPage()
-                        case 12: vitalReminderPage()
-                        case 13: fluidIntakeDetailsPage()
-                        case 14: completionSuccessView()
-                        default: EmptyView()
+                            case 0: bloodGroupPage()
+                            case 1: locationPage()
+                            case 2: weightPage()
+                            case 3: heightSelectionPage()
+                            case 4: chronicDiseasePage()
+                            case 5: goalView()
+                            case 6: healthHistoryPage()
+                            case 7: healthHistoryPage()
+                            default: EmptyView()
+//                        case 0: firstPage()  // n
+//                        case 1: secondPages() // n
+//                        case 2: dobPage() // n
+//                        case 3: bloodGroupPage()
+//                        case 4: locationPage()
+//                        case 5: weightPage()
+//                        case 6: heightSelectionPage()
+//                        case 7: chronicDiseasePage()
+//                        case 8: otherDiseasePage() // n
+//                        case 9: healthHistoryPage()
+//                        case 10: ProfileSummaryPage() // n
+//                        case 11: thankYouPage() // n
+//                        case 12: vitalReminderPage() // n
+//                        case 13: fluidIntakeDetailsPage() // n
+//                        case 14: completionSuccessView() // n
+//                        default: EmptyView()
                         }
                     }
                     .frame(height: 600)
@@ -128,23 +135,23 @@ struct CreateAccountView: View {
 //                                    showGlobalError(message: "First Name Should Not be empty")
 //                                    return
 //                                }
-                                if viewModal.firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                                    viewModal.showFirstNameError = true
-                                    return
-                                } else {
-                                    viewModal.showFirstNameError = false
-                                }
-
-                                
-                                if(viewModal.currentPage == 1 && viewModal.selectedGender == nil){
-                                    showGlobalError(message: "Please select gender")
-                                    return
-                                }
-                                if(viewModal.formattedDate.isEmpty){
-                                    showGlobalError(message: "Please select DOB")
-                                    return
-                                }
-                                
+//                                if viewModal.firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//                                    viewModal.showFirstNameError = true
+//                                    return
+//                                } else {
+//                                    viewModal.showFirstNameError = false
+//                                }
+//
+//                                
+//                                if(viewModal.currentPage == 1 && viewModal.selectedGender == nil){
+//                                    showGlobalError(message: "Please select gender")
+//                                    return
+//                                }
+//                                if(viewModal.formattedDate.isEmpty){
+//                                    showGlobalError(message: "Please select DOB")
+//                                    return
+//                                }
+//                                
                                 if(viewModal.currentPage < 14){
                                     if(viewModal.lastPage == -1 ){
                                         if viewModal.currentPage == 4 {
@@ -237,13 +244,7 @@ struct CreateAccountView: View {
                                 .padding()
                                 .foregroundColor(.white)
                                 .background({
-                                    if viewModal.firstName.isEmpty {
-                                        Color.gray
-                                    } else if viewModal.selectedGender == nil && viewModal.currentPage == 1{
-                                        Color.gray
-                                    } else {
                                         Color.primaryBlue
-                                    }
                                 }())
 
                                 .background(viewModal.firstName.isEmpty ? Color.gray : Color.primaryBlue)
@@ -358,7 +359,7 @@ struct CreateAccountView: View {
             if !isEdit {
                 GIFView(gifName: "namegif")
                     .scaledToFit()
-                    .frame(height: 250)
+                    .frame(height: 220)
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Welcome to Vitalio.")
@@ -443,7 +444,6 @@ struct CreateAccountView: View {
         }
     }
 
-
     struct ErrorTooltipView: View {
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
@@ -492,12 +492,6 @@ struct CreateAccountView: View {
         }
     }
 
-
-
-
-    
-    
-
     struct GenderOptionView: View {
         var data: Gender
         var isSelected: Bool
@@ -540,7 +534,7 @@ struct CreateAccountView: View {
     func secondPages(isEdit: Bool = false) -> some View {
         VStack {
             if !isEdit {
-                GIFView(gifName: "gendergif").frame(height: 250)
+                GIFView(gifName: "gendergif").frame(height: 220)
                     .padding()
             }
 
@@ -581,14 +575,7 @@ struct CreateAccountView: View {
         }
         .padding(.horizontal, 10)
     }
-
-
-    
-    
-    
-    
-    /// DOB view page
-    
+      
     func dobPage(isEdit: Bool = false) -> some View {
         VStack {
             if !isEdit {
@@ -637,37 +624,48 @@ struct CreateAccountView: View {
         .padding(.horizontal, 20)
     }
 
-
-    
-    /// Blood View Page
-    
-    
     func bloodGroupPage(isEdit: Bool = false) -> some View {
         ScrollView {
             VStack(alignment: .center) {
+                VStack(spacing: 16) {
+                    Text("Blood Group")
+                        .font(.system(size: 32, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+
+                    DotsIndicator(total: 7, current: 0)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 120)
+
+                
+                
                 if !isEdit {
-                    GIFView(gifName: "bloodgif")
+                    GIFView(gifName: "bloodC")
                         .scaledToFit()
                         .frame(height: 220)
                         .padding(.top, 10)
                         .padding(.horizontal)
 
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("And what is your Blood Group?")
-                            .font(.system(size: 32))
-                            .foregroundStyle(Color.primaryBlue)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
+                    HStack{
+                        Spacer()
+                        VStack(alignment: .center, spacing: 8) {
+                            Text("And what is your Blood Group?")
+                                .font(.system(size: 26))
+                                .foregroundStyle(Color.black)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
 
-                        Text("Your blood group helps ensure accurate and personalized care.")
-                            .font(.system(size: 16))
-                            .foregroundStyle(.secondary)
-                            .padding(.bottom, 30)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
+                            Text("Your blood group helps ensure accurate and personalized care.")
+                                .font(.system(size: 16))
+                                .foregroundStyle(.secondary)
+                                .padding(.bottom, 30)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        Spacer()
                     }
-                    .padding(.horizontal, 20)
                 }
 
                 LazyVGrid(columns: viewModal.bloodGridColumns, spacing: 16) {
@@ -715,20 +713,26 @@ struct CreateAccountView: View {
         }
     }
 
-
-
-    
-    ///  Address page view
-
     func locationPage(isEdit: Bool = false) -> some View {
         ZStack {
             VStack(spacing: 0) {
+                VStack(spacing: 16) {
+                   
+              
+                Text("Your address")
+                    .font(.system(size: 32, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 
+                DotsIndicator(total: 7, current: 1)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 120)
+
                 if !isEdit {
-                    GIFView(gifName: "addressgif")
+                    GIFView(gifName: "addressC")
                         .scaledToFit()
-                        .frame(height: 250)
-                       
+                        .frame(height: 200)
                         .background(Color.white)
                 }
                 
@@ -737,9 +741,11 @@ struct CreateAccountView: View {
                         if !isEdit {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Where do you live?")
-                                    .font(.system(size: 32))
-                                    .foregroundStyle(Color.primaryBlue)
+                                    .font(.system(size: 26))
+                                    .foregroundStyle(Color.black)
                                     .fontWeight(.bold)
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: false, vertical: true)
 
                                 Text("Your address helps us provide location-based services and personalized care.")
                                     .font(.system(size: 16))
@@ -853,35 +859,64 @@ struct CreateAccountView: View {
         }
     }
 
-
-
-    /// weight page view
+    func goalView() -> some View {
+        ScrollView{
+            VStack(spacing: 16) {
+                Text("Set your own goal")
+                    .font(.system(size: 32, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                DotsIndicator(total: 7, current: 6)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 120)
+            GIFView(gifName: "goal")
+                .scaledToFit()
+                .frame(height: 250)
+                ActivityGrid()
+        }
+    }
     
     func weightPage(isEdit: Bool = false) -> some View {
         ScrollView {
+            VStack(spacing: 16) {
+            Text("Add weight")
+                .font(.system(size: 32, weight: .bold))
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+            DotsIndicator(total: 7, current: 3)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 120)
             VStack(spacing: 20) {
                 if !isEdit {
-                    GIFView(gifName: "weightgif")
+                    GIFView(gifName: "weightC")
                        // remove if your GIFView is not an Image
                         .scaledToFit()
-                        .frame(height: 250)
+                        .frame(height: 220)
                         .padding(.top, 10)
                         .padding(.horizontal)
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("What is your current weight?")
-                            .font(.system(size: 32))
-                            .foregroundStyle(Color.primaryBlue)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.leading)
-
-                        Text("Your weight helps us provide tailored health and fitness recommendations.")
-                            .font(.system(size: 16))
-                            .foregroundStyle(.secondary)
-                            .padding(.bottom, 25)
-                            .multilineTextAlignment(.leading)
+                    
+          
+                    
+                    HStack{
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("What is your current weight?")
+                                .font(.system(size: 26))
+                                .foregroundStyle(Color.black)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Text("Your weight helps us provide tailored health and fitness recommendations.")
+                                .font(.system(size: 16))
+                                .foregroundStyle(.secondary)
+                                .padding(.bottom, 25)
+                                .multilineTextAlignment(.leading)
+                         
+                        }
+                        Spacer()
                     }
-                    .padding(.horizontal, 20)
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
@@ -948,27 +983,33 @@ struct CreateAccountView: View {
             .frame(maxWidth: .infinity, alignment: .center)
         }
     }
-
-
-    
-    
-    /// height page view
     
     func heightSelectionPage(isEdit: Bool = false) -> some View {
         VStack {
             ScrollView {
+                VStack(spacing: 16) {
+                Text("Add height")
+                    .font(.system(size: 32, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                DotsIndicator(total: 7, current: 4)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 120)
                 VStack {
                     if !isEdit {
-                        GIFView(gifName: "heightgif").scaledToFit()
-                            .frame(height: 250)
+                        GIFView(gifName: "heightC").scaledToFit()
+                            .frame(height: 220)
                             .frame(maxWidth: .infinity)
                             .padding(.top, 10)
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("What is your height?")
-                                .font(.system(size: 32))
-                                .foregroundStyle(Color.primaryBlue)
+                                .font(.system(size: 26))
+                                .foregroundStyle(Color.black)
                                 .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
 
                             Text("Your height will help us provide personalized health insights.")
                                 .font(.system(size: 16))
@@ -1005,7 +1046,6 @@ struct CreateAccountView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-
                     Spacer().frame(height: 80)
                 }
             }
@@ -1101,25 +1141,33 @@ struct CreateAccountView: View {
         }
     }
 
-        
-    
-    
-    ///Chronic disease page
-
     func chronicDiseasePage() -> some View {
         VStack(spacing: 0) {
+            VStack(spacing: 16) {
+            Text("Chronic disease")
+                .font(.system(size: 32, weight: .bold))
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+            DotsIndicator(total: 7, current: 5)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 120)
             // GIF always visible
-            GIFView(gifName: "diseasegif")
+            GIFView(gifName: "headacheC")
                 .scaledToFit()
-                .frame(height: 250)
-                .background(Color.white)
+                .frame(height: 220)
+                .padding(.horizontal)
+            
+          
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Select the chronic disease you want to manage")
-                        .font(.system(size: 32))
-                        .foregroundStyle(Color.primaryBlue)
+                        .font(.system(size: 26))
+                        .foregroundStyle(Color.black)
                         .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Text("Sharing any chronic conditions helps us provide more tailored health advice and care.")
                         .font(.system(size: 16))
@@ -1142,15 +1190,12 @@ struct CreateAccountView: View {
     }
 
 
-    // Subviews
-
     @ViewBuilder
     func searchBarView() -> some View {
         VStack(alignment: .leading) {
-            Text("Chronic Disease")
-                .font(.system(size: 14))
-                .foregroundColor(.black)
-
+        
+//            DotsIndicator(total: 6, current: 2)
+            
             HStack {
                 Image(systemName: "magnifyingglass")
 
@@ -1295,17 +1340,23 @@ struct CreateAccountView: View {
     func otherDiseasePage() -> some View {
         VStack(spacing: 0) {
             // GIF always visible
-            GIFView(gifName: "other_disease")
+            
+            DotsIndicator(total: 7, current: 6)
+            
+            GIFView(gifName: "familyC")
                 .scaledToFit()
                 .frame(height: 250)
                 .background(Color.white)
             
+            
             ScrollView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Inform us if you have any other chronic conditions.")
-                        .font(.system(size: 32))
-                        .foregroundStyle(Color.primaryBlue)
+                        .font(.system(size: 26))
+                        .foregroundStyle(Color.black)
                         .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Text("If you have any other ongoing health conditions, telling us will help improve your care.")
                         .font(.system(size: 16))
@@ -1335,13 +1386,17 @@ struct CreateAccountView: View {
         VStack {
                    Image("chronicCondition")
                        .padding()
-                   
+            
+            DotsIndicator(total: 7, current: 7)
+            
                    VStack(alignment: .leading, spacing: 8) {
                        // Title & Subtitle
                        Text("Inform us if you have any other chronic conditions.")
-                           .font(.system(size: 32))
-                           .foregroundStyle(Color.primaryBlue)
-                           .fontWeight(.semibold)
+                           .font(.system(size: 26))
+                           .foregroundStyle(Color.black)
+                           .fontWeight(.bold)
+                           .multilineTextAlignment(.center)
+                           .fixedSize(horizontal: false, vertical: true)
                        
                        Text("Sharing any chronic conditions helps us provide more tailored health advice and care.")
                            .font(.system(size: 16))
@@ -1453,24 +1508,36 @@ struct CreateAccountView: View {
     
     
     /// HeathHistory page
-
+    
     
     func healthHistoryPage() -> some View {
        
             
-                VStack(spacing: 0){
-                    GIFView(gifName: "familygif").scaledToFit()
-                        .frame(height: 250)
+        VStack(spacing: 0){
+            VStack{
+                Text("Family health")
+                    .font(.system(size: 32, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                DotsIndicator(total: 7, current: 8)
+            }
+        .frame(maxWidth: .infinity)
+        .frame(height: 120)
+        // GIF always visible
+                    GIFView(gifName: "familyC").scaledToFit()
+                        .frame(height: 220)
                         .background(Color.white)
+       
+                    
                     ScrollView{
                         VStack(alignment: .leading, spacing: 8){
                             Text("Your Family's Health History")
-                                .font(.system(size: 32))
-                                .foregroundStyle(Color.primaryBlue)
+                                .font(.system(size: 26))
+                                .foregroundStyle(Color.black)
                                 .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
                                 .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.leading)
-                                .lineLimit(nil)
                             
                             Text("Are there any hereditary conditions in your family?")
                                 .font(.system(size: 16))
@@ -1534,7 +1601,7 @@ struct CreateAccountView: View {
                                             .frame(height: 100)
                                         
                                     }.frame(maxWidth: .infinity, alignment: .leading)
-                                }   .frame(height: 250)
+                                }   .frame(height: 220)
                             }
                             .navigationBarHidden(viewModal.showCancelButton)
                             .resignKeyboardOnDragGesture()
@@ -1658,10 +1725,7 @@ struct CreateAccountView: View {
                     
                 }
                 //.padding(.horizontal,20)
-            
-            
-
-
+        
 //            if viewModal.showHealthHistoryPopup {
 //                Color.black.opacity(0.4)
 //                    .edgesIgnoringSafeArea(.all)
@@ -1735,481 +1799,6 @@ struct CreateAccountView: View {
 //            }
    
     }
-    
-    func thankYouPage() -> some View {
-        VStack {
-            Spacer().frame(height : 20)
-            Group() {
-                Text("What's Next?")
-                    .font(.system(size: 32))
-                    .foregroundStyle(Color.primaryBlue)
-                    .fontWeight(.bold)
-
-                Text("To help you maintain optimal health, we need a few more details")
-                    .font(.system(size: 16))
-                    .foregroundStyle(.secondary)
-                    .padding(.bottom, 25)
-            }
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, 20)
-
-            Button(action: {
-                        print("Set preferences tapped")
-                if(viewModal.currentPage == 11){
-                    viewModal.currentPage += 1
-                }
-                    }) {
-                        Text("Set preferences for a better experience")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 48)
-                            .background(Color.primaryBlue)
-                            .cornerRadius(10)
-                    }
-                    .padding(.horizontal, 20)
-
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-    }
-
-
-    
-    /// Vital Reminder Page
-    
-    func vitalReminderPage() -> some View {
-        ZStack {
-            VStack {
-                GIFView(gifName: "setreminder")
-                    .padding()
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Set Vital Reminder")
-                        .font(.system(size: 32))
-                        .foregroundStyle(Color.primaryBlue)
-                        .fontWeight(.bold)
-                    
-                    Text("Your primary details are uploaded. Please select the interval for your vital reminders.")
-                        .font(.system(size: 16))
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom, 25)
-                    
-                    ZStack {
-                        vitalsListView
-                    }
-                }
-                .padding(.horizontal, 20)
-                
-                Spacer().frame(height: 50)
-            }
-            .padding(.horizontal, 20)
-            
-            if viewModal.showPopupReminder {
-                popupReminderView
-            }
-        }
-    }
-
-    private var vitalsListView: some View {
-        ScrollView {
-            ForEach(Array(viewModal.vitalsList.enumerated()), id: \.offset) { index, data in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(data["name"] as? String ?? "")
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                        
-                        Text(data["frequencyType"] as? String ?? "")
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 8)
-                .frame(height: 60)
-                .background(Color.white)
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                )
-                .onTapGesture {
-                    viewModal.selectedVitalIndex = index
-                    viewModal.showPopupReminder = true
-                }
-            }
-        }
-    }
-
-
-    private var popupReminderView: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    viewModal.showPopupReminder = false
-                }
-            
-            VStack {
-                ScrollView {
-                    ForEach(Array(viewModal.frequencyList.enumerated()), id: \.offset) { index, data in
-                        let name = data["frequencyName"] as? String ?? ""
-                        
-                        HStack {
-                            Text(name)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Image(systemName: viewModal.selectedSubName == name ? "checkmark.circle.fill" : "circle")
-                                .foregroundColor(viewModal.selectedSubName == name ? .green : .gray)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 8)
-                        .onTapGesture {
-                            viewModal.selectedSubName = name
-                            
-                            if let selectedIndex = viewModal.selectedVitalIndex {
-                                viewModal.vitalsList[selectedIndex]["frequencyType"] = name
-                                viewModal.vitalsList[selectedIndex]["isCheck"] = true
-                            }
-                            
-                            viewModal.showPopupReminder = false
-                            viewModal.selectedSubName = ""
-                            print("viewModal.vitalsList : \(viewModal.vitalsList)")
-                        }
-                        
-                        Divider()
-                            .padding(.horizontal, 20)
-                    }
-                }
-                .padding(.top, 30)
-                
-                Button("Done") {
-                    viewModal.showPopupReminder = false
-                }
-                .frame(maxWidth: 200)
-                .frame(height: 40, alignment: .center)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                
-                Spacer()
-            }
-            .frame(width: 300, height: 400)
-            .background(Color.white)
-            .cornerRadius(20)
-            .shadow(radius: 10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
-        }
-    }
-
-
-    
-    
-    
-    
-    /// fluide intake details Page
-    
-    
-    func fluidIntakeDetailsPage() -> some View {
-        VStack{
-     
-        GIFView(gifName: "intakegif")
-                    .padding()
-                
-                VStack(alignment: .leading, spacing: 8){
-                    Text("Fluid Intake Details")
-                        .font(.system(size: 32))
-                        .foregroundStyle(Color.primaryBlue)
-                        .fontWeight(.bold)
-                    
-                    Text("We've got the time to remind you for your vitals. Let us know about your fluid intake.")
-                        .font(.system(size: 16))
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom,25)
-                    
-                    
-                    
-                    HStack {
-                        CustomTextField1(
-                            text: $viewModal.fluidQuantity,
-                            title: "Fluid Intake",
-                            placeholder: "Enter your daily fluid intake",
-                            onChange: { newValue in
-                                print("Changed to: \(newValue)")
-                                print(viewModal.fluidQuantity)
-                                viewModal.fluidIntakeDetails["quantity"] = newValue
-                                print(viewModal.fluidIntakeDetails)
-                            },
-                            titleFont: .footnote,
-                            titleColor:  .gray,
-                            textFieldFont: .headline,
-                            textColor: .red,
-                            backgroundColor: Color.white,
-                            cornerRadius: 8,
-                            showBorder: true,
-                            borderColor: .gray.opacity(0.3)
-                            
-                        )
-                        Text("Litre")
-                        
-//                        VStack(alignment: .leading) {
-//                            Spacer().frame(height: 15)
-//                            
-//                            Menu {
-//                                ForEach(viewModal.fludeIntakeUnitOptions, id: \.self) { option in
-//                                    Button(action: {
-//                                        viewModal.selectedfluidIntakeUnit = option
-//                                    }) {
-//                                        Text(option)
-//                                            .font(.title)
-//                                    }
-//                                }
-//                            } label: {
-//                                HStack(alignment: .center) {
-//                                    Text(viewModal.selectedfluidIntakeUnit)
-//                                        .font(.system(size: 18))
-//                                        .foregroundColor(.secondary)
-//                                    
-//                                    Image(systemName: "chevron.down")
-//                                        .foregroundColor(.secondary)
-//                                        .frame(width: 16, height: 16)
-//                                }
-//                                .padding()
-//                                .frame(height: 50)
-//                                .background(Color.white)
-//                                .cornerRadius(10)
-//                            }
-//                        }
-                        
-                        
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                }.padding(.horizontal,20)
-                Spacer().frame(height: 50)
-                
-                
-            }.padding(.horizontal,20)
-        }
-    
-    ///profile summary
-//    enum EditableField: String, Identifiable, CaseIterable {
-//        case name = "Name"
-//        case gender = "Gender"
-//        case dateOfBirth = "Date of Birth"
-//        case bloodGroup = "Blood Group"
-//        case address = "Address"
-//        case weight = "Weight"
-//        case height = "Height"
-//
-//        var id: String { rawValue }
-//    }
-    func profileFieldView(
-        title: String,
-        value: String,
-        emptyMessage: String = "No info is provided",
-        isEditable: Bool = true,
-        onEditTap: @escaping () -> Void
-    ) -> some View {
-        HStack(alignment: .top) {
-            if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Image("checkMark")
-                    .renderingMode(.template)
-                    .foregroundColor(.gray)
-            }
-            else{
-                Image("checkMark")
-            }
-
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
-                if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text(emptyMessage)
-                        .font(.caption)
-                        .italic()
-                        .foregroundColor(.red)
-
-                } else {
-                    Text(value)
-                        .font(.body)
-                        .foregroundColor(.black)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            if isEditable {
-                Group {
-                    if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        Image("arrow_forward")
-                            .resizable()
-                            .frame(width: 18, height: 18)
-                    } else {
-                        Image("pencil")
-                            .resizable()
-                            .frame(width: 18, height: 18)
-                    }
-                }
-                .onTapGesture {
-                    print("🖊 Edit tapped for \(title)")
-                    onEditTap()
-                }
-            }
-
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 2)
-    }
-
-
-    func editBottomSheetView(field: EditableField, onDismiss: @escaping () -> Void) -> some View {
-        VStack(spacing: 20) {
-            Text("Edit \(field.rawValue)")
-                .font(.title2)
-                .bold()
-
-            switch field {
-            case .name:
-                firstPage(isEdit: true)
-            case .gender:
-                secondPages(isEdit: true)
-            case .dateOfBirth:
-                dobPage(isEdit: true)
-            case .bloodGroup:
-                bloodGroupPage(isEdit: true)
-            case .address:
-                locationPage(isEdit: true)
-            case .weight:
-                weightPage(isEdit: true)
-            case .height:
-                heightSelectionPage(isEdit: true)
-            default:
-                Text("Editing UI for \(field.rawValue)")
-            }
-
-            Button("Save") {
-                onDismiss()
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-
-            Spacer()
-        }
-        .padding()
-        .presentationDetents([.height(300), .medium])
-    }
-    func ProfileSummaryPage() -> some View {
- 
-    
-        ScrollView {
-            profileFieldView(title: "Name", value: "\(viewModal.firstName) \(viewModal.lastNmae)",emptyMessage: "--No name provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 0
-//                toggleField(.name)
-            }
-//            if viewModal.selectedProfileField == .name {
-//                firstPage(isEdit: true)
-//            }
-
-            profileFieldView(title: "Gender", value: viewModal.selectedGender ?? "",emptyMessage: "--No gender provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 1
-//                toggleField(.gender)
-            }
-//            if viewModal.selectedProfileField == .gender {
-//                secondPages(isEdit: true)
-//                    .frame(maxWidth: .infinity)
-//            }
-
-            profileFieldView(title: "Date of Birth", value: viewModal.formattedDate,emptyMessage: "--No DOB provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 2
-//                toggleField(.dateOfBirth)
-            }
-//            if viewModal.selectedProfileField == .dateOfBirth {
-//                dobPage(isEdit: true)
-//            }
-
-            profileFieldView(title: "Blood Group", value: viewModal.selectedBloodGroup ?? "",emptyMessage: "--No blood group provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 3
-//                toggleField(.bloodGroup)
-            }
-//            if viewModal.selectedProfileField == .bloodGroup {
-//                bloodGroupPage(isEdit: true)
-//            }
-
-            profileFieldView(title: "Address", value: viewModal.fullAddress,emptyMessage: "--No address provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 4
-//                toggleField(.address)
-            }
-//            if viewModal.selectedProfileField == .address {
-//                locationPage(isEdit: true)
-//            }
-
-            profileFieldView(title: "Weight", value: viewModal.weight,emptyMessage: "--No weight provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 5
-//                toggleField(.weight)
-            }
-//            if viewModal.selectedProfileField == .weight {
-//                weightPage(isEdit: true)
-//            }
-
-            profileFieldView(title: "Height", value: viewModal.selectedHeightText,emptyMessage: "--No height provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 6
-//                toggleField(.height)
-            }
-            profileFieldView(title: "Chronic Condition", value: viewModal.chronicPreview,emptyMessage: "--No chronic condition provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 7
-//                toggleField(.height)
-            }
-            profileFieldView(title: "Family's Health History", value: viewModal.familyProblemPreview,emptyMessage: "--No family health history provided.--") {
-                viewModal.lastPage = 10
-                viewModal.currentPage = 9
-//                toggleField(.height)
-            }
-//            if viewModal.selectedProfileField == .height {
-//                heightSelectionPage(isEdit: true)
-//            }
-        }
-        .padding(.horizontal).onAppear(){
-            viewModal.chronicPreview = viewModal.selectedItems.map { $0.problemName }
-                                           .joined(separator: ", ")
-            viewModal.generateAllProblemsText()
-        }
-
-        
-    }
-        
     
     func toggleField(_ field: EditableField) {
         viewModal.selectedProfileField =
@@ -2344,6 +1933,7 @@ struct CreateAccountView: View {
             }
         }
     }
+    
     struct LoadingDotsView: View {
         @State private var animate = false
         
@@ -2370,16 +1960,464 @@ struct CreateAccountView: View {
         }
     }
 
+    func thankYouPage() -> some View {
+        VStack {
+            Spacer().frame(height : 20)
+            Group() {
+                Text("What's Next?")
+                    .font(.system(size: 32))
+                    .foregroundStyle(Color.primaryBlue)
+                    .fontWeight(.bold)
+
+                Text("To help you maintain optimal health, we need a few more details")
+                    .font(.system(size: 16))
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 25)
+            }
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 20)
+
+            Button(action: {
+                        print("Set preferences tapped")
+                if(viewModal.currentPage == 11){
+                    viewModal.currentPage += 1
+                }
+                    }) {
+                        Text("Set preferences for a better experience")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 48)
+                            .background(Color.primaryBlue)
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal, 20)
+
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    }
+    /// Vital Reminder Page
+    
+    func vitalReminderPage() -> some View {
+        ZStack {
+            VStack {
+                GIFView(gifName: "setreminder")
+                    .padding()
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Set Vital Reminder")
+                        .font(.system(size: 32))
+                        .foregroundStyle(Color.primaryBlue)
+                        .fontWeight(.bold)
+                    
+                    Text("Your primary details are uploaded. Please select the interval for your vital reminders.")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom, 25)
+                    
+                    ZStack {
+                        vitalsListView
+                    }
+                }
+                .padding(.horizontal, 20)
+                
+                Spacer().frame(height: 50)
+            }
+            .padding(.horizontal, 20)
+            
+            if viewModal.showPopupReminder {
+                popupReminderView
+            }
+        }
+    }
+
+    private var vitalsListView: some View {
+        ScrollView {
+            ForEach(Array(viewModal.vitalsList.enumerated()), id: \.offset) { index, data in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(data["name"] as? String ?? "")
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                        
+                        Text(data["frequencyType"] as? String ?? "")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .frame(height: 60)
+                .background(Color.white)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
+                .onTapGesture {
+                    viewModal.selectedVitalIndex = index
+                    viewModal.showPopupReminder = true
+                }
+            }
+        }
+    }
 
 
-
+    private var popupReminderView: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    viewModal.showPopupReminder = false
+                }
+            
+            VStack {
+                ScrollView {
+                    ForEach(Array(viewModal.frequencyList.enumerated()), id: \.offset) { index, data in
+                        let name = data["frequencyName"] as? String ?? ""
+                        
+                        HStack {
+                            Text(name)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Image(systemName: viewModal.selectedSubName == name ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(viewModal.selectedSubName == name ? .green : .gray)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 8)
+                        .onTapGesture {
+                            viewModal.selectedSubName = name
+                            
+                            if let selectedIndex = viewModal.selectedVitalIndex {
+                                viewModal.vitalsList[selectedIndex]["frequencyType"] = name
+                                viewModal.vitalsList[selectedIndex]["isCheck"] = true
+                            }
+                            
+                            viewModal.showPopupReminder = false
+                            viewModal.selectedSubName = ""
+                            print("viewModal.vitalsList : \(viewModal.vitalsList)")
+                        }
+                        
+                        Divider()
+                            .padding(.horizontal, 20)
+                    }
+                }
+                .padding(.top, 30)
+                
+                Button("Done") {
+                    viewModal.showPopupReminder = false
+                }
+                .frame(maxWidth: 200)
+                .frame(height: 40, alignment: .center)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                
+                Spacer()
+            }
+            .frame(width: 300, height: 400)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
+        }
+    }
 
     
+    func fluidIntakeDetailsPage() -> some View {
+        VStack{
+     
+        GIFView(gifName: "intakegif")
+                    .padding()
+                
+                VStack(alignment: .leading, spacing: 8){
+                    Text("Fluid Intake Details")
+                        .font(.system(size: 32))
+                        .foregroundStyle(Color.primaryBlue)
+                        .fontWeight(.bold)
+                    
+                    Text("We've got the time to remind you for your vitals. Let us know about your fluid intake.")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom,25)
+
+                    HStack {
+                        CustomTextField1(
+                            text: $viewModal.fluidQuantity,
+                            title: "Fluid Intake",
+                            placeholder: "Enter your daily fluid intake",
+                            onChange: { newValue in
+                                print("Changed to: \(newValue)")
+                                print(viewModal.fluidQuantity)
+                                viewModal.fluidIntakeDetails["quantity"] = newValue
+                                print(viewModal.fluidIntakeDetails)
+                            },
+                            titleFont: .footnote,
+                            titleColor:  .gray,
+                            textFieldFont: .headline,
+                            textColor: .red,
+                            backgroundColor: Color.white,
+                            cornerRadius: 8,
+                            showBorder: true,
+                            borderColor: .gray.opacity(0.3)
+                            
+                        )
+                        Text("Litre")
+                        
+//                        VStack(alignment: .leading) {
+//                            Spacer().frame(height: 15)
+//
+//                            Menu {
+//                                ForEach(viewModal.fludeIntakeUnitOptions, id: \.self) { option in
+//                                    Button(action: {
+//                                        viewModal.selectedfluidIntakeUnit = option
+//                                    }) {
+//                                        Text(option)
+//                                            .font(.title)
+//                                    }
+//                                }
+//                            } label: {
+//                                HStack(alignment: .center) {
+//                                    Text(viewModal.selectedfluidIntakeUnit)
+//                                        .font(.system(size: 18))
+//                                        .foregroundColor(.secondary)
+//
+//                                    Image(systemName: "chevron.down")
+//                                        .foregroundColor(.secondary)
+//                                        .frame(width: 16, height: 16)
+//                                }
+//                                .padding()
+//                                .frame(height: 50)
+//                                .background(Color.white)
+//                                .cornerRadius(10)
+//                            }
+//                        }
+                        
+                        
+                    }
+
+                }.padding(.horizontal,20)
+                Spacer().frame(height: 50)
+                
+                
+            }.padding(.horizontal,20)
+        }
+    
+    ///profile summary
+//    enum EditableField: String, Identifiable, CaseIterable {
+//        case name = "Name"
+//        case gender = "Gender"
+//        case dateOfBirth = "Date of Birth"
+//        case bloodGroup = "Blood Group"
+//        case address = "Address"
+//        case weight = "Weight"
+//        case height = "Height"
+//
+//        var id: String { rawValue }
+//    }
+    func profileFieldView(
+        title: String,
+        value: String,
+        emptyMessage: String = "No info is provided",
+        isEditable: Bool = true,
+        onEditTap: @escaping () -> Void
+    ) -> some View {
+        HStack(alignment: .top) {
+            if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Image("checkMark")
+                    .renderingMode(.template)
+                    .foregroundColor(.gray)
+            }
+            else{
+                Image("checkMark")
+            }
+
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                
+                if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Text(emptyMessage)
+                        .font(.caption)
+                        .italic()
+                        .foregroundColor(.red)
+
+                } else {
+                    Text(value)
+                        .font(.body)
+                        .foregroundColor(.black)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if isEditable {
+                Group {
+                    if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        Image("arrow_forward")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    } else {
+                        Image("pencil")
+                            .resizable()
+                            .frame(width: 18, height: 18)
+                    }
+                }
+                .onTapGesture {
+                    print("🖊 Edit tapped for \(title)")
+                    onEditTap()
+                }
+            }
+
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 2)
+    }
+
+    func editBottomSheetView(field: EditableField, onDismiss: @escaping () -> Void) -> some View {
+        VStack(spacing: 20) {
+            Text("Edit \(field.rawValue)")
+                .font(.title2)
+                .bold()
+
+            switch field {
+            case .name:
+                firstPage(isEdit: true)
+            case .gender:
+                secondPages(isEdit: true)
+            case .dateOfBirth:
+                dobPage(isEdit: true)
+            case .bloodGroup:
+                bloodGroupPage(isEdit: true)
+            case .address:
+                locationPage(isEdit: true)
+            case .weight:
+                weightPage(isEdit: true)
+            case .height:
+                heightSelectionPage(isEdit: true)
+            default:
+                Text("Editing UI for \(field.rawValue)")
+            }
+
+            Button("Save") {
+                onDismiss()
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+
+            Spacer()
+        }
+        .padding()
+        .presentationDetents([.height(300), .medium])
+    }
+    
+    func ProfileSummaryPage() -> some View {
+ 
+    
+        ScrollView {
+            profileFieldView(title: "Name", value: "\(viewModal.firstName) \(viewModal.lastNmae)",emptyMessage: "--No name provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 0
+//                toggleField(.name)
+            }
+//            if viewModal.selectedProfileField == .name {
+//                firstPage(isEdit: true)
+//            }
+
+            profileFieldView(title: "Gender", value: viewModal.selectedGender ?? "",emptyMessage: "--No gender provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 1
+//                toggleField(.gender)
+            }
+//            if viewModal.selectedProfileField == .gender {
+//                secondPages(isEdit: true)
+//                    .frame(maxWidth: .infinity)
+//            }
+
+            profileFieldView(title: "Date of Birth", value: viewModal.formattedDate,emptyMessage: "--No DOB provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 2
+//                toggleField(.dateOfBirth)
+            }
+//            if viewModal.selectedProfileField == .dateOfBirth {
+//                dobPage(isEdit: true)
+//            }
+
+            profileFieldView(title: "Blood Group", value: viewModal.selectedBloodGroup ?? "",emptyMessage: "--No blood group provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 3
+//                toggleField(.bloodGroup)
+            }
+//            if viewModal.selectedProfileField == .bloodGroup {
+//                bloodGroupPage(isEdit: true)
+//            }
+
+            profileFieldView(title: "Address", value: viewModal.fullAddress,emptyMessage: "--No address provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 4
+//                toggleField(.address)
+            }
+//            if viewModal.selectedProfileField == .address {
+//                locationPage(isEdit: true)
+//            }
+
+            profileFieldView(title: "Weight", value: viewModal.weight,emptyMessage: "--No weight provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 5
+//                toggleField(.weight)
+            }
+//            if viewModal.selectedProfileField == .weight {
+//                weightPage(isEdit: true)
+//            }
+
+            profileFieldView(title: "Height", value: viewModal.selectedHeightText,emptyMessage: "--No height provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 6
+//                toggleField(.height)
+            }
+            profileFieldView(title: "Chronic Condition", value: viewModal.chronicPreview,emptyMessage: "--No chronic condition provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 7
+//                toggleField(.height)
+            }
+            profileFieldView(title: "Family's Health History", value: viewModal.familyProblemPreview,emptyMessage: "--No family health history provided.--") {
+                viewModal.lastPage = 10
+                viewModal.currentPage = 9
+//                toggleField(.height)
+            }
+//            if viewModal.selectedProfileField == .height {
+//                heightSelectionPage(isEdit: true)
+//            }
+        }
+        .padding(.horizontal).onAppear(){
+            viewModal.chronicPreview = viewModal.selectedItems.map { $0.problemName }
+                .joined(separator: ", ")
+            viewModal.generateAllProblemsText()
+        }
+
+        
+    }
+        
     
 }
 
 #Preview {
-    CreateAccountView().environmentObject(SignUpViewModal())
+    CreateAccountView()
+        .environmentObject(SignUpViewModal())
 }
 
 
@@ -2399,22 +2437,6 @@ extension View {
     }
 }
 
-
-
-
-// Getting Started
-// Moving Forward
-// Staying on Track
-// One-Third Complete
-// Almost There to Halfway
-// Staying on Track
-// Moving Ahead
-// Final Stretch in Sight
-// Just a Little Further to Go
-// Final Push Ahead
-// All Done!
-//
-//
 
 
 struct KeyboardDismissView<Content: View>: View {

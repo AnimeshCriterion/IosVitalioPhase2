@@ -43,6 +43,7 @@ struct NewChallengeCard: View {
             vm.description = challenge.description
             vm.color = cardColor
             vm.selectedChallenge = challenge
+            vm.startsIn = challenge.startsIn
             
             route.navigate(to: .challengeDetailsView)
         }) {

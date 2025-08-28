@@ -3,7 +3,7 @@
 //  watchAooForTestingPurpose
 //
 //  Created by HID-18 on 24/07/25.
-//
+//Ba
 
 import Foundation
 import SwiftUI
@@ -18,6 +18,7 @@ class ChallengesviewModel :  ObservableObject {
     
     @Published var title : String = ""
     @Published var description : String = ""
+    @Published var startsIn : String = ""
     @Published var color : Color = .blue
 
     func getChallenges() async {
@@ -94,7 +95,7 @@ class ChallengesviewModel :  ObservableObject {
 
                print("✅ Challenges fetched:")
                for challenge in joinedChallenges {
-                   print("🔹 \(challenge.title), starts in: \(challenge.startsIn)")
+                   print("🔹 \(challenge.title), starts in: \(challenge.startsIn)  ")
                }
            } catch {
                print("❌ Failed to load challenges:", error.localizedDescription)
@@ -102,7 +103,7 @@ class ChallengesviewModel :  ObservableObject {
        }
     
     
-
+    
     func join(challengeId: String) async{
         let userData =  UserDefaultsManager.shared.getEmployee()
         let pid = "\(userData?.id ?? 0)"
@@ -117,10 +118,57 @@ class ChallengesviewModel :  ObservableObject {
             let data = try await APIService.shared.postRawData(toURL: url, body: parameters)
             print(data)
         }catch{
-            
+  
         }
        await getJoinedChallenges()
        await getChallenges()
         
     }
+    
+    
+    
+    
+
+    
+    
+
+    func leaveChallenge(challengeId: Int?) async{
+        
+            let userData =  UserDefaultsManager.shared.getEmployee()
+        let pid = "\(userData?.id ?? 0)"
+        
+        guard let url = URL(string: "http://182.156.200.177:5082/api/Challengeparticipants/LeaveChallengeparticipants?pid=\(pid)&challengeId=\(challengeId ?? 0)") else {
+            print("❌ Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("❌ API Error:", error.localizedDescription)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("❌ Invalid response")
+                return
+            }
+            
+            print("📡 Status Code:", httpResponse.statusCode)
+            
+            if let data = data, let responseString = String(data: data, encoding: .utf8) {
+                print("✅ Response:", responseString)
+            } else {
+                print("⚠️ No response data")
+            }
+        }.resume()
+        await getJoinedChallenges()
+        await getChallenges()
+    }
+
+
+
 }

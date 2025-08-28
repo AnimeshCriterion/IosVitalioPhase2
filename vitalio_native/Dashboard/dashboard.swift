@@ -27,6 +27,35 @@ func gradientText(_ text: String,
         )
 }
 
+struct DashboardAllPages: View{
+    @EnvironmentObject var route: Routing
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var viewModel : DashboardViewModal
+    @EnvironmentObject var loginVM : LoginViewModal
+    @EnvironmentObject var vitalsVM: VitalsViewModal
+    @State private var selectedTab: Tab = .home
+    @State private var dragOffset: CGFloat = 0
+    @ObservedObject private var localizer = LocalizationManager.shared
+    @GestureState private var isPressing = false
+    @EnvironmentObject var popupManager: PopupManager
+    @EnvironmentObject var vm : ChallengesviewModel
+       var isDarkMode: Bool {
+           themeManager.colorScheme == .dark
+       }
+    
+    var body: some View {
+        if(selectedTab == .home){
+            Dashboard()
+        }else{
+            ChallengesView()
+        }
+     
+        CustomTabBar(dark: isDarkMode, selectedTab: $selectedTab) // Moved inside VStack
+
+    }
+}
+
 
 struct Dashboard: View {
 
@@ -36,7 +65,7 @@ struct Dashboard: View {
     @EnvironmentObject var viewModel : DashboardViewModal
     @EnvironmentObject var loginVM : LoginViewModal
     @EnvironmentObject var vitalsVM: VitalsViewModal
-    @State private var selectedTab: Tab = .home
+//    @State private var selectedTab: Tab = .home
     @State private var dragOffset: CGFloat = 0
     @ObservedObject private var localizer = LocalizationManager.shared
     @GestureState private var isPressing = false
@@ -181,7 +210,6 @@ struct Dashboard: View {
                 }
             
               
-                CustomTabBar(dark: isDarkMode, selectedTab: $selectedTab) // Moved inside VStack
                
                     .onAppear(){
                         Task{
@@ -244,8 +272,8 @@ struct Dashboard: View {
 
 
             .navigationBarHidden(true) // Hides the default AppBar
-            
-           
+             
+             
             if viewModel.showVoiceAssistant {
                 Voiceassistantview()
                            .transition(.move(edge: .bottom))
@@ -470,10 +498,17 @@ struct TabBarItem: View {
     var body: some View {
         VStack(spacing: 4) {
             Image(icon)
+                .renderingMode(.template) // so only non-transparent part is tinted
                 .resizable()
                 .scaledToFit()
                 .frame(width: 24, height: 24)
-                .foregroundColor(icon == "home" ? .blue : .gray)
+                .foregroundColor(selectedTab == tab ? .primaryBlue : .gray.opacity(0.7))
+                .padding(10) // some padding around the icon
+                .background(
+                    RoundedRectangle(cornerRadius: 8) // square with rounded corners
+                        .fill(selectedTab == tab ? .primaryBlue.opacity(0.2) : Color.gray.opacity(0))
+                )
+
 //            LocalizedText(key:title)
 //                .font(.caption)
 //                .foregroundColor(icon == "home" ? .blue : .gray)
@@ -489,7 +524,7 @@ struct TabBarItem: View {
 //              route.navigate(to: .pillsReminder)
             }
             if(selectedTab == .challenge){
-                route.navigate(to: .challengesView)
+//                route.navigate(to: .challengesView)
             }
             if(selectedTab == .mindfulness){
 //              route.navigate(to: .pillsReminder)

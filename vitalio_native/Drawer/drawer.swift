@@ -217,12 +217,12 @@ struct SideMenuView: View {
                         {
                             GroupedDrawerTile(title: "Reset Password", iconName: "feedback", dark: isDarkMode)
                         }
-//                               Button(action: {
-//                            route.navigate(to: .createAccountView)
-//                        })
-//                        {
-//                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
-//                        }
+                               Button(action: {
+                            route.navigate(to: .createAccountView)
+                        })
+                        {
+                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
+                        }
                         
                     }
                     .sheet(isPresented: $showLogoutSheet) {

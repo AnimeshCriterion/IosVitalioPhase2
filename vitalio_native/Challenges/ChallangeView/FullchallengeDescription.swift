@@ -10,14 +10,22 @@ import SwiftUI
 struct ChallengeDetailsView: View {
     @State private var showCongrats = false
     @EnvironmentObject var vm: ChallengesviewModel
-    
+    @EnvironmentObject var themeManager: ThemeManager
+    var isDarkMode: Bool {
+        themeManager.colorScheme == .dark
+    }
+ 
+    var userData = UserDefaultsManager.shared.getEmployee()
+ @EnvironmentObject var route: Routing
+ 
     var body: some View {
         ScrollView {
-            Color(vm.color.opacity(0.2))
-                .edgesIgnoringSafeArea(.all)
+            CustomNavBarView(title: "" , isDarkMode: isDarkMode) {
+                route.back()
+            }
             ZStack {
-                Color(vm.color.opacity(0.2))
-                    .edgesIgnoringSafeArea(.all)
+//                Color(vm.color.opacity(0.2))
+//                    .edgesIgnoringSafeArea(.all)
 
                 VStack(spacing: 24) {
                     Spacer().frame(height: 40)
@@ -42,29 +50,71 @@ struct ChallengeDetailsView: View {
                         Text("Starting in")
                             .font(.system(size: 14, weight: .semibold))
 
-                        Text("01ᵈ:03ʰ:17ᵐ")
-                            .font(.system(size: 20, weight: .semibold))
-                            .monospacedDigit()
-
+//                        Text("01ᵈ:03ʰ:17ᵐ")
+//                            .font(.system(size: 20, weight: .semibold))
+//                            .monospacedDigit()
+                        CountdownView(timerString:  vm.startsIn)
                         Button(action: {
                             showCongrats = true
                         }) {
-                            Text("Join Now!")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(vm.color)
-                                .cornerRadius(10)
+                  
+                            VStack{
+                                Text((vm.selectedChallenge!.startsIn == "Started" ) ? "\(vm.selectedChallenge!.startsIn)" : "Strats in \(vm.selectedChallenge!.startsIn)")
+                                    .font(.system(size: 12))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.gray)
+                                if !(vm.selectedChallenge?.peopleJoined?.contains(where: { $0.id == String(userData?.empId ?? "0") }) ?? false) {
+                                    Text("Join Now!")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(.white)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 14)
+                                        .background(vm.color)
+                                        .cornerRadius(10)
+                                } else {
+                                    HStack{
+                                        //                                        Spacer()
+                                        Text("Challenged joined")
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundColor(.white)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 14)
+                                            .background(vm.color)
+                                            .cornerRadius(10)
+                                        //                                        Image("joined")
+                                        //                                            .font(.system(size: 16, weight: .semibold))
+                                        //                                            .foregroundColor(.white)
+                                        //                                            .frame(maxWidth: .infinity)
+                                        //                                            .padding(.vertical, 14)
+                                        //                                            .background(vm.color)
+                                        //                                            .cornerRadius(10)
+                                        //                                        Spacer()
+                                    }}
+                            }
                         }
-
+                        if !(vm.selectedChallenge?.peopleJoined?.contains(where: { $0.id == String(userData?.empId ?? "0") }) ?? false) {
+                            
+                        }else{
+                            Button( action: {
+                                Task{
+                                 await   vm.leaveChallenge(challengeId: vm.selectedChallenge?.id)
+                                    route.back()
+                                }
+                            }
+                            ){
+    Text("Leave challange")
+        .font(.system(size: 16, weight: .bold))
+        .foregroundColor(Color.red)
+                            }
+                           
+                        }
                         Text("7 people to join you in this challenge")
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
                         VStack{
-                            Text((vm.selectedChallenge?.peopleJoined!.isEmpty ?? false   || vm.selectedChallenge?.peopleJoined == nil) ? "" : "People Joined")
-                                .font(.system(size: 10))
-                                .foregroundColor(.gray)
+//                            Text((vm.selectedChallenge?.peopleJoined!.isEmpty ?? false   || vm.selectedChallenge?.peopleJoined == nil) ? "" : "People Joined")
+//                                .font(.system(size: 10))
+//                                .foregroundColor(.gray)
                             HStack(spacing: -12) {
                                 if let people = vm.selectedChallenge?.peopleJoined, !people.isEmpty {
                                     ForEach(people.prefix(5)) { person in
@@ -94,22 +144,22 @@ struct ChallengeDetailsView: View {
                             }
                         }
 
-                        HStack(spacing: -12) {
-                            ForEach(0..<5) { i in
-                                Image("user\(i)")
-                                    .resizable()
-                                    .frame(width: 32, height: 32)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                            }
-
-                            Text("2+")
-                                .font(.system(size: 12, weight: .bold))
-                                .foregroundColor(.white)
-                                .frame(width: 32, height: 32)
-                                .background(Color.red)
-                                .clipShape(Circle())
-                        }
+//                        HStack(spacing: -12) {
+//                            ForEach(0..<5) { i in
+//                                Image("user\(i)")
+//                                    .resizable()
+//                                    .frame(width: 32, height: 32)
+//                                    .clipShape(Circle())
+//                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+//                            }
+//
+//                            Text("2+")
+//                                .font(.system(size: 12, weight: .bold))
+//                                .foregroundColor(.white)
+//                                .frame(width: 32, height: 32)
+//                                .background(Color.red)
+//                                .clipShape(Circle())
+//                        }
                     }
                     .padding()
                     .background(Color.white)
@@ -128,7 +178,9 @@ struct ChallengeDetailsView: View {
                 }
             }
             .animation(.easeInOut, value: showCongrats)
-        }
+        }.background(
+            Color(vm.color.opacity(0.2))
+            .edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -276,3 +328,46 @@ struct RewardItem: View {
         }
     }
 }
+
+func parseTimerString(_ string: String) -> Int {
+    let day = Int(string.components(separatedBy: "d").first ?? "0") ?? 0
+    let hourPart = string.components(separatedBy: "d:").last?.components(separatedBy: "h").first ?? "0"
+    let hour = Int(hourPart) ?? 0
+    let minutePart = string.components(separatedBy: "h:").last?.components(separatedBy: "m").first ?? "0"
+    let minute = Int(minutePart) ?? 0
+    
+    return (day * 86400) + (hour * 3600) + (minute * 60)
+}
+
+
+
+struct CountdownView: View {
+    @State private var remainingSeconds: Int
+    
+    init(timerString: String) {
+        _remainingSeconds = State(initialValue: parseTimerString(timerString))
+    }
+    
+    var body: some View {
+        Text(formattedTime())
+            .font(.system(size: 20, weight: .semibold))
+            .monospacedDigit()
+            .onAppear {
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    if remainingSeconds > 0 {
+                        remainingSeconds -= 1
+                    }
+                }
+            }
+    }
+    
+    private func formattedTime() -> String {
+        let days = remainingSeconds / 86400
+        let hours = (remainingSeconds % 86400) / 3600
+        let minutes = (remainingSeconds % 3600) / 60
+        let seconds = remainingSeconds % 60
+        
+        return String(format: "%02dᵈ:%02dʰ:%02dᵐ:%02dˢ", days, hours, minutes, seconds)
+    }
+}
+

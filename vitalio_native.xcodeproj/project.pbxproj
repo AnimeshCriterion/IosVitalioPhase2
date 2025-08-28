@@ -40,6 +40,7 @@
 		8D188B802DF94B39007267B9 /* familygif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D188B7F2DF94B39007267B9 /* familygif.gif */; };
 		8D188B822DF94B86007267B9 /* setreminder.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D188B812DF94B86007267B9 /* setreminder.gif */; };
 		8D188B842DF94BCA007267B9 /* intakegif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D188B832DF94BCA007267B9 /* intakegif.gif */; };
+		8D2335922E5DA72600689CB1 /* addphoto.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D2335912E5DA72500689CB1 /* addphoto.gif */; };
 		8D2AEEC12DB3AAF300FFCB62 /* SharedAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */; };
 		8D2C37892E41D002003170DD /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C37882E41D002003170DD /* ForgotPassword.swift */; };
 		8D2E8FCA2DDAF4CC0008EB66 /* country_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D2E8FC72DDAF4CC0008EB66 /* country_json.json */; };
@@ -71,6 +72,9 @@
 		8D3816332DC0A56B008F2539 /* _NIOFileSystemFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816322DC0A56B008F2539 /* _NIOFileSystemFoundationCompat */; };
 		8D3816362DC0A666008F2539 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3816352DC0A666008F2539 /* Starscream */; };
 		8D38163C2DC0D361008F2539 /* testAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D38163B2DC0D361008F2539 /* testAudio.swift */; };
+		8D4A62B32E572C250027715D /* bloodC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D4A62B22E572C250027715D /* bloodC.gif */; };
+		8D4A62B72E572C5A0027715D /* addressC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D4A62B62E572C5A0027715D /* addressC.gif */; };
+		8D4A62B92E572CB90027715D /* weightC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D4A62B82E572CB90027715D /* weightC.gif */; };
 		8D4FC8F52DB8CA6A00D51E08 /* DietViewmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */; };
 		8D4FC8F72DB8D75B00D51E08 /* dietDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */; };
 		8D78480B2DC32E2F004A255D /* EditProfileViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */; };
@@ -79,7 +83,9 @@
 		8D829EFE2E3CD7E200FA4298 /* ChallengesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829EFA2E3CD7E200FA4298 /* ChallengesViewModel.swift */; };
 		8D829EFF2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829EFB2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift */; };
 		8D829F022E3CD7FB00FA4298 /* leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D829F002E3CD7FB00FA4298 /* leaderboard.swift */; };
+		8D84C9FD2E55DD8300700D51 /* VitalioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D84C9FC2E55DD8300700D51 /* VitalioTests.swift */; };
 		8D8DB88D2E4DC741000A43A1 /* button_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D8DB88C2E4DC740000A43A1 /* button_loader.gif */; };
+		8D9567862E5EBC4C0052D58B /* goal.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D9567852E5EBC4C0052D58B /* goal.gif */; };
 		8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257742D97D39300CF96B4 /* appbar.swift */; };
 		8D966B4E2D9CF6DF00B37927 /* url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF6392D9BEC5A0026726C /* url.swift */; };
 		8D966B4F2D9CF6E700B37927 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8257762D97D7EC00CF96B4 /* MyButton.swift */; };
@@ -122,8 +128,15 @@
 		8DCE2BCD2DA39F9E004EEED2 /* fluid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */; };
 		8DCE2BCF2DA3DF44004EEED2 /* MedicineModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */; };
 		8DD1EF612E3DEA4E00EBDC07 /* mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1EF602E3DEA4E00EBDC07 /* mood.swift */; };
+		8DD452032E582E7D00A94278 /* personalisedGoalC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DD451FE2E582E7C00A94278 /* personalisedGoalC.gif */; };
+		8DD452042E582E7D00A94278 /* familyC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DD451FF2E582E7C00A94278 /* familyC.gif */; };
+		8DD452052E582E7D00A94278 /* heightC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DD452002E582E7C00A94278 /* heightC.gif */; };
+		8DD452062E582E7D00A94278 /* headacheC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DD452012E582E7D00A94278 /* headacheC.gif */; };
+		8DD452072E582E7D00A94278 /* photoC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8DD452022E582E7D00A94278 /* photoC.gif */; };
 		8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */; };
 		8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */; };
+		8DD6A9412E5C37A3001B1357 /* goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6A9402E5C37A3001B1357 /* goals.swift */; };
+		8DD6A9442E5C6E25001B1357 /* DotsIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD6A9432E5C6E25001B1357 /* DotsIndicator.swift */; };
 		8DDDD4522E44841A001AE3B4 /* sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4512E44841A001AE3B4 /* sleep.swift */; };
 		8DDDD4542E448569001AE3B4 /* sleepmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4532E448569001AE3B4 /* sleepmodel.swift */; };
 		8DDDD4562E4485BC001AE3B4 /* SleepTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDD4552E4485BC001AE3B4 /* SleepTrackerViewModel.swift */; };
@@ -163,6 +176,16 @@
 		8DFB66F62DAE759B00FE7302 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB66F52DAE759B00FE7302 /* Report.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8D84C9FE2E55DD8300700D51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DD5F8362D8A88B600FBDF87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD5F83D2D8A88B600FBDF87;
+			remoteInfo = vitalio_native;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		521000D42E0139AF00AE9936 /* preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = preview.swift; sourceTree = "<group>"; };
 		525F3C572DF970C200D69430 /* Edit Profile 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Edit Profile 4.swift"; sourceTree = "<group>"; };
@@ -198,6 +221,7 @@
 		8D188B7F2DF94B39007267B9 /* familygif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = familygif.gif; sourceTree = "<group>"; };
 		8D188B812DF94B86007267B9 /* setreminder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = setreminder.gif; sourceTree = "<group>"; };
 		8D188B832DF94BCA007267B9 /* intakegif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = intakegif.gif; sourceTree = "<group>"; };
+		8D2335912E5DA72500689CB1 /* addphoto.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = addphoto.gif; sourceTree = "<group>"; };
 		8D2AEEC02DB3AAF300FFCB62 /* SharedAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAccountView.swift; sourceTree = "<group>"; };
 		8D2C37882E41D002003170DD /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		8D2E8FC72DDAF4CC0008EB66 /* country_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = country_json.json; sourceTree = "<group>"; };
@@ -215,6 +239,9 @@
 		8D3247492E472826003DC81B /* FullchallengeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullchallengeDescription.swift; sourceTree = "<group>"; };
 		8D3816132DC08C5C008F2539 /* Voiceassistantview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voiceassistantview.swift; sourceTree = "<group>"; };
 		8D38163B2DC0D361008F2539 /* testAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testAudio.swift; sourceTree = "<group>"; };
+		8D4A62B22E572C250027715D /* bloodC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bloodC.gif; sourceTree = "<group>"; };
+		8D4A62B62E572C5A0027715D /* addressC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = addressC.gif; path = ../../../Downloads/addressC.gif; sourceTree = "<group>"; };
+		8D4A62B82E572CB90027715D /* weightC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = weightC.gif; sourceTree = "<group>"; };
 		8D4FC8F42DB8CA6A00D51E08 /* DietViewmodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietViewmodal.swift; sourceTree = "<group>"; };
 		8D4FC8F62DB8D75B00D51E08 /* dietDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dietDataModel.swift; sourceTree = "<group>"; };
 		8D7848092DC32E2F004A255D /* EditProfileViewModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModal.swift; sourceTree = "<group>"; };
@@ -227,7 +254,10 @@
 		8D829EFA2E3CD7E200FA4298 /* ChallengesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesViewModel.swift; sourceTree = "<group>"; };
 		8D829EFB2E3CD7E200FA4298 /* JoinedChallengeDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinedChallengeDataModel.swift; sourceTree = "<group>"; };
 		8D829F002E3CD7FB00FA4298 /* leaderboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leaderboard.swift; sourceTree = "<group>"; };
+		8D84C9FA2E55DD8300700D51 /* VitalioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VitalioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D84C9FC2E55DD8300700D51 /* VitalioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalioTests.swift; sourceTree = "<group>"; };
 		8D8DB88C2E4DC740000A43A1 /* button_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = button_loader.gif; sourceTree = "<group>"; };
+		8D9567852E5EBC4C0052D58B /* goal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = goal.gif; sourceTree = "<group>"; };
 		8D966B6A2D9D2C5600B37927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = vitalio_native.entitlements; sourceTree = "<group>"; };
 		8D966B742D9D420200B37927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +275,11 @@
 		8DCE2BCC2DA39F9D004EEED2 /* fluid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fluid.swift; sourceTree = "<group>"; };
 		8DCE2BCE2DA3DF44004EEED2 /* MedicineModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModal.swift; sourceTree = "<group>"; };
 		8DD1EF602E3DEA4E00EBDC07 /* mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mood.swift; sourceTree = "<group>"; };
+		8DD451FE2E582E7C00A94278 /* personalisedGoalC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = personalisedGoalC.gif; sourceTree = "<group>"; };
+		8DD451FF2E582E7C00A94278 /* familyC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = familyC.gif; sourceTree = "<group>"; };
+		8DD452002E582E7C00A94278 /* heightC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heightC.gif; sourceTree = "<group>"; };
+		8DD452012E582E7D00A94278 /* headacheC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = headacheC.gif; sourceTree = "<group>"; };
+		8DD452022E582E7D00A94278 /* photoC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = photoC.gif; sourceTree = "<group>"; };
 		8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitalio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD5F8432D8A88B600FBDF87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +294,8 @@
 		8DD5F85D2D8A8A1000FBDF87 /* otp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = otp.swift; sourceTree = "<group>"; };
 		8DD5F8632D8AB32E00FBDF87 /* CreateAccont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccont.swift; sourceTree = "<group>"; };
 		8DD5F8652D8AD7C500FBDF87 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		8DD6A9402E5C37A3001B1357 /* goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goals.swift; sourceTree = "<group>"; };
+		8DD6A9432E5C6E25001B1357 /* DotsIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsIndicator.swift; sourceTree = "<group>"; };
 		8DDDD4512E44841A001AE3B4 /* sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleep.swift; sourceTree = "<group>"; };
 		8DDDD4532E448569001AE3B4 /* sleepmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleepmodel.swift; sourceTree = "<group>"; };
 		8DDDD4552E4485BC001AE3B4 /* SleepTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTrackerViewModel.swift; sourceTree = "<group>"; };
@@ -307,6 +344,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8D84C9F72E55DD8300700D51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD5F83B2D8A88B600FBDF87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,11 +407,13 @@
 		8D2E8FC62DDAF4BA0008EB66 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				8DD6A9422E5C6DFF001B1357 /* Signup view */,
 				521000D42E0139AF00AE9936 /* preview.swift */,
 				8D2E8FC72DDAF4CC0008EB66 /* country_json.json */,
 				8D2E8FC82DDAF4CC0008EB66 /* CreateAccountView.swift */,
 				8D2E8FC92DDAF4CC0008EB66 /* SignUpViewModel.swift */,
 				8D2F1CC32DDD916F0058E939 /* signupdatamodel.swift */,
+				8DD6A9402E5C37A3001B1357 /* goals.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -513,6 +559,14 @@
 			path = leaderboard;
 			sourceTree = "<group>";
 		};
+		8D84C9FB2E55DD8300700D51 /* VitalioTests */ = {
+			isa = PBXGroup;
+			children = (
+				8D84C9FC2E55DD8300700D51 /* VitalioTests.swift */,
+			);
+			path = VitalioTests;
+			sourceTree = "<group>";
+		};
 		8D966B762D9D432D00B37927 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,11 +655,21 @@
 		8DD5F8352D8A88B600FBDF87 = {
 			isa = PBXGroup;
 			children = (
+				8D9567852E5EBC4C0052D58B /* goal.gif */,
+				8DD451FF2E582E7C00A94278 /* familyC.gif */,
+				8DD452012E582E7D00A94278 /* headacheC.gif */,
+				8DD452002E582E7C00A94278 /* heightC.gif */,
+				8DD451FE2E582E7C00A94278 /* personalisedGoalC.gif */,
+				8DD452022E582E7D00A94278 /* photoC.gif */,
+				8D2335912E5DA72500689CB1 /* addphoto.gif */,
 				8D8DB88C2E4DC740000A43A1 /* button_loader.gif */,
 				8DDDD4592E44B3F3001AE3B4 /* angry.gif */,
 				8DDDD4572E44B3F2001AE3B4 /* glad.gif */,
+				8D4A62B82E572CB90027715D /* weightC.gif */,
 				8DDDD45C2E44B3F4001AE3B4 /* happy.gif */,
 				8DDDD45A2E44B3F3001AE3B4 /* Spectacular.gif */,
+				8D4A62B62E572C5A0027715D /* addressC.gif */,
+				8D4A62B22E572C250027715D /* bloodC.gif */,
 				8DDDD45B2E44B3F4001AE3B4 /* Upset.gif */,
 				8DDDD4582E44B3F2001AE3B4 /* worried.gif */,
 				8D188B832DF94BCA007267B9 /* intakegif.gif */,
@@ -626,6 +690,7 @@
 				8D966B742D9D420200B37927 /* AppDelegate.swift */,
 				8D029BA62DE82DF0000FE708 /* InfoPlist.strings */,
 				8DD5F8402D8A88B600FBDF87 /* vitalio_native */,
+				8D84C9FB2E55DD8300700D51 /* VitalioTests */,
 				8DD5F83F2D8A88B600FBDF87 /* Products */,
 				8D966B762D9D432D00B37927 /* Frameworks */,
 			);
@@ -635,6 +700,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD5F83E2D8A88B600FBDF87 /* Vitalio.app */,
+				8D84C9FA2E55DD8300700D51 /* VitalioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -685,6 +751,14 @@
 				8DD5F8482D8A88B900FBDF87 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DD6A9422E5C6DFF001B1357 /* Signup view */ = {
+			isa = PBXGroup;
+			children = (
+				8DD6A9432E5C6E25001B1357 /* DotsIndicator.swift */,
+			);
+			path = "Signup view";
 			sourceTree = "<group>";
 		};
 		8DDDD4502E448380001AE3B4 /* sleepwidget */ = {
@@ -755,6 +829,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8D84C9F92E55DD8300700D51 /* VitalioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D84CA022E55DD8300700D51 /* Build configuration list for PBXNativeTarget "VitalioTests" */;
+			buildPhases = (
+				8D84C9F62E55DD8300700D51 /* Sources */,
+				8D84C9F72E55DD8300700D51 /* Frameworks */,
+				8D84C9F82E55DD8300700D51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D84C9FF2E55DD8300700D51 /* PBXTargetDependency */,
+			);
+			name = VitalioTests;
+			productName = VitalioTests;
+			productReference = 8D84C9FA2E55DD8300700D51 /* VitalioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8DD5F83D2D8A88B600FBDF87 /* vitalio_native */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DD5F84C2D8A88B900FBDF87 /* Build configuration list for PBXNativeTarget "vitalio_native" */;
@@ -800,9 +892,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					8D84C9F92E55DD8300700D51 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 8DD5F83D2D8A88B600FBDF87;
+					};
 					8DD5F83D2D8A88B600FBDF87 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -829,11 +925,19 @@
 			projectRoot = "";
 			targets = (
 				8DD5F83D2D8A88B600FBDF87 /* vitalio_native */,
+				8D84C9F92E55DD8300700D51 /* VitalioTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8D84C9F82E55DD8300700D51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD5F83C2D8A88B600FBDF87 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -844,23 +948,33 @@
 				8DDDD4622E44B3F4001AE3B4 /* happy.gif in Resources */,
 				8D188B7E2DF94AE3007267B9 /* diseasegif.gif in Resources */,
 				528CD8842E1697E70002B795 /* other_disease.gif in Resources */,
+				8DD452032E582E7D00A94278 /* personalisedGoalC.gif in Resources */,
 				8D188B822DF94B86007267B9 /* setreminder.gif in Resources */,
 				8D188B782DF94A28007267B9 /* addressgif.gif in Resources */,
 				8D029BA42DE82DF0000FE708 /* InfoPlist.strings in Resources */,
 				8DDDD45F2E44B3F4001AE3B4 /* angry.gif in Resources */,
+				8D4A62B92E572CB90027715D /* weightC.gif in Resources */,
 				8D188B7C2DF94AAB007267B9 /* heightgif.gif in Resources */,
 				8D188B7A2DF94A40007267B9 /* weightgif.gif in Resources */,
 				8D188B6E2DF9406B007267B9 /* calandergif.gif in Resources */,
 				8DDDD4612E44B3F4001AE3B4 /* Upset.gif in Resources */,
 				5293CF122E129C770071D66B /* confetti.gif in Resources */,
 				8D188B762DF949FE007267B9 /* bloodgif.gif in Resources */,
+				8D9567862E5EBC4C0052D58B /* goal.gif in Resources */,
 				8D8DB88D2E4DC741000A43A1 /* button_loader.gif in Resources */,
+				8DD452062E582E7D00A94278 /* headacheC.gif in Resources */,
 				8DDDD45E2E44B3F4001AE3B4 /* worried.gif in Resources */,
+				8DD452042E582E7D00A94278 /* familyC.gif in Resources */,
 				8DDDD45D2E44B3F4001AE3B4 /* glad.gif in Resources */,
+				8D2335922E5DA72600689CB1 /* addphoto.gif in Resources */,
 				8D188B742DF9497D007267B9 /* gendergif.gif in Resources */,
 				8DD5F8492D8A88B900FBDF87 /* Preview Assets.xcassets in Resources */,
+				8D4A62B32E572C250027715D /* bloodC.gif in Resources */,
+				8DD452052E582E7D00A94278 /* heightC.gif in Resources */,
 				8DDDD4602E44B3F4001AE3B4 /* Spectacular.gif in Resources */,
 				8D188B842DF94BCA007267B9 /* intakegif.gif in Resources */,
+				8D4A62B72E572C5A0027715D /* addressC.gif in Resources */,
+				8DD452072E582E7D00A94278 /* photoC.gif in Resources */,
 				8D188B702DF947B1007267B9 /* gif2.gif in Resources */,
 				8DD5F8462D8A88B900FBDF87 /* Assets.xcassets in Resources */,
 				8D2E8FCA2DDAF4CC0008EB66 /* country_json.json in Resources */,
@@ -871,6 +985,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8D84C9F62E55DD8300700D51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D84C9FD2E55DD8300700D51 /* VitalioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D966B4C2D9CF6D400B37927 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -970,7 +1092,9 @@
 				8DF253A12DD5CA7C00BECD6F /* ObserverDashboaard.swift in Sources */,
 				8DF1938E2E40A69900995340 /* VitalsForDashboard.swift in Sources */,
 				8D2C37892E41D002003170DD /* ForgotPassword.swift in Sources */,
+				8DD6A9442E5C6E25001B1357 /* DotsIndicator.swift in Sources */,
 				8DEE64492DBA3D9100C5B5E4 /* AddReport.swift in Sources */,
+				8DD6A9412E5C37A3001B1357 /* goals.swift in Sources */,
 				8D829F022E3CD7FB00FA4298 /* leaderboard.swift in Sources */,
 				8D966B4D2D9CF6DB00B37927 /* appbar.swift in Sources */,
 				8DDF8EE32DBCE1D800F8B47D /* CustomeLoader.swift in Sources */,
@@ -987,6 +1111,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D84C9FF2E55DD8300700D51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DD5F83D2D8A88B600FBDF87 /* vitalio_native */;
+			targetProxy = 8D84C9FE2E55DD8300700D51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8D029BA62DE82DF0000FE708 /* InfoPlist.strings */ = {
@@ -1010,6 +1142,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8D84CA002E55DD8300700D51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7BCQCGA365;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.criteriontech.VitalioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vitalio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vitalio";
+			};
+			name = Debug;
+		};
+		8D84CA012E55DD8300700D51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7BCQCGA365;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.criteriontech.VitalioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vitalio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vitalio";
+			};
+			name = Release;
+		};
 		8DD5F84A2D8A88B900FBDF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1206,6 +1376,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8D84CA022E55DD8300700D51 /* Build configuration list for PBXNativeTarget "VitalioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D84CA002E55DD8300700D51 /* Debug */,
+				8D84CA012E55DD8300700D51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8DD5F8392D8A88B600FBDF87 /* Build configuration list for PBXProject "vitalio_native" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
