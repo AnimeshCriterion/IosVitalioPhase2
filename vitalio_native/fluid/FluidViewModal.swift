@@ -219,7 +219,7 @@ class FluidaViewModal  : ObservableObject {
                 self.fluidList = decoded.responseValue
             }
      
-            print(decoded)
+            print("decoded \(decoded)")
         } catch {
             print("Error decoding food list: \(error)")
             

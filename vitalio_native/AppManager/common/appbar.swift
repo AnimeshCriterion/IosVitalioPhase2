@@ -10,13 +10,17 @@ import SwiftUI
 struct CustomNavBarView: View {
     var title: String
     var isDarkMode: Bool
-    var onBack: () -> Void
-
+    var onBack: (() -> Void)? = nil
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         HStack {
             Button(action: {
+              if let onBack = onBack {
                 onBack()
+            } else {
+                dismiss()
+            }
             }) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 20, weight: .medium))

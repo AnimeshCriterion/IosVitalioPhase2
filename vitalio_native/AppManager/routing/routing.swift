@@ -36,6 +36,8 @@ final class Routing : ObservableObject{
         case chatBotView
         case createAccountView
         case language
+        case NotificationView
+        case personalInfoview
         
     }
 

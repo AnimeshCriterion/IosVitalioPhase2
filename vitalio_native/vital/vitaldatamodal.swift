@@ -23,9 +23,9 @@ struct Vital: Codable ,Equatable , Identifiable{
     let uhid: String
     let pmId: Int
     let vitalID: Int
-    let vitalName: String
+    var vitalName: String
     let vitalValue: Double
-    let unit: String
+    var unit: String
     let vitalDateTime: String
     let userId: Int
     let rowId: Int

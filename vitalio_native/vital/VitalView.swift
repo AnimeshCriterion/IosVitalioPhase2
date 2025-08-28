@@ -44,6 +44,7 @@ struct VitalView: View {
                                         
                                     Spacer()
                                     Button(action: {
+                                        vitalsVM.matchSelectedValue = []
                                         route.navigate(to: .addVitals)
                                         vitalsVM.data = vital.vitalName
                                         vitalsVM.unitData = vital.unit
@@ -51,16 +52,16 @@ struct VitalView: View {
                                         print(vital.vitalName)
                                         switch vital.vitalName {
                                           case "Blood Pressure":
-                                            vitalsVM.matchSelectedValue.append(contentsOf: ["vmValueBPSys", "vmValueBPDias"])
+                                            vitalsVM.matchSelectedValue.append(contentsOf: ["vmValueBPSys", "vmValueBPDias","vmValuePulse"])
 //                                            vitalsVM.matchSelectedValue = "vmValueBPSys"
 //                                            vitalsVM.matchSelectedValue = "vmValueBPDias"
-                                          case "Spo2":
+                                          case "Blood Oxygen (spo2)":
                                             vitalsVM.matchSelectedValue.append("vmValueSPO2")
 //                                            vitalsVM.matchSelectedValue = "vmValueSPO2"
-                                          case "RespRate":
+                                          case "Respiratory Rate":
                                             vitalsVM.matchSelectedValue.append("vmValueRespiratoryRate")
 //                                            vitalsVM.matchSelectedValue = "vmValueRespiratoryRate"
-                                          case "HeartRate":
+                                          case "Heart Rate":
                                             vitalsVM.matchSelectedValue.append("vmValueHeartRate")
 //                                            vitalsVM.matchSelectedValue = "vmValueHeartRate"
                                           case "Pulse":
@@ -69,10 +70,10 @@ struct VitalView: View {
                                           case "RBS":
                                             vitalsVM.matchSelectedValue.append("vmValueRbs")
 //                                            vitalsVM.matchSelectedValue = "vmValueRbs"
-                                          case "Temperature":
+                                          case "Body Temperature":
                                             vitalsVM.matchSelectedValue.append("vmValueTemperature")
 //                                            vitalsVM.matchSelectedValue = "vmValueTemperature"
-                                          case "Weight":
+                                          case "Body Weight":
                                             vitalsVM.matchSelectedValue.append("weight")
 //                                            vitalsVM.matchSelectedValue = "weight"
                                           case "Height":

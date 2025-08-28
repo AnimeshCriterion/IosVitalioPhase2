@@ -27,6 +27,7 @@ struct CreateAccountView: View {
                             route.back()
                         }else{
                             viewModal.currentPage -= 1
+                            viewModal.currentProgress -= 1
                             print("hello \(viewModal.firstName) current page: \(viewModal.currentPage) ")
                         }
                     }
@@ -37,6 +38,11 @@ struct CreateAccountView: View {
                                     viewModal.fullAddress = ""
                                 }
                                 viewModal.currentPage += 1
+                                print("baqar current page: \(viewModal.currentPage) ")
+                                if viewModal.currentPage != 8 && viewModal.currentPage != 11 && viewModal.currentPage != 12 {
+                                    viewModal.currentProgress += 1
+                                }
+                                
                                 
                             }
 
@@ -61,13 +67,13 @@ struct CreateAccountView: View {
                         VStack(alignment:viewModal.currentPage == 11 ? .center : .leading, spacing: 8) {
                             
                             HStack {
-                                Text("\(Int((Double(viewModal.currentPage) / 14.0) * 100))%")
+                                Text("\(Int((Double(viewModal.currentProgress) / 11.0) * 100))%")
                                     .font(.system(size: 16))
                                     .fontWeight(.bold)
                                     .foregroundStyle(Color.primaryBlue)
                                 
                                 
-                                ProgressView(value: Double(viewModal.currentPage) / 13.0)
+                                ProgressView(value: Double(viewModal.currentProgress) / 11.0)
                                     .tint(.blue)
                                     .frame(height: 10)
                                     .animation(.easeInOut(duration: 1), value: viewModal.currentPage)
@@ -178,6 +184,11 @@ struct CreateAccountView: View {
                                             print(viewModal.fullAddress)
                                         }
                                         viewModal.currentPage += 1
+                                        print("baqar current page: \(viewModal.currentPage) ")
+                                        if viewModal.currentPage != 8 && viewModal.currentPage != 11 && viewModal.currentPage != 12 {
+                                            print("tillu")
+                                            viewModal.currentProgress += 1
+                                        }
                                         print("hello \(viewModal.firstName) current page: \(viewModal.currentPage) ")
                                     }
                                     else {
@@ -285,6 +296,10 @@ struct CreateAccountView: View {
                                 if isSelected {
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundColor(.blue)
+                                }
+                                else {
+                                    Image(systemName: "checkmark.circle")
+                                        .foregroundColor(.secondary)
                                 }
                             }
                             .contentShape(Rectangle())
@@ -558,7 +573,7 @@ struct CreateAccountView: View {
                 }
 
                 // 👇 Replace LazyVGrid with horizontal scroll
-                ScrollView(.horizontal, showsIndicators: false) {
+                
                     HStack(spacing: 16) {
                         ForEach(viewModal.genders) { data in
                             GenderOptionView(
@@ -571,7 +586,7 @@ struct CreateAccountView: View {
                         }
                     }
                     .padding(.vertical, 4)
-                }
+             
             }
            
 
@@ -758,6 +773,7 @@ struct CreateAccountView: View {
                                         selectedOption: $viewModal.selectedCountry,
                                         onSelect: { country in
                                             viewModal.selectedCountryID = country.id
+                                            print("selectedCountryID \(country.id)")
                                             Task {
                                                 await viewModal.StateData(viewModal.selectedCountryID!)
                                             }
@@ -1078,7 +1094,9 @@ struct CreateAccountView: View {
                         let unit = viewModal.selectedHeightUnit
 
                         let heightInFeet = feet + (inches / 12.0)
+                        print("heightInFeet: \(heightInFeet)")
                         viewModal.selectedHeightText = String(format: "%.1f %@", heightInFeet, unit)
+                        print("selectedHeightText: \(viewModal.selectedHeightText)")
                         viewModal.showPopup.toggle()
 
                         if let cm1 = viewModal.convertToCentimeters(from: viewModal.selectedHeightText) {
@@ -1494,12 +1512,12 @@ struct CreateAccountView: View {
                                                     VStack(alignment: .leading, spacing: 6) {
                                                         Text(member.rawValue)
                                                             .font(.headline)
-                                                            .foregroundColor(.primary)
+                                                            .foregroundColor(.secondary)
                                                         
                                                         ForEach(problems, id: \.id) { problem in
                                                             Text("• \(problem.problemName)")
                                                                 .font(.subheadline)
-                                                                .foregroundColor(.secondary)
+                                                                .foregroundColor(Color.primaryBlue)
                                                                 .padding(.leading, 10)
                                                         }
                                                     }
@@ -1507,22 +1525,25 @@ struct CreateAccountView: View {
                                                     .frame(maxWidth: .infinity, alignment: .leading)
                                                     .background(Color(.secondarySystemBackground))
                                                     .cornerRadius(12)
-                                                    .padding(.horizontal)
+                                                    .padding(.horizontal).padding(.top)
                                                     
                                                     // Remove icon at top-right
                                                     Button(action: {
-                                                        // Remove action here
-                                                        // Remove all problems belonging to this member
-                                                            viewModal.problemsByFamily[member] = nil
-                                                        print("checlin problem \(viewModal.familyProblems)")
-//                                                        viewModal.familyProblems.removeAll { $0.familyMember == member}
+                                                        viewModal.problemsByFamily[member] = nil
+                                                        print("checking problem \(viewModal.familyProblems)")
                                                         print("Remove tapped")
                                                     }) {
-                                                        Image(systemName: "xmark.circle.fill")
-                                                            .foregroundColor(.gray)
-                                                            .imageScale(.medium)
-                                                            .padding(10)
-                                                    }
+                                                        Image(systemName: "xmark")
+                                                            .foregroundColor(.red) // Red icon
+                                                            .font(.system(size: 8, weight: .bold)) // Make it bold and closer to your screenshot
+                                                            .padding(8) // Space inside the background
+                                                            .background(
+                                                                Circle()
+                                                                    .fill(Color.red.opacity(0.1)) // Light red background
+                                                            )
+                                                    }.padding(4)
+
+
                                                 }
 
 
@@ -2063,11 +2084,11 @@ struct CreateAccountView: View {
                     if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                         Image("arrow_forward")
                             .resizable()
-                            .frame(width: 18, height: 18)
+                            .frame(width: 20, height: 20)
                     } else {
                         Image("pencil")
                             .resizable()
-                            .frame(width: 18, height: 18)
+                            .frame(width: 20, height: 20)
                     }
                 }
                 .onTapGesture {

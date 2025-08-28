@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,8 @@
 		525F3C582DF970C200D69430 /* Edit Profile 4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F3C572DF970C200D69430 /* Edit Profile 4.swift */; };
 		528CD8842E1697E70002B795 /* other_disease.gif in Resources */ = {isa = PBXBuildFile; fileRef = 528CD8832E1697E70002B795 /* other_disease.gif */; };
 		5293CF122E129C770071D66B /* confetti.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5293CF112E129C770071D66B /* confetti.gif */; };
+		5297279F2E4DD22500F82284 /* singleSelectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5297279E2E4DD21B00F82284 /* singleSelectionField.swift */; };
+		52BC60CA2E4B31EA00883CDE /* multiSelectionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC60C92E4B31D000883CDE /* multiSelectionField.swift */; };
 		52DA85C92E323E5E00E19B0F /* otp_fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA85C82E323E5500E19B0F /* otp_fields.swift */; };
 		8D029BA42DE82DF0000FE708 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D029BA62DE82DF0000FE708 /* InfoPlist.strings */; };
 		8D0582A62DAA257F0043330A /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0582A52DAA257F0043330A /* Intake.swift */; };
@@ -141,6 +143,8 @@
 		525F3C572DF970C200D69430 /* Edit Profile 4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Edit Profile 4.swift"; sourceTree = "<group>"; };
 		528CD8832E1697E70002B795 /* other_disease.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = other_disease.gif; sourceTree = "<group>"; };
 		5293CF112E129C770071D66B /* confetti.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = confetti.gif; sourceTree = "<group>"; };
+		5297279E2E4DD21B00F82284 /* singleSelectionField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleSelectionField.swift; sourceTree = "<group>"; };
+		52BC60C92E4B31D000883CDE /* multiSelectionField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = multiSelectionField.swift; sourceTree = "<group>"; };
 		52DA85C82E323E5500E19B0F /* otp_fields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otp_fields.swift; sourceTree = "<group>"; };
 		8D029BA52DE82DF0000FE708 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D029BA72DE82DF3000FE708 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -251,6 +255,12 @@
 		8DFFCD342D92C2B7007A7483 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
 		8DFFCD382D92C421007A7483 /* viewmodal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewmodal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		5201670C2E3C8A4500E17AA3 /* Reminders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Reminders; sourceTree = "<group>"; };
+		526DEEC12E46290800252F95 /* PersonalInfo */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PersonalInfo; sourceTree = "<group>"; };
+		52CDD8402E375A7D0040BCD0 /* Notification */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notification; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8DD5F83B2D8A88B600FBDF87 /* Frameworks */ = {
@@ -399,6 +409,8 @@
 		8D8257732D97D38200CF96B4 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				5297279E2E4DD21B00F82284 /* singleSelectionField.swift */,
+				52BC60C92E4B31D000883CDE /* multiSelectionField.swift */,
 				8DDF8EDD2DBCE1D700F8B47D /* CustomDropDown.swift */,
 				8DDF8EDF2DBCE1D700F8B47D /* CustomeLoader.swift */,
 				8DDF8EDE2DBCE1D700F8B47D /* CustomTextField 1.swift */,
@@ -519,6 +531,8 @@
 		8DD5F8402D8A88B600FBDF87 /* vitalio_native */ = {
 			isa = PBXGroup;
 			children = (
+				5201670C2E3C8A4500E17AA3 /* Reminders */,
+				52CDD8402E375A7D0040BCD0 /* Notification */,
 				8D0BBDC42DE6E4A900ACFBBC /* Language */,
 				8D966B792D9D46F400B37927 /* vitalio-native-Info.plist */,
 				8D966B6C2D9D400C00B37927 /* vitalio_native.entitlements */,
@@ -548,6 +562,7 @@
 				8DD5F8452D8A88B900FBDF87 /* Assets.xcassets */,
 				8DD5F8472D8A88B900FBDF87 /* Preview Content */,
 				8D0BBDC22DE6D7FD00ACFBBC /* Localizable.strings */,
+				526DEEC12E46290800252F95 /* PersonalInfo */,
 			);
 			path = vitalio_native;
 			sourceTree = "<group>";
@@ -629,6 +644,11 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5201670C2E3C8A4500E17AA3 /* Reminders */,
+				526DEEC12E46290800252F95 /* PersonalInfo */,
+				52CDD8402E375A7D0040BCD0 /* Notification */,
 			);
 			name = vitalio_native;
 			packageProductDependencies = (
@@ -790,6 +810,7 @@
 				8D966B582D9CF70500B37927 /* LocalData.swift in Sources */,
 				8DF6EFE32DB770EE00E2C69A /* SymptomstrackerView.swift in Sources */,
 				8D966B572D9CF70200B37927 /* color.swift in Sources */,
+				5297279F2E4DD22500F82284 /* singleSelectionField.swift in Sources */,
 				8D966B562D9CF6FE00B37927 /* Text.swift in Sources */,
 				8D966B552D9CF6FB00B37927 /* APIClass.swift in Sources */,
 				8D38163C2DC0D361008F2539 /* testAudio.swift in Sources */,
@@ -797,6 +818,7 @@
 				8D966B532D9CF6F400B37927 /* network.swift in Sources */,
 				8D12F5EE2DC4A13400DE1A41 /* VoiceManager.swift in Sources */,
 				8DEE644B2DBA50DB00C5B5E4 /* DynamicData.swift in Sources */,
+				52BC60CA2E4B31EA00883CDE /* multiSelectionField.swift in Sources */,
 				8D1544342DA907A9009E7433 /* Output.swift in Sources */,
 				8DBD5F3A2DE9C13700B2367C /* Internet.swift in Sources */,
 				8D966B512D9CF6EE00B37927 /* viewmodal.swift in Sources */,

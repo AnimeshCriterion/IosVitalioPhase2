@@ -17,6 +17,7 @@ extension Color {
     static let primaryBlue = Color(hex: "#1564ED")
     static let textGrey = Color(hex: "#5F6471")
     static let textGrey2 = Color(hex: "#202529")
+    static let lightBlueContainer = Color(hex: "#F5F8FC")
 }
 
 extension Color {

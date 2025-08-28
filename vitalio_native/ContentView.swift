@@ -33,6 +33,9 @@ struct ContentView: View {
                 }
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        
+                        
+                        
                         if((UserDefaultsManager.shared.getIsLoggedIn() ?? nil) == true ){
                             route.navigate(to: .dashboard)
                         }else{
@@ -102,6 +105,11 @@ struct ContentView: View {
                         CreateAccountView()
                     case .language:
                         Language()
+                    case .NotificationView:
+                        NotificationView()
+                    case .personalInfoview:
+                        PersonalInfoView()
+                    
                     }}
             }
             // Popup layer

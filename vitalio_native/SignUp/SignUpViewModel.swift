@@ -45,6 +45,7 @@ class SignUpViewModal: ObservableObject {
     }
     
     @Published var currentPage = 0
+    @Published var currentProgress = 0
     @Published var lastPage = -1
     @Published  var firstName: String = ""
     @Published  var lastNmae: String = ""
@@ -175,6 +176,7 @@ class SignUpViewModal: ObservableObject {
                 let data = try Data(contentsOf: url)
                 let decoded = try JSONDecoder().decode([Country].self, from: data)
                 countries = decoded
+                print("allCountries \(countries)")
             } catch {
                 print("❌ Failed to decode JSON:", error)
             }

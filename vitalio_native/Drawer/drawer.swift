@@ -65,14 +65,24 @@ struct SideMenuView: View {
                                                             print("FaheemCheck \(UserDefaultsManager.shared.getUserData()?.profileUrl ?? "No URL")")
                                                         }) {
                                                             Group {
-                                                                if let urlString = UserDefaultsManager.shared.getUserData()?.profileUrl,
-                                                                   let url = URL(string: urlString) {
-                                                                     AsyncImage(url: url) { phase in
+                                                                if let selectedImage = selectedImage {
+                                                                    // 🖼️ Show newly selected image (from camera or gallery)
+                                                                    Image(uiImage: selectedImage)
+                                                                        .resizable()
+                                                                        .scaledToFill()
+                                                                        .clipShape(Circle())
+                                                                } else if let urlString = UserDefaultsManager.shared.getUserData()?.profileUrl,
+                                                                          let url = URL(string: urlString) {
+                                                                    AsyncImage(url: url) { phase in
                                                                         if let image = phase.image {
-                                                                            if editProfileVM.loadingImage {  ProgressView() } else {   image
-                                                                                .resizable()
-                                                                                .scaledToFill()
-                                                                                .clipShape(Circle())}
+                                                                            if editProfileVM.loadingImage {
+                                                                                ProgressView()
+                                                                            } else {
+                                                                                image
+                                                                                    .resizable()
+                                                                                    .scaledToFill()
+                                                                                    .clipShape(Circle())
+                                                                            }
                                                                         } else if phase.error != nil {
                                                                             Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
                                                                                 .resizable()
@@ -82,15 +92,15 @@ struct SideMenuView: View {
                                                                             ProgressView()
                                                                         }
                                                                     }
-                                                                    .frame(width: 100, height: 100)
                                                                 } else {
                                                                     Image(systemName: "person.crop.circle")
                                                                         .resizable()
                                                                         .scaledToFit()
-                                                                        .frame(width: 100, height: 100)
                                                                         .foregroundColor(.gray)
                                                                 }
                                                             }
+                                                            .frame(width: 100, height: 100)
+
                                                                }
                                                         .actionSheet(isPresented: $isShowingActionSheet) {
                                                             ActionSheet(title: Text("select_image"), buttons: [
@@ -135,7 +145,7 @@ struct SideMenuView: View {
                             CustomText(userData?.patientName ?? "", color:    isDarkMode ? Color.white:  Color.black, size: 24, weight: Font.Weight.semibold)
                             
                             if let userData = UserDefaultsManager.shared.getUserData() {
-                                CustomText("+91 \(userData.mobileNo)", color: Color.gray, size: 18, weight: .semibold)
+                                CustomText("\(userData.uhID ?? "")", color: Color.gray, size: 18, weight: .semibold)
                             } else {
                                 CustomText("", color: Color.gray, size: 18, weight: .semibold)
                             }
@@ -164,61 +174,108 @@ struct SideMenuView: View {
                         .background(isDarkMode ? Color.customBackgroundDark2 : Color.white)
                         .cornerRadius(15)
                         .padding()
-                    VStack{
-                        Button(action: {
-                            route.navigate(to: .allergies)
-                        }) {
-                        DrawerTile(title: "allergies", iconName: "allergies", dark: isDarkMode )}
-                        Button(action: {
-                            route.navigate(to: .sharedAccountView)
-                        }) {
-                        DrawerTile(title: "switch_account", iconName: "addmember", dark: isDarkMode )}
-                        DrawerTile(title: "connect_smart_watch", iconName: "watch", dark: isDarkMode )
-                        Button(action:{
-                            route.navigate(to: .addMemberView)
-                        }){
-                            DrawerTile(title: "add_member", iconName: "addmember", dark: isDarkMode )
+                    VStack(spacing: 20) {
+                        
+                        // Section 1
+                        SettingsSection {
+                            SettingsRow(icon: "person.crop.circle", iconColor: .blue, title: "Personal Info"){
+                                route.navigate(to: .personalInfoview)
+//                                NavigationLink(destination: PersonalInfoView())
+                            }
+                            
+                            SettingsRow(icon: "arrow.2.squarepath", iconColor: .indigo, title: "Switch Account") {
+                                route.navigate(to: .sharedAccountView)
+                            }
+                            
+                            SettingsRow(icon: "person.badge.plus", iconColor: .green, title: "Add Member") {
+                                route.navigate(to: .addMemberView)
+                            }
+                        }
+                        
+                        // Section 2
+                        SettingsSection {
+                            SettingsRow(icon: "list.bullet.clipboard", iconColor: .indigo, title: "Allergies", trailingText: "2") {
+                                route.navigate(to: .allergies)
+                            }
+                            
+                            SettingsRow(icon: "applewatch", iconColor: .blue, title: "Connect Smart Watch")
+                        }
+                        
+                        // Section 3
+                        SettingsSection {
+                            SettingsRow(icon: "globe", iconColor: .blue, title: "Language") {
+                                route.navigate(to: .language)
+                            }
+                            
+                            SettingsRow(icon: "moon.stars.fill", iconColor: .purple, title: "Dark Mode") {
+                                route.navigate(to: .darkmode)
+                            }
+                            
+                            SettingsRow(icon: "questionmark.circle", iconColor: .orange, title: "FAQs") {
+                                route.navigate(to: .faqView)
+                            }
+                            
+                            SettingsRow(icon: "bubble.left.and.bubble.right", iconColor: .pink, title: "Feedback") {
+                                route.navigate(to: .feedback)
+                            }
                         }
                     }
-                    .padding(10)
-                    
-                    VStack{
-                        
-                        Button(action: {
-                            route.navigate(to: .language)
-                        }) {
-                            GroupedDrawerTile(title: "language", iconName: "language", dark: isDarkMode)
-                        }
-                        
-                        Button(action: {
-                            route.navigate(to: .darkmode)
-                        }) {
-                            GroupedDrawerTile(title: "dark_mode", iconName: "darkmode", dark: isDarkMode)}
-                        Button(action: {
-                            route.navigate(to: .faqView)
-                        }) {
-                            GroupedDrawerTile(title: "faqs", iconName: "faq", dark: isDarkMode)
-                        }
-                        Button(action: {
-                            route.navigate(to: .feedback)
-                        })
-                        {
-                            GroupedDrawerTile(title: "feedback", iconName: "feedback", dark: isDarkMode)
-                        }
-//                               Button(action: {
-//                            route.navigate(to: .createAccountView)
+
+//                    VStack{
+//                        Button(action: {
+//                            route.navigate(to: .allergies)
+//                        }) {
+//                        DrawerTile(title: "allergies", iconName: "allergies", dark: isDarkMode )}
+//                        Button(action: {
+//                            route.navigate(to: .sharedAccountView)
+//                        }) {
+//                        DrawerTile(title: "switch_account", iconName: "addmember", dark: isDarkMode )}
+//                        DrawerTile(title: "connect_smart_watch", iconName: "watch", dark: isDarkMode )
+//                        Button(action:{
+//                            route.navigate(to: .addMemberView)
+//                        }){
+//                            DrawerTile(title: "add_member", iconName: "addmember", dark: isDarkMode )
+//                        }
+//                    }
+//                    .padding(10)
+//                    
+//                    VStack{
+//                        
+//                        Button(action: {
+//                            route.navigate(to: .language)
+//                        }) {
+//                            GroupedDrawerTile(title: "language", iconName: "language", dark: isDarkMode)
+//                        }
+//                        
+//                        Button(action: {
+//                            route.navigate(to: .darkmode)
+//                        }) {
+//                            GroupedDrawerTile(title: "dark_mode", iconName: "darkmode", dark: isDarkMode)}
+//                        Button(action: {
+//                            route.navigate(to: .faqView)
+//                        }) {
+//                            GroupedDrawerTile(title: "faqs", iconName: "faq", dark: isDarkMode)
+//                        }
+//                        Button(action: {
+//                            route.navigate(to: .feedback)
 //                        })
 //                        {
-//                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
+//                            GroupedDrawerTile(title: "feedback", iconName: "feedback", dark: isDarkMode)
 //                        }
-                        
-                    }
+////                               Button(action: {
+////                            route.navigate(to: .createAccountView)
+////                        })
+////                        {
+////                            GroupedDrawerTile(title: "create_account", iconName: "feedback", dark: isDarkMode)
+////                        }
+//                        
+//                    }
                     .sheet(isPresented: $showLogoutSheet) {
                                LogoutConfirmationSheet(isPresented: $showLogoutSheet)
                                    .presentationDetents([.height(250)])
                                    .presentationDragIndicator(.visible)
                            }
-                    .background( isDarkMode ?Color.customBackgroundDark2 : Color.white)
+//                    .background( isDarkMode ?Color.customBackgroundDark2 : Color.white)
                     .cornerRadius(15)
                     .padding(10)
                 }
@@ -398,3 +455,94 @@ struct LogoutConfirmationSheet: View {
     }
 }
 
+///
+// MARK: - Settings Section
+struct SettingsSection<Content: View>: View {
+    let content: Content
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    var body: some View {
+        VStack(spacing: 0) {
+            content
+        }
+        .background(Color.white)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.05), radius: 3, x: 0, y: 1)
+    }
+}
+
+// MARK: - Settings Row
+struct SettingsRow: View {
+    var icon: String
+    var iconColor: Color
+    var title: String
+    var trailingText: String? = nil
+    var onTap: (() -> Void)? = nil
+
+    var body: some View {
+        HStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 32, height: 32)
+                Image(systemName: icon)
+                    .foregroundColor(iconColor)
+                    .font(.system(size: 16))
+            }
+            Text(title)
+                .foregroundColor(.primary)
+                .font(.system(size: 16))
+
+            Spacer()
+
+            if let trailing = trailingText {
+                Text(trailing)
+                    .foregroundColor(.gray)
+                    .font(.system(size: 14))
+            }
+
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+                .font(.system(size: 14))
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 12)
+        .contentShape(Rectangle()) // Makes full row tappable
+        .onTapGesture {
+            onTap?()
+        }
+    }
+}
+
+
+// MARK: - Toggle Row
+struct ToggleRow: View {
+    var icon: String
+    var iconColor: Color
+    var title: String
+    @Binding var isOn: Bool
+    
+    var body: some View {
+        HStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(iconColor.opacity(0.15))
+                    .frame(width: 32, height: 32)
+                Image(systemName: icon)
+                    .foregroundColor(iconColor)
+                    .font(.system(size: 16))
+            }
+            Text(title)
+                .foregroundColor(.primary)
+                .font(.system(size: 16))
+            
+            Spacer()
+            
+            Toggle("", isOn: $isOn)
+                .labelsHidden()
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 12)
+    }
+}

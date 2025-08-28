@@ -49,6 +49,14 @@ struct InputView: View {
                 PeriodToggleView(selectedPeriod: $selectedPeriod)
                     .environmentObject(viewModel)
                 
+                BarChart(water:  viewModel.getBarQuantity(for: 97694) ?? 0,
+                         juice: viewModel.getBarQuantity(for: 66) ?? 0,
+                         milk: viewModel.getBarQuantity(for: 76) ?? 0,
+                         tea:  viewModel.getBarQuantity(for: 114973) ?? 0,
+                         coffee: viewModel.getBarQuantity(for: 168) ?? 0,
+                         recommended: 2000)
+
+                
                 if selectedPeriod == .daily {
                     HStack {
                         Spacer()
@@ -103,7 +111,7 @@ struct InputView: View {
                 Spacer()
             }}
         .navigationBarHidden(true) // Hides the default AppBar
-        .padding()
+    
         .background(isDark ? Color.customBackgroundDark2 :Color.white)
         .cornerRadius(20)
     }

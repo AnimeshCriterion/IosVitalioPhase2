@@ -107,19 +107,78 @@ class VitalsViewModal: ObservableObject {
 //            print("❌ Error Fetching Vitals:", error)
 //        }
 //    }
+    func imageName(for vital: String?) -> String {
+        switch vital {
+        case "Blood Pressure":
+            return "heart"
+        case "Heart Rate":
+            return "heart"
+        case "Blood Oxygen (spo2)":
+            return "drop"
+        case "Body Temperature":
+            return "thermometer"
+        case "Pulse":
+            return "pulse"
+        case "Respiratory Rate":
+            return "waves"
+        case "RBS":
+            return "drop"
+        case "Body Weight":
+            return "weightIcon"
+        default:
+            return "default_image" // fallback image name
+        }
+    }
+
+    func iconName(for vitalName: String?) -> String {
+        switch vitalName {
+        case "Blood Pressure":
+            return "waveform.path.ecg"
+        case "Heart Rate":
+            return "heart.fill"
+        case "Blood Oxygen (spo2)":
+            return "lungs.fill"
+        case "Body Temperature":
+            return "thermometer"
+        case "Pulse":
+            return "heart.circle.fill"
+        case "Respiratory Rate":
+            return "wind"
+        case "RBS":
+            return "drop.fill"
+        case "Body Weight":
+            return "scalemass"
+        default:
+            return "questionmark"
+        }
+    }
+
+    func displayName(for vitalName: String) -> String {
+        switch vitalName {
+        case "BP_Sys", "BP_Dias": return "Blood Pressure"
+        case "HeartRate": return "Heart Rate"
+        case "Spo2": return "Blood Oxygen (spo2)"
+        case "Temperature": return "Body Temperature"
+        case "Pulse": return "Pulse"
+        case "RespRate": return "Respiratory Rate"
+        case "RBS": return "RBS"
+        case "Weight": return "Body Weight"
+        case "Height": return "Height"
+        default: return vitalName
+        }
+    }
+
     var groupedVitals: [Vital] {
-        // All vital names you expect
-        let allVitalNames = [
-            "Blood Pressure", "HeartRate", "Spo2", "Temperature", "Pulse",
-            "RespRate", "RBS", "Weight", "Height"
+        let allVitalKeys = [
+            "Blood Pressure", "Heart Rate", "Blood Oxygen (spo2)", "Body Temperature",
+            "Pulse", "Respiratory Rate", "RBS", "Body Weight", "Height"
         ]
         
         var result: [Vital] = []
         var addedBP = false
-
-        // Step 1: Handle existing vitals
+        
         for vital in vitals {
-            if vital.vitalName == "BP_Sys" || vital.vitalName == "BP_Dias" {
+            if (vital.vitalName == "BP_Sys" || vital.vitalName == "BP_Dias") {
                 if addedBP { continue }
                 if let sys = vitals.first(where: { $0.vitalName == "BP_Sys" }),
                    let dias = vitals.first(where: { $0.vitalName == "BP_Dias" }) {
@@ -138,38 +197,45 @@ class VitalsViewModal: ObservableObject {
                     addedBP = true
                 }
             } else {
-                result.append(vital)
+                let mappedName = displayName(for: vital.vitalName)
+                var modifiedVital = vital
+                modifiedVital.vitalName = mappedName
+                modifiedVital.unit = unitForVital(mappedName) // 👈 Set correct unit here
+                result.append(modifiedVital)
+
             }
         }
-
-        // Step 2: Add missing vitals with placeholder
+        
         let existingNames = Set(result.map { $0.vitalName })
-        for name in allVitalNames where !existingNames.contains(name) {
-            let placeholderVital = Vital(
+        for key in allVitalKeys where !existingNames.contains(key) {
+            let placeholder = Vital(
                 uhid: "", pmId: 0, vitalID: 0,
-                vitalName: name,
+                vitalName: key,
                 vitalValue: 0,
-                unit: unitForVital(name), // Optional: provide default unit
+                unit: unitForVital(key),
                 vitalDateTime: "", userId: 0, rowId: 0
             )
-            result.append(placeholderVital)
+            result.append(placeholder)
         }
 
         return result
     }
+
     func unitForVital(_ name: String) -> String {
         switch name {
-        case "Blood Pressure": return "mmHg"
-        case "HeartRate", "Pulse": return "/min"
-        case "Spo2": return "%"
-        case "Temperature": return "°F"
-        case "RespRate": return "/min"
-        case "RBS": return "mg/dL"
-        case "Weight": return "kg"
-        case "Height": return "cm"
+        case "Blood Pressure": return "mm/Hg"                 // millimeters of mercury
+        case "Heart Rate", "Pulse": return "BPM"             // beats per minute
+        case "Blood Oxygen (spo2)": return "%"               // percentage
+        case "Body Temperature": return "°F"                 // degrees Fahrenheit (or use °C depending on region)
+        case "Respiratory Rate": return "min"        // breaths per minute
+        case "RBS": return "mg/dL"                           // milligrams per deciliter (Random Blood Sugar)
+        case "Body Weight": return "kg"                      // kilograms
+        case "Height": return "cm"                           // centimeters
         default: return ""
         }
     }
+
+
 
 
     let vitalPriorityOrder: [String] = [
@@ -218,8 +284,8 @@ class VitalsViewModal: ObservableObject {
             let nowString = formatter.string(from: Date())
 
             let defaultVitals: [Vital] = [
-                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Sys", vitalValue: 0, unit: "mmHg", vitalDateTime: nowString, userId: 0, rowId: 0),
-                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Dias", vitalValue: 0, unit: "mmHg", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Sys", vitalValue: 0, unit: "mm/Hg", vitalDateTime: nowString, userId: 0, rowId: 0),
+                Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "BP_Dias", vitalValue: 0, unit: "mm/Hg", vitalDateTime: nowString, userId: 0, rowId: 0),
                 Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "HeartRate", vitalValue: 0, unit: "bpm", vitalDateTime: nowString, userId: 0, rowId: 0),
                 Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Spo2", vitalValue: 0, unit: "%", vitalDateTime: nowString, userId: 0, rowId: 0),
                 Vital(uhid: uhid, pmId: 0, vitalID: 0, vitalName: "Temperature", vitalValue: 0, unit: "°F", vitalDateTime: nowString, userId: 0, rowId: 0),

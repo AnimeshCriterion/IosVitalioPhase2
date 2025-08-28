@@ -19,9 +19,7 @@ struct SharedAccountView: View {
     var body: some View {
         VStack(alignment: .leading){
             HStack {
-                CustomNavBarView(title: "Shared Account", isDarkMode: dark){
-                    
-                }
+                CustomNavBarView(title: "Shared Account", isDarkMode: dark)
                 Button(action: {
                     route.navigate(to: .addMemberView)
                 }) {
@@ -90,7 +88,7 @@ struct UserCardView: View {
         }
         .padding()
         .background( dark ? Color.customBackgroundDark2 :Color.white)
-        .cornerRadius(8)
+        .cornerRadius(8).navigationBarBackButtonHidden(true)
     }
 }
 
@@ -121,25 +119,19 @@ struct UsersListView: View {
 
 struct AddMemberView: View {
     @State private var code: String = "EG1P56"
+    @EnvironmentObject var theme: ThemeManager
+    
+       var dark: Bool {
+           theme.colorScheme == .dark
+       }
 
     var body: some View {
         VStack(spacing: 24) {
             // Navigation Bar
             HStack {
-                Button(action: {
-                    // Go back
-                }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.white)
-                        .clipShape(Circle())
-                }
-                Text("Add Member")
-                    .font(.system(size: 16, weight: .semibold))
-                Spacer()
+                CustomNavBarView(title: "Add member", isDarkMode: dark)
+               
             }
-            .padding()
 
             // Vitalio Logo
             Image("add_member") // Replace with actual logo asset name
@@ -192,6 +184,6 @@ struct AddMemberView: View {
         }
         .padding(.top)
         .background(Color(UIColor.systemGroupedBackground))
-        .edgesIgnoringSafeArea(.bottom)
+        .edgesIgnoringSafeArea(.bottom).navigationBarBackButtonHidden(true)
     }
 }

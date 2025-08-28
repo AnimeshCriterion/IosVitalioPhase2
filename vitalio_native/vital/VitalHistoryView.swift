@@ -88,7 +88,7 @@ struct VitalHistoryView: View {
                                  .foregroundColor(.gray).padding(.horizontal, 20)
                      }
                          .padding(.vertical,20)
-            .padding(.vertical,20)
+         
             
             
             
@@ -96,7 +96,11 @@ struct VitalHistoryView: View {
                 
                 ZStack {
                     ZStack {
-                        Image("heart")
+                        Image(vitalsVM.imageName(for: vitalsVM.selectedVital?.vitalName))
+                            .resizable()
+                            .scaledToFit()
+                        
+
                             .frame(height: 260)
                         
                         

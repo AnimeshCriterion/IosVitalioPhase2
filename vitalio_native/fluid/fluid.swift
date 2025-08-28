@@ -24,7 +24,7 @@ struct Fluid: View {
                     }) {
                         Image(systemName: "chevron.left").foregroundColor(isDark ? .white : .black)}
                     Spacer().frame(width: 20)
-                    LocalizedText(key:"fluid_data_input")
+                    LocalizedText(key:"Fluid Input")
                         .font(.headline)
                     Spacer()
                     Button(action: {
@@ -50,7 +50,7 @@ struct Fluid: View {
                 ZStack {
                     // Gray background
                     RoundedRectangle(cornerRadius: 14)
-                        .fill(Color.gray.opacity(0.1))
+                        .fill(Color.white)
                         .frame(height: 44)
 
                     HStack(spacing: 0) {
@@ -71,7 +71,7 @@ struct Fluid: View {
                                 fluidVM.isIntakeSelected = true
                             }
                         }) {
-                            LocalizedText(key:"fluid_intake")
+                            LocalizedText(key:"Fluid Intake")
                                 .foregroundColor(fluidVM.isIntakeSelected ? .white : .gray)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
@@ -81,7 +81,7 @@ struct Fluid: View {
                                 fluidVM.isIntakeSelected = false
                             }
                         }) {
-                            LocalizedText(key:"fluid_output")
+                            LocalizedText(key:"Fluid Output")
                                 .foregroundColor(!fluidVM.isIntakeSelected ? .white : .gray)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 44)
